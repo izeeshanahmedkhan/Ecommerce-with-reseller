@@ -1,0 +1,511 @@
+@extends('admin.layouts.master')
+@section('content')
+    <input type="hidden" value="{{$activePage = 'productCreate', $title = 'Create Product - Nafia Garments'}}">
+
+    <div class="main-content">
+        <div class="breadcrumb">
+            <h1>Products</h1>
+        </div>
+        <form class="forms-sample" method="POST" action="{{ route('product.store') }}" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="card-title mb-3">Create New Product</div>
+
+                            @csrf()
+                            <div class="form-group">
+                                <label>New Product</label>
+
+                                <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Enter New Product Name" value="{{ old('name') }}" aria-label="name">
+                                @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="selectCategory">Select Category</label>
+{{--                                <select id="parentCategory"--}}
+{{--                                        name="categories[]"--}}
+{{--                                        class="form-control round @error('product_category') is-invalid @enderror"--}}
+{{--                                        multiple>--}}
+{{--                                    <option value="none" selected="" disabled="">Select Product Category</option>--}}
+{{--                                    @foreach($categories as $category)--}}
+{{--                                        @if($category->parent_id == 0)--}}
+{{--                                            <optgroup value="{{$category->id}}" label="{{$category->title}}">--}}
+{{--                                                @foreach($categories as $subcategory)--}}
+{{--                                                    @if($subcategory->parent_id == $category->id)--}}
+{{--                                                        <option value="{{$subcategory->id}}" >{{$subcategory->title}}</option>--}}
+{{--                                                    @endif--}}
+{{--                                                @endforeach--}}
+{{--                                            </optgroup>--}}
+{{--                                        @endif--}}
+
+{{--                                    @endforeach--}}
+
+{{--                                </select>--}}
+                                <select class="form-control @error('categories') is-invalid @enderror" id="selectCategory" name="categories[]" multiple size="10">
+                                    <option value="none" selected="" disabled="">Select Product Category</option>
+                                    @foreach($categories as $category)
+
+
+                                        @if($category->parent_id == 0)
+
+                                            <optgroup value="{{ $category->id }}" label="{{ $category->title }}">
+
+                                            @php
+                                                $first_child_categories =  DB::table('categories')
+                                                ->where('parent_id',$category->id)
+                                                ->get()
+                                            @endphp
+
+                                                @if(count($first_child_categories) != false)
+
+                                                    @foreach($first_child_categories as $first_child_category)
+
+                                                        <option value="{{ $first_child_category->id }}"> -{{$first_child_category->title }}</option>
+
+                                                            @php
+                                                                $second_child_categories =  DB::table('categories')
+                                                                ->where('parent_id',$first_child_category->id)
+                                                                ->get()
+                                                            @endphp
+
+                                                            @if(count($second_child_categories) != false)
+
+                                                                @foreach($second_child_categories as $second_child_category)
+
+                                                                    <option value="{{ $second_child_category->id }}"> --{{ $second_child_category->title }}</option>
+
+                                                                    @php
+                                                                        $third_child_categories =  DB::table('categories')
+                                                                        ->where('parent_id',$second_child_category->id)
+                                                                        ->get()
+                                                                    @endphp
+
+                                                                    @if(count($third_child_categories) != false)
+
+                                                                        @foreach($third_child_categories as $third_child_category)
+
+                                                                            <option value="{{ $third_child_category->id }}"> ---{{ $third_child_category->title }}</option>
+
+                                                                            @php
+                                                                                $fourth_child_categories =  DB::table('categories')
+                                                                                ->where('parent_id',$third_child_category->id)
+                                                                                ->get()
+                                                                            @endphp
+
+                                                                            @if(count($fourth_child_categories) != false)
+
+                                                                                @foreach($fourth_child_categories as $fourth_child_category)
+
+                                                                                    <option value="{{ $fourth_child_category->id }}"> ----{{ $fourth_child_category->title }}</option>
+
+                                                                                @endforeach
+
+                                                                            @endif
+
+                                                                        @endforeach
+
+                                                                    @endif
+
+                                                                @endforeach
+
+                                                            @endif
+
+                                                    @endforeach
+
+                                                @endif
+
+                                            </optgroup>
+
+                                        @endif
+
+{{--                                                {{ $parent_one = $category->id }}--}}
+
+
+
+{{--                                                {{ $parent_two = $category->id }}--}}
+
+    {{--                                                    {{$length = strlen($category->title) }}--}}
+
+
+{{--                                            @if($category->parent_id == $parent_two)--}}
+
+{{--                                                <option value="{{ $category->id }}"> --{{ $category->title }} </option>--}}
+
+{{--                                            @endif--}}
+
+{{--                                                    {{ $parent_three = $category->id }}--}}
+
+{{--                                            @if($category->parent_id == $parent_three)--}}
+
+{{--                                                <option value="{{ $category->id }}"> ---{{ $category->title }} </option>--}}
+
+{{--                                            @endif--}}
+
+{{--                                                    {{ $parent_four = $category->id }}--}}
+
+
+{{--                                            @if($category->parent_id == $parent_four)--}}
+
+{{--                                                <option value="{{ $category->id }}"> ----{{ $category->title }} </option>--}}
+
+{{--                                            @endif--}}
+
+
+
+
+                                    @endforeach
+
+
+                                </select>
+                                @error('categories')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="selectBatch">Select Batch</label>
+                                <select class="form-control @error('batch') is-invalid @enderror" id="selectBatch" name="batch">
+                                    <option selected disabled> Select Batch </option>
+                                    @foreach($batches as $batch)
+                                        <option value="{{ $batch->id }}">{{ $batch->name  }}</option>
+                                    @endforeach
+                                </select>
+                                @error('batch')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label for="selectInventory">Inventory</label>
+                                <select class="form-control @error('inventory_category') is-invalid @enderror" id="selectInventory" name="inventory_category">
+                                    <option selected disabled> Select Inventory </option>
+                                    <option value="0"> In-House </option>
+                                    <option value="1"> Purchase to Order</option>
+                                </select>
+                                @error('inventory_category')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <br>
+                        <div class="form-group">
+                            <label> Product Attributes </label>
+                        </div>
+                            <table class="table table-bordered" id="dynamicTable">
+                                <tr>
+                                    <th> Colour </th>
+                                    <th> Size </th>
+                                    <th> Image </th>
+                                    <th> Action </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="form-group">
+                                            <label for="selectColour">Select Colour</label>
+                                            <select class="form-control @error('colour_0') is-invalid @enderror" id="selectColour" name="colour_0[0]">
+                                                <option selected disabled> Select Colour </option>
+                                                @foreach($colours as $colour)
+                                                    <option value="{{ $colour->id }}" style="background-color:{{ $colour->colourCode }}">{{ $colour->colourCode  }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('colour_0')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <label for="selectSize">Select Size</label>
+                                            <select class="form-control @error('size_0') is-invalid @enderror" id="selectSize" name="size_0[0]">
+                                                <option selected disabled> Select Size </option>
+                                                @foreach($sizes as $size)
+                                                    <option value="{{ $size->id }}">{{ $size->sizeName  }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('size_0')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <label for="selectImage">Select Image</label>
+                                        <input type="file" class="form-control @error('image_0') is-invalid @enderror" name="image_0[]" multiple>
+                                        @error('image_0')
+                                        <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </td>
+                                    <td>
+                                        <button type="button" name="add" id="add" class="btn btn-success">Add More</button>
+                                    </td>
+                                </tr>
+                            </table>
+
+
+                            <div class="form-group">
+                                <label>Description</label>
+
+                                <textarea name="description" id="tiny" class="form-control @error('description') is-invalid @enderror"  value="{{ old('description') }}" aria-label="description" rows="15"> </textarea>
+                                @error('description')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="card-title mb-3">Status</div>
+                        <div class="form-group">
+                            <label for="selectStatus">Select Status</label>
+                            <select class="form-control @error('status') is-invalid @enderror" id="selectStatus" name="status">
+                                <option selected disabled> Select Status </option>
+                                <option value="1"> Active </option>
+                                <option value="0"> In Active </option>
+                            </select>
+                            @error('status')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>SKU Code</label>
+
+                            <input type="text" name="sku_code" class="form-control @error('sku_code') is-invalid @enderror" placeholder="Enter SKU Code" value="{{ old('sku_code') }}" aria-label="sku_code">
+                            @error('sku_code')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="selectStockAvailability">Select Stock</label>
+                            <select class="form-control @error('stock_availability') is-invalid @enderror" id="selectStockAvailability" name="stock_availability">
+                                <option selected disabled> Select Stock Availability </option>
+                                <option value="1"> Available </option>
+                                <option value="0"> Not Available </option>
+                            </select>
+                            @error('stock_availability')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Quantity</label>
+
+                            <input type="text" name="quantity" class="form-control @error('quantity') is-invalid @enderror" placeholder="Enter Quantity Here" value="{{ old('quantity') }}" aria-label="quantity">
+                            @error('quantity')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Price</label>
+
+                            <input type="text" name="price" class="form-control @error('price') is-invalid @enderror" placeholder="Enter Price Here" value="{{ old('price') }}" aria-label="price">
+                            @error('price')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Price For Salesman</label>
+
+                            <input type="text" name="list_price_for_salesman" class="form-control @error('list_price_for_salesman') is-invalid @enderror" placeholder="Enter Price for Salesman Here" value="{{ old('list_price_for_salesman') }}" aria-label="list_price_for_salesman">
+                            @error('list_price_for_salesman')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Commission (%)</label>
+
+                            <input type="text" name="commission" class="form-control @error('commission') is-invalid @enderror" placeholder="Enter Commission in percent" value="{{ old('commission') }}" aria-label="commission">
+                            @error('commission')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Vedio Link</label>
+
+                            <input type="text" name="video_link" class="form-control @error('video_link') is-invalid @enderror" placeholder="Enter Video Link Here" value="{{ old('video_link') }}" aria-label="video_link">
+                            @error('video_link')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label>Purchase Discount</label>
+
+                            <input type="text" name="purchase_discount" class="form-control @error('purchase_discount') is-invalid @enderror" placeholder="Enter Discount Here" value="{{ old('purchase_discount') }}" aria-label="purchase_discount">
+                            @error('purchase_discount')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Purchase Cost</label>
+
+                            <input type="text" name="purchase_cost" class="form-control @error('purchase_cost') is-invalid @enderror" placeholder="Enter Purchase Cost Here" value="{{ old('purchase_cost') }}" aria-label="purchase_cost">
+                            @error('purchase_cost')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Labour Cost</label>
+
+                            <input type="text" name="labour_cost" class="form-control @error('labour_cost') is-invalid @enderror" placeholder="Enter Labour Cost Here" value="{{ old('labour_cost') }}" aria-label="labour_cost">
+                            @error('labour_cost')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Transportation Cost</label>
+
+                            <input type="text" name="transportation_cost" class="form-control @error('transportation_cost') is-invalid @enderror" placeholder="Enter Transportation Cost Here" value="{{ old('transportation_cost') }}" aria-label="transportation_cost">
+                            @error('transportation_cost')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Owner</label>
+
+                            <input type="text" name="owner" class="form-control @error('owner') is-invalid @enderror" placeholder="Enter Owner Name" value="{{ old('owner') }}" aria-label="owner">
+                            @error('owner')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Vendor</label>
+
+                            <input type="text" name="vendor" class="form-control @error('vendor') is-invalid @enderror" placeholder="Enter Vendor Name" value="{{ old('vendor') }}" aria-label="vendor">
+                            @error('vendor')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- end of main-content -->
+        </form>
+    </div>
+
+@endsection
+
+
+@section('page_css')
+    <link rel="stylesheet" href="{{asset('admin/css/plugins/toastr.css')}}" />
+
+
+@endsection
+@section('page_script')
+
+    <script type="text/javascript">
+
+        var i = 0;
+
+        $("#add").click(function(){
+
+
+            ++i;
+
+
+            $("#dynamicTable").append('<tr>' +
+                '<td>' +
+                '<div class="form-group">' +
+                '<label for="selectColour">Select Colour</label>' +
+                '<select class="form-control" id="selectColour" name="colour_'+i+'['+i+']">' +
+                '<option selected disabled> Select Colour </option>' +
+                '@foreach($colours as $colour)' +
+                '<option value="{{ $colour->id }}" style="background-color:{{ $colour->colourCode }}">{{ $colour->colourCode  }}</option>' +
+                '@endforeach' +
+                '</select>' +
+                '</div>' +
+                '</td>' +
+                '<td>' +
+                '<div class="form-group">' +
+                '<label for="selectColour">Select Size</label>' +
+                '<select class="form-control" id="selectSize" name="size_'+i+'['+i+']">' +
+                '<option selected disabled> Select size </option>' +
+                '@foreach($sizes as $size)' +
+                '<option value="{{ $size->id }}">{{ $size->sizeName  }}</option>' +
+                '@endforeach' +
+                '</select>' +
+                '</div>' +
+                '</td>'+
+                '<td>' +
+                '<label for="selectImage">Select Image</label>' +
+                '<input type="file" class="form-control" name="image_'+i+'[]" multiple>' +
+                '</td>'+
+                '<input type="hidden" name="length" value="'+i+'">'+
+                '<td><button type="button" class="btn btn-danger remove-tr">Remove</button></td></tr>');
+
+
+
+        });
+
+        $(document).on('click', '.remove-tr', function(){
+
+            $(this).parents('tr').remove();
+
+        });
+    </script>
+
+
+
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="/path/to/tinymce.min.js"></script>
+
+    <script>
+        tinymce.init({
+            selector: 'textarea#tiny'
+        });
+    </script>
+
+    <script src="{{ asset('admin/js/plugins/toastr.min.js') }}"></script>
+{{--    <script src="{{asset('admin/js/scripts/toastr.script.min.js')}}"></script>--}}
+
+@endsection

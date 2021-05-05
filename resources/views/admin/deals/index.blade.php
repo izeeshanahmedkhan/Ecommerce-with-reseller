@@ -1,0 +1,130 @@
+@extends('admin.layouts.master')
+@section('content')
+    <input type="hidden" value="{{$activePage = 'dealIndex', $title = 'Deals - Nafia Garments'}}">
+    <div class="main-content">
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <h4>View All Deals</h4>
+            </div>
+        </div>
+        <!-- end of row-->
+        <div class="row mb-4">
+            <div class="col-md-12 mb-4">
+                <div class="card text-left">
+                    <div class="card-body">
+                        <h4 class="card-title mb-3" style="display: inline;">Deal</h4>
+                        @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('create deals'))
+                        <div style="float:right; margin-right: 1%;">
+                            <a href="{{route('deal.create')}}" class="btn btn-raised btn-raised-primary m-1" style="color: white;"><i
+                                    class="nav-icon font-weight-bold"></i>Add New Deal</a>
+                            <br> <br>
+                        </div>
+                        @endif
+
+                        <div class="table-responsive">
+                            <table class="display table table-striped table-bordered" id="zero_configuration_table" style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Deal</th>
+                                    <th>Product</th>
+                                    <th>Size</th>
+                                    <th>Discount</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Status</th>
+                                    <th>Created At</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($deals as $deal)
+                                    <tr>
+                                        <td>{{$deal->id}}</td>
+                                        <td>{{$deal->deal}}</td>
+                                        <td>
+                                            @php $product = \App\Models\Product::where('id',$deal->product_id)->first() @endphp
+                                            {{ $product->name }}
+                                        </td>
+                                        <td>
+                                            @php $size = \App\Models\Size::where('id',$deal->size_id)->first() @endphp
+                                            {{ $size->sizeName }}
+                                        </td>
+                                        <td>{{$deal->discount}}</td>
+                                        <td>{{$deal->start_date}}</td>
+                                        <td>{{$deal->end_date}}</td>
+                                        <td>{{$deal->status == '1' ? 'Active':'InActive'}}</td>
+                                        <td>{{$deal->created_at->diffForHumans()}}</td>
+                                        <td>
+                                            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('edit deals'))
+                                            <a href="{{route('deal.edit',$deal)}}" class="btn btn-raised btn-raised-primary m-1" style="color: white"><i
+                                                    class="nav-icon i-Pen-2 font-weight-bold"></i></a>
+                                            @endif
+                                            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('delete deals'))
+                                            <form method="POST" action="{{route('deal.destroy',$deal)}}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"  class="btn btn-raised btn-raised-danger m-1" style="color: white"><i
+                                                        class="nav-icon i-Close-Window font-weight-bold"></i></button>
+                                            </form>
+                                            @endif
+                                            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('deals status'))
+                                                @if($deal->status == 0)
+                                                    <form method="POST" action="{{route('deal.status',$deal)}}">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button type="submit" name="deal" value="deal"  class="btn btn-raised btn-raised-success m-1" style="color: white"><i
+                                                                class="nav-icon font-weight-bold"></i> Active </button>
+                                                    </form>
+                                                @elseif($deal->status == 1)
+                                                    <form method="POST" action="{{route('deal.status',$deal)}}">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button type="submit" name="deal" value="deal"  class="btn btn-raised btn-raised-danger m-1" style="color: white"><i
+                                                                class="nav-icon font-weight-bold"></i> InActive </button>
+                                                    </form>
+                                                @endif
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Deal</th>
+                                    <th>Product</th>
+                                    <th>Size</th>
+                                    <th>Discount</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Status</th>
+                                    <th>Created At</th>
+                                    <th>Action</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+@endsection
+@section('page_css')
+{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>--}}
+    <link rel="stylesheet" href="{{asset('admin-assets/css/plugins/toastr.css')}}" />
+    <link rel="stylesheet" href="{{asset('admin-assets/css/plugins/datatables.min.css')}}" />
+@endsection
+@section('page_script')
+    <script src="{{ asset('admin-assets/js/plugins/toastr.min.js') }}"></script>
+{{--    <script src="{{asset('admin/js/scripts/toastr.script.min.js')}}"></script>--}}
+   {{-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">--}}
+    {{--    <script src="{{asset('admin/js/plugins/toastr.min.js')}}"></script>--}}
+    {{--    <script src="{{asset('admin/js/scripts/toastr.script.min.js')}}"></script>--}}
+    <script src="{{asset('admin-assets/js/plugins/datatables.min.js')}}"></script>
+    <script src="{{asset('admin-assets/js/scripts/datatables.script.min.js')}}"></script>
+@endsection
