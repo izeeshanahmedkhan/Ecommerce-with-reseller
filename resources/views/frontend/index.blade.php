@@ -907,6 +907,18 @@
 
                                                             @endif
 
+                                                            @php $category_general_discount = \App\Models\GeneralDiscount::where('category_id',$categoryProduct->category->id)->first();@endphp
+
+                                                            @if(!empty($category_general_discount))
+
+                                                                @if(empty($product_deal) && empty($product_offer) && empty($product_general_discount))
+
+                                                                    <span class="product-item-label"> {{ $category_general_discount->general_discount }} Discount</span>
+
+                                                                @endif
+
+                                                            @endif
+
                                                         </div>
 
                                                         <div class="product-item-detail">

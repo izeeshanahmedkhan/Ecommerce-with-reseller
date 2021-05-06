@@ -159,6 +159,7 @@
                                         <th>Avail.</th>
                                         <th>Unit price</th>
                                         <th>Qty</th>
+                                        <th>Discount</th>
                                         <th>Total</th>
                                         <th class="action"><i class="fa fa-trash-o"></i></th>
                                     </tr>
@@ -171,6 +172,10 @@
                                     @php $pack_of_two_discount = 0; @endphp
                                     @php $pack_of_three_discount = 0; @endphp
                                     @php $delivery_charges = 0; @endphp
+                                    @php $buy_one_get_one_discount = 0; @endphp
+                                    @php $free_delivery = 0; @endphp
+                                    @php $general_product_discount = 0; @endphp
+                                    @php $general_category_discount = 0; @endphp
                                     @php $discount = 0; @endphp
                                     @foreach($cart as $c)
                                         <tr>
@@ -205,6 +210,172 @@
                                             @endif
                                             <td class="price"><span>{{$product->price}} Rs/-</span></td>
                                             <td class="qty"> {{ $c->quantity }} </td>
+                                            @php
+
+                                                $offer_product = \App\Models\Offer::where('product_id',$product->id)
+                                                ->where('size_id',$size->id)
+                                                ->where('status',1)
+                                                ->first();
+
+                                                if(!empty($offer_product) && $offer_product->offer == "Buy One Get One Free"){
+
+                                                    if($c->quantity == 1){
+
+                                                        $c->quantity = 2;
+
+                                                        $c->save();
+
+                                                    }
+
+                                                    if($c->quantity % 2 == 0 || $c->quantity % 2 == 1){
+
+                                                        $buy_one_get_one_discount = $product->price;
+                                                    }
+
+                                                    @endphp
+                                                        <td> {{ $offer_product->offer }} </td>
+                                                    @php
+                                                }
+
+                                            @endphp
+
+                                            @php
+
+                                                $deal_product = \App\Models\Deal::where('product_id',$product->id)
+                                                ->where('size_id',$size->id)
+                                                ->where('status',1)
+                                                ->first();
+
+                                                if(!empty($deal_product) && $deal_product->deal == "pack_of_two"){
+
+                                                    for($i=0;$i<$c->quantity;$i++){
+
+                                                        $pack_of_two++;
+
+                                                        if($pack_of_two == 2){
+
+                                                            $pack_of_two_discount = $pack_of_two_discount + ($product->price * ($deal_product->discount / 100));
+
+                                                            $pack_of_two = 0;
+
+                                                        }
+
+                                                    }
+
+                                                    @endphp
+                                                      @if($pack_of_two_discount != 0)
+                                                         <td> {{ $deal_product->deal }} </td>
+
+                                                          @else
+
+                                                            <td> </td>
+                                                      @endif
+
+                                                    @php
+                                                }
+
+                                                if(!empty($deal_product) && $deal_product->deal == "pack_of_three"){
+
+                                                    for($i=0;$i<$c->quantity;$i++){
+
+                                                        $pack_of_three++;
+
+                                                        if($pack_of_three == 3){
+
+                                                            $pack_of_three_discount = $pack_of_three_discount + ($product->price * ($deal_product->discount / 100));
+
+                                                            $pack_of_three = 0;
+                                                        }
+                                                    }
+
+                                                    @endphp
+                                                        @if($pack_of_three_discount != 0)
+                                                            <td> {{ $deal_product->deal }} </td>
+
+                                                        @else
+
+                                                            <td> </td>
+                                                        @endif
+                                                    @php
+
+                                                }
+
+                                            @endphp
+
+                                            @php
+                                                $general_product = \App\Models\GeneralDiscount::where('product_id',$product->id)
+                                                ->where('status',1)
+                                                ->first();
+
+                                                if(!empty($general_product) && $general_product->general_discount == "Product"){
+
+                                                    $general_product_discount = $general_product_discount + ($total_single_product * ($general_product->discount / 100));
+
+                                                    @endphp
+                                                        <td> {{ $general_product->general_discount }} </td>
+                                                    @php
+
+                                                }
+                                            @endphp
+
+                                            @php
+
+                                                $category_product = \App\Models\CategoryProduct::where('product_id',$product->id)->first();
+
+                                                $general_category = \App\Models\GeneralDiscount::where('category_id',$category_product->category_id)
+                                                ->where('status',1)
+                                                ->first();
+
+                                                if(!empty($general_category) && $general_category->general_discount == "Category"){
+
+                                                    $general_category_deal_product = \App\Models\Deal::where('product_id',$product->id)
+                                                    ->where('size_id',$size->id)
+                                                    ->where('status',1)
+                                                    ->first();
+
+                                                    $general_category_offer_product = \App\Models\Offer::where('product_id',$product->id)
+                                                    ->where('size_id',$size->id)
+                                                    ->where('status',1)
+                                                    ->first();
+
+                                                    $general_category_product = \App\Models\GeneralDiscount::where('product_id',$product->id)
+                                                    ->where('status',1)
+                                                    ->first();
+
+                                                    if(empty($general_category_deal_product) && empty($general_category_offer_product) && empty($general_category_product)){
+
+                                                        $general_category_discount = $general_category_discount + ($product->price * ($general_category->discount / 100));
+
+                                                        @endphp
+                                                            <td> {{ $general_category->general_discount }} </td>
+                                                        @php
+
+                                                    }
+
+                                                }
+
+                                            @endphp
+
+                                            @php
+                                                $offer_category = \App\Models\offer::where('product_id',$product->id)
+                                                ->where('status',1)
+                                                ->first();
+
+                                                if(!empty($offer_category) && $offer_category->offer == "Free Delivery"){
+
+                                                @endphp
+                                                <td> {{ $offer_category->offer }} </td>
+                                                @php
+
+                                                    }
+                                            @endphp
+
+                                            @if(empty($general_category_deal_product) && empty($general_category_offer_product) && empty($general_category_product) && empty($general_category) && empty($offer_category))
+
+                                                <td>  </td>
+
+                                            @endif
+
                                             <td class="price">
                                             <span>
 
@@ -214,9 +385,7 @@
 
                                                 @endfor
 
-                                                {{ $total_single_product }} Rs/-
-
-                                                @php $total_single_product = 0; @endphp
+                                                {{ $total_single_product = $total_single_product - $buy_one_get_one_discount}} Rs/-
 
 
                                             </span>
@@ -232,56 +401,19 @@
 
                                         @endfor
 
-                                        @php
+                                        @php $total_price= $total_price - $buy_one_get_one_discount; @endphp
 
-                                            $deal_product = \App\Models\Deal::where('product_id',$product->id)
-                                            ->where('size_id',$size->id)
-                                            ->where('status',1)
-                                            ->first();
-
-                                            if(!empty($deal_product) && $deal_product->deal == "pack_of_two"){
-
-                                                for($i=0;$i<$c->quantity;$i++){
-
-                                                    $pack_of_two++;
-
-                                                    if($pack_of_two == 2){
-
-                                                        $pack_of_two_discount = $pack_of_two_discount + ($product->price * ($deal_product->discount / 100));
-
-                                                        $pack_of_two = 0;
-
-                                                    }
-
-                                                }
-                                            }
-
-                                            if(!empty($deal_product) && $deal_product->deal == "pack_of_three"){
-
-                                                for($i=0;$i<$c->quantity;$i++){
-
-                                                    $pack_of_three++;
-
-                                                    if($pack_of_three == 3){
-
-                                                        $pack_of_three_discount = $pack_of_three_discount + ($product->price * ($deal_product->discount / 100));
-
-                                                        $pack_of_three = 0;
-                                                    }
-                                                }
-
-                                            }
-
-                                        @endphp
+                                        @php $buy_one_get_one_discount=0; @endphp
+                                        @php $total_single_product = 0; @endphp
 
                                     @endforeach
 
-                                    @php $discount = $pack_of_two_discount + $pack_of_three_discount; @endphp
+                                    @php $discount = $pack_of_two_discount + $pack_of_three_discount + $general_product_discount + $general_category_discount; @endphp
 
                                     </tbody>
                                     <tfoot>
                                     <tr>
-                                        <td colspan="2" rowspan="4"></td>
+                                        <td colspan="3" rowspan="4"></td>
                                         <td colspan="3">Total products (tax incl.)</td>
                                         <td colspan="2">{{ $total_price }} Rs/-</td>
                                     </tr>
@@ -291,7 +423,7 @@
                                         <td colspan="2">{{ $discount }} Rs/-</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3"> Delivery Charges </td>
+                                        <td colspan="3"> Delivery Charges <Charges></Charges> </td>
                                         <td colspan="2">{{ $delivery_charges }} Rs/-</td>
                                     </tr>
                                     <tr>

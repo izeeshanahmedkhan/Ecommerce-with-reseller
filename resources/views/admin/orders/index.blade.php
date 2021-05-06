@@ -33,9 +33,19 @@
                                         <td>{{$order->id}}</td>
                                         <td>{{$order->order_number}}</td>
                                         <td>
-                                            @php $user = \App\Models\User::where('id',$order->user_id)->first() @endphp
+                                            @php
 
-                                            {{ $user->name }}
+                                                $user = \App\Models\User::where('id',$order->user_id)->first();
+
+                                                if(!empty($user)){
+
+                                                    $user_name = $user->name;
+
+                                                    echo $user_name;
+
+                                                }
+
+                                            @endphp
 
                                         </td>
                                         <td>{{ $order->payment_type }}</td>
