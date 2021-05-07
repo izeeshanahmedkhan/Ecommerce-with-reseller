@@ -57,6 +57,12 @@
             </li>
             @endif
 
+            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show delivery charges'))
+                <li class="nav-item {{$activePage == 'deliverychargesIndex' ? 'active' : ''}} "><a class="nav-item-hold" href="{{route('delivery_charges.index')}}"><i class="nav-icon fas fa-dollar-sign"></i><span class="nav-text">Delivery Charges</span></a>
+                    <div class="triangle"></div>
+                </li>
+            @endif
+
             @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show orders'))
                 <li class="nav-item {{$activePage == 'orderIndex' ? 'active' : ''}} "><a class="nav-item-hold" href="{{route('order.index')}}"><i class="nav-icon fab fa-first-order"></i><span class="nav-text">Orders</span></a>
                     <div class="triangle"></div>

@@ -287,6 +287,16 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
 
     Route::post('states',[App\Http\Controllers\CountryStateCityController::class, 'getState']);
     Route::post('cities',[App\Http\Controllers\CountryStateCityController::class, 'getCity']);
+    Route::post('citydeliverycharges',[App\Http\Controllers\CountryStateCityController::class, 'getDeliveryCharges']);
+
+// delivery charges
+
+    Route::get('/admin/deliverycharges',[App\Http\Controllers\DeliveryChargesController::class, 'index'])->name('delivery_charges.index');
+    Route::get('/admin/deliverycharges/create',[App\Http\Controllers\DeliveryChargesController::class, 'create'])->name('delivery_charges.create');
+    Route::post('/admin/deliverycharges/store',[App\Http\Controllers\DeliveryChargesController::class, 'store'])->name('delivery_charges.store');
+    Route::get('/admin/deliverycharges/{deliverycharges}/edit',[App\Http\Controllers\DeliveryChargesController::class, 'edit'])->name('delivery_charges.edit');
+    Route::put('/admin/deliverycharges/{deliverycharges}/update',[App\Http\Controllers\DeliveryChargesController::class, 'update'])->name('delivery_charges.update');
+    Route::delete('/admin/deliverycharges/{deliverycharges}/delete',[App\Http\Controllers\DeliveryChargesController::class, 'destroy'])->name('delivery_charges.destroy');
 
 //order
 

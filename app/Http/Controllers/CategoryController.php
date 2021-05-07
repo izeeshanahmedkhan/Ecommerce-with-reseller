@@ -69,7 +69,7 @@ class CategoryController extends Controller
 
            Category::create($input);
 
-           Session::flash('message','Category Added Sucessfully');
+           Session::flash('message','Category Added Successfully');
            Session::flash('alert-type','success');
            return redirect()->route('category.index');
         }

@@ -210,8 +210,13 @@
                                             @endif
                                             <td class="price"><span>{{$product->price}} Rs/-</span></td>
                                             <td class="qty"> {{ $c->quantity }} </td>
-                                            @php
+                                            @for($i=0;$i<$c->quantity;$i++)
 
+                                                @php $total_single_product = $total_single_product + $product->price @endphp
+
+                                            @endfor
+                                            @php $bool = true; @endphp
+                                            @php
                                                 $offer_product = \App\Models\Offer::where('product_id',$product->id)
                                                 ->where('size_id',$size->id)
                                                 ->where('status',1)
@@ -235,10 +240,9 @@
                                                     @endphp
                                                         <td> {{ $offer_product->offer }} </td>
                                                     @php
+                                                    $bool = false;
                                                 }
-
                                             @endphp
-
                                             @php
 
                                                 $deal_product = \App\Models\Deal::where('product_id',$product->id)
@@ -263,41 +267,29 @@
                                                     }
 
                                                     @endphp
-                                                      @if($pack_of_two_discount != 0)
                                                          <td> {{ $deal_product->deal }} </td>
-
-                                                          @else
-
-                                                            <td> </td>
-                                                      @endif
-
                                                     @php
-                                                }
-
-                                                if(!empty($deal_product) && $deal_product->deal == "pack_of_three"){
-
-                                                    for($i=0;$i<$c->quantity;$i++){
-
-                                                        $pack_of_three++;
-
-                                                        if($pack_of_three == 3){
-
-                                                            $pack_of_three_discount = $pack_of_three_discount + ($product->price * ($deal_product->discount / 100));
-
-                                                            $pack_of_three = 0;
-                                                        }
+                                                        $bool = false;
                                                     }
 
+                                                    if(!empty($deal_product) && $deal_product->deal == "pack_of_three"){
+
+                                                        for($i=0;$i<$c->quantity;$i++){
+
+                                                            $pack_of_three++;
+
+                                                            if($pack_of_three == 3){
+
+                                                                $pack_of_three_discount = $pack_of_three_discount + ($product->price * ($deal_product->discount / 100));
+
+                                                                $pack_of_three = 0;
+                                                            }
+                                                        }
+
                                                     @endphp
-                                                        @if($pack_of_three_discount != 0)
                                                             <td> {{ $deal_product->deal }} </td>
-
-                                                        @else
-
-                                                            <td> </td>
-                                                        @endif
                                                     @php
-
+                                                    $bool = false;
                                                 }
 
                                             @endphp
@@ -314,7 +306,7 @@
                                                     @endphp
                                                         <td> {{ $general_product->general_discount }} </td>
                                                     @php
-
+                                                    $bool = false;
                                                 }
                                             @endphp
 
@@ -349,10 +341,9 @@
                                                         @endphp
                                                             <td> {{ $general_category->general_discount }} </td>
                                                         @php
-
+                                                            $bool = false;
+                                                        }
                                                     }
-
-                                                }
 
                                             @endphp
 
@@ -366,27 +357,20 @@
                                                 @endphp
                                                 <td> {{ $offer_category->offer }} </td>
                                                 @php
-
-                                                    }
+                                                    $bool = false;
+                                                }
                                             @endphp
 
-                                            @if(empty($general_category_deal_product) && empty($general_category_offer_product) && empty($general_category_product) && empty($general_category) && empty($offer_category))
+                                            @if($bool == true)
 
-                                                <td>  </td>
+                                                <td> — </td>
 
                                             @endif
 
                                             <td class="price">
                                             <span>
 
-                                                @for($i=0;$i<$c->quantity;$i++)
-
-                                                    @php $total_single_product = $total_single_product + $product->price @endphp
-
-                                                @endfor
-
                                                 {{ $total_single_product = $total_single_product - $buy_one_get_one_discount}} Rs/-
-
 
                                             </span>
                                             </td>
@@ -422,14 +406,31 @@
                                         <td colspan="3"> Discount </td>
                                         <td colspan="2">{{ $discount }} Rs/-</td>
                                     </tr>
-                                    <tr>
-                                        <td colspan="3"> Delivery Charges <Charges></Charges> </td>
-                                        <td colspan="2">{{ $delivery_charges }} Rs/-</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3"><strong>Total</strong></td>
-                                        <td colspan="2"><strong>{{ $total_price }} Rs/-</strong></td>
-                                    </tr>
+
+                                        @php
+                                            $offer_category = \App\Models\offer::where('product_id',$product->id)
+                                            ->where('status',1)
+                                            ->first();
+
+                                            if(!empty($offer_category) && $offer_category->offer == "Free Delivery"){
+
+                                        @endphp
+                                        <tr>
+                                                <td colspan="3"> Delivery Charges <Charges></Charges> </td>
+                                                <td colspan="2" id=""> 0 Rs/-</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3"><strong>Total</strong></td>
+                                            <td colspan="2"><strong>{{ $total_price }} Rs/-</strong></td>
+                                        </tr>
+                                        @php
+                                        }
+                                        else{
+                                            @endphp
+                                                <tr id="deliverycharge"> </tr>
+                                            @php
+                                            }
+                                        @endphp
                                     </tfoot>
                                 </table>
                             @endif
@@ -488,10 +489,31 @@
                     },
                     dataType: 'json',
                     success: function (result) {
-                        $('#city-dropdown').html('<option value="">Select City</option>');
+                        $('#city').html('<option value="">Select City</option>');
                         $.each(result.cities, function (key, value) {
                             $("#city").append('<option value="' + value.id + '">' + value.name + '</option>');
                         });
+                    }
+                });
+            });
+            $('#city').on('change', function () {
+                var city_id = this.value;
+                $("#deliverycharge").html('');
+                $.ajax({
+                    url: "{{url('citydeliverycharges')}}",
+                    type: "POST",
+                    data: {
+                        city_id: city_id,
+                        _token: '{{csrf_token()}}'
+                    },
+                    dataType: 'json',
+                    success: function (result) {
+                        $('#deliverycharge').html('<td colspan="3"> Delivery Charges <Charges></Charges> </td>\n' +
+                            '                                        <td colspan="2" id="">' + result.delivery_charges.delivery_charge + ' Rs/- </td>');
+                        $("#deliverycharge").after('<tr>\n' +
+                            '                                            <td colspan="3"><strong>Total</strong></td>\n' +
+                            '                                            <td colspan="2"><strong>' + ({{ $total_price }} + result.delivery_charges.delivery_charge) +' Rs/-</strong></td>\n' +
+                            '                                        </tr>');
                     }
                 });
             });

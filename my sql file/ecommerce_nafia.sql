@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2021 at 02:19 PM
+-- Generation Time: May 07, 2021 at 03:52 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -181,9 +181,11 @@ CREATE TABLE `carts` (
 --
 
 INSERT INTO `carts` (`id`, `quantity`, `size_id`, `colour_id`, `product_id`, `user_id`, `created_at`, `updated_at`) VALUES
-(26, 1, 1, 3, 1, 3, '2021-04-29 05:05:55', '2021-04-29 05:05:55'),
-(35, 6, 1, 3, 1, 9, '2021-05-05 06:23:38', '2021-05-05 06:36:33'),
-(36, 6, 3, 1, 5, 9, '2021-05-05 06:37:31', '2021-05-05 06:44:51');
+(43, 1, 3, 1, 5, 3, '2021-05-06 07:02:54', '2021-05-06 07:02:54'),
+(44, 1, 1, 3, 1, 3, '2021-05-06 07:17:07', '2021-05-06 07:17:07'),
+(45, 1, 2, 3, 4, 3, '2021-05-06 07:17:29', '2021-05-06 07:17:29'),
+(46, 2, 2, 4, 2, 3, '2021-05-06 07:18:22', '2021-05-06 07:19:20'),
+(47, 1, 1, 1, 3, 3, '2021-05-06 07:19:04', '2021-05-06 07:19:04');
 
 -- --------------------------------------------------------
 
@@ -829,8 +831,28 @@ CREATE TABLE `deals` (
 --
 
 INSERT INTO `deals` (`id`, `deal`, `product_id`, `size_id`, `discount`, `start_date`, `end_date`, `status`, `created_at`, `updated_at`) VALUES
-(3, 'pack_of_two', 1, 1, 10, '2021-05-04 16:52:00', '2021-05-05 16:52:00', 1, '2021-05-04 06:52:54', '2021-05-04 06:52:54'),
-(4, 'pack_of_three', 5, 3, 10, '2021-05-05 15:11:00', '2021-05-06 15:11:00', 1, '2021-05-05 05:11:34', '2021-05-05 05:11:34');
+(5, 'pack_of_two', 1, 1, 10, '2021-05-06 16:59:00', '2021-05-07 16:59:00', 0, '2021-05-06 06:59:55', '2021-05-07 05:37:37');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `delivery_charges`
+--
+
+CREATE TABLE `delivery_charges` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `city_id` int(11) NOT NULL,
+  `delivery_charge` double(36,2) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `delivery_charges`
+--
+
+INSERT INTO `delivery_charges` (`id`, `city_id`, `delivery_charge`, `created_at`, `updated_at`) VALUES
+(2, 927, 200.00, '2021-05-07 05:36:54', '2021-05-07 05:36:54');
 
 -- --------------------------------------------------------
 
@@ -886,10 +908,10 @@ CREATE TABLE `general_discounts` (
 --
 
 INSERT INTO `general_discounts` (`id`, `general_discount`, `product_id`, `category_id`, `reseller_id`, `customer_id`, `discount`, `start_date`, `end_date`, `status`, `created_at`, `updated_at`) VALUES
-(6, 'Category', NULL, 2, NULL, NULL, 12, '2021-05-03 01:50:00', '2021-05-04 01:50:00', 1, '2021-05-02 15:50:37', '2021-05-02 15:50:37'),
+(6, 'Category', NULL, 2, NULL, NULL, 12, '2021-05-03 01:50:00', '2021-05-04 01:50:00', 0, '2021-05-02 15:50:37', '2021-05-07 05:38:03'),
 (8, 'Customer', NULL, NULL, NULL, 7, 7, '2021-05-03 02:18:00', '2021-05-04 02:18:00', 1, '2021-05-02 16:18:48', '2021-05-02 16:18:48'),
 (10, 'Reseller', NULL, NULL, 2, NULL, 15, '2021-05-03 15:31:00', '2021-05-04 15:31:00', 1, '2021-05-03 05:31:41', '2021-05-03 05:31:41'),
-(11, 'Product', 4, NULL, NULL, NULL, 5, '2021-05-04 16:55:00', '2021-05-06 16:55:00', 1, '2021-05-04 06:55:37', '2021-05-04 06:55:37');
+(12, 'Product', 4, NULL, NULL, NULL, 15, '2021-05-06 17:01:00', '2021-05-07 17:01:00', 1, '2021-05-06 07:01:46', '2021-05-07 06:57:52');
 
 -- --------------------------------------------------------
 
@@ -972,7 +994,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (29, '2021_04_29_103029_create_deals_table', 2),
 (31, '2021_05_02_125706_create_offers_table', 3),
 (32, '2021_05_02_184217_create_general_discounts_table', 4),
-(33, '2021_05_03_075314_create_resellers_table', 5);
+(33, '2021_05_03_075314_create_resellers_table', 5),
+(35, '2021_05_07_092806_create_delivery_charges_table', 6);
 
 -- --------------------------------------------------------
 
@@ -1003,9 +1026,9 @@ CREATE TABLE `model_has_roles` (
 --
 
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
-(7, 'App\\Models\\User', 7),
-(8, 'App\\Models\\User', 8),
-(9, 'App\\Models\\User', 9);
+(7, 'App\\Models\\User', 1),
+(8, 'App\\Models\\User', 2),
+(9, 'App\\Models\\User', 3);
 
 -- --------------------------------------------------------
 
@@ -1033,8 +1056,8 @@ CREATE TABLE `offers` (
 --
 
 INSERT INTO `offers` (`id`, `offer`, `product_id`, `size_id`, `start_date`, `end_date`, `code`, `min_amount`, `discount`, `status`, `created_at`, `updated_at`) VALUES
-(8, 'Buy One Get One Free', 2, 2, '2021-05-04 16:53:00', '2021-05-05 16:53:00', NULL, NULL, NULL, 1, '2021-05-04 06:53:42', '2021-05-04 06:53:42'),
-(9, 'Free Delivery', 3, NULL, '2021-05-04 16:53:00', '2021-05-04 16:54:00', NULL, NULL, NULL, 1, '2021-05-04 06:54:16', '2021-05-04 06:54:16');
+(9, 'Free Delivery', 3, NULL, '2021-05-04 16:53:00', '2021-05-04 16:54:00', NULL, NULL, NULL, 0, '2021-05-04 06:54:16', '2021-05-07 08:36:07'),
+(10, 'Buy One Get One Free', 2, 2, '2021-05-06 17:00:00', '2021-05-07 17:00:00', NULL, NULL, NULL, 0, '2021-05-06 07:00:45', '2021-05-07 06:55:42');
 
 -- --------------------------------------------------------
 
@@ -1618,9 +1641,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `image`, `o_auth`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(7, 'user', 'user@example.com', NULL, '$2y$10$6UjMe7CkibQUUQaJpS6rhuPoF2Ym/5MFIyCrtjvDDGbHRtgY1Oulu', 'default-1.jpg', '12345', 1, NULL, '2021-04-29 06:04:56', '2021-04-29 06:04:56'),
-(8, 'admin', 'admin@example.com', NULL, '$2y$10$zAU9pttU4yUl.qDeDIIN/O9LbjMjIn8xjQTjTDMHcHHXN2JHX7jtq', 'default-2.jpg', '12345', 1, NULL, '2021-04-29 06:04:56', '2021-04-29 06:04:56'),
-(9, 'super admin', 'superadmin@example.com', NULL, '$2y$10$TUnD00Xld.wLr5CBYWiYHuJsVVcTH7Ai.U2YaVNdw4TBmFNixTEj2', 'default-3.jpg', '12345', 1, NULL, '2021-04-29 06:04:56', '2021-04-29 06:04:56');
+(1, 'user', 'user@example.com', NULL, '$2y$10$6UjMe7CkibQUUQaJpS6rhuPoF2Ym/5MFIyCrtjvDDGbHRtgY1Oulu', 'default-1.jpg', '12345', 1, NULL, '2021-04-29 06:04:56', '2021-04-29 06:04:56'),
+(2, 'admin', 'admin@example.com', NULL, '$2y$10$zAU9pttU4yUl.qDeDIIN/O9LbjMjIn8xjQTjTDMHcHHXN2JHX7jtq', 'default-2.jpg', '12345', 1, NULL, '2021-04-29 06:04:56', '2021-04-29 06:04:56'),
+(3, 'super admin', 'superadmin@example.com', NULL, '$2y$10$TUnD00Xld.wLr5CBYWiYHuJsVVcTH7Ai.U2YaVNdw4TBmFNixTEj2', 'default-3.jpg', '12345', 1, NULL, '2021-04-29 06:04:56', '2021-04-29 06:04:56');
 
 --
 -- Indexes for dumped tables
@@ -1708,6 +1731,12 @@ ALTER TABLE `couriers`
 -- Indexes for table `deals`
 --
 ALTER TABLE `deals`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `delivery_charges`
+--
+ALTER TABLE `delivery_charges`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1884,7 +1913,7 @@ ALTER TABLE `block_floor_products`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -1926,7 +1955,13 @@ ALTER TABLE `couriers`
 -- AUTO_INCREMENT for table `deals`
 --
 ALTER TABLE `deals`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `delivery_charges`
+--
+ALTER TABLE `delivery_charges`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -1944,7 +1979,7 @@ ALTER TABLE `front_ends`
 -- AUTO_INCREMENT for table `general_discounts`
 --
 ALTER TABLE `general_discounts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `home_settings`
@@ -1956,13 +1991,13 @@ ALTER TABLE `home_settings`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `offers`
 --
 ALTER TABLE `offers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `orders`
