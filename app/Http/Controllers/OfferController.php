@@ -134,6 +134,7 @@ class OfferController extends Controller
             'code' => ['required','string'],
             'minimum_amount' => ['required','numeric','min:1'],
             'discount' => ['required','numeric','min:1','max:100'],
+            'no_of_times' => ['nullable','numeric','min:1'],
             'start_date' => ['required','date'],
             'end_date' => ['required','date','after:start_date'],
             'status' => ['required']
@@ -145,6 +146,7 @@ class OfferController extends Controller
         $offer->code = $request->get('code');
         $offer->min_amount = $request->get('minimum_amount');
         $offer->discount = $request->get('discount');
+        $offer->no_of_times = $request->get('no_of_times');
         $offer->start_date = $request->get('start_date');
         $offer->end_date = $request->get('end_date');
         $offer->status = $request->get('status');
@@ -276,6 +278,7 @@ class OfferController extends Controller
             'code' => ['required','string'],
             'minimum_amount' => ['required','numeric','min:1'],
             'discount' => ['required','numeric','min:1','max:100'],
+            'no_of_times' => ['nullable','numeric','min:1'],
             'start_date' => ['required','date'],
             'end_date' => ['required','date','after:start_date'],
             'status' => ['required']
@@ -286,6 +289,7 @@ class OfferController extends Controller
         $offer->code = $request->get('code');
         $offer->min_amount = $request->get('minimum_amount');
         $offer->discount = $request->get('discount');
+        $offer->no_of_times = $request->get('no_of_times');
         $offer->start_date = $request->get('start_date');
         $offer->end_date = $request->get('end_date');
         $offer->status = $request->get('status');
@@ -427,6 +431,41 @@ class OfferController extends Controller
                 return redirect()->route('offer.index');
             }
         }
+    }
+
+    public function coupon_check(Request $request){
+
+        $request->validate([
+
+            'coupon_code' => ['required'],
+        ]);
+
+        $checkCode = Offer::where('code',$request->coupon_code)
+            ->where('status',1)
+            ->where('no_of_times','>=',1)
+            ->where('min_amount','<=',$request->total_amount)
+            ->first();
+
+        if(!empty($checkCode)){
+
+            Session::flash('message','Voucher Code Applied Successfully');
+            Session::flash('alert-type','success');
+
+            Session::put(['vouchercode'=>$checkCode]);
+
+            return redirect('checkout');
+
+        }
+        else{
+
+            Session::flash('message','Voucher Code expired');
+            Session::flash('alert-type','error');
+            return back();
+
+        }
+
+
+
     }
 
 }

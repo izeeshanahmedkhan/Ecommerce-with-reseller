@@ -46,6 +46,16 @@
                                 </div>
 
                                 <div class="col-md-6 form-group mb-3">
+                                    <label for="selectNoOftimes">No Of Times</label>
+                                    <input type="text" id="selectNoOftimes" name="no_of_times" class="form-control @error('no_of_times') is-invalid @enderror" placeholder="Enter Number of Times" value="{{ $offer->no_of_times }}" aria-label="no_of_times">
+                                    @error('no_of_times')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-6 form-group mb-3">
                                     <label for="selectStartDate">Start Date</label>
                                     <input type="datetime-local" name="start_date" class="form-control @error('start_date') is-invalid @enderror" id="selectStartDate" value="{{ date('Y-m-d\TH:i', strtotime($offer->start_date)) }}" aria-label="start_date">
                                     @error('start_date')

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Offer;
 use App\Models\Order;
 use App\Models\Billing;
 use App\Models\Product;
@@ -58,6 +59,7 @@ class OrderController extends Controller
 
         ]);
 
+
         $user = Auth::User();
 
         $cart = Cart::where('user_id', $user->id)->get();
@@ -98,12 +100,20 @@ class OrderController extends Controller
 
             $request->user()->notify(new OrderProcessed($order));
 
+            $new_no_of_times = Session('vouchercode')['no_of_times'] - 1;
+
+            Offer::where('code',Session('vouchercode')['code'])->update(['no_of_times'=>$new_no_of_times]);
+
+            Session::forget('vouchercode');
+
+            Session::save();
+
             return view('frontend.thankyouorder',['order_num'=>$order_num]);
 
         }
         else{
 
-            session::flash('message',"Place an order first");
+            session::flash('message',"Add An Item To Cart");
             session::flash('alert-type','error');
 
             return redirect('/home');

@@ -158,8 +158,8 @@
                                         <th>Description</th>
                                         <th>Avail.</th>
                                         <th>Unit price</th>
-                                        <th>Qty</th>
                                         <th>Discount</th>
+                                        <th>Qty</th>
                                         <th>Total</th>
                                         <th class="action"><i class="fa fa-trash-o"></i></th>
                                     </tr>
@@ -176,6 +176,7 @@
                                     @php $free_delivery = 0; @endphp
                                     @php $general_product_discount = 0; @endphp
                                     @php $general_category_discount = 0; @endphp
+                                    @php $offer_promo_code_discount = 0; @endphp
                                     @php $discount = 0; @endphp
                                     @foreach($cart as $c)
                                         <tr>
@@ -209,7 +210,6 @@
                                                         class="label label-success">{{ 'In stock' }}</span></td>
                                             @endif
                                             <td class="price"><span>{{$product->price}} Rs/-</span></td>
-                                            <td class="qty"> {{ $c->quantity }} </td>
                                             @for($i=0;$i<$c->quantity;$i++)
 
                                                 @php $total_single_product = $total_single_product + $product->price @endphp
@@ -224,24 +224,27 @@
 
                                                 if(!empty($offer_product) && $offer_product->offer == "Buy One Get One Free"){
 
+                                                    if($c->quantity % 2 == 0 || $c->quantity % 2 == 1){
+
+                                                        $buy_one_get_one_discount = $product->price;
+                                                    }
+
                                                     if($c->quantity == 1){
 
                                                         $c->quantity = 2;
 
                                                         $c->save();
 
-                                                    }
-
-                                                    if($c->quantity % 2 == 0 || $c->quantity % 2 == 1){
+                                                        $total_single_product = $total_single_product + $product->price;
 
                                                         $buy_one_get_one_discount = $product->price;
                                                     }
 
-                                                    @endphp
-                                                        <td> {{ $offer_product->offer }} </td>
-                                                    @php
-                                                    $bool = false;
-                                                }
+                                            @endphp
+                                            <td> {{ $offer_product->offer }} </td>
+                                            @php
+                                                $bool = false;
+                                            }
                                             @endphp
                                             @php
 
@@ -266,31 +269,31 @@
 
                                                     }
 
-                                                    @endphp
-                                                         <td> {{ $deal_product->deal }} </td>
-                                                    @php
-                                                        $bool = false;
+                                            @endphp
+                                            <td> {{ $deal_product->deal }} </td>
+                                            @php
+                                                $bool = false;
+                                            }
+
+                                            if(!empty($deal_product) && $deal_product->deal == "pack_of_three"){
+
+                                                for($i=0;$i<$c->quantity;$i++){
+
+                                                    $pack_of_three++;
+
+                                                    if($pack_of_three == 3){
+
+                                                        $pack_of_three_discount = $pack_of_three_discount + ($product->price * ($deal_product->discount / 100));
+
+                                                        $pack_of_three = 0;
                                                     }
-
-                                                    if(!empty($deal_product) && $deal_product->deal == "pack_of_three"){
-
-                                                        for($i=0;$i<$c->quantity;$i++){
-
-                                                            $pack_of_three++;
-
-                                                            if($pack_of_three == 3){
-
-                                                                $pack_of_three_discount = $pack_of_three_discount + ($product->price * ($deal_product->discount / 100));
-
-                                                                $pack_of_three = 0;
-                                                            }
-                                                        }
-
-                                                    @endphp
-                                                            <td> {{ $deal_product->deal }} </td>
-                                                    @php
-                                                    $bool = false;
                                                 }
+
+                                            @endphp
+                                            <td> {{ $deal_product->deal }} </td>
+                                            @php
+                                                $bool = false;
+                                            }
 
                                             @endphp
 
@@ -303,11 +306,11 @@
 
                                                     $general_product_discount = $general_product_discount + ($total_single_product * ($general_product->discount / 100));
 
-                                                    @endphp
-                                                        <td> {{ $general_product->general_discount }} </td>
-                                                    @php
-                                                    $bool = false;
-                                                }
+                                            @endphp
+                                            <td> {{ $general_product->general_discount }} </td>
+                                            @php
+                                                $bool = false;
+                                            }
                                             @endphp
 
                                             @php
@@ -338,12 +341,12 @@
 
                                                         $general_category_discount = $general_category_discount + ($product->price * ($general_category->discount / 100));
 
-                                                        @endphp
-                                                            <td> {{ $general_category->general_discount }} </td>
-                                                        @php
-                                                            $bool = false;
-                                                        }
-                                                    }
+                                            @endphp
+                                            <td> {{ $general_category->general_discount }} </td>
+                                            @php
+                                                $bool = false;
+                                            }
+                                        }
 
                                             @endphp
 
@@ -354,11 +357,16 @@
 
                                                 if(!empty($offer_category) && $offer_category->offer == "Free Delivery"){
 
-                                                @endphp
-                                                <td> {{ $offer_category->offer }} </td>
-                                                @php
-                                                    $bool = false;
-                                                }
+                                                $offer_category_free_delivery = \App\Models\offer::where('product_id',$product->id)
+                                                ->where('offer','Free Delivery')
+                                                ->where('status',1)
+                                                ->first();
+
+                                            @endphp
+                                            <td> {{ $offer_category->offer }} </td>
+                                            @php
+                                                $bool = false;
+                                            }
                                             @endphp
 
                                             @if($bool == true)
@@ -366,6 +374,7 @@
                                                 <td> — </td>
 
                                             @endif
+                                            <td class="qty"> {{ $c->quantity }} </td>
 
                                             <td class="price">
                                             <span>
@@ -392,7 +401,14 @@
 
                                     @endforeach
 
-                                    @php $discount = $pack_of_two_discount + $pack_of_three_discount + $general_product_discount + $general_category_discount; @endphp
+                                    @php
+                                        if(session('vouchercode')){
+
+                                            $offer_promo_code_discount = $offer_promo_code_discount + ($total_price * (session('vouchercode')['discount'] / 100));
+                                        }
+                                    @endphp
+
+                                    @php $discount = $offer_promo_code_discount + $pack_of_two_discount + $pack_of_three_discount + $general_product_discount + $general_category_discount; @endphp
 
                                     </tbody>
                                     <tfoot>
@@ -403,7 +419,11 @@
                                     </tr>
                                     @php $total_price = $total_price - $discount; @endphp
                                     <tr>
-                                        <td colspan="3"> Discount </td>
+                                        @if($offer_promo_code_discount !== 0)
+                                            <td colspan="3"> Other Discount + Coupon Discount</td>
+                                            @else
+                                            <td colspan="3"> Discount </td>
+                                        @endif
                                         <td colspan="2">{{ $discount }} Rs/-</td>
                                     </tr>
 
@@ -412,33 +432,53 @@
                                             ->where('status',1)
                                             ->first();
 
-                                            if(!empty($offer_category) && $offer_category->offer == "Free Delivery"){
+                                            if(!empty($offer_category_free_delivery) AND $offer_category_free_delivery->offer == "Free Delivery"){
 
-                                        @endphp
-                                        <tr>
-                                                <td colspan="3"> Delivery Charges <Charges></Charges> </td>
-                                                <td colspan="2" id=""> 0 Rs/-</td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="3"><strong>Total</strong></td>
-                                            <td colspan="2"><strong>{{ $total_price }} Rs/-</strong></td>
-                                        </tr>
-                                        @php
-                                        }
-                                        else{
-                                            @endphp
-                                                <tr id="deliverycharge"> </tr>
-                                            @php
+                                                @endphp
+                                                <tr>
+                                                        <td colspan="3"> Delivery Charges <Charges></Charges> </td>
+                                                        <td colspan="2" id=""> 0 Rs/-</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3"><strong>Total</strong></td>
+                                                    <td colspan="2"><strong>{{ $total_price }} Rs/-</strong></td>
+                                                </tr>
+                                                <input type="hidden" name="total_amount" value="{{  $total_price }}" />
+                                                @php
                                             }
+                                            else{
+                                                @endphp
+                                                    <tr id="deliverycharge"> </tr>
+                                                @php
+                                                }
                                         @endphp
                                     </tfoot>
                                 </table>
                             @endif
-                            <input type="hidden" name="total_amount" value="{{  $total_price }}" />
                             <button class="button pull-right">Place Order</button>
                         </div>
                     </div>
                 </form>
+                <div class="row block-newletter">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4 block-content">
+                        <form action="{{ route('coupon_code') }}" method="post">
+                            @csrf
+                            <div class="input-group">
+                                <input type="text" style="border: 1px solid black;" name="coupon_code" class="form-control @error('coupon_code') is-invalid @enderror" placeholder="Enter Coupon Code Here">
+                                <input type="hidden" name="total_amount" value="{{  $total_price }}" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-subcribe" style="color:#FFFFFF;background-color:#ff3366"><span>Apply</span></button>
+                                </span>
+                            </div>
+                            @error('coupon_code')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </form>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -499,6 +539,7 @@
             $('#city').on('change', function () {
                 var city_id = this.value;
                 $("#deliverycharge").html('');
+                $("#deliverychargeafter").empty();
                 $.ajax({
                     url: "{{url('citydeliverycharges')}}",
                     type: "POST",
@@ -508,12 +549,24 @@
                     },
                     dataType: 'json',
                     success: function (result) {
-                        $('#deliverycharge').html('<td colspan="3"> Delivery Charges <Charges></Charges> </td>\n' +
-                            '                                        <td colspan="2" id="">' + result.delivery_charges.delivery_charge + ' Rs/- </td>');
-                        $("#deliverycharge").after('<tr>\n' +
-                            '                                            <td colspan="3"><strong>Total</strong></td>\n' +
-                            '                                            <td colspan="2"><strong>' + ({{ $total_price }} + result.delivery_charges.delivery_charge) +' Rs/-</strong></td>\n' +
-                            '                                        </tr>');
+                        if(jQuery.isEmptyObject(result.delivery_charges)){
+                            $('#deliverycharge').html('<td colspan="3"> Delivery Charges <Charges></Charges> </td>\n' +
+                                '                                        <td colspan="2" id="">' + 300 + ' Rs/- </td>');
+                            $("#deliverycharge").after('<tr id="deliverychargeafter">\n' +
+                                '                                            <td colspan="3"><strong>Total</strong></td>\n' +
+                                '                                            <td colspan="2"><strong>' + ({{ $total_price }} + 300) +' Rs/-</strong></td>\n' +
+                                '                                        </tr>' +
+                                '<input type="hidden" name="total_amount" value="{{  $total_price + 300 }}" />');
+                        }
+                        else{
+                            $('#deliverycharge').html('<td colspan="3"> Delivery Charges <Charges></Charges> </td>\n' +
+                                '                                        <td colspan="2" id="">' + result.delivery_charges.delivery_charge + ' Rs/- </td>');
+                            $("#deliverycharge").after('<tr id="deliverychargeafter">\n' +
+                                '                                            <td colspan="3"><strong>Total</strong></td>\n' +
+                                '                                            <td colspan="2"><strong>' + ({{ $total_price }} + result.delivery_charges.delivery_charge) +' Rs/-</strong></td>\n' +
+                                '                                        </tr>' +
+                                '<input type="hidden" name="total_amount" value="'+ ({{ $total_price }} + result.delivery_charges.delivery_charge) +'" />');
+                        }
                     }
                 });
             });

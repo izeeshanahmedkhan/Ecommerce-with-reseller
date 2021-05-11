@@ -16,7 +16,7 @@
 
                                 <div class="col-md-6 form-group mb-3">
                                     <label for="selectCode">Create Code</label>
-                                    <input type="text" name="code" class="form-control @error('code') is-invalid @enderror" placeholder="Enter New Code" value="{{ old('code') }}" aria-label="code">
+                                    <input type="text" id="selectCode" name="code" class="form-control @error('code') is-invalid @enderror" placeholder="Enter New Code" value="{{ old('code') }}" aria-label="code">
                                     @error('code')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -26,7 +26,7 @@
 
                                 <div class="col-md-6 form-group mb-3">
                                     <label for="selectMinimumAmount">Create Minimum Amount</label>
-                                    <input type="text" name="minimum_amount" class="form-control @error('minimum_amount') is-invalid @enderror" placeholder="Enter New Minimum Code" value="{{ old('minimum_amount') }}" aria-label="minimum_amount">
+                                    <input type="text" id="selectMinimumAmount" name="minimum_amount" class="form-control @error('minimum_amount') is-invalid @enderror" placeholder="Enter New Minimum Code" value="{{ old('minimum_amount') }}" aria-label="minimum_amount">
                                     @error('minimum_amount')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -38,6 +38,16 @@
                                     <label for="selectDiscount">Discount (%)</label>
                                     <input type="text" name="discount" class="form-control @error('discount') is-invalid @enderror" id="selectDiscount" placeholder="Enter Discount Here" value="{{ old('discount') }}" aria-label="discount">
                                     @error('discount')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-6 form-group mb-3">
+                                    <label for="selectNoOftimes">No Of Times</label>
+                                    <input type="text" id="selectNoOftimes" name="no_of_times" class="form-control @error('no_of_times') is-invalid @enderror" placeholder="Enter Number of Times" value="{{ old('no_of_times') }}" aria-label="no_of_times">
+                                    @error('no_of_times')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

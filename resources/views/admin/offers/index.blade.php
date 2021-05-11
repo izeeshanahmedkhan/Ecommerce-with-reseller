@@ -229,6 +229,7 @@
                                     <th>Code</th>
                                     <th>Minimum Amount</th>
                                     <th>Discount</th>
+                                    <th>No of times</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
                                     <th>Status</th>
@@ -244,6 +245,7 @@
                                         <td>{{$voucher_code->code}}</td>
                                         <td>{{$voucher_code->min_amount}}</td>
                                         <td>{{$voucher_code->discount}}</td>
+                                        <td>{{$voucher_code->no_of_times}}</td>
                                         <td>{{$voucher_code->start_date}}</td>
                                         <td>{{$voucher_code->end_date}}</td>
                                         <td>{{$voucher_code->status == '1' ? 'Active':'InActive'}}</td>
@@ -289,6 +291,7 @@
                                     <th>Code</th>
                                     <th>Minimum Amount</th>
                                     <th>Discount</th>
+                                    <th>No of times</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
                                     <th>Status</th>

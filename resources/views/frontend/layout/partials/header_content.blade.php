@@ -19,7 +19,7 @@
 
                 <!-- logo -->
                 <strong class="logo">
-                    <a href="{{ '/home' }}"><img src="{{asset('storage/images/logos/'.$logo)}}" alt="logo"></a>
+                    <a href="{{ '/' }}"><img src="{{asset('storage/images/logos/'.$logo)}}" alt="logo"></a>
 {{--                    <a href="#"><img src=" {{asset('frontend/images/media/index1/logo.png')}}" alt="logo"></a>--}}
                 </strong>
 
@@ -42,30 +42,31 @@
                         <span class="counter qty">
                             <span class="cart-text">Shopping Cart</span>
                             <span class="counter-number">@if(Auth::check()) {{ count($cart) }} @else 0 @endif</span>
-                            <span class="counter-label"> @if(Auth::check()) {{ count($cart) }} @else 0 @endif <span>Items</span></span>
-                            <span class="counter-price">
-                                @if(Auth::check())
+{{--                            class="counter-label"--}}
+                            <span> @if(Auth::check()) {{ count($cart) }} @else 0 @endif <span>Items</span></span>
+{{--                            <span class="counter-price">--}}
+{{--                                @if(Auth::check())--}}
 
-                                        @php $total_price = 0; @endphp
+{{--                                        @php $total_price = 0; @endphp--}}
 
-                                        @foreach($cart as $c)
+{{--                                        @foreach($cart as $c)--}}
 
-                                            @php $product = \App\Models\Product::where('id',$c->product_id)->first() @endphp
+{{--                                            @php $product = \App\Models\Product::where('id',$c->product_id)->first() @endphp--}}
 
-                                                @for($i=0;$i<$c->quantity;$i++)
+{{--                                                @for($i=0;$i<$c->quantity;$i++)--}}
 
-                                                    @php $total_price = $total_price + $product->price @endphp
+{{--                                                    @php $total_price = $total_price + $product->price @endphp--}}
 
-                                                @endfor
+{{--                                                @endfor--}}
 
-                                        @endforeach
+{{--                                        @endforeach--}}
 
-                                        {{ $total_price }}
+{{--                                        {{ $total_price }}--}}
 
-                                    @else
-                                        0.00
-                                @endif
-                            </span>
+{{--                                    @else--}}
+{{--                                        0.00--}}
+{{--                                @endif--}}
+{{--                            </span>--}}
                         </span>
                     </a>
                     <div class="dropdown-menu">
@@ -100,19 +101,19 @@
                                                         <a href="#">{{ $product->name }}</a>
                                                     </strong>
                                                     <div class="product-item-price">
-                                                        <span class="price">
+    {{--                                                        <span class="price">--}}
 
-                                                            @for($i=0;$i<$c->quantity;$i++)
+    {{--                                                            @for($i=0;$i<$c->quantity;$i++)--}}
 
-                                                                @php $total_single_product = $total_single_product + $product->price @endphp
+    {{--                                                                @php $total_single_product = $total_single_product + $product->price @endphp--}}
 
-                                                            @endfor
+    {{--                                                            @endfor--}}
 
-                                                                {{ $total_single_product }}
+    {{--                                                                {{ $total_single_product }}--}}
 
-                                                                @php $total_single_product = 0; @endphp
+    {{--                                                                @php $total_single_product = 0; @endphp--}}
 
-                                                        </span>
+    {{--                                                        </span>--}}
                                                     </div>
                                                     <div class="product-item-qty">
                                                         <span class="label">Qty: </span ><span class="number"> {{ $c->quantity }} </span>
@@ -130,10 +131,10 @@
                                     </ol>
                                 </div>
                                 @if(Auth::check())
-                                <div class="subtotal">
-                                    <span class="label">Total</span>
-                                    <span class="price">{{ $total_price }}</span>
-                                </div>
+{{--                                <div class="subtotal">--}}
+{{--                                    <span class="label">Total</span>--}}
+{{--                                    <span class="price">{{ $total_price }}</span>--}}
+{{--                                </div>--}}
                                     <div class="actions">
                                         <!-- <a class="btn btn-viewcart" href="">
                                                 <span>Shopping bag</span>

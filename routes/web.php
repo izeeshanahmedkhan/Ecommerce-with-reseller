@@ -309,6 +309,8 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
 // -- order for frontend
     Route::post('/order',[App\Http\Controllers\OrderController::class, 'store'])->name('order');
 
+    Route::post('/coupon',[App\Http\Controllers\OfferController::class, 'coupon_check'])->name('coupon_code');
+
 });
 
 

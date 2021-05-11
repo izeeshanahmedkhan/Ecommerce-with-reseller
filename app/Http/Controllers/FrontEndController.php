@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\CategoryProduct;
 use App\Models\Colour;
@@ -12,6 +13,9 @@ use App\Models\HomeSetting;
 use App\Models\BlockFloorProducts;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class FrontEndController extends Controller
 {
@@ -22,6 +26,10 @@ class FrontEndController extends Controller
      */
     public function index()
     {
+        DB::table('deals')->where('end_date','<',now())->update(['status' => 0]);
+        DB::table('offers')->where('end_date','<',now())->update(['status' => 0]);
+        DB::table('general_discounts')->where('end_date','<',now())->update(['status' => 0]);
+
         $services = HomeSetting::where('key','service')
             ->where('status',1)
             ->take(4)
@@ -45,6 +53,10 @@ class FrontEndController extends Controller
 
     public function home()
     {
+        DB::table('deals')->where('end_date','<',now())->update(['status' => 0]);
+        DB::table('offers')->where('end_date','<',now())->update(['status' => 0]);
+        DB::table('general_discounts')->where('end_date','<',now())->update(['status' => 0]);
+
         $services = HomeSetting::where('key','service')
             ->where('status',1)
             ->take(4)
@@ -80,7 +92,21 @@ class FrontEndController extends Controller
 
     public function checkout(){
 
-        return view('frontend.checkout');
+        $user = Auth::User();
+
+        $cart = Cart::where('user_id', $user->id)->get();
+
+        if(count($cart) !== 0){
+
+            return view('frontend.checkout');
+        }
+        else{
+
+            session::flash('message',"Add An Item To Cart");
+            session::flash('alert-type','error');
+
+            return back();
+        }
 
     }
 
