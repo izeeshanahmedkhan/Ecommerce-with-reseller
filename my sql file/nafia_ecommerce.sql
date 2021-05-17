@@ -165,7 +165,7 @@ CREATE TABLE `carts` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `carts` */
 
@@ -174,7 +174,7 @@ insert  into `carts`(`id`,`quantity`,`size_id`,`colour_id`,`product_id`,`user_id
 (55,2,1,3,1,3,'2021-05-11 05:18:39','2021-05-11 05:19:13'),
 (56,1,3,1,5,3,'2021-05-11 05:19:40','2021-05-11 05:19:40'),
 (58,1,1,1,3,3,'2021-05-11 05:20:31','2021-05-11 05:20:31'),
-(70,3,2,4,2,3,'2021-05-11 06:04:25','2021-05-11 06:05:13');
+(71,2,2,4,2,3,'2021-05-12 20:17:37','2021-05-12 20:17:45');
 
 /*Table structure for table `categories` */
 
@@ -786,6 +786,48 @@ CREATE TABLE `couriers` (
 
 /*Data for the table `couriers` */
 
+/*Table structure for table `customer_user` */
+
+DROP TABLE IF EXISTS `customer_user`;
+
+CREATE TABLE `customer_user` (
+  `customer_id` bigint(20) unsigned NOT NULL,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`customer_id`,`user_id`),
+  KEY `customer_user_user_id_foreign` (`user_id`),
+  CONSTRAINT `customer_user_customer_id_foreign` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `customer_user_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `customer_user` */
+
+/*Table structure for table `customers` */
+
+DROP TABLE IF EXISTS `customers`;
+
+CREATE TABLE `customers` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `city` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `area` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contact` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `messaging_service_no` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `messaging_service_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `social_media_name_1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `link_1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `social_media_name_2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `link_2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `customers` */
+
 /*Table structure for table `deals` */
 
 DROP TABLE IF EXISTS `deals`;
@@ -807,7 +849,7 @@ CREATE TABLE `deals` (
 /*Data for the table `deals` */
 
 insert  into `deals`(`id`,`deal`,`product_id`,`size_id`,`discount`,`start_date`,`end_date`,`status`,`created_at`,`updated_at`) values 
-(5,'pack_of_two',1,1,10,'2021-05-06 16:59:00','2021-05-11 04:51:00',1,'2021-05-06 11:59:55','2021-05-11 05:18:06');
+(5,'pack_of_two',1,1,10,'2021-05-06 16:59:00','2021-05-12 20:20:00',0,'2021-05-06 11:59:55','2021-05-12 20:14:04');
 
 /*Table structure for table `delivery_charges` */
 
@@ -881,10 +923,10 @@ CREATE TABLE `general_discounts` (
 /*Data for the table `general_discounts` */
 
 insert  into `general_discounts`(`id`,`general_discount`,`product_id`,`category_id`,`reseller_id`,`customer_id`,`discount`,`start_date`,`end_date`,`status`,`created_at`,`updated_at`) values 
-(6,'Category',NULL,2,NULL,NULL,12,'2021-05-03 01:50:00','2021-05-04 01:50:00',1,'2021-05-02 20:50:37','2021-05-11 05:17:06'),
+(6,'Category',NULL,2,NULL,NULL,12,'2021-05-03 01:50:00','2021-05-12 20:20:00',0,'2021-05-02 20:50:37','2021-05-12 20:16:06'),
 (8,'Customer',NULL,NULL,NULL,7,7,'2021-05-03 02:18:00','2021-05-04 02:18:00',0,'2021-05-02 21:18:48','2021-05-02 21:18:48'),
 (10,'Reseller',NULL,NULL,2,NULL,15,'2021-05-03 15:31:00','2021-05-04 15:31:00',0,'2021-05-03 10:31:41','2021-05-03 10:31:41'),
-(12,'Product',4,NULL,NULL,NULL,15,'2021-05-06 17:01:00','2021-05-07 17:01:00',1,'2021-05-06 12:01:46','2021-05-11 05:17:11');
+(12,'Product',4,NULL,NULL,NULL,15,'2021-05-06 17:01:00','2021-05-12 20:20:00',0,'2021-05-06 12:01:46','2021-05-12 20:15:45');
 
 /*Table structure for table `home_settings` */
 
@@ -926,7 +968,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `migrations` */
 
@@ -962,7 +1004,16 @@ insert  into `migrations`(`id`,`migration`,`batch`) values
 (32,'2021_05_02_184217_create_general_discounts_table',4),
 (33,'2021_05_03_075314_create_resellers_table',5),
 (35,'2021_05_07_092806_create_delivery_charges_table',6),
-(36,'2021_05_07_092807_create_offers_table',7);
+(36,'2021_05_07_092807_create_offers_table',7),
+(37,'2021_05_11_160418_create_customers_table',8),
+(38,'2021_05_11_160419_create_sale_centers_table',9),
+(39,'2021_05_11_160420_create_riders_table',9),
+(40,'2021_05_11_160421_create_suppliers_table',9),
+(41,'2021_05_11_160422_create_resellers_table',10),
+(42,'2021_05_11_160423_create_customers_table',11),
+(43,'2021_05_12_162133_create_customer_users_table',12),
+(44,'2021_05_11_160424_create_customers_table',13),
+(45,'2021_05_12_162134_create_customer_users_table',13);
 
 /*Table structure for table `model_has_permissions` */
 
@@ -996,6 +1047,7 @@ CREATE TABLE `model_has_roles` (
 
 insert  into `model_has_roles`(`role_id`,`model_type`,`model_id`) values 
 (7,'App\\Models\\User',1),
+(7,'App\\Models\\User',12),
 (8,'App\\Models\\User',2),
 (9,'App\\Models\\User',3);
 
@@ -1023,9 +1075,9 @@ CREATE TABLE `offers` (
 /*Data for the table `offers` */
 
 insert  into `offers`(`id`,`offer`,`product_id`,`size_id`,`start_date`,`end_date`,`code`,`min_amount`,`discount`,`no_of_times`,`status`,`created_at`,`updated_at`) values 
-(2,'Voucher Code',NULL,NULL,'2021-05-10 18:17:00','2021-05-11 18:17:00','vcoffer01',2000.00,5,0,1,'2021-05-10 13:17:55','2021-05-10 20:52:13'),
-(3,'Buy One Get One Free',2,2,'2021-05-11 03:18:00','2021-05-11 04:53:00',NULL,NULL,NULL,NULL,1,'2021-05-10 22:18:55','2021-05-11 05:17:23'),
-(4,'Free Delivery',3,NULL,'2021-05-11 05:18:00','2021-05-11 05:19:00',NULL,NULL,NULL,NULL,1,'2021-05-11 05:17:50','2021-05-11 05:17:50');
+(2,'Voucher Code',NULL,NULL,'2021-05-10 18:17:00','2021-05-11 18:17:00','vcoffer01',2000.00,5,2,0,'2021-05-10 13:17:55','2021-05-12 20:15:19'),
+(3,'Buy One Get One Free',2,2,'2021-05-11 03:18:00','2021-05-12 20:20:00',NULL,NULL,NULL,NULL,0,'2021-05-10 22:18:55','2021-05-12 20:14:31'),
+(4,'Free Delivery',3,NULL,'2021-05-11 05:18:00','2021-05-12 20:20:00',NULL,NULL,NULL,NULL,0,'2021-05-11 05:17:50','2021-05-12 20:14:50');
 
 /*Table structure for table `orders` */
 
@@ -1248,6 +1300,8 @@ DROP TABLE IF EXISTS `resellers`;
 CREATE TABLE `resellers` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `city` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `area` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `address` text COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1271,12 +1325,9 @@ CREATE TABLE `resellers` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `resellers` */
-
-insert  into `resellers`(`id`,`name`,`city`,`area`,`address`,`contact`,`messaging_service_no`,`messaging_service_name`,`cnic_no`,`cnic_front`,`cnic_back`,`social_media_name_1`,`link_1`,`social_media_name_2`,`link_2`,`bank_account_title`,`bank_name`,`bank_branch`,`account_or_iban_no`,`money_transfer_no`,`money_transfer_service`,`status`,`created_at`,`updated_at`) values 
-(2,'Mustafa','Karachi','Gulshan','Gulshan Iqbal 13-C Karachi','01112345654','123','ufone','34456-6475867-4','unnamed.jpg','visiting card-02.png','facebook','fb.com','twitter','twitter.com','Mustafa','Meezan','Gulshan','123456789012','321','Jazz Cash',1,'2021-05-03 09:54:32','2021-05-03 09:54:32');
 
 /*Table structure for table `review_replies` */
 
@@ -1323,10 +1374,12 @@ CREATE TABLE `riders` (
   `area` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `contact` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `cnic_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `picture_of_cnic` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cnic_front` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cnic_back` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `messaging_service_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `messaging_service_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `bank_account_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `bank_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `bank_branch` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1483,10 +1536,13 @@ CREATE TABLE `sale_centers` (
   `city` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `area` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `contact` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `picture_of_cnic` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cnic_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cnic_front` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cnic_back` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `messaging_service_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `messaging_service_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `social_media_name_1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `social_media_name_2` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `social_media_name_3` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1495,6 +1551,7 @@ CREATE TABLE `sale_centers` (
   `link_3` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `bank_account_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `bank_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bank_branch` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `account_or_iban_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `money_transfer_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `money_transfer_service` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1563,7 +1620,8 @@ CREATE TABLE `suppliers` (
   `area` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `contact` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `cnic_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `picture_of_cnic` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cnic_front` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cnic_back` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `messaging_service_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `messaging_service_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1603,7 +1661,7 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `users` */
 

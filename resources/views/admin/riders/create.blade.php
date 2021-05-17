@@ -77,9 +77,19 @@
                                 </div>
 
                                 <div class="col-md-6 form-group mb-3">
-                                    <label for="riderPictureOfCNIC">CNIC Image</label>
-                                    <input type="file"  name="picture_of_cnic" class="form-control form-control @error('picture_of_cnic') is-invalid @enderror" id="riderPictureOfCNIC" placeholder="Enter CNIC Picture" value="{{ old('picture_of_cnic') }}" autocomplete="picture_of_cnic" autofocus/>
-                                    @error('picture_of_cnic')
+                                    <label for="resellerCnicFront">CNIC Front Image</label>
+                                    <input type="file"  name="cnic_front" class="form-control form-control @error('cnic_front') is-invalid @enderror" id="resellerCnicFront" value="{{ old('cnic_front') }}" autocomplete="cnic_front" autofocus/>
+                                    @error('cnic_front')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-6 form-group mb-3">
+                                    <label for="resellerCnicBack">CNIC Back Image</label>
+                                    <input type="file"  name="cnic_back" class="form-control form-control @error('cnic_back') is-invalid @enderror" id="resellerCnicBack" value="{{ old('cnic_back') }}" autocomplete="cnic_back" autofocus/>
+                                    @error('cnic_back')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -110,6 +120,16 @@
                                     <label for="riderEmail">Email</label>
                                     <input type="email"  name="email" class="form-control form-control @error('email') is-invalid @enderror" id="riderEmail    " type="text" placeholder="Enter email" value="{{ old('email') }}" autocomplete="email" autofocus />
                                     @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-6 form-group mb-3">
+                                    <label for="exampleInputEmail2">Password</label>
+                                    <input type="password"  name="password" class="form-control form-control-rounded @error('password') is-invalid @enderror" id="exampleInputEmail2"  placeholder="Enter password" />
+                                    @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

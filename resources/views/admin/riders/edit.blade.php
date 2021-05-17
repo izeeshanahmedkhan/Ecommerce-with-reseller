@@ -78,17 +78,31 @@
                                 </div>
 
                                 <div class="col-md-3 form-group mb-3">
-                                    <label for="riderPictureOfCNIC">CNIC Image</label>
-                                    <input type="file"  name="picture_of_cnic" class="form-control form-control @error('picture_of_cnic') is-invalid @enderror" id="riderPictureOfCNIC" placeholder="Enter CNIC Picture" value="{{ $rider->picture_of_cnic }}" autocomplete="picture_of_cnic" autofocus/>
-                                    @error('picture_of_cnic')
+                                    <label for="riderCnicFront">CNIC Front Image</label>
+                                    <input type="file"  name="cnic_front" class="form-control form-control @error('cnic_front') is-invalid @enderror" id="riderCnicFront" value="{{ old('cnic_front') }}" autocomplete="cnic_front" autofocus/>
+                                    @error('cnic_front')
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
 
                                 <div class="col-md-3 form-group mb-3">
-                                    <img src="{{ asset('storage/images/riderImages/'.$rider->picture_of_cnic) }}" height="100px" width="150px">
+                                    <img src="{{ asset('storage/images/riderImages/'.$rider->cnic_front) }}" height="100px" width="200px">
+                                </div>
+
+                                <div class="col-md-3 form-group mb-3">
+                                    <label for="riderCnicBack">CNIC Back Image</label>
+                                    <input type="file"  name="cnic_back" class="form-control form-control @error('cnic_back') is-invalid @enderror" id="riderCnicBack" value="{{ old('cnic_back') }}" autocomplete="cnic_back" autofocus/>
+                                    @error('cnic_back')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-3 form-group mb-3">
+                                    <img src="{{ asset('storage/images/riderImages/'.$rider->cnic_back) }}" height="100px" width="200px">
                                 </div>
 
                                 <div class="col-md-6 form-group mb-3">
@@ -114,10 +128,20 @@
                                 <div class="col-md-6 form-group mb-3">
                                     <label for="riderEmail">Email</label>
                                     <input type="email"  name="email" class="form-control form-control @error('email') is-invalid @enderror" id="riderEmail    " type="text" placeholder="Enter email" value="{{ $rider->email }}" autocomplete="email" autofocus />
-                                    @error('messaging_service_name')
+                                    @error('email')
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-6 form-group mb-3">
+                                    <label for="exampleInputEmail2">Password</label>
+                                    <input type="password"  name="password" class="form-control form-control-rounded @error('password') is-invalid @enderror" id="exampleInputEmail2"  placeholder="Enter password" />
+                                    @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
 

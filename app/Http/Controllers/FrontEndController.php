@@ -92,6 +92,10 @@ class FrontEndController extends Controller
 
     public function checkout(){
 
+        DB::table('deals')->where('end_date','<',now())->update(['status' => 0]);
+        DB::table('offers')->where('end_date','<',now())->update(['status' => 0]);
+        DB::table('general_discounts')->where('end_date','<',now())->update(['status' => 0]);
+
         $user = Auth::User();
 
         $cart = Cart::where('user_id', $user->id)->get();

@@ -81,6 +81,12 @@
                 </li>
             @endif
 
+            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show customers'))
+                <li class="nav-item {{$activePage == 'customerIndex' ? 'active' : ''}}"><a class="nav-item-hold" href="{{route('customer.index')}}"><i class="nav-icon fas fa-users"></i><span class="nav-text">customers</span></a>
+                    <div class="triangle"></div>
+                </li>
+            @endif
+
         </ul>
     </div>
     <div class="sidebar-left-secondary rtl-ps-none" data-perfect-scrollbar="" data-suppress-scroll-x="true">

@@ -53,4 +53,9 @@ class User extends Authenticatable
 
         return $user_contact->contact;
     }
+
+    public function customers(){
+
+        return $this->belongsToMany(Customer::class);
+    }
 }

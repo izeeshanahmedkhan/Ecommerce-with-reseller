@@ -76,9 +76,9 @@
                                 </div>
 
                                 <div class="col-md-6 form-group mb-3">
-                                    <label for="saleCenterEmail">Email</label>
-                                    <input type="email"  name="email" class="form-control form-control @error('email') is-invalid @enderror" id="saleCenterEmail    " type="text" placeholder="Enter email" value="{{ old('email') }}" autocomplete="email" autofocus />
-                                    @error('messaging_service_name')
+                                    <label for="saleCenterCNICNO">CNIC Number</label>
+                                    <input type="text"  name="cnic_no" class="form-control form-control @error('cnic_no') is-invalid @enderror" id="saleCenterCNICNO" placeholder="Enter CNIC Number" value="{{ old('cnic_no') }}" autocomplete="cnic_no" autofocus/>
+                                    @error('cnic_no')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -86,9 +86,19 @@
                                 </div>
 
                                 <div class="col-md-6 form-group mb-3">
-                                    <label for="saleCenterPictureOfCNIC">CNIC Image</label>
-                                    <input type="file"  name="picture_of_cnic" class="form-control form-control @error('picture_of_cnic') is-invalid @enderror" id="saleCenterPictureOfCNIC" placeholder="Enter CNIC Picture" value="{{ old('picture_of_cnic') }}" autocomplete="picture_of_cnic" autofocus/>
-                                    @error('picture_of_cnic')
+                                    <label for="saleCenterCnicFront">CNIC Front Image</label>
+                                    <input type="file"  name="cnic_front" class="form-control form-control @error('cnic_front') is-invalid @enderror" id="saleCenterCnicFront" value="{{ old('cnic_front') }}" autocomplete="cnic_front" autofocus/>
+                                    @error('cnic_front')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-6 form-group mb-3">
+                                    <label for="saleCenterCnicBack">CNIC Back Image</label>
+                                    <input type="file"  name="cnic_back" class="form-control form-control @error('cnic_back') is-invalid @enderror" id="saleCenterCnicBack" value="{{ old('cnic_back') }}" autocomplete="cnic_back" autofocus/>
+                                    @error('cnic_back')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -109,6 +119,26 @@
                                     <label for="saleCenterMessagingServiceNo">Messaging Service Number</label>
                                     <input type="text"  name="messaging_service_no" class="form-control form-control @error('messaging_service_no') is-invalid @enderror" id="saleCenterMessagingServiceNo" type="text" placeholder="Enter messaging service number" value="{{ old('messaging_service_no') }}" autocomplete="messaging_service_no" autofocus />
                                     @error('messaging_service_no')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-6 form-group mb-3">
+                                    <label for="saleCenterEmail">Email</label>
+                                    <input type="email"  name="email" class="form-control form-control @error('email') is-invalid @enderror" id="saleCenterEmail    " type="text" placeholder="Enter email" value="{{ old('email') }}" autocomplete="email" autofocus />
+                                    @error('messaging_service_name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-6 form-group mb-3">
+                                    <label for="exampleInputEmail2">Password</label>
+                                    <input type="password"  name="password" class="form-control form-control-rounded @error('password') is-invalid @enderror" id="exampleInputEmail2"  placeholder="Enter password" />
+                                    @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -189,6 +219,16 @@
                                     <label for="saleCenterBankName">Bank Name</label>
                                     <input type="text"  name="bank_name" class="form-control form-control @error('bank_name') is-invalid @enderror" id="saleCenterBankName" type="text" placeholder="Enter Bank Name" value="{{ old('bank_name') }}" autocomplete="bank_name" autofocus />
                                     @error('bank_name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-6 form-group mb-3">
+                                    <label for="saleCenterBankBranch">Bank Branch</label>
+                                    <input type="text"  name="bank_branch" class="form-control form-control @error('bank_branch') is-invalid @enderror" id="saleCenterBankBranch" type="text" placeholder="Enter Bank Branch" value="{{ old('bank_branch') }}" autocomplete="bank_branch" autofocus />
+                                    @error('bank_branch')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

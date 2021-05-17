@@ -24,6 +24,26 @@
                                 </div>
 
                                 <div class="col-md-6 form-group mb-3">
+                                    <label for="resellerEmail">Email</label>
+                                    <input type="email"  name="email" class="form-control form-control @error('email') is-invalid @enderror" id="resellerEmail" type="text" placeholder="Enter email" value="{{ old('email') }}" autocomplete="email" autofocus />
+                                    @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-6 form-group mb-3">
+                                    <label for="exampleInputEmail2">Password</label>
+                                    <input type="password"  name="password" class="form-control form-control-rounded @error('password') is-invalid @enderror" id="exampleInputEmail2"  placeholder="Enter password" />
+                                    @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-6 form-group mb-3">
                                     <label for="resellerCity">City</label>
                                     <input type="text"  name="city" class="form-control form-control @error('city') is-invalid @enderror" id="resellerCity" placeholder="Enter city name" value="{{ old('city') }}" autocomplete="city" autofocus/>
                                     @error('city')

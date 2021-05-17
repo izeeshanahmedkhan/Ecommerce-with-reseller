@@ -88,17 +88,31 @@
                                 </div>
 
                                 <div class="col-md-3 form-group mb-3">
-                                    <label for="supplierPictureOfCNIC">CNIC Image</label>
-                                    <input type="file"  name="picture_of_cnic" class="form-control form-control @error('picture_of_cnic') is-invalid @enderror" id="supplierPictureOfCNIC" placeholder="Enter CNIC Picture" value="{{ $supplier->picture_of_cnic }}" autocomplete="picture_of_cnic" autofocus/>
-                                    @error('picture_of_cnic')
+                                    <label for="supplierCnicFront">CNIC Front Image</label>
+                                    <input type="file"  name="cnic_front" class="form-control form-control @error('cnic_front') is-invalid @enderror" id="supplierCnicFront" value="{{ old('cnic_front') }}" autocomplete="cnic_front" autofocus/>
+                                    @error('cnic_front')
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
 
                                 <div class="col-md-3 form-group mb-3">
-                                    <img src="{{ asset('storage/images/supplierImages/'.$supplier->picture_of_cnic) }}" height="100px" width="150px">
+                                    <img src="{{ asset('storage/images/supplierImages/'.$supplier->cnic_front) }}" height="100px" width="200px">
+                                </div>
+
+                                <div class="col-md-3 form-group mb-3">
+                                    <label for="supplierCnicBack">CNIC Back Image</label>
+                                    <input type="file"  name="cnic_back" class="form-control form-control @error('cnic_back') is-invalid @enderror" id="supplierCnicBack" value="{{ old('cnic_back') }}" autocomplete="cnic_back" autofocus/>
+                                    @error('cnic_back')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-3 form-group mb-3">
+                                    <img src="{{ asset('storage/images/supplierImages/'.$supplier->cnic_back) }}" height="100px" width="200px">
                                 </div>
 
                                 <div class="col-md-6 form-group mb-3">

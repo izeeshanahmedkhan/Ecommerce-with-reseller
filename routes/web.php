@@ -177,6 +177,15 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
     Route::put('/admin/reseller/{reseller}/update',[App\Http\Controllers\ResellerController::class, 'update'])->name('reseller.update');
     Route::delete('/admin/reseller/{reseller}/delete',[App\Http\Controllers\ResellerController::class, 'destroy'])->name('reseller.destroy');
 
+//admin Customer
+
+    Route::get('/admin/customer',[App\Http\Controllers\CustomerController::class, 'index'])->name('customer.index');
+    Route::get('/admin/customer/create',[App\Http\Controllers\CustomerController::class, 'create'])->name('customer.create');
+    Route::post('/admin/customer/store',[App\Http\Controllers\CustomerController::class, 'store'])->name('customer.store');
+    Route::get('/admin/customer/{customer}/edit',[App\Http\Controllers\CustomerController::class, 'edit'])->name('customer.edit');
+    Route::put('/admin/customer/{customer}/update',[App\Http\Controllers\CustomerController::class, 'update'])->name('customer.update');
+    Route::delete('/admin/customer/{customer}/delete',[App\Http\Controllers\CustomerController::class, 'destroy'])->name('customer.destroy');
+
 
 //admin discounts
 
