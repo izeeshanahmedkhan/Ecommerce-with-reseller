@@ -23,10 +23,9 @@ class CreateRidersTable extends Migration
             $table->string('cnic_no');
             $table->text('cnic_front');
             $table->text('cnic_back');
-            $table->string('messaging_service_no');
-            $table->string('messaging_service_name');
+            $table->string('messaging_service_no')->nullable();
+            $table->string('messaging_service_name')->nullable();
             $table->string('email');
-            $table->string('password');
             $table->string('bank_account_title');
             $table->string('bank_name');
             $table->string('bank_branch');

@@ -5,14 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Rider extends Model
+class RiderUser extends Model
 {
     use HasFactory;
 
+    protected $table = 'rider_user';
+
     protected $guarded = [];
-
-    public function users(){
-
-        return $this->belongsToMany(User::class);
-    }
 }

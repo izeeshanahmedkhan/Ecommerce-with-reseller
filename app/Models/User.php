@@ -68,4 +68,9 @@ class User extends Authenticatable
 
         return $this->belongsToMany(SaleCenter::class);
     }
+
+    public function riders(){
+
+        return $this->belongsToMany(Rider::class);
+    }
 }

@@ -87,6 +87,7 @@ return array(
     'App\\Models\\Review' => $baseDir . '/app/Models/Review.php',
     'App\\Models\\ReviewReply' => $baseDir . '/app/Models/ReviewReply.php',
     'App\\Models\\Rider' => $baseDir . '/app/Models/Rider.php',
+    'App\\Models\\RiderUser' => $baseDir . '/app/Models/RiderUser.php',
     'App\\Models\\SaleCenter' => $baseDir . '/app/Models/SaleCenter.php',
     'App\\Models\\SaleCenterUser' => $baseDir . '/app/Models/SaleCenterUser.php',
     'App\\Models\\Size' => $baseDir . '/app/Models/Size.php',

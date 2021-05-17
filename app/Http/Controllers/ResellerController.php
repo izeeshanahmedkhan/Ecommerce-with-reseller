@@ -76,7 +76,6 @@ class ResellerController extends Controller
             $reseller->name = $request->get('name');
             $reseller->email = $request->get('email');
             $reseller->city = $request->get('city');
-            $reseller->name = $request->get('name');
             $reseller->area = $request->get('area');
             $reseller->address = $request->get('address');
             $reseller->contact = $request->get('contact');
@@ -205,7 +204,6 @@ class ResellerController extends Controller
             $reseller->name = $request->get('name');
             $reseller->email = $request->get('email');
             $reseller->city = $request->get('city');
-            $reseller->name = $request->get('name');
             $reseller->area = $request->get('area');
             $reseller->address = $request->get('address');
             $reseller->contact = $request->get('contact');
@@ -284,7 +282,7 @@ class ResellerController extends Controller
         else{
 
             Session::flash('message','Reseller Already exists with this CNIC');
-            Session::flash('alert-type','warning');
+            Session::flash('alert-type','error');
             return redirect()->back();
 
         }
