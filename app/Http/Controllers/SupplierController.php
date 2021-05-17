@@ -44,16 +44,17 @@ class SupplierController extends Controller
             'address'=> ['required', 'string','max:255'],
             'city'=> ['required', 'string', 'max:255'],
             'area'=> ['required', 'string', 'max:255'],
-            'contact'=> ['required','string', 'max:255'],
+            'contact'=> ['required','numeric', 'digits:11'],
             'cnic_no'=> 'required|string|max:255',
-            'picture_of_cnic'=> 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'messaging_service_no'=> 'required|string|max:255',
-            'messaging_service_name'=> 'required|string|max:255',
-            'email'=> ['required','email'],
-            'social_media_name_1'=> 'required|string|max:255',
-            'link_1'=> 'required|string|max:255',
-            'social_media_name_2'=> 'required|string|max:255',
-            'link_2'=> 'required|string|max:255',
+            'cnic_front' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'cnic_back'  => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'messaging_service_no'=> 'nullable|string|max:255',
+            'messaging_service_name'=> 'nullable|string|max:255',
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'social_media_name_1'=> 'nullable|string|max:255',
+            'link_1'=> 'nullable|string|max:255',
+            'social_media_name_2'=> 'nullable|string|max:255',
+            'link_2'=> 'nullable|string|max:255',
             'bank_account_title'=> 'required|string|max:255',
             'bank_name'=> 'required|string|max:255',
             'bank_branch'=> 'required|string|max:255',
@@ -68,13 +69,21 @@ class SupplierController extends Controller
         if(sizeof($checkCnicNo) == false){
 
             $supplier = new Supplier();
+
             $supplier->fill($request->all());
 
-            $image = $request->file('picture_of_cnic');
-            $image_name = $image->getClientOriginalName();
-            $image->storeAs('/images/supplierImages',$image_name);
+            $cnic_front_image = $request->file('cnic_front');
+            $cnic_front_image_name = $cnic_front_image->getClientOriginalName();
+            $cnic_front_image->storeAs('/images/supplierImages',$cnic_front_image_name);
 
-            $supplier->picture_of_cnic = $image_name;
+            $supplier->cnic_front = $cnic_front_image_name;
+
+            $cnic_back_image = $request->file('cnic_back');
+            $cnic_back_image_name = $cnic_back_image->getClientOriginalName();
+            $cnic_back_image->storeAs('/images/supplierImages',$cnic_back_image_name);
+
+            $supplier->cnic_back = $cnic_back_image_name;
+
             $supplier->save();
 
             Session::flash('message','Supplier Added Successfully');

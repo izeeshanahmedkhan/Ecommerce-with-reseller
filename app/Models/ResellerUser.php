@@ -5,15 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SaleCenter extends Model
+class ResellerUser extends Model
 {
     use HasFactory;
 
+    protected $table = 'reseller_user';
+
     protected $guarded = [];
-
-    public function users(){
-
-        return $this->belongsToMany(User::class);
-    }
-
 }

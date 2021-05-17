@@ -78,7 +78,7 @@
 
                                 <div class="col-md-6 form-group mb-3">
                                     <label for="saleCenterCNICNO">CNIC Number</label>
-                                    <input type="text"  name="cnic_no" class="form-control form-control @error('cnic_no') is-invalid @enderror" id="saleCenterCNICNO" placeholder="Enter CNIC Number" value="{{ $reseller->cnic_no }}" autocomplete="cnic_no" autofocus/>
+                                    <input type="text"  name="cnic_no" class="form-control form-control @error('cnic_no') is-invalid @enderror" id="saleCenterCNICNO" placeholder="Enter CNIC Number" value="{{ $salecenter->cnic_no }}" autocomplete="cnic_no" autofocus/>
                                     @error('cnic_no')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

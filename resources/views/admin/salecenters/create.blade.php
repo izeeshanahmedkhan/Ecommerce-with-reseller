@@ -128,7 +128,7 @@
                                 <div class="col-md-6 form-group mb-3">
                                     <label for="saleCenterEmail">Email</label>
                                     <input type="email"  name="email" class="form-control form-control @error('email') is-invalid @enderror" id="saleCenterEmail    " type="text" placeholder="Enter email" value="{{ old('email') }}" autocomplete="email" autofocus />
-                                    @error('messaging_service_name')
+                                    @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -269,8 +269,8 @@
                                     <label for="selectStatus">Select Status</label>
                                     <select class="form-control @error('status') is-invalid @enderror" id="selectStatus" name="status">
                                         <option selected disabled> Select Status </option>
-                                        <option value="1"> Active </option>
-                                        <option value="0"> In Active </option>
+                                        <option {{ old('status') == 1 ? 'selected':'' }} value="1"> Active </option>
+                                        <option {{ old('status') == 0 ? 'selected':'' }} value="0"> In Active </option>
                                     </select>
                                     @error('status')
                                     <span class="invalid-feedback" role="alert">

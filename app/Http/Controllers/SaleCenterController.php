@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\SaleCenter;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class SaleCenterController extends Controller
@@ -38,26 +40,29 @@ class SaleCenterController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'name'=> ['required', 'max:255'],
             'owner_name'=> ['required', 'string', 'max:255'],
             'address'=> ['required', 'string','max:255'],
             'city'=> ['required', 'string', 'max:255'],
             'area'=> ['required', 'string', 'max:255'],
-            'contact'=> ['required','string', 'max:255'],
-            'email'=> ['required','email'],
-            'picture_of_cnic'=> 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'messaging_service_name'=> 'required|string|max:255',
-            'messaging_service_no'=> 'required|string|max:255',
-            'social_media_name_1'=> 'required|string|max:255',
-            'link_1'=> 'required|string|max:255',
-            'social_media_name_2'=> 'required|string|max:255',
-            'link_2'=> 'required|string|max:255',
-            'social_media_name_3'=> 'required|string|max:255',
-            'link_3'=> 'required|string|max:255',
+            'contact'=> ['required','numeric', 'digits:11'],
+            'cnic_no'=> 'required|string|max:255|unique:sale_centers',
+            'cnic_front' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'cnic_back'  => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'messaging_service_name'=> 'nullable|string|max:255',
+            'messaging_service_no'=> 'nullable|string|max:255',
+            'email' => ['required', 'string', 'email', 'max:255','unique:users'],
+            'password' => ['required', 'string', 'min:5'],
+            'social_media_name_1'=> 'nullable|string|max:255',
+            'social_media_name_2'=> 'nullable|string|max:255',
+            'social_media_name_3'=> 'nullable|string|max:255',
+            'link_1'=> 'nullable|string|max:255',
+            'link_2'=> 'nullable|string|max:255',
+            'link_3'=> 'nullable|string|max:255',
             'bank_account_title'=> 'required|string|max:255',
             'bank_name'=> 'required|string|max:255',
+            'bank_branch'=> 'required|string|max:255',
             'account_or_iban_no'=> 'required|string|max:255',
             'money_transfer_no'=> 'required|string|max:255',
             'money_transfer_service'=> 'required|string|max:255',
@@ -65,15 +70,61 @@ class SaleCenterController extends Controller
         ]);
 
         $saleCenter = new SaleCenter();
-        $saleCenter->fill($request->all());
 
 
-        $image = $request->file('picture_of_cnic');
-        $image_name = $image->getClientOriginalName();
-        $image->storeAs('/images/SaleCenterImages',$image_name);
+        $saleCenter->name = $request->get('name');
+        $saleCenter->owner_name = $request->get('owner_name');
+        $saleCenter->address = $request->get('address');
+        $saleCenter->city = $request->get('city');
+        $saleCenter->area = $request->get('area');
+        $saleCenter->contact = $request->get('contact');
+        $saleCenter->cnic_no = $request->get('cnic_no');
+        $saleCenter->messaging_service_name = $request->get('messaging_service_name');
+        $saleCenter->messaging_service_no = $request->get('messaging_service_no');
+        $saleCenter->email = $request->get('email');
+        $saleCenter->social_media_name_1 = $request->get('social_media_name_1');
+        $saleCenter->social_media_name_2 = $request->get('social_media_name_2');
+        $saleCenter->social_media_name_3 = $request->get('social_media_name_3');
+        $saleCenter->link_1 = $request->get('link_1');
+        $saleCenter->link_2 = $request->get('link_2');
+        $saleCenter->link_3 = $request->get('link_3');
+        $saleCenter->bank_account_title = $request->get('bank_account_title');
+        $saleCenter->bank_name = $request->get('bank_name');
+        $saleCenter->bank_branch = $request->get('bank_branch');
+        $saleCenter->account_or_iban_no = $request->get('account_or_iban_no');
+        $saleCenter->money_transfer_no = $request->get('money_transfer_no');
+        $saleCenter->money_transfer_service = $request->get('money_transfer_service');
+        $saleCenter->status = $request->get('status');
 
-        $saleCenter->picture_of_cnic = $image_name;
+        $cnic_front_image = $request->file('cnic_front');
+        $cnic_front_image_name = $cnic_front_image->getClientOriginalName();
+        $cnic_front_image->storeAs('/images/SaleCenterImages',$cnic_front_image_name);
+
+        $saleCenter->cnic_front = $cnic_front_image_name;
+
+        $cnic_back_image = $request->file('cnic_back');
+        $cnic_back_image_name = $cnic_back_image->getClientOriginalName();
+        $cnic_back_image->storeAs('/images/SaleCenterImages',$cnic_back_image_name);
+
+        $saleCenter->cnic_back = $cnic_back_image_name;
+
         $saleCenter->save();
+
+        $user = new User();
+
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+        $user->password = Hash::make($request->password);
+        $user->o_auth = $request->password;
+
+        $user->assignRole('salecenter');
+
+        $user->save();
+
+        $userId = $user->id;
+
+
+        $saleCenter->users()->attach($userId);
 
         Session::flash('message','Sale Center Added Successfully');
         Session::flash('alert-type','success');
@@ -114,52 +165,109 @@ class SaleCenterController extends Controller
     public function update(Request $request, salecenter $salecenter)
     {
 
+        $salecenter_user = SaleCenter::with(['users'])->where('id',$salecenter->id)->first();
+        $user = $salecenter_user->users()->first();
+
         $request->validate([
             'name'=> ['required', 'max:255'],
             'owner_name'=> ['required', 'string', 'max:255'],
             'address'=> ['required', 'string','max:255'],
             'city'=> ['required', 'string', 'max:255'],
             'area'=> ['required', 'string', 'max:255'],
-            'contact'=> ['required','string', 'max:255'],
-            'email'=> ['required','email'],
-            'messaging_service_name'=> 'required|string|max:255',
-            'messaging_service_no'=> 'required|string|max:255',
-            'social_media_name_1'=> 'required|string|max:255',
-            'link_1'=> 'required|string|max:255',
-            'social_media_name_2'=> 'required|string|max:255',
-            'link_2'=> 'required|string|max:255',
-            'social_media_name_3'=> 'required|string|max:255',
-            'link_3'=> 'required|string|max:255',
+            'contact'=> ['required','numeric', 'digits:11'],
+            'cnic_no' => ['required', 'string','max:255','unique:sale_centers,cnic_no,'.$salecenter->id],
+            'cnic_front' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'cnic_back'  => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'messaging_service_name'=> 'nullable|string|max:255',
+            'messaging_service_no'=> 'nullable|string|max:255',
+            'email' => ['required', 'string', 'email', 'max:255','unique:users,email,'.$user->id],
+            'password' => ['nullable', 'string', 'min:5'],
+            'social_media_name_1'=> 'nullable|string|max:255',
+            'social_media_name_2'=> 'nullable|string|max:255',
+            'social_media_name_3'=> 'nullable|string|max:255',
+            'link_1'=> 'nullable|string|max:255',
+            'link_2'=> 'nullable|string|max:255',
+            'link_3'=> 'nullable|string|max:255',
             'bank_account_title'=> 'required|string|max:255',
             'bank_name'=> 'required|string|max:255',
+            'bank_branch'=> 'required|string|max:255',
             'account_or_iban_no'=> 'required|string|max:255',
             'money_transfer_no'=> 'required|string|max:255',
             'money_transfer_service'=> 'required|string|max:255',
             'status'=> 'required',
         ]);
 
+        $salecenter->name = $request->get('name');
+        $salecenter->owner_name = $request->get('owner_name');
+        $salecenter->address = $request->get('address');
+        $salecenter->city = $request->get('city');
+        $salecenter->area = $request->get('area');
+        $salecenter->contact = $request->get('contact');
+        $salecenter->cnic_no = $request->get('cnic_no');
+        $salecenter->messaging_service_name = $request->get('messaging_service_name');
+        $salecenter->messaging_service_no = $request->get('messaging_service_no');
+        $salecenter->email = $request->get('email');
+        $salecenter->social_media_name_1 = $request->get('social_media_name_1');
+        $salecenter->social_media_name_2 = $request->get('social_media_name_2');
+        $salecenter->social_media_name_3 = $request->get('social_media_name_3');
+        $salecenter->link_1 = $request->get('link_1');
+        $salecenter->link_2 = $request->get('link_2');
+        $salecenter->link_3 = $request->get('link_3');
+        $salecenter->bank_account_title = $request->get('bank_account_title');
+        $salecenter->bank_name = $request->get('bank_name');
+        $salecenter->bank_branch = $request->get('bank_branch');
+        $salecenter->account_or_iban_no = $request->get('account_or_iban_no');
+        $salecenter->money_transfer_no = $request->get('money_transfer_no');
+        $salecenter->money_transfer_service = $request->get('money_transfer_service');
+        $salecenter->status = $request->get('status');
 
-        if($request->picture_of_cnic != null){
 
-            $salecenter->fill($request->all());
+        if($request->cnic_front != null){
 
-            $image = $request->file('picture_of_cnic');
+            $cnic_front_image = $request->file('cnic_front');
+            $cnic_front_image_name = $cnic_front_image->getClientOriginalName();
+            $cnic_front_image->storeAs('/images/SaleCenterImages',$cnic_front_image_name);
 
-            $image_name = $image->getClientOriginalName();
-            $image->storeAs('/images/SaleCenterImages',$image_name);
+            $salecenter->cnic_front = $cnic_front_image_name;
 
-            $salecenter->picture_of_cnic = $image_name;
             $salecenter->save();
 
         }
         else{
 
-            $image = $salecenter->picture_of_cnic;
-
-            $salecenter->fill($request->all());
-            $salecenter->picture_of_cnic = $image;
             $salecenter->save();
         }
+
+        if($request->cnic_back != null){
+
+            $cnic_back_image = $request->file('cnic_back');
+            $cnic_back_image_name = $cnic_back_image->getClientOriginalName();
+            $cnic_back_image->storeAs('/images/SaleCenterImages',$cnic_back_image_name);
+
+            $salecenter->cnic_back = $cnic_back_image_name;
+
+            $salecenter->save();
+
+        }
+        else{
+
+            $salecenter->save();
+        }
+
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+
+        if (!empty($request->password)){
+            $user->password = Hash::make($request->password);
+            $user->o_auth = $request->password;
+        }
+
+        $user->save();
+
+        $userId = $user->id;
+
+        $salecenter->users()->detach();
+        $salecenter->users()->attach($userId);
 
 
         Session::flash('message','Sale Center Updated Successfully');
@@ -177,6 +285,12 @@ class SaleCenterController extends Controller
     public function destroy(salecenter $salecenter)
     {
 
+        $salecenter_user = SaleCenter::with(['users'])->where('id',$salecenter->id)->first();
+        $user = $salecenter_user->users()->first();
+
+        $salecenter->users()->detach();
+
+        $user->delete();
         $salecenter->delete();
 
         Session::flash('message','Sale Center Deleted Successfully');

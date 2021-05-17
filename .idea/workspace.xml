@@ -3,23 +3,21 @@
   <component name="ChangeListManager">
     <list default="true" id="109f3638-9762-4d24-bc6b-d19387ef9a4d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FrontEndController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FrontEndController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ResellerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ResellerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SaleCenterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SaleCenterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SupplierController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SupplierController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Reseller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Reseller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/SaleCenter.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/SaleCenter.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_03_11_084835_create_sale_centers_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_03_14_130041_create_riders_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_03_18_142153_create_suppliers_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_05_03_075314_create_resellers_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/layouts/partials/leftside_navbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/layouts/partials/leftside_navbar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_05_11_160419_create_sale_centers_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_05_11_160421_create_suppliers_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_05_11_160422_create_resellers_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeders/CitiesTableSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/CitiesTableSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my sql file/nafia_ecommerce.sql" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/resellers/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/resellers/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/resellers/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/resellers/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/riders/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/riders/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/riders/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/riders/edit.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/salecenters/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/salecenters/create.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/salecenters/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/salecenters/edit.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/suppliers/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/suppliers/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/suppliers/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/suppliers/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/users/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/autoload.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/autoload.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/composer/ClassLoader.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/ClassLoader.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/composer/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/LICENSE" afterDir="false" />
@@ -180,7 +178,7 @@
       <method v="2" />
     </configuration>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -198,10 +196,17 @@
       <workItem from="1620667336906" duration="27275000" />
       <workItem from="1620724989703" duration="9713000" />
       <workItem from="1620811407509" duration="17305000" />
+      <workItem from="1621243261158" duration="10091000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="450" y="185" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1621252929589">
+      <screen x="0" y="0" width="1440" height="860" />
+    </state>
+    <state x="450" y="185" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1440.860@0.0.1440.860" timestamp="1621252929589" />
   </component>
 </project>
