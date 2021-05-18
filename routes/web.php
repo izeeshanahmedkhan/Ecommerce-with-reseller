@@ -24,6 +24,7 @@ Auth::routes();
 Route::group(['middleware' => ['auth','checkStatus']], function (){
 
     Route::get('/admin',[App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/reseller',[App\Http\Controllers\UserResellerController::class, 'index'])->name('reseller.dashboard')->middleware('role:reseller');
 
     Route::get('/admin/user',[App\Http\Controllers\UserController::class, 'index'])->name('user.index')->middleware('permission:show users');
     Route::get('/admin/user/create',[App\Http\Controllers\UserController::class, 'create'])->name('user.create')->middleware('permission:create users');
@@ -319,6 +320,11 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
     Route::post('/order',[App\Http\Controllers\OrderController::class, 'store'])->name('order');
 
     Route::post('/coupon',[App\Http\Controllers\OfferController::class, 'coupon_check'])->name('coupon_code');
+
+    //reseller Products
+
+    Route::get('/reseller/product',[App\Http\Controllers\ProductResellerController::class, 'index'])->name('product_reseller.index');
+    Route::get('/reseller/product/{product}/show',[App\Http\Controllers\ProductResellerController::class, 'show'])->name('product_reseller.show');
 
 });
 

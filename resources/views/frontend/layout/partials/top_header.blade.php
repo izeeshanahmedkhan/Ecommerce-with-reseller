@@ -72,9 +72,9 @@
                             @endif
                         @else
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }}</a>
-                            </li>
+{{--                            <li class="nav-item">--}}
+{{--                                <a class="nav-link" href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }}</a>--}}
+{{--                            </li>--}}
                             <li>
                                 <div>
                                     <a class="dropdown-item" href="{{ route('logout') }}"

@@ -1,9 +1,11 @@
 <div class="side-content-wrap">
     <div class="sidebar-left open rtl-ps-none" data-perfect-scrollbar="" data-suppress-scroll-x="true">
         <ul class="navigation-left">
+            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show admin dashboard'))
             <li class="nav-item {{ $activePage == 'adminIndex' ? 'active':'' }}"><a class="nav-item-hold" href="{{ route('admin.dashboard') }}"><i class="nav-icon i-Bar-Chart"></i><span class="nav-text">Dashboard</span></a>
                 <div class="triangle"></div>
             </li>
+            @endif
 
             @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show users') || auth()->user()->hasPermissionTo('create users') || auth()->user()->hasPermissionTo('show roles'))
             <li class="nav-item {{$activePage == 'userIndex' ? 'active' : ''}} {{$activePage == 'userCreate' ? 'active' : ''}} {{$activePage == 'roleIndex' ? 'active' : ''}}" data-item="users">

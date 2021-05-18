@@ -1,10 +1,10 @@
-@extends('admin.layouts.master')
+@extends('reseller.layouts.master')
 @section('content')
-    <input type="hidden" value="{{$activePage = 'colourIndex', $title = 'Colours- Nafia Garments'}}">
+    <input type="hidden" value="{{$activePage = 'productIndex', $title = 'Reseller Products- Nafia Garments'}}">
     <div class="main-content">
         <div class="row mb-4">
             <div class="col-md-12">
-                <h4>View All Colours</h4>
+                <h4>View All Products</h4>
             </div>
         </div>
         <!-- end of row-->
@@ -12,58 +12,43 @@
             <div class="col-md-12 mb-4">
                 <div class="card text-left">
                     <div class="card-body">
-                        <h4 class="card-title mb-3" style="display: inline;">Colour</h4>
-                        @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('create colours'))
+                        <h4 class="card-title mb-3" style="display: inline;">Product</h4>
+                        @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('create products'))
                         <div style="float:right; margin-right: 1%;">
-                            <a href="{{route('colour.create')}}" class="btn btn-raised btn-raised-primary m-1" style="color: white;"><i
-                                    class="nav-icon font-weight-bold"></i>Add New Colour</a>
+                            <a href="{{route('product.create')}}" class="btn btn-raised btn-raised-primary m-1" style="color: white;"><i
+                                    class="nav-icon font-weight-bold"></i>Add New Product</a>
                             <br> <br>
                         </div>
                         @endif
+
                         <div class="table-responsive">
                             <table class="display table table-striped table-bordered" id="zero_configuration_table" style="width:100%">
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Colour Code</th>
-                                    <th>Colour</th>
-                                    <th>Created At</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($colours as $colour)
+                                @foreach($products as $product)
                                     <tr>
-                                        <td>{{$colour->id}}</td>
-                                        <td>{{$colour->colourCode}}</td>
+                                        <td>{{ $product->id }}</td>
+                                        <td>{{ $product->name }}</td>
+                                        <td>{{ $product->list_price_for_salesman }}</td>
                                         <td>
-                                            <div style="background-color: {{ $colour->colourCode }}; width:50px; height: 50px; font-size: 0;"></div>
-                                        </td>
-                                        <td>{{$colour->created_at->diffForHumans()}}</td>
-                                        <td>
-                                            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('edit colours'))
-                                            <a href="{{route('colour.edit',$colour)}}" class="btn btn-raised btn-raised-primary m-1" style="color: white"><i
-                                                    class="nav-icon i-Pen-2 font-weight-bold"></i></a>
-                                            @endif
-                                            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('delete colours'))
-                                            <form method="POST" action="{{route('colour.destroy',$colour)}}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"  class="btn btn-raised btn-raised-danger m-1" style="color: white"><i
-                                                        class="nav-icon i-Close-Window font-weight-bold"></i></button>
-                                            </form>
-                                            @endif
+                                            <a href="{{route('product_reseller.show',$product)}}" class="btn btn-raised btn-raised-success m-1" style="color: white"><i
+                                                    class="far fa-eye font-weight-bold"> View </i></a>
                                         </td>
                                     </tr>
                                 @endforeach
-
                                 </tbody>
                                 <tfoot>
                                 <tr>
                                     <th>#</th>
-                                    <th>Colour Code</th>
-                                    <th>Colour</th>
-                                    <th>Created At</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
                                     <th>Action</th>
                                 </tr>
                                 </tfoot>
