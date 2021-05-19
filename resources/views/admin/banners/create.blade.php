@@ -16,7 +16,7 @@
                             <div class="row">
 
                                 <div class="col-md-6 form-group mb-3">
-                                    <label for="banner_1">Banner - 1 (Width:255px Height:183px)</label>
+                                    <label for="banner_1">Banner - 1 (Width:225px Height:183px)</label>
 
                                     <input type="file"  name="banner_1" class="form-control form-control @error('banner_1') is-invalid @enderror" id="banner_1" placeholder="Enter Banner One" value="{{ old('banner_1') }}" autocomplete="banner_1" autofocus/>
 

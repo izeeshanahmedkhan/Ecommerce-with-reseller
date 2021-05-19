@@ -17,7 +17,7 @@
                                 @if($banner->key == "banner-1")
 
                                     <div class="col-md-3 form-group mb-3">
-                                        <label for="banner_1">Banner (Width:255px Height:183px)</label>
+                                        <label for="banner_1">Banner (Width:225px Height:183px)</label>
                                         <input type="hidden" name="banner_1_value" value="{{ $banner->value }}"/>
                                         <input type="file"  name="banner_1" class="form-control @error('banner_1') is-invalid @enderror" id="banner_1" placeholder="Enter Banner" value="{{ $banner->value }}" autocomplete="banner_1" autofocus/>
                                         @error('banner_1')

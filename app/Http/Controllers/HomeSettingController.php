@@ -269,7 +269,7 @@ class HomeSettingController extends Controller
 
             $request->validate([
 
-                'banner_1' => ['required','image','mimes:jpeg,png,jpg,gif,svg','dimensions:min_width=255,min_height=183'],
+                'banner_1' => ['required','image','mimes:jpeg,png,jpg,gif,svg','dimensions:min_width=225,min_height=183'],
                 'banner_2' => ['required','image','mimes:jpeg,png,jpg,gif,svg','dimensions:min_width=207,min_height=182'],
             ]);
 
