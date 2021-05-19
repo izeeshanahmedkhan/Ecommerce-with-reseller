@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 18, 2021 at 03:13 PM
+-- Generation Time: May 19, 2021 at 02:39 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -118,6 +118,13 @@ CREATE TABLE `block_floor_products` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `block_floor_products`
+--
+
+INSERT INTO `block_floor_products` (`id`, `title`, `icon`, `banner_1`, `banner_2`, `featured_banner`, `colourCode`, `category_one`, `category_two`, `category_three`, `category_four`, `category_five`, `category_six`, `category_seven`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'FASHION', 'fas fa-tshirt', 'banner1-1.jpg', 'banner1-2.jpg', 'baner-floor1.jpg', '#ff3366', 2, 3, 4, 5, 6, 7, 5, 1, '2021-05-19 11:30:45', '2021-05-19 11:30:49');
+
 -- --------------------------------------------------------
 
 --
@@ -134,6 +141,13 @@ CREATE TABLE `carts` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `carts`
+--
+
+INSERT INTO `carts` (`id`, `quantity`, `size_id`, `colour_id`, `product_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 1, 1, 3, '2021-05-19 11:31:38', '2021-05-19 11:31:38');
 
 -- --------------------------------------------------------
 
@@ -865,6 +879,24 @@ CREATE TABLE `home_settings` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `home_settings`
+--
+
+INSERT INTO `home_settings` (`id`, `page_name`, `key`, `value`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'all-pages', 'logo', 'logo.png', 1, '2021-05-19 11:18:07', '2021-05-19 11:18:10'),
+(2, 'all-pages', 'address', 'Example Street 68, Mahattan,New York, USA', 1, '2021-05-19 11:19:38', '2021-05-19 11:19:43'),
+(3, 'all-pages', 'phone', '12345678952', 1, '2021-05-19 11:19:38', '2021-05-19 11:19:46'),
+(4, 'all-pages', 'email', 'Support@ovicsoft.com', 1, '2021-05-19 11:19:38', '2021-05-19 11:19:49'),
+(5, 'all-pages', 'slider', 'slide1.jpg~Slider - 1~Slider -1 Sub Title', 1, '2021-05-19 11:20:43', '2021-05-19 11:20:59'),
+(6, 'all-pages', 'slider', 'slide3.jpg~Slider - 2~Slider -2 Sub Title', 1, '2021-05-19 11:20:55', '2021-05-19 11:21:02'),
+(7, 'home-page', 'banner-1', 'banner-slide1.jpg', 1, '2021-05-19 11:25:38', '2021-05-19 11:25:44'),
+(8, 'home-page', 'banner-2', 'banner-slide2.jpg', 1, '2021-05-19 11:25:38', '2021-05-19 11:25:48'),
+(13, 'home-page', 'service', 'FREE SHIPPING~On order over $200~fa fa-plane', 1, '2021-05-19 11:27:36', '2021-05-19 11:27:40'),
+(14, 'home-page', 'service', '30-DAY RETURN~Moneyback guarantee~fa fa-clock', 1, '2021-05-19 11:27:54', '2021-05-19 11:27:59'),
+(15, 'home-page', 'service', '24/7 SUPPORT~Online consultations~fas fa-phone-alt', 1, '2021-05-19 11:28:13', '2021-05-19 11:28:17'),
+(16, 'home-page', 'service', 'SAFE SHOPPING~Safe Shopping Guarantee~fas fa-umbrella', 1, '2021-05-19 11:28:31', '2021-05-19 11:28:34');
+
 -- --------------------------------------------------------
 
 --
@@ -960,6 +992,7 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (3, 'App\\Models\\User', 3),
 (4, 'App\\Models\\User', 4),
 (4, 'App\\Models\\User', 5),
+(4, 'App\\Models\\User', 14),
 (5, 'App\\Models\\User', 7),
 (6, 'App\\Models\\User', 9),
 (6, 'App\\Models\\User', 10),
@@ -1199,6 +1232,13 @@ CREATE TABLE `resellers` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `resellers`
+--
+
+INSERT INTO `resellers` (`id`, `name`, `email`, `city`, `area`, `address`, `contact`, `messaging_service_no`, `messaging_service_name`, `cnic_no`, `cnic_front`, `cnic_back`, `social_media_name_1`, `link_1`, `social_media_name_2`, `link_2`, `bank_account_title`, `bank_name`, `bank_branch`, `account_or_iban_no`, `money_transfer_no`, `money_transfer_service`, `status`, `created_at`, `updated_at`) VALUES
+(4, 'reseller', 'reseller@example.com', 'Karachi', 'Ghulshan', 'Ghulshan Iqbal, Karachi', '+923345652528', NULL, NULL, '98858658585852', 'photo-wide-3.jpg', 'photo-wide-4.jpg', NULL, NULL, NULL, NULL, 'Reseller', 'Meezan', 'Gulshan', '02154', '12154', 'Ufone', 1, '2021-05-19 11:43:59', '2021-05-19 11:43:59');
+
 -- --------------------------------------------------------
 
 --
@@ -1211,6 +1251,13 @@ CREATE TABLE `reseller_user` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `reseller_user`
+--
+
+INSERT INTO `reseller_user` (`reseller_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(4, 14, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1605,7 +1652,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `im
 (4, 'Ahmed', 'ahmed@gmail.com', NULL, '$2y$10$dieKLla03pEc5mx3s3CgS.12i2d0soORXyiVpmmmkMn4VuKLAeFtO', NULL, '12345', 1, NULL, '2021-05-17 10:22:31', '2021-05-17 10:22:31'),
 (5, 'Ahmed', 'ahmed1@gmail.com', NULL, '$2y$10$z1pCJYgeD5yVCaeh7PUBK.Iuv3aWCo8w7BFdqea/VaGUDqQd04E/C', NULL, '12345', 1, NULL, '2021-05-17 10:25:06', '2021-05-17 10:25:06'),
 (7, 'Gulshan', 'ahmed5@gmail.com', NULL, '$2y$10$wXupEqDdSgtG4IhUrkR1eesvWyz9GbmMo8BnqrzAueXxu/cdcLOF.', NULL, '12345', 1, NULL, '2021-05-17 11:34:52', '2021-05-17 11:34:52'),
-(13, 'Hameed', 'hameed@gmail.com', NULL, '$2y$10$bV1oG9BczjmSl1Cx1vAcSuIUqEVFVuMZgR64PbC6Ls77i1urnVVpK', NULL, '12345', 1, NULL, '2021-05-17 18:03:00', '2021-05-17 18:03:00');
+(13, 'Hameed', 'hameed@gmail.com', NULL, '$2y$10$bV1oG9BczjmSl1Cx1vAcSuIUqEVFVuMZgR64PbC6Ls77i1urnVVpK', NULL, '12345', 1, NULL, '2021-05-17 18:03:00', '2021-05-17 18:03:00'),
+(14, 'reseller', 'reseller@example.com', NULL, '$2y$10$.Ujx5zqvGuL602sSyG8mLOu8TQc74UWQ1TBsG61ypNIVoEc.C2SzO', NULL, '12345', 1, NULL, '2021-05-19 11:43:59', '2021-05-19 11:43:59');
 
 --
 -- Indexes for dumped tables
@@ -1903,13 +1951,13 @@ ALTER TABLE `billings`
 -- AUTO_INCREMENT for table `block_floor_products`
 --
 ALTER TABLE `block_floor_products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -1987,7 +2035,7 @@ ALTER TABLE `general_discounts`
 -- AUTO_INCREMENT for table `home_settings`
 --
 ALTER TABLE `home_settings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -2023,7 +2071,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `resellers`
 --
 ALTER TABLE `resellers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `reviews`
@@ -2077,7 +2125,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
