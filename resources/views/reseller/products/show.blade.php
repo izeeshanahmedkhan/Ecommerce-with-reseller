@@ -42,9 +42,9 @@
                                     <th> Colour</th>
                                     <th> Size</th>
                                     <th> Image</th>
+                                    <th> Action</th>
                                 </tr>
                                 </thead>
-                                <tbody>
                                     @php $count = null; @endphp
                                     @php $total_rows = count($product_csis); @endphp
                                     @php $carousel_boolen = true @endphp
@@ -52,11 +52,16 @@
                                     @php $carousel_count_for_controls = 1 @endphp
                                     @foreach($product_csis as $product_csi)
                                         @if($product_csi->colour_id !== $count)
+                                            <form method="POST" action="{{ route('reseller_cart.store') }}">
+                                                @csrf
+                                                @method('POST')
                                                 <tr>
                                                     <td>
                                                         @php $colour =  \App\Models\Colour::where('id',$product_csi->colour_id)->first() @endphp
 
                                                         <div style="background-color: {{ $colour->colourCode }}; width:50px; height: 50px; font-size: 0;"></div>
+
+                                                        <input type="hidden" name="colour" value="{{ $colour->id }}">
                                                     </td>
                                                     <td>
 
@@ -64,8 +69,12 @@
 
                                                         {{ $size->sizeName }}
 
+                                                        <input type="hidden" name="size" value="{{ $size->id }}">
+
                                                     </td>
                                                     <td>
+
+                                                        <input type="hidden" name="product" value="{{ $product->id }}">
 
                                                         @php $product_colour_rows = \App\Models\ColourImageProductSize::where('colour_id',$colour->id)->get() @endphp
 
@@ -83,7 +92,7 @@
                                                                                         <li class="active" data-target="#carouselExamplePause{{ $carousel_count_for_controls }}" data-slide-to="{{ $i }}"></li>
                                                                                         @php $carousel_count_boolen = false @endphp
                                                                                     @else
-                                                                                        <li data-target="#carouselExamplePause" data-slide-to="{{ $i }}"></li>
+                                                                                        <li data-target="#carouselExamplePause{{ $carousel_count_for_controls }}" data-slide-to="{{ $i }}"></li>
                                                                                     @endif
                                                                                 @endfor
                                                                             </ol>
@@ -94,10 +103,10 @@
                                                                             @foreach($product_colour_rows as $product_colour_row)
 
                                                                             @if($carousel_boolen)
-                                                                                <div class="carousel-item active" style="height:250px;"><img class="d-block w-auto" src="{{ asset('storage/images/productImages/'.$product_colour_row->image) }}" alt="Image Not Found" /></div>
+                                                                                <div class="carousel-item active" style="height:200px;margin-bottom:50px;"><img class="d-block w-auto" src="{{ asset('storage/images/productImages/'.$product_colour_row->image) }}" alt="Image Not Found" /></div>
                                                                                 @php $carousel_boolen = false @endphp
                                                                             @else
-                                                                                <div class="carousel-item" style="height: 250px;"><img class="d-block w-auto" src="{{ asset('storage/images/productImages/'.$product_colour_row->image) }}" alt="Image Not Found" /></div>
+                                                                                <div class="carousel-item" style="height:200px;margin-bottom:50px;"><img class="d-block w-auto" src="{{ asset('storage/images/productImages/'.$product_colour_row->image) }}" alt="Image Not Found" /></div>
                                                                             @endif
                                                                                 @endforeach
                                                                             </div>
@@ -115,11 +124,44 @@
                                                             </div>
                                                         </div>
                                                     </td>
+                                                    <td>
+                                                        <!-- Button trigger modal -->
+                                                            <button type="button"  class="btn btn-raised btn-raised-success m-1" data-toggle="modal" data-target="#exampleModalCenter{{ $carousel_count_for_controls }}" style="color: white"><i
+                                                                    class="nav-icon fas fa-cart-plus font-weight-bold"> </i> Add To Cart </button>
+
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="exampleModalCenter{{ $carousel_count_for_controls }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalCenterTitle">Quantity</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <label>Quantity</label>
+                                                                        <input type="text" name="quantity" class="form-control @error('quantity') is-invalid @enderror" placeholder="Enter Quantity Here" value="{{ old('quantity') }}" aria-label="quantity">
+                                                                        @error('quantity')
+                                                                        <span class="invalid-feedback" role="alert">
+                                                                            <strong>{{ $message }}</strong>
+                                                                        </span>
+                                                                        @enderror
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                        <button type="submit" class="btn btn-primary">Add</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
                                                 </tr>
-                                            @php
-                                                $count = $colour->id;
-                                                $carousel_count_for_controls++;
-                                            @endphp
+                                                @php
+                                                    $count = $colour->id;
+                                                    $carousel_count_for_controls++;
+                                                @endphp
+                                            </form>
                                         @endif
                                     @endforeach
                                 </tbody>
@@ -128,6 +170,7 @@
                                     <th> Colour</th>
                                     <th> Size</th>
                                     <th> Image</th>
+                                    <th> Action</th>
                                 </tr>
                                 </tfoot>
                             </table>
@@ -149,11 +192,16 @@
 
 @section('page_css')
 
+    <link rel="stylesheet" href="{{asset('admin-assets/css/plugins/toastr.css')}}" />
 
 @endsection
 
 @section('page_script')
 
-    <script src="{{asset('admin-assets/js/scripts/sidebar.large.script.min.js')}}"></script>
+    <script src="{{ asset('admin-assets/js/plugins/toastr.min.js') }}"></script>
+
+    <script>
+        $(function(){$('.carousel').carousel();});
+    </script>
 
 @endsection

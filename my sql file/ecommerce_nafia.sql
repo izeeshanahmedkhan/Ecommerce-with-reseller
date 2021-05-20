@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2021 at 02:39 PM
+-- Generation Time: May 20, 2021 at 02:39 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -147,7 +147,7 @@ CREATE TABLE `carts` (
 --
 
 INSERT INTO `carts` (`id`, `quantity`, `size_id`, `colour_id`, `product_id`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, 1, 3, '2021-05-19 11:31:38', '2021-05-19 11:31:38');
+(1, 2, 1, 1, 1, 3, '2021-05-19 11:31:38', '2021-05-20 12:29:55');
 
 -- --------------------------------------------------------
 
@@ -956,7 +956,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (40, '2021_05_17_160147_create_sale_center_users_table', 6),
 (41, '2021_05_11_160429_create_suppliers_table', 7),
 (42, '2021_05_11_160430_create_riders_table', 8),
-(43, '2021_05_17_215937_create_rider_users_table', 9);
+(43, '2021_05_17_215937_create_rider_users_table', 9),
+(44, '2021_05_20_153637_create_reseller_carts_table', 10);
 
 -- --------------------------------------------------------
 
@@ -1238,6 +1239,31 @@ CREATE TABLE `resellers` (
 
 INSERT INTO `resellers` (`id`, `name`, `email`, `city`, `area`, `address`, `contact`, `messaging_service_no`, `messaging_service_name`, `cnic_no`, `cnic_front`, `cnic_back`, `social_media_name_1`, `link_1`, `social_media_name_2`, `link_2`, `bank_account_title`, `bank_name`, `bank_branch`, `account_or_iban_no`, `money_transfer_no`, `money_transfer_service`, `status`, `created_at`, `updated_at`) VALUES
 (4, 'reseller', 'reseller@example.com', 'Karachi', 'Ghulshan', 'Ghulshan Iqbal, Karachi', '+923345652528', NULL, NULL, '98858658585852', 'photo-wide-3.jpg', 'photo-wide-4.jpg', NULL, NULL, NULL, NULL, 'Reseller', 'Meezan', 'Gulshan', '02154', '12154', 'Ufone', 1, '2021-05-19 11:43:59', '2021-05-19 11:43:59');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reseller_carts`
+--
+
+CREATE TABLE `reseller_carts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `quantity` bigint(20) UNSIGNED NOT NULL,
+  `size_id` int(11) NOT NULL,
+  `colour_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `reseller_carts`
+--
+
+INSERT INTO `reseller_carts` (`id`, `quantity`, `size_id`, `colour_id`, `product_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(3, 1, 1, 1, 1, 14, '2021-05-20 12:11:45', '2021-05-20 12:11:45'),
+(4, 3, 2, 2, 1, 14, '2021-05-20 12:11:54', '2021-05-20 12:11:54');
 
 -- --------------------------------------------------------
 
@@ -1845,6 +1871,12 @@ ALTER TABLE `resellers`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `reseller_carts`
+--
+ALTER TABLE `reseller_carts`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `reseller_user`
 --
 ALTER TABLE `reseller_user`
@@ -1957,7 +1989,7 @@ ALTER TABLE `block_floor_products`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -2041,7 +2073,7 @@ ALTER TABLE `home_settings`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `offers`
@@ -2071,6 +2103,12 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `resellers`
 --
 ALTER TABLE `resellers`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `reseller_carts`
+--
+ALTER TABLE `reseller_carts`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --

@@ -69,10 +69,6 @@
 @endsection
 @section('page_script')
     <script src="{{ asset('admin-assets/js/plugins/toastr.min.js') }}"></script>
-{{--    <script src="{{asset('admin/js/scripts/toastr.script.min.js')}}"></script>--}}
-   {{-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">--}}
-    {{--    <script src="{{asset('admin/js/plugins/toastr.min.js')}}"></script>--}}
-    {{--    <script src="{{asset('admin/js/scripts/toastr.script.min.js')}}"></script>--}}
     <script src="{{asset('admin-assets/js/plugins/datatables.min.js')}}"></script>
     <script src="{{asset('admin-assets/js/scripts/datatables.script.min.js')}}"></script>
 @endsection

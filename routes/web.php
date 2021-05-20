@@ -289,6 +289,12 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
     Route::post('/cart',[App\Http\Controllers\CartController::class, 'store'])->name('cart');
     Route::get('/cart/{cart}/delete',[App\Http\Controllers\CartController::class, 'destroy'])->name('cart.destroy');
 
+    // reseller cart
+
+    Route::get('/Reseller/cart',[App\Http\Controllers\ResellerCartController::class, 'index'])->name('reseller_cart.index');
+    Route::post('/Reseller/cart/store',[App\Http\Controllers\ResellerCartController::class, 'store'])->name('reseller_cart.store');
+    Route::get('/Reseller/cart/{cart}/delete',[App\Http\Controllers\ResellerCartController::class, 'destroy'])->name('reseller_cart.destroy');
+
 //checkout
 
     Route::get('/checkout',[App\Http\Controllers\FrontEndController::class, 'checkout'])->name('checkout');

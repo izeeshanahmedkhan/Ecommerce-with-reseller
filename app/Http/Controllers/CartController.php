@@ -37,7 +37,6 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-
             $request->validate([
 
                 'quantity' => ['numeric','min:1'],
@@ -132,8 +131,14 @@ class CartController extends Controller
      */
     public function destroy(Cart $cart)
     {
-
         $cart->delete();
+
+        $CheckCart = Cart::where('user_id',auth()->user()->id)->get();
+
+        if(sizeof($CheckCart) == 0){
+
+            return redirect('/home');
+        }
 
         return back();
     }
