@@ -193,12 +193,15 @@
 @section('page_css')
 
     <link rel="stylesheet" href="{{asset('admin-assets/css/plugins/toastr.css')}}" />
+    <link rel="stylesheet" href="{{asset('admin-assets/css/plugins/datatables.min.css')}}" />
 
 @endsection
 
 @section('page_script')
 
     <script src="{{ asset('admin-assets/js/plugins/toastr.min.js') }}"></script>
+    <script src="{{asset('admin-assets/js/plugins/datatables.min.js')}}"></script>
+    <script src="{{asset('admin-assets/js/scripts/datatables.script.min.js')}}"></script>
 
     <script>
         $(function(){$('.carousel').carousel();});

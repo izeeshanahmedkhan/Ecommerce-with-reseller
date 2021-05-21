@@ -7,6 +7,7 @@ use App\Models\Offer;
 use App\Models\Order;
 use App\Models\Billing;
 use App\Models\Product;
+use App\Models\ResellerCart;
 use App\Notifications\OrderProcessed;
 use Illuminate\Http\Request;
 use Auth;
@@ -62,7 +63,16 @@ class OrderController extends Controller
 
         $user = Auth::User();
 
-        $cart = Cart::where('user_id', $user->id)->get();
+        if($request->get('reseller_cart') != null){
+
+            $cart = ResellerCart::where('user_id', $user->id)->get();
+        }
+        else{
+
+            $cart = Cart::where('user_id', $user->id)->get();
+        }
+
+
 
         if(count($cart) !== 0){
 
@@ -94,11 +104,13 @@ class OrderController extends Controller
 
                 Product::where('id',$c->product_id)->update(['quantity'=>$new_quantity]);
 
-                Cart::destroy($c->id);
+                ResellerCart::destroy($c->id);
 
             }
 
             $request->user()->notify(new OrderProcessed($order));
+
+            if(!empty(Session('vouchercode')['no_of_times'])){
 
             $new_no_of_times = Session('vouchercode')['no_of_times'] - 1;
 
@@ -107,6 +119,8 @@ class OrderController extends Controller
             Session::forget('vouchercode');
 
             Session::save();
+
+            }
 
             return view('frontend.thankyouorder',['order_num'=>$order_num]);
 

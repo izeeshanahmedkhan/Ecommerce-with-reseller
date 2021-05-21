@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2021 at 02:39 PM
+-- Generation Time: May 21, 2021 at 02:36 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -91,6 +91,15 @@ CREATE TABLE `billings` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `billings`
+--
+
+INSERT INTO `billings` (`id`, `user_id`, `name`, `email`, `address`, `country`, `province`, `city`, `postal_code`, `contact`, `total_amount`, `order_number`, `created_at`, `updated_at`) VALUES
+(1, 14, 'reseller', 'reseller@example.com', 'Ghulshan Iqbal, Karachi', 1, 1, 54, '75300', '+923345652528', 700.00, '34RCz', '2021-05-21 12:25:23', '2021-05-21 12:25:23'),
+(2, 14, 'reseller', 'reseller@example.com', 'Ghulshan Iqbal, Karachi', 1, 1, 54, '75300', '+923345652528', 700.00, 'UT4BL', '2021-05-21 12:32:21', '2021-05-21 12:32:21'),
+(3, 14, 'reseller', 'reseller@example.com', 'Ghulshan Iqbal, Karachi', 1, 1, 54, '72400', '+923345652528', 700.00, 'lLa65', '2021-05-21 12:34:33', '2021-05-21 12:34:33');
 
 -- --------------------------------------------------------
 
@@ -1044,6 +1053,17 @@ CREATE TABLE `orders` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `order_number`, `quantity`, `size_id`, `colour_id`, `product_id`, `user_id`, `payment_type`, `status`, `total_amount`, `created_at`, `updated_at`) VALUES
+(1, '34RCz', 1, 1, 1, 1, 14, 'cash on delivery', 1, 700.00, '2021-05-21 12:25:23', '2021-05-21 12:25:23'),
+(2, 'UT4BL', 1, 1, 1, 1, 14, 'cash on delivery', 1, 700.00, '2021-05-21 12:32:21', '2021-05-21 12:32:21'),
+(3, 'UT4BL', 3, 2, 2, 1, 14, 'cash on delivery', 1, 700.00, '2021-05-21 12:32:21', '2021-05-21 12:32:21'),
+(4, 'lLa65', 1, 1, 1, 1, 14, 'cash on delivery', 1, 700.00, '2021-05-21 12:34:33', '2021-05-21 12:34:33'),
+(5, 'lLa65', 3, 2, 2, 1, 14, 'cash on delivery', 1, 700.00, '2021-05-21 12:34:33', '2021-05-21 12:34:33');
+
 -- --------------------------------------------------------
 
 --
@@ -1197,7 +1217,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `status`, `stock_availability`, `sku_code`, `description`, `owner`, `vendor`, `video_link`, `quantity`, `price`, `purchase_discount`, `purchase_cost`, `labour_cost`, `transportation_cost`, `list_price_for_salesman`, `commission`, `inventory_category`, `created_at`, `updated_at`) VALUES
-(1, 'Product - 1', 1, 1, 'SKU01', '<p style=\"text-align: left;\"><strong>Product - 1 Description</strong></p>', NULL, NULL, NULL, 500, 100.00, NULL, NULL, NULL, NULL, 80.00, NULL, '0', '2021-05-18 11:32:19', '2021-05-18 11:32:19');
+(1, 'Product - 1', 1, 1, 'SKU01', '<p style=\"text-align: left;\"><strong>Product - 1 Description</strong></p>', NULL, NULL, NULL, 491, 100.00, NULL, NULL, NULL, NULL, 80.00, NULL, '0', '2021-05-18 11:32:19', '2021-05-21 12:34:33');
 
 -- --------------------------------------------------------
 
@@ -1256,14 +1276,6 @@ CREATE TABLE `reseller_carts` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `reseller_carts`
---
-
-INSERT INTO `reseller_carts` (`id`, `quantity`, `size_id`, `colour_id`, `product_id`, `user_id`, `created_at`, `updated_at`) VALUES
-(3, 1, 1, 1, 1, 14, '2021-05-20 12:11:45', '2021-05-20 12:11:45'),
-(4, 3, 2, 2, 1, 14, '2021-05-20 12:11:54', '2021-05-20 12:11:54');
 
 -- --------------------------------------------------------
 
@@ -1977,7 +1989,7 @@ ALTER TABLE `batches`
 -- AUTO_INCREMENT for table `billings`
 --
 ALTER TABLE `billings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `block_floor_products`
@@ -1989,7 +2001,7 @@ ALTER TABLE `block_floor_products`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -2085,7 +2097,7 @@ ALTER TABLE `offers`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `permissions`

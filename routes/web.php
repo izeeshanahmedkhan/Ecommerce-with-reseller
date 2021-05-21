@@ -295,6 +295,10 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
     Route::post('/Reseller/cart/store',[App\Http\Controllers\ResellerCartController::class, 'store'])->name('reseller_cart.store');
     Route::get('/Reseller/cart/{cart}/delete',[App\Http\Controllers\ResellerCartController::class, 'destroy'])->name('reseller_cart.destroy');
 
+    //reseller checkout
+
+    Route::get('/Reseller/checkout',[App\Http\Controllers\ResellerCartController::class, 'checkout'])->name('reseller.checkout');
+
 //checkout
 
     Route::get('/checkout',[App\Http\Controllers\FrontEndController::class, 'checkout'])->name('checkout');

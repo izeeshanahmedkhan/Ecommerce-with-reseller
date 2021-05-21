@@ -128,6 +128,11 @@
                                 </tr>
                                 </tfoot>
                             </table>
+                            <div class="text-center">
+                                <a href="{{route('reseller.checkout')}}" onmouseover="this.style.backgroundColor='red'" onmouseout="this.style.backgroundColor='#ff3366'" class="btn btn-raised m-1" style="color: white;background-color: #FF3366;"><i
+                                        class="nav-icon font-weight-bold"></i>CHECKOUT</a>
+                                <br> <br>
+                            </div>
                         </div>
                     </div>
                 </div>

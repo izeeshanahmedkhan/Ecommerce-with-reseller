@@ -94,6 +94,24 @@ class ResellerCartController extends Controller
         }
     }
 
+    public function checkout(){
+
+        $cart = ResellerCart::where('user_id',Auth::User()->id)->get();
+
+        if(count($cart) !== 0){
+
+            return view('reseller.checkout');
+        }
+        else{
+
+            session::flash('message',"Add An Item To Cart");
+            session::flash('alert-type','error');
+
+            return back();
+        }
+
+    }
+
     /**
      * Display the specified resource.
      *
