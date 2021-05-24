@@ -205,10 +205,10 @@
                                                     <td class="cart_avail"><span
                                                             class="label label-success">{{ 'In stock' }}</span></td>
                                                 @endif
-                                                <td class="price"><span>{{$product->price}} Rs/-</span></td>
+                                                <td class="price"><span>{{$product->list_price_for_salesman}} Rs/-</span></td>
                                                 @for($i=0;$i<$c->quantity;$i++)
 
-                                                    @php $total_single_product = $total_single_product + $product->price @endphp
+                                                    @php $total_single_product = $total_single_product + $product->list_price_for_salesman @endphp
 
                                                 @endfor
                                                 @php $bool = true; @endphp
@@ -222,7 +222,7 @@
 
                                                         if($c->quantity % 2 == 0 || $c->quantity % 2 == 1){
 
-                                                            $buy_one_get_one_discount = $product->price;
+                                                            $buy_one_get_one_discount = $product->list_price_for_salesman;
                                                         }
 
                                                         if($c->quantity == 1){
@@ -231,9 +231,9 @@
 
                                                             $c->save();
 
-                                                            $total_single_product = $total_single_product + $product->price;
+                                                            $total_single_product = $total_single_product + $product->list_price_for_salesman;
 
-                                                            $buy_one_get_one_discount = $product->price;
+                                                            $buy_one_get_one_discount = $product->list_price_for_salesman;
                                                         }
 
                                                 @endphp
@@ -257,7 +257,7 @@
 
                                                             if($pack_of_two == 2){
 
-                                                                $pack_of_two_discount = $pack_of_two_discount + ($product->price * ($deal_product->discount / 100));
+                                                                $pack_of_two_discount = $pack_of_two_discount + ($product->list_price_for_salesman * ($deal_product->discount / 100));
 
                                                                 $pack_of_two = 0;
 
@@ -279,7 +279,7 @@
 
                                                         if($pack_of_three == 3){
 
-                                                            $pack_of_three_discount = $pack_of_three_discount + ($product->price * ($deal_product->discount / 100));
+                                                            $pack_of_three_discount = $pack_of_three_discount + ($product->list_price_for_salesman * ($deal_product->discount / 100));
 
                                                             $pack_of_three = 0;
                                                         }
@@ -335,7 +335,7 @@
 
                                                         if(empty($general_category_deal_product) && empty($general_category_offer_product) && empty($general_category_product)){
 
-                                                            $general_category_discount = $general_category_discount + ($product->price * ($general_category->discount / 100));
+                                                            $general_category_discount = $general_category_discount + ($product->list_price_for_salesman * ($general_category->discount / 100));
 
                                                 @endphp
                                                 <td> {{ $general_category->general_discount }} </td>
@@ -380,13 +380,14 @@
                                             </span>
                                                 </td>
                                                 <td class="action">
-                                                    <a href="{{route('cart.destroy',$c)}}">Delete item</a>
+                                                    <a href="{{route('reseller_cart.destroy',$c)}}" class="btn btn-raised btn-raised-danger m-1" style="color: white"><i
+                                                            class="nav-icon i-Close-Window font-weight-bold"></i></a>
                                                 </td>
                                             </tr>
 
                                             @for($i=0;$i<$c->quantity;$i++)
 
-                                                @php $total_price = $total_price + $product->price @endphp
+                                                @php $total_price = $total_price + $product->list_price_for_salesman @endphp
 
                                             @endfor
 

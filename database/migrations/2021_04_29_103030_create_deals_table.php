@@ -21,6 +21,8 @@ class CreateDealsTable extends Migration
             $table->bigInteger('discount');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
+            $table->string('deal_for');
+            $table->string('specific_deal_for')->nullable();
             $table->boolean('status');
             $table->timestamps();
         });

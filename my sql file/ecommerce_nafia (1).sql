@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 21, 2021 at 02:36 PM
+-- Generation Time: May 24, 2021 at 02:10 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -99,7 +99,9 @@ CREATE TABLE `billings` (
 INSERT INTO `billings` (`id`, `user_id`, `name`, `email`, `address`, `country`, `province`, `city`, `postal_code`, `contact`, `total_amount`, `order_number`, `created_at`, `updated_at`) VALUES
 (1, 14, 'reseller', 'reseller@example.com', 'Ghulshan Iqbal, Karachi', 1, 1, 54, '75300', '+923345652528', 700.00, '34RCz', '2021-05-21 12:25:23', '2021-05-21 12:25:23'),
 (2, 14, 'reseller', 'reseller@example.com', 'Ghulshan Iqbal, Karachi', 1, 1, 54, '75300', '+923345652528', 700.00, 'UT4BL', '2021-05-21 12:32:21', '2021-05-21 12:32:21'),
-(3, 14, 'reseller', 'reseller@example.com', 'Ghulshan Iqbal, Karachi', 1, 1, 54, '72400', '+923345652528', 700.00, 'lLa65', '2021-05-21 12:34:33', '2021-05-21 12:34:33');
+(3, 14, 'reseller', 'reseller@example.com', 'Ghulshan Iqbal, Karachi', 1, 1, 54, '72400', '+923345652528', 700.00, 'lLa65', '2021-05-21 12:34:33', '2021-05-21 12:34:33'),
+(4, 14, 'reseller', 'reseller@example.com', 'Ghulshan Iqbal, Karachi', 1, 1, 54, '55500', '+923345652528', 860.00, '0n4b1', '2021-05-24 09:58:14', '2021-05-24 09:58:14'),
+(5, 14, 'reseller', 'reseller@example.com', 'Ghulshan Iqbal, Karachi', 1, 1, 54, '55500', '+923345652528', 380.00, 'QOQxU', '2021-05-24 10:08:58', '2021-05-24 10:08:58');
 
 -- --------------------------------------------------------
 
@@ -804,10 +806,19 @@ CREATE TABLE `deals` (
   `discount` bigint(20) NOT NULL,
   `start_date` datetime NOT NULL,
   `end_date` datetime NOT NULL,
+  `deal_for` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `specific_deal_for` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` tinyint(1) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `deals`
+--
+
+INSERT INTO `deals` (`id`, `deal`, `product_id`, `size_id`, `discount`, `start_date`, `end_date`, `deal_for`, `specific_deal_for`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'pack_of_two', 1, 1, 10, '2021-05-24 17:09:00', '2021-05-25 17:09:00', 'customer', NULL, 1, '2021-05-24 12:09:16', '2021-05-24 12:09:16');
 
 -- --------------------------------------------------------
 
@@ -966,7 +977,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (41, '2021_05_11_160429_create_suppliers_table', 7),
 (42, '2021_05_11_160430_create_riders_table', 8),
 (43, '2021_05_17_215937_create_rider_users_table', 9),
-(44, '2021_05_20_153637_create_reseller_carts_table', 10);
+(44, '2021_05_20_153637_create_reseller_carts_table', 10),
+(45, '2021_04_29_103030_create_deals_table', 11);
 
 -- --------------------------------------------------------
 
@@ -1062,7 +1074,9 @@ INSERT INTO `orders` (`id`, `order_number`, `quantity`, `size_id`, `colour_id`, 
 (2, 'UT4BL', 1, 1, 1, 1, 14, 'cash on delivery', 1, 700.00, '2021-05-21 12:32:21', '2021-05-21 12:32:21'),
 (3, 'UT4BL', 3, 2, 2, 1, 14, 'cash on delivery', 1, 700.00, '2021-05-21 12:32:21', '2021-05-21 12:32:21'),
 (4, 'lLa65', 1, 1, 1, 1, 14, 'cash on delivery', 1, 700.00, '2021-05-21 12:34:33', '2021-05-21 12:34:33'),
-(5, 'lLa65', 3, 2, 2, 1, 14, 'cash on delivery', 1, 700.00, '2021-05-21 12:34:33', '2021-05-21 12:34:33');
+(5, 'lLa65', 3, 2, 2, 1, 14, 'cash on delivery', 1, 700.00, '2021-05-21 12:34:33', '2021-05-21 12:34:33'),
+(6, '0n4b1', 7, 1, 1, 1, 14, 'cash on delivery', 1, 860.00, '2021-05-24 09:58:14', '2021-05-24 09:58:14'),
+(7, 'QOQxU', 1, 1, 1, 1, 14, 'cash on delivery', 1, 380.00, '2021-05-24 10:08:58', '2021-05-24 10:08:58');
 
 -- --------------------------------------------------------
 
@@ -1217,7 +1231,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `status`, `stock_availability`, `sku_code`, `description`, `owner`, `vendor`, `video_link`, `quantity`, `price`, `purchase_discount`, `purchase_cost`, `labour_cost`, `transportation_cost`, `list_price_for_salesman`, `commission`, `inventory_category`, `created_at`, `updated_at`) VALUES
-(1, 'Product - 1', 1, 1, 'SKU01', '<p style=\"text-align: left;\"><strong>Product - 1 Description</strong></p>', NULL, NULL, NULL, 491, 100.00, NULL, NULL, NULL, NULL, 80.00, NULL, '0', '2021-05-18 11:32:19', '2021-05-21 12:34:33');
+(1, 'Product - 1', 1, 1, 'SKU01', '<p style=\"text-align: left;\"><strong>Product - 1 Description</strong></p>', NULL, NULL, NULL, 483, 100.00, NULL, NULL, NULL, NULL, 80.00, NULL, '0', '2021-05-18 11:32:19', '2021-05-24 10:08:58');
 
 -- --------------------------------------------------------
 
@@ -1989,7 +2003,7 @@ ALTER TABLE `batches`
 -- AUTO_INCREMENT for table `billings`
 --
 ALTER TABLE `billings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `block_floor_products`
@@ -2049,7 +2063,7 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `deals`
 --
 ALTER TABLE `deals`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `delivery_charges`
@@ -2085,7 +2099,7 @@ ALTER TABLE `home_settings`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `offers`
@@ -2097,7 +2111,7 @@ ALTER TABLE `offers`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -2121,7 +2135,7 @@ ALTER TABLE `resellers`
 -- AUTO_INCREMENT for table `reseller_carts`
 --
 ALTER TABLE `reseller_carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `reviews`

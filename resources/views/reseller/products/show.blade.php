@@ -54,7 +54,6 @@
                                         @if($product_csi->colour_id !== $count)
                                             <form method="POST" action="{{ route('reseller_cart.store') }}">
                                                 @csrf
-                                                @method('POST')
                                                 <tr>
                                                     <td>
                                                         @php $colour =  \App\Models\Colour::where('id',$product_csi->colour_id)->first() @endphp
@@ -193,15 +192,15 @@
 @section('page_css')
 
     <link rel="stylesheet" href="{{asset('admin-assets/css/plugins/toastr.css')}}" />
-    <link rel="stylesheet" href="{{asset('admin-assets/css/plugins/datatables.min.css')}}" />
+{{--    <link rel="stylesheet" href="{{asset('admin-assets/css/plugins/datatables.min.css')}}" />--}}
 
 @endsection
 
 @section('page_script')
 
     <script src="{{ asset('admin-assets/js/plugins/toastr.min.js') }}"></script>
-    <script src="{{asset('admin-assets/js/plugins/datatables.min.js')}}"></script>
-    <script src="{{asset('admin-assets/js/scripts/datatables.script.min.js')}}"></script>
+{{--    <script src="{{asset('admin-assets/js/plugins/datatables.min.js')}}"></script>--}}
+{{--    <script src="{{asset('admin-assets/js/scripts/datatables.script.min.js')}}"></script>--}}
 
     <script>
         $(function(){$('.carousel').carousel();});

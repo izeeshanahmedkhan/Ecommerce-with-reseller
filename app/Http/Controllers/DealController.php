@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\ColourImageProductSize;
+use App\Models\Customer;
 use App\Models\Deal;
 use App\Models\Product;
+use App\Models\Reseller;
 use App\Models\Size;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -45,6 +48,24 @@ class DealController extends Controller
         return response()->json($data);
     }
 
+    public function getSpecificdealfor(Request $request){
+
+        if($request->deal_for == "customer"){
+
+            $data['customers'] = Customer::all();
+
+            return response()->json($data);
+
+        }
+        elseif($request->deal_for == "reseller"){
+
+            $data['resellers'] = Reseller::all();
+
+            return response()->json($data);
+
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -75,6 +96,7 @@ class DealController extends Controller
             'discount' => ['required','numeric','min:1','max:100'],
             'start_date' => ['required','date'],
             'end_date' => ['required','date','after:start_date'],
+            'deal_for' => ['required'],
             'status' => ['required']
         ]);
 

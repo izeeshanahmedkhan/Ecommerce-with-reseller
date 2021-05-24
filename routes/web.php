@@ -200,9 +200,11 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
     Route::delete('/admin/deal/{deal}/delete',[App\Http\Controllers\DealController::class, 'destroy'])->name('deal.destroy')->middleware('permission:delete deals');
     Route::put('/admin/deal/{deal}/status',[App\Http\Controllers\DealController::class, 'deal_status'])->name('deal.status')->middleware('permission:deals status');
 
-// get sizes for deals product
+// get sizes and specific deals for deals product
 
     Route::post('sizes',[App\Http\Controllers\DealController::class, 'getSize']);
+
+    Route::post('specificdealfor',[App\Http\Controllers\DealController::class, 'getSpecificdealfor']);
 
 //offers
 

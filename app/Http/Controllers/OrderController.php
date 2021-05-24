@@ -122,7 +122,16 @@ class OrderController extends Controller
 
             }
 
-            return view('frontend.thankyouorder',['order_num'=>$order_num]);
+            if($request->get('reseller_cart') != null){
+
+                return view('reseller.thankyouorder',['order_num'=>$order_num]);
+
+            }
+            else{
+
+                return view('frontend.thankyouorder',['order_num'=>$order_num]);
+
+            }
 
         }
         else{
