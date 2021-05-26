@@ -338,6 +338,19 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
     Route::get('/reseller/product',[App\Http\Controllers\ProductResellerController::class, 'index'])->name('product_reseller.index');
     Route::get('/reseller/product/{product}/show',[App\Http\Controllers\ProductResellerController::class, 'show'])->name('product_reseller.show');
 
+    //reseller Catalogue
+
+    Route::get('/reseller/catalogue',[App\Http\Controllers\CatalogueController::class, 'index'])->name('catalogue.index');
+    Route::get('/reseller/catalogue/create',[App\Http\Controllers\CatalogueController::class, 'create'])->name('catalogue.create');
+    Route::post('/reseller/catalogue/store',[App\Http\Controllers\CatalogueController::class, 'store'])->name('catalogue.store');
+    Route::get('/reseller/catalogue/{catalogue}/edit',[App\Http\Controllers\CatalogueController::class, 'edit'])->name('catalogue.edit');
+    Route::put('/reseller/catalogue/{catalogue}/update',[App\Http\Controllers\CatalogueController::class, 'update'])->name('catalogue.update');
+    Route::delete('/reseller/catalogue/{catalogue}/delete',[App\Http\Controllers\CatalogueController::class, 'destroy'])->name('catalogue.destroy');
+
+    //reseller Catalogue product
+
+    Route::post('/reseller/catalogue/product/store',[App\Http\Controllers\CatalogueProductController::class, 'store'])->name('catalogue_product.store');
+
 });
 
 

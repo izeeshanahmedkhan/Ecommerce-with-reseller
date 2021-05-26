@@ -50,6 +50,7 @@
                                     @php $carousel_boolen = true @endphp
                                     @php $carousel_count_boolen = true @endphp
                                     @php $carousel_count_for_controls = 1 @endphp
+                                    @php $catalogue_for_controls = 1 @endphp
                                     @foreach($product_csis as $product_csi)
                                         @if($product_csi->colour_id !== $count)
                                             <form method="POST" action="{{ route('reseller_cart.store') }}">
@@ -154,13 +155,64 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                            </form>
+
+
+
+                                                        @php $catalogues = \App\Models\Catalogue::all(); @endphp
+
+
+                                                        <!-- Button trigger modal for catalogue -->
+                                                        <button type="button"  class="btn btn-raised btn-raised-success m-1" data-toggle="modal" data-target="#exampleModalCenterCatalogue{{ $catalogue_for_controls }}" style="color: white"><i
+                                                                class="nav-icon fa fa-list font-weight-bold"> </i> Add To Catalogue </button>
+
+                                                    <form method="POST" action="{{ route('catalogue_product.store') }}">
+                                                    @csrf
+                                                        <!-- Modal catalogue -->
+                                                        <div class="modal fade" id="exampleModalCenterCatalogue{{ $catalogue_for_controls }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalCenterTitle">Catalogue</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <label>Catalogue</label>
+                                                                        <select class="form-control js-example-basic-single{{ $catalogue_for_controls }} @error('catalogue_id') is-invalid @enderror" name="catalogue_id">
+                                                                            <option selected disabled> Select Catalogue </option>
+                                                                            @foreach($catalogues as $catalogue)
+                                                                                <option value="{{ $catalogue->id }}">{{ $catalogue->catalogue  }}</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                        @error('catalogue_id')
+                                                                        <span class="invalid-feedback" role="alert">
+                                                                                <strong>{{ $message }}</strong>
+                                                                            </span>
+                                                                        @enderror
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                                                                            <input type="hidden" name="size_id" value="{{ \Illuminate\Support\Facades\Crypt::encrypt($size->id)  }}">
+                                                                            <input type="hidden" name="colour_id" value="{{ \Illuminate\Support\Facades\Crypt::encrypt($colour->id)  }}">
+                                                                            <input type="hidden" name="product_id" value="{{ \Illuminate\Support\Facades\Crypt::encrypt($product->id) }}">
+
+                                                                        <button type="submit" class="btn btn-primary">Add</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
                                                     </td>
                                                 </tr>
                                                 @php
                                                     $count = $colour->id;
                                                     $carousel_count_for_controls++;
+                                                    $catalogue_for_controls++;
                                                 @endphp
-                                            </form>
                                         @endif
                                     @endforeach
                                 </tbody>
@@ -193,17 +245,40 @@
 
     <link rel="stylesheet" href="{{asset('admin-assets/css/plugins/toastr.css')}}" />
 {{--    <link rel="stylesheet" href="{{asset('admin-assets/css/plugins/datatables.min.css')}}" />--}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
 
 @endsection
 
 @section('page_script')
 
-    <script src="{{ asset('admin-assets/js/plugins/toastr.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 {{--    <script src="{{asset('admin-assets/js/plugins/datatables.min.js')}}"></script>--}}
 {{--    <script src="{{asset('admin-assets/js/scripts/datatables.script.min.js')}}"></script>--}}
+    <script src="{{ asset('admin-assets/js/plugins/toastr.min.js') }}"></script>
+
+    <script>
+
+        var i;
+
+        $(document).ready(function() {
+
+            for(var i=1;i<{{ $catalogue_for_controls }};i++){
+
+                $('.js-example-basic-single'+i).select2({
+                    dropdownParent: $('#exampleModalCenterCatalogue'+i)
+                });
+
+            }
+
+        });
+
+    </script>
 
     <script>
         $(function(){$('.carousel').carousel();});
     </script>
+
+
 
 @endsection

@@ -14,6 +14,10 @@
                 <div class="triangle"></div>
             </li>
 
+            <li class="nav-item {{$activePage == 'catalogueIndex' ? 'active' : ''}}"><a class="nav-item-hold" href="{{ route('catalogue.index') }}"><i class="nav-icon fa fa-list"></i><span class="nav-text">Catalogue</span></a>
+                <div class="triangle"></div>
+            </li>
+
 {{--            <li class="nav-item {{$activePage == 'userIndex' ? 'active' : ''}} {{$activePage == 'userCreate' ? 'active' : ''}} {{$activePage == 'roleIndex' ? 'active' : ''}}" data-item="users">--}}
 {{--                <a class="nav-item-hold" href="">--}}
 {{--                    <i class="nav-icon i-Administrator"></i>--}}
