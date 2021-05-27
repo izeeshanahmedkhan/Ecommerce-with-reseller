@@ -21,19 +21,23 @@
   <component name="ChangeListManager">
     <list default="true" id="109f3638-9762-4d24-bc6b-d19387ef9a4d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/reseller/layouts/partials/leftside_navbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/reseller/layouts/partials/leftside_navbar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/reseller/products/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/reseller/products/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/autoload.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/autoload.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/ClassLoader.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/ClassLoader.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_files.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_files.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_real.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_real.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/platform_check.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/platform_check.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DealController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DealController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/GeneralDiscountController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/GeneralDiscountController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OfferController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OfferController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_05_02_184217_create_general_discounts_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_05_07_092807_create_offers_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/deals/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/deals/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/deals/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/deals/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/generaldiscounts/categories/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/generaldiscounts/categories/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/generaldiscounts/categories/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/generaldiscounts/categories/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/generaldiscounts/products/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/generaldiscounts/products/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/generaldiscounts/products/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/generaldiscounts/products/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/offers/buy_1_get_1_offers/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/offers/buy_1_get_1_offers/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/offers/buy_1_get_1_offers/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/offers/buy_1_get_1_offers/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/offers/free_deliveries/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/offers/free_deliveries/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/offers/free_deliveries/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/offers/free_deliveries/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/offers/voucher_codes/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/offers/voucher_codes/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/offers/voucher_codes/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/offers/voucher_codes/edit.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,6 +186,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -217,6 +222,7 @@
       <workItem from="1621499410766" duration="14249000" />
       <workItem from="1621589785307" duration="10841000" />
       <workItem from="1621844937098" duration="12035000" />
+      <workItem from="1622049486034" duration="7054000" />
     </task>
     <servers />
   </component>

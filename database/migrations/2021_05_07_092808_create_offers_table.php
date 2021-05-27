@@ -24,6 +24,8 @@ class CreateOffersTable extends Migration
             $table->float('min_amount',36)->nullable();
             $table->bigInteger('discount')->nullable();
             $table->integer('no_of_times')->nullable();
+            $table->string('deal_for');
+            $table->string('specific_deal_for')->nullable();
             $table->boolean('status');
             $table->timestamps();
         });

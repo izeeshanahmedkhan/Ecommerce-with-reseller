@@ -832,9 +832,6 @@ CREATE TABLE `deals` (
 
 /*Data for the table `deals` */
 
-insert  into `deals`(`id`,`deal`,`product_id`,`size_id`,`discount`,`start_date`,`end_date`,`deal_for`,`specific_deal_for`,`status`,`created_at`,`updated_at`) values 
-(1,'pack_of_two',1,1,10,'2021-05-24 17:09:00','2021-05-25 17:09:00','customer',NULL,0,'2021-05-24 17:09:16','2021-05-24 17:09:16');
-
 /*Table structure for table `delivery_charges` */
 
 DROP TABLE IF EXISTS `delivery_charges`;
@@ -895,11 +892,13 @@ CREATE TABLE `general_discounts` (
   `discount` bigint(20) NOT NULL,
   `start_date` datetime NOT NULL,
   `end_date` datetime NOT NULL,
+  `deal_for` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `specific_deal_for` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` tinyint(1) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `general_discounts` */
 
@@ -943,7 +942,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `migrations` */
 
@@ -995,7 +994,9 @@ insert  into `migrations`(`id`,`migration`,`batch`) values
 (45,'2021_04_29_103030_create_deals_table',11),
 (47,'2021_05_25_211241_create_catalogues_table',12),
 (48,'2021_05_25_211242_create_catalogues_table',13),
-(49,'2021_05_25_232418_create_catalogue_products_table',13);
+(49,'2021_05_25_232418_create_catalogue_products_table',13),
+(50,'2021_05_02_184218_create_general_discounts_table',14),
+(51,'2021_05_07_092808_create_offers_table',14);
 
 /*Table structure for table `model_has_permissions` */
 
@@ -1056,11 +1057,13 @@ CREATE TABLE `offers` (
   `min_amount` double(36,2) DEFAULT NULL,
   `discount` bigint(20) DEFAULT NULL,
   `no_of_times` int(11) DEFAULT NULL,
+  `deal_for` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `specific_deal_for` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` tinyint(1) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*Data for the table `offers` */
 

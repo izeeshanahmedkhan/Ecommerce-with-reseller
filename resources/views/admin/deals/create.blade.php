@@ -119,6 +119,34 @@
                                 <div class="col-md-6 form-group mb-3">
                                     <label for="specific_deal_for">Select Specific Deal For</label>
                                     <select class="form-control js-example-basic-single @error('specific_deal_for') is-invalid @enderror" id="specific_deal_for" name="specific_deal_for">
+                                        @if(old('deal_for') == 'customer')
+
+                                            @if(!is_null(old('specific_deal_for')))
+
+                                                @php $customer = \App\Models\Customer::where('id',old('specific_deal_for'))->first() @endphp
+
+                                                @if(!is_null($customer))
+
+                                                    <option value="{{ old('specific_deal_for') }}"> {{ $customer->email }} </option>
+
+                                                @endif
+                                            @endif
+
+                                        @elseif(old('deal_for') == 'reseller')
+
+                                            @if(!is_null(old('specific_deal_for')))
+
+                                                @php $reseller = \App\Models\Reseller::where('id',old('specific_deal_for'))->first() @endphp
+
+                                                @if(!is_null($reseller))
+
+                                                    <option value="{{ old('specific_deal_for') }}"> {{ $reseller->email }} </option>
+
+                                                @endif
+
+                                            @endif
+
+                                        @endif
                                     </select>
                                     @error('specific_deal_for')
                                     <span class="invalid-feedback" role="alert">

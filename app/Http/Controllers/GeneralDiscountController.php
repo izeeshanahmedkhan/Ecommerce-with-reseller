@@ -94,6 +94,7 @@ class GeneralDiscountController extends Controller
             'discount' => ['required','numeric','min:1','max:100'],
             'start_date' => ['required','date'],
             'end_date' => ['required','date','after:start_date'],
+            'deal_for' => ['required'],
             'status' => ['required']
         ]);
 
@@ -104,6 +105,8 @@ class GeneralDiscountController extends Controller
         $generaldiscount->discount = $request->get('discount');
         $generaldiscount->start_date = $request->get('start_date');
         $generaldiscount->end_date = $request->get('end_date');
+        $generaldiscount->deal_for = $request->get('deal_for');
+        $generaldiscount->specific_deal_for = $request->get('specific_deal_for');
         $generaldiscount->status = $request->get('status');
 
         $generaldiscount->save();
@@ -122,6 +125,7 @@ class GeneralDiscountController extends Controller
             'discount' => ['required','numeric','min:1','max:100'],
             'start_date' => ['required','date'],
             'end_date' => ['required','date','after:start_date'],
+            'deal_for' => ['required'],
             'status' => ['required']
         ]);
 
@@ -132,6 +136,8 @@ class GeneralDiscountController extends Controller
         $generaldiscount->discount = $request->get('discount');
         $generaldiscount->start_date = $request->get('start_date');
         $generaldiscount->end_date = $request->get('end_date');
+        $generaldiscount->deal_for = $request->get('deal_for');
+        $generaldiscount->specific_deal_for = $request->get('specific_deal_for');
         $generaldiscount->status = $request->get('status');
 
         $generaldiscount->save();
@@ -270,6 +276,7 @@ class GeneralDiscountController extends Controller
             'discount' => ['required','numeric','min:1','max:100'],
             'start_date' => ['required','date'],
             'end_date' => ['required','date','after:start_date'],
+            'deal_for' => ['required'],
             'status' => ['required']
         ]);
 
@@ -279,6 +286,8 @@ class GeneralDiscountController extends Controller
         $generaldiscount->discount = $request->get('discount');
         $generaldiscount->start_date = $request->get('start_date');
         $generaldiscount->end_date = $request->get('end_date');
+        $generaldiscount->deal_for = $request->get('deal_for');
+        $generaldiscount->specific_deal_for = $request->get('specific_deal_for');
         $generaldiscount->status = $request->get('status');
 
         $generaldiscount->save();
@@ -299,6 +308,7 @@ class GeneralDiscountController extends Controller
             'discount' => ['required','numeric','min:1','max:100'],
             'start_date' => ['required','date'],
             'end_date' => ['required','date','after:start_date'],
+            'deal_for' => ['required'],
             'status' => ['required']
         ]);
 
@@ -308,6 +318,8 @@ class GeneralDiscountController extends Controller
         $generaldiscount->discount = $request->get('discount');
         $generaldiscount->start_date = $request->get('start_date');
         $generaldiscount->end_date = $request->get('end_date');
+        $generaldiscount->deal_for = $request->get('deal_for');
+        $generaldiscount->specific_deal_for = $request->get('specific_deal_for');
         $generaldiscount->status = $request->get('status');
 
         $generaldiscount->save();

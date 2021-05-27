@@ -157,6 +157,7 @@ class DealController extends Controller
             'discount' => ['required','numeric','min:1','max:100'],
             'start_date' => ['required','date'],
             'end_date' => ['required','date','after:start_date'],
+            'deal_for' => ['required'],
             'status' => ['required']
         ]);
 

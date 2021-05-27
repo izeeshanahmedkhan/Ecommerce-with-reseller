@@ -80,6 +80,59 @@
                                 </div>
 
                                 <div class="col-md-6 form-group mb-3">
+                                    <label for="deal_for">Select Offer for</label>
+                                    <select class="form-control @error('deal_for') is-invalid @enderror" id="deal_for" name="deal_for">
+                                        <option selected disabled> Select Deal For </option>
+                                        <option {{ old('deal_for') == "customer" ? 'selected':'' }}  value="customer"> Customer </option>
+                                        <option {{ old('deal_for') == "reseller" ? 'selected':'' }}  value="reseller"> Reseller </option>
+                                    </select>
+                                    @error('deal_for')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-6 form-group mb-3">
+                                    <label for="specific_deal_for">Select Specific Offer For</label>
+                                    <select class="form-control js-example-basic-single @error('specific_deal_for') is-invalid @enderror" id="specific_deal_for" name="specific_deal_for">
+                                        @if(old('deal_for') == 'customer')
+
+                                            @if(!is_null(old('specific_deal_for')))
+
+                                                @php $customer = \App\Models\Customer::where('id',old('specific_deal_for'))->first() @endphp
+
+                                                @if(!is_null($customer))
+
+                                                    <option value="{{ old('specific_deal_for') }}"> {{ $customer->email }} </option>
+
+                                               @endif
+                                            @endif
+
+                                        @elseif(old('deal_for') == 'reseller')
+
+                                            @if(!is_null(old('specific_deal_for')))
+
+                                                @php $reseller = \App\Models\Reseller::where('id',old('specific_deal_for'))->first() @endphp
+
+                                                @if(!is_null($reseller))
+
+                                                    <option value="{{ old('specific_deal_for') }}"> {{ $reseller->email }} </option>
+
+                                                @endif
+
+                                            @endif
+
+                                        @endif
+                                    </select>
+                                    @error('specific_deal_for')
+                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-6 form-group mb-3">
                                     <label for="selectStatus">Select Status</label>
                                     <select class="form-control @error('status') is-invalid @enderror" id="selectStatus" name="status">
                                         <option selected disabled> Select Status </option>
@@ -140,6 +193,40 @@
                         $.each(result.sizes, function (key, value) {
                             $("#size").append('<option value="' + value.id + '">' + value.sizeName + '</option>');
                         });
+                    }
+                });
+            });
+
+            $('#deal_for').on('change', function () {
+                var deal_for = this.value;
+                $("#specific_deal_for").html('');
+                $.ajax({
+                    url: "{{url('specificdealfor')}}",
+                    type: "POST",
+                    data: {
+                        deal_for: deal_for,
+                        _token: '{{csrf_token()}}'
+                    },
+                    dataType: 'json',
+                    success: function (result) {
+                        $('#specific_deal_for').html('<option value="">Select Specific Deal For</option>');
+
+                        if(result.customers != null){
+
+                            $.each(result.customers, function (key, value) {
+                                $("#specific_deal_for").append('<option value="' + value.id + '">' + value.email + '</option>');
+                            });
+
+                        }
+                        else if(result.resellers != null){
+
+                            $.each(result.resellers, function (key, value) {
+                                $("#specific_deal_for").append('<option value="' + value.id + '">' + value.email + '</option>');
+                            });
+
+                        }
+
+
                     }
                 });
             });

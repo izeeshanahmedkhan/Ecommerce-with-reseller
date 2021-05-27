@@ -81,6 +81,7 @@ class OfferController extends Controller
             'size_id' => ['required'],
             'start_date' => ['required','date'],
             'end_date' => ['required','date','after:start_date'],
+            'deal_for' => ['required'],
             'status' => ['required']
         ]);
 
@@ -91,6 +92,8 @@ class OfferController extends Controller
         $offer->size_id = $request->get('size_id');
         $offer->start_date = $request->get('start_date');
         $offer->end_date = $request->get('end_date');
+        $offer->deal_for = $request->get('deal_for');
+        $offer->specific_deal_for = $request->get('specific_deal_for');
         $offer->status = $request->get('status');
 
         $offer->save();
@@ -108,6 +111,7 @@ class OfferController extends Controller
             'product_id' => ['required'],
             'start_date' => ['required','date'],
             'end_date' => ['required','date','after:start_date'],
+            'deal_for' => ['required'],
             'status' => ['required']
         ]);
 
@@ -117,6 +121,8 @@ class OfferController extends Controller
         $offer->product_id = $request->get('product_id');
         $offer->start_date = $request->get('start_date');
         $offer->end_date = $request->get('end_date');
+        $offer->deal_for = $request->get('deal_for');
+        $offer->specific_deal_for = $request->get('specific_deal_for');
         $offer->status = $request->get('status');
 
         $offer->save();
@@ -137,6 +143,7 @@ class OfferController extends Controller
             'no_of_times' => ['nullable','numeric','min:1'],
             'start_date' => ['required','date'],
             'end_date' => ['required','date','after:start_date'],
+            'deal_for' => ['required'],
             'status' => ['required']
         ]);
 
@@ -149,6 +156,8 @@ class OfferController extends Controller
         $offer->no_of_times = $request->get('no_of_times');
         $offer->start_date = $request->get('start_date');
         $offer->end_date = $request->get('end_date');
+        $offer->deal_for = $request->get('deal_for');
+        $offer->specific_deal_for = $request->get('specific_deal_for');
         $offer->status = $request->get('status');
 
         $offer->save();
@@ -224,6 +233,7 @@ class OfferController extends Controller
             'size_id' => ['required'],
             'start_date' => ['required','date'],
             'end_date' => ['required','date','after:start_date'],
+            'deal_for' => ['required'],
             'status' => ['required']
         ]);
 
@@ -234,6 +244,8 @@ class OfferController extends Controller
         $offer->size_id = $request->get('size_id');
         $offer->start_date = $request->get('start_date');
         $offer->end_date = $request->get('end_date');
+        $offer->deal_for = $request->get('deal_for');
+        $offer->specific_deal_for = $request->get('specific_deal_for');
         $offer->status = $request->get('status');
 
         $offer->save();
@@ -252,6 +264,7 @@ class OfferController extends Controller
             'product_id' => ['required'],
             'start_date' => ['required','date'],
             'end_date' => ['required','date','after:start_date'],
+            'deal_for' => ['required'],
             'status' => ['required']
         ]);
 
@@ -260,6 +273,8 @@ class OfferController extends Controller
         $offer->product_id = $request->get('product_id');
         $offer->start_date = $request->get('start_date');
         $offer->end_date = $request->get('end_date');
+        $offer->deal_for = $request->get('deal_for');
+        $offer->specific_deal_for = $request->get('specific_deal_for');
         $offer->status = $request->get('status');
 
         $offer->save();
@@ -281,6 +296,7 @@ class OfferController extends Controller
             'no_of_times' => ['nullable','numeric','min:1'],
             'start_date' => ['required','date'],
             'end_date' => ['required','date','after:start_date'],
+            'deal_for' => ['required'],
             'status' => ['required']
         ]);
 
@@ -292,6 +308,8 @@ class OfferController extends Controller
         $offer->no_of_times = $request->get('no_of_times');
         $offer->start_date = $request->get('start_date');
         $offer->end_date = $request->get('end_date');
+        $offer->deal_for = $request->get('deal_for');
+        $offer->specific_deal_for = $request->get('specific_deal_for');
         $offer->status = $request->get('status');
 
         $offer->save();
