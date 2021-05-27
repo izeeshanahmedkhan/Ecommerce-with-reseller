@@ -884,10 +884,19 @@
                                                             <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
                                                             @php
 
+                                                                $customer = \App\Models\CustomerUser::where('user_id',auth()->user())->first();
+
+                                                                if(!is_null($customer)){
+
+                                                                    $customer = $customer->id;
+
+                                                                }
+
                                                                 $product_deal = \App\Models\Deal::where('product_id',$product->id)
                                                                 ->where('status',1)
+                                                                ->where('deal_for','customer')
+                                                                ->where('specific_deal_for',$customer)
                                                                 ->first();
-
 
                                                             @endphp
 
@@ -898,7 +907,15 @@
 
                                                             @endif
 
-                                                            @php $product_offer = \App\Models\Offer::where('product_id',$product->id)->where('status',1)->first();@endphp
+                                                            @php
+
+                                                                $product_offer = \App\Models\Offer::where('product_id',$product->id)
+                                                                ->where('status',1)
+                                                                ->where('deal_for','customer')
+                                                                ->where('specific_deal_for',$customer)
+                                                                ->first();
+
+                                                            @endphp
 
                                                             @if(!empty($product_offer))
 
@@ -906,7 +923,15 @@
 
                                                             @endif
 
-                                                            @php $product_general_discount = \App\Models\GeneralDiscount::where('product_id',$product->id)->where('status',1)->first();@endphp
+                                                            @php
+
+                                                                $product_general_discount = \App\Models\GeneralDiscount::where('product_id',$product->id)
+                                                                ->where('status',1)
+                                                                ->where('deal_for','customer')
+                                                                ->where('specific_deal_for',$customer)
+                                                                ->first();
+
+                                                            @endphp
 
                                                             @if(!empty($product_general_discount))
 
@@ -914,7 +939,15 @@
 
                                                             @endif
 
-                                                            @php $category_general_discount = \App\Models\GeneralDiscount::where('category_id',$categoryProduct->category->id)->where('status',1)->first();@endphp
+                                                            @php
+
+                                                                $category_general_discount = \App\Models\GeneralDiscount::where('category_id',$categoryProduct->category->id)
+                                                                ->where('status',1)
+                                                                ->where('deal_for','customer')
+                                                                ->where('specific_deal_for',$customer)
+                                                                ->first();
+
+                                                            @endphp
 
                                                             @if(!empty($category_general_discount))
 
@@ -989,10 +1022,19 @@
                                                             <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
                                                             @php
 
+                                                                $customer = \App\Models\CustomerUser::where('user_id',auth()->user())->first();
+
+                                                                if(!is_null($customer)){
+
+                                                                    $customer = $customer->id;
+
+                                                                }
+
                                                                 $product_deal = \App\Models\Deal::where('product_id',$product->id)
                                                                 ->where('status',1)
+                                                                ->where('deal_for','customer')
+                                                                ->where('specific_deal_for',$customer)
                                                                 ->first();
-
 
                                                             @endphp
 
@@ -1003,7 +1045,15 @@
 
                                                             @endif
 
-                                                            @php $product_offer = \App\Models\Offer::where('product_id',$product->id)->where('status',1)->first();@endphp
+                                                            @php
+
+                                                                $product_offer = \App\Models\Offer::where('product_id',$product->id)
+                                                                ->where('status',1)
+                                                                ->where('deal_for','customer')
+                                                                ->where('specific_deal_for',$customer)
+                                                                ->first();
+
+                                                            @endphp
 
                                                             @if(!empty($product_offer))
 
@@ -1011,7 +1061,15 @@
 
                                                             @endif
 
-                                                            @php $product_general_discount = \App\Models\GeneralDiscount::where('product_id',$product->id)->where('status',1)->first();@endphp
+                                                            @php
+
+                                                                $product_general_discount = \App\Models\GeneralDiscount::where('product_id',$product->id)
+                                                                ->where('status',1)
+                                                                ->where('deal_for','customer')
+                                                                ->where('specific_deal_for',$customer)
+                                                                ->first();
+
+                                                            @endphp
 
                                                             @if(!empty($product_general_discount))
 
@@ -1019,7 +1077,15 @@
 
                                                             @endif
 
-                                                            @php $category_general_discount = \App\Models\GeneralDiscount::where('category_id',$categoryProduct->category->id)->where('status',1)->first();@endphp
+                                                            @php
+
+                                                                $category_general_discount = \App\Models\GeneralDiscount::where('category_id',$categoryProduct->category->id)
+                                                                ->where('status',1)
+                                                                ->where('deal_for','customer')
+                                                                ->where('specific_deal_for',$customer)
+                                                                ->first();
+
+                                                            @endphp
 
                                                             @if(!empty($category_general_discount))
 
@@ -1093,10 +1159,19 @@
                                                             <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
                                                             @php
 
+                                                                $customer = \App\Models\CustomerUser::where('user_id',auth()->user())->first();
+
+                                                                if(!is_null($customer)){
+
+                                                                    $customer = $customer->id;
+
+                                                                }
+
                                                                 $product_deal = \App\Models\Deal::where('product_id',$product->id)
                                                                 ->where('status',1)
+                                                                ->where('deal_for','customer')
+                                                                ->where('specific_deal_for',$customer)
                                                                 ->first();
-
 
                                                             @endphp
 
@@ -1107,7 +1182,15 @@
 
                                                             @endif
 
-                                                            @php $product_offer = \App\Models\Offer::where('product_id',$product->id)->where('status',1)->first();@endphp
+                                                            @php
+
+                                                                $product_offer = \App\Models\Offer::where('product_id',$product->id)
+                                                                ->where('status',1)
+                                                                ->where('deal_for','customer')
+                                                                ->where('specific_deal_for',$customer)
+                                                                ->first();
+
+                                                            @endphp
 
                                                             @if(!empty($product_offer))
 
@@ -1115,7 +1198,15 @@
 
                                                             @endif
 
-                                                            @php $product_general_discount = \App\Models\GeneralDiscount::where('product_id',$product->id)->where('status',1)->first();@endphp
+                                                            @php
+
+                                                                $product_general_discount = \App\Models\GeneralDiscount::where('product_id',$product->id)
+                                                                ->where('status',1)
+                                                                ->where('deal_for','customer')
+                                                                ->where('specific_deal_for',$customer)
+                                                                ->first();
+
+                                                            @endphp
 
                                                             @if(!empty($product_general_discount))
 
@@ -1123,7 +1214,15 @@
 
                                                             @endif
 
-                                                            @php $category_general_discount = \App\Models\GeneralDiscount::where('category_id',$categoryProduct->category->id)->where('status',1)->first();@endphp
+                                                            @php
+
+                                                                $category_general_discount = \App\Models\GeneralDiscount::where('category_id',$categoryProduct->category->id)
+                                                                ->where('status',1)
+                                                                ->where('deal_for','customer')
+                                                                ->where('specific_deal_for',$customer)
+                                                                ->first();
+
+                                                            @endphp
 
                                                             @if(!empty($category_general_discount))
 
@@ -1197,10 +1296,19 @@
                                                             <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
                                                             @php
 
+                                                                $customer = \App\Models\CustomerUser::where('user_id',auth()->user())->first();
+
+                                                                if(!is_null($customer)){
+
+                                                                    $customer = $customer->id;
+
+                                                                }
+
                                                                 $product_deal = \App\Models\Deal::where('product_id',$product->id)
                                                                 ->where('status',1)
+                                                                ->where('deal_for','customer')
+                                                                ->where('specific_deal_for',$customer)
                                                                 ->first();
-
 
                                                             @endphp
 
@@ -1211,7 +1319,15 @@
 
                                                             @endif
 
-                                                            @php $product_offer = \App\Models\Offer::where('product_id',$product->id)->where('status',1)->first();@endphp
+                                                            @php
+
+                                                                $product_offer = \App\Models\Offer::where('product_id',$product->id)
+                                                                ->where('status',1)
+                                                                ->where('deal_for','customer')
+                                                                ->where('specific_deal_for',$customer)
+                                                                ->first();
+
+                                                            @endphp
 
                                                             @if(!empty($product_offer))
 
@@ -1219,7 +1335,15 @@
 
                                                             @endif
 
-                                                            @php $product_general_discount = \App\Models\GeneralDiscount::where('product_id',$product->id)->where('status',1)->first();@endphp
+                                                            @php
+
+                                                                $product_general_discount = \App\Models\GeneralDiscount::where('product_id',$product->id)
+                                                                ->where('status',1)
+                                                                ->where('deal_for','customer')
+                                                                ->where('specific_deal_for',$customer)
+                                                                ->first();
+
+                                                            @endphp
 
                                                             @if(!empty($product_general_discount))
 
@@ -1227,7 +1351,15 @@
 
                                                             @endif
 
-                                                            @php $category_general_discount = \App\Models\GeneralDiscount::where('category_id',$categoryProduct->category->id)->where('status',1)->first();@endphp
+                                                            @php
+
+                                                                $category_general_discount = \App\Models\GeneralDiscount::where('category_id',$categoryProduct->category->id)
+                                                                ->where('status',1)
+                                                                ->where('deal_for','customer')
+                                                                ->where('specific_deal_for',$customer)
+                                                                ->first();
+
+                                                            @endphp
 
                                                             @if(!empty($category_general_discount))
 
@@ -1301,10 +1433,19 @@
                                                             <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
                                                             @php
 
+                                                                $customer = \App\Models\CustomerUser::where('user_id',auth()->user())->first();
+
+                                                                if(!is_null($customer)){
+
+                                                                    $customer = $customer->id;
+
+                                                                }
+
                                                                 $product_deal = \App\Models\Deal::where('product_id',$product->id)
                                                                 ->where('status',1)
+                                                                ->where('deal_for','customer')
+                                                                ->where('specific_deal_for',$customer)
                                                                 ->first();
-
 
                                                             @endphp
 
@@ -1315,7 +1456,15 @@
 
                                                             @endif
 
-                                                            @php $product_offer = \App\Models\Offer::where('product_id',$product->id)->where('status',1)->first();@endphp
+                                                            @php
+
+                                                                $product_offer = \App\Models\Offer::where('product_id',$product->id)
+                                                                ->where('status',1)
+                                                                ->where('deal_for','customer')
+                                                                ->where('specific_deal_for',$customer)
+                                                                ->first();
+
+                                                            @endphp
 
                                                             @if(!empty($product_offer))
 
@@ -1323,7 +1472,15 @@
 
                                                             @endif
 
-                                                            @php $product_general_discount = \App\Models\GeneralDiscount::where('product_id',$product->id)->where('status',1)->first();@endphp
+                                                            @php
+
+                                                                $product_general_discount = \App\Models\GeneralDiscount::where('product_id',$product->id)
+                                                                ->where('status',1)
+                                                                ->where('deal_for','customer')
+                                                                ->where('specific_deal_for',$customer)
+                                                                ->first();
+
+                                                            @endphp
 
                                                             @if(!empty($product_general_discount))
 
@@ -1331,7 +1488,15 @@
 
                                                             @endif
 
-                                                            @php $category_general_discount = \App\Models\GeneralDiscount::where('category_id',$categoryProduct->category->id)->where('status',1)->first();@endphp
+                                                            @php
+
+                                                                $category_general_discount = \App\Models\GeneralDiscount::where('category_id',$categoryProduct->category->id)
+                                                                ->where('status',1)
+                                                                ->where('deal_for','customer')
+                                                                ->where('specific_deal_for',$customer)
+                                                                ->first();
+
+                                                            @endphp
 
                                                             @if(!empty($category_general_discount))
 
@@ -1405,10 +1570,19 @@
                                                             <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
                                                             @php
 
+                                                                $customer = \App\Models\CustomerUser::where('user_id',auth()->user())->first();
+
+                                                                if(!is_null($customer)){
+
+                                                                    $customer = $customer->id;
+
+                                                                }
+
                                                                 $product_deal = \App\Models\Deal::where('product_id',$product->id)
                                                                 ->where('status',1)
+                                                                ->where('deal_for','customer')
+                                                                ->where('specific_deal_for',$customer)
                                                                 ->first();
-
 
                                                             @endphp
 
@@ -1419,7 +1593,15 @@
 
                                                             @endif
 
-                                                            @php $product_offer = \App\Models\Offer::where('product_id',$product->id)->where('status',1)->first();@endphp
+                                                            @php
+
+                                                                $product_offer = \App\Models\Offer::where('product_id',$product->id)
+                                                                ->where('status',1)
+                                                                ->where('deal_for','customer')
+                                                                ->where('specific_deal_for',$customer)
+                                                                ->first();
+
+                                                            @endphp
 
                                                             @if(!empty($product_offer))
 
@@ -1427,7 +1609,15 @@
 
                                                             @endif
 
-                                                            @php $product_general_discount = \App\Models\GeneralDiscount::where('product_id',$product->id)->where('status',1)->first();@endphp
+                                                            @php
+
+                                                                $product_general_discount = \App\Models\GeneralDiscount::where('product_id',$product->id)
+                                                                ->where('status',1)
+                                                                ->where('deal_for','customer')
+                                                                ->where('specific_deal_for',$customer)
+                                                                ->first();
+
+                                                            @endphp
 
                                                             @if(!empty($product_general_discount))
 
@@ -1435,7 +1625,15 @@
 
                                                             @endif
 
-                                                            @php $category_general_discount = \App\Models\GeneralDiscount::where('category_id',$categoryProduct->category->id)->where('status',1)->first();@endphp
+                                                            @php
+
+                                                                $category_general_discount = \App\Models\GeneralDiscount::where('category_id',$categoryProduct->category->id)
+                                                                ->where('status',1)
+                                                                ->where('deal_for','customer')
+                                                                ->where('specific_deal_for',$customer)
+                                                                ->first();
+
+                                                            @endphp
 
                                                             @if(!empty($category_general_discount))
 
@@ -1509,10 +1707,19 @@
                                                             <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
                                                             @php
 
+                                                                $customer = \App\Models\CustomerUser::where('user_id',auth()->user())->first();
+
+                                                                if(!is_null($customer)){
+
+                                                                    $customer = $customer->id;
+
+                                                                }
+
                                                                 $product_deal = \App\Models\Deal::where('product_id',$product->id)
                                                                 ->where('status',1)
+                                                                ->where('deal_for','customer')
+                                                                ->where('specific_deal_for',$customer)
                                                                 ->first();
-
 
                                                             @endphp
 
@@ -1523,7 +1730,15 @@
 
                                                             @endif
 
-                                                            @php $product_offer = \App\Models\Offer::where('product_id',$product->id)->where('status',1)->first();@endphp
+                                                            @php
+
+                                                                $product_offer = \App\Models\Offer::where('product_id',$product->id)
+                                                                ->where('status',1)
+                                                                ->where('deal_for','customer')
+                                                                ->where('specific_deal_for',$customer)
+                                                                ->first();
+
+                                                            @endphp
 
                                                             @if(!empty($product_offer))
 
@@ -1531,7 +1746,15 @@
 
                                                             @endif
 
-                                                            @php $product_general_discount = \App\Models\GeneralDiscount::where('product_id',$product->id)->where('status',1)->first();@endphp
+                                                            @php
+
+                                                                $product_general_discount = \App\Models\GeneralDiscount::where('product_id',$product->id)
+                                                                ->where('status',1)
+                                                                ->where('deal_for','customer')
+                                                                ->where('specific_deal_for',$customer)
+                                                                ->first();
+
+                                                            @endphp
 
                                                             @if(!empty($product_general_discount))
 
@@ -1539,7 +1762,15 @@
 
                                                             @endif
 
-                                                            @php $category_general_discount = \App\Models\GeneralDiscount::where('category_id',$categoryProduct->category->id)->where('status',1)->first();@endphp
+                                                            @php
+
+                                                                $category_general_discount = \App\Models\GeneralDiscount::where('category_id',$categoryProduct->category->id)
+                                                                ->where('status',1)
+                                                                ->where('deal_for','customer')
+                                                                ->where('specific_deal_for',$customer)
+                                                                ->first();
+
+                                                            @endphp
 
                                                             @if(!empty($category_general_discount))
 

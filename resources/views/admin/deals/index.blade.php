@@ -32,6 +32,8 @@
                                     <th>Discount</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
+                                    <th>Deal For</th>
+                                    <th>Specific Deal For</th>
                                     <th>Status</th>
                                     <th>Created At</th>
                                     <th>Action</th>
@@ -53,6 +55,57 @@
                                         <td>{{$deal->discount}}</td>
                                         <td>{{$deal->start_date}}</td>
                                         <td>{{$deal->end_date}}</td>
+                                        <td>{{$deal->deal_for}}</td>
+                                        @php
+
+                                            if($deal->deal_for == "customer"){
+
+                                                $customer = \App\Models\Customer::where('id',$deal->specific_deal_for)->first();
+
+                                                if(!empty($customer)){
+
+                                                    @endphp
+
+                                                        <td>{{$customer->name}}</td>
+
+                                                    @php
+                                                }
+                                                else{
+
+                                                    @endphp
+
+                                                        <td> </td>
+
+                                                    @php
+
+                                                }
+
+                                            }
+                                            else if($deal->deal_for == "reseller"){
+
+                                                $reseller = \App\Models\Reseller::where('id',$deal->specific_deal_for)->first();
+
+                                                if(!empty($reseller)){
+
+                                                    @endphp
+
+                                                    <td>{{$reseller->name}}</td>
+
+                                                    @php
+                                                }
+                                                else{
+
+                                                    @endphp
+
+                                                    <td> </td>
+
+                                                    @php
+
+                                                }
+
+                                            }
+
+                                        @endphp
                                         <td>{{$deal->status == '1' ? 'Active':'InActive'}}</td>
                                         <td>{{$deal->created_at->diffForHumans()}}</td>
                                         <td>
@@ -99,6 +152,8 @@
                                     <th>Discount</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
+                                    <th>Deal For</th>
+                                    <th>Specific Deal For</th>
                                     <th>Status</th>
                                     <th>Created At</th>
                                     <th>Action</th>

@@ -31,6 +31,8 @@
                                     <th>Size</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
+                                    <th>Deal For</th>
+                                    <th>Specific Deal For</th>
                                     <th>Status</th>
                                     <th>Created At</th>
                                     <th>Action</th>
@@ -51,6 +53,57 @@
                                         </td>
                                         <td>{{$buy_1_get_1_free->start_date}}</td>
                                         <td>{{$buy_1_get_1_free->end_date}}</td>
+                                        <td>{{$buy_1_get_1_free->deal_for}}</td>
+                                        @php
+
+                                            if($buy_1_get_1_free->deal_for == "customer"){
+
+                                                $customer = \App\Models\Customer::where('id',$buy_1_get_1_free->specific_deal_for)->first();
+
+                                                if(!empty($customer)){
+
+                                                @endphp
+
+                                                <td>{{$customer->name}}</td>
+
+                                                @php
+                                                }
+                                                else{
+
+                                                    @endphp
+
+                                                    <td> </td>
+
+                                                    @php
+
+                                                }
+
+                                            }
+                                            else if($buy_1_get_1_free->deal_for == "reseller"){
+
+                                                $reseller = \App\Models\Reseller::where('id',$buy_1_get_1_free->specific_deal_for)->first();
+
+                                                if(!empty($reseller)){
+
+                                                    @endphp
+
+                                                    <td>{{$reseller->name}}</td>
+
+                                                    @php
+                                                }
+                                                else{
+
+                                                    @endphp
+
+                                                    <td> </td>
+
+                                                    @php
+
+                                                }
+
+                                            }
+
+                                        @endphp
                                         <td>{{$buy_1_get_1_free->status == '1' ? 'Active':'InActive'}}</td>
                                         <td>{{$buy_1_get_1_free->created_at->diffForHumans()}}</td>
                                         <td>
@@ -95,6 +148,8 @@
                                     <th>Size</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
+                                    <th>Deal For</th>
+                                    <th>Specific Deal For</th>
                                     <th>Status</th>
                                     <th>Created At</th>
                                     <th>Action</th>
@@ -132,7 +187,9 @@
                                     <th>Offer</th>
                                     <th>Product</th>
                                     <th>Start Date</th>
-                                    <th>End Date</th>
+                                    <th>End Date
+                                    <th>Deal For</th>
+                                    <th>Specific Deal For</th>
                                     <th>Status</th>
                                     <th>Created At</th>
                                     <th>Action</th>
@@ -149,6 +206,57 @@
                                             </td>
                                             <td>{{$free_delivery->start_date}}</td>
                                             <td>{{$free_delivery->end_date}}</td>
+                                            <td>{{$free_delivery->deal_for}}</td>
+                                            @php
+
+                                                if($free_delivery->deal_for == "customer"){
+
+                                                    $customer = \App\Models\Customer::where('id',$free_delivery->specific_deal_for)->first();
+
+                                                    if(!empty($customer)){
+
+                                            @endphp
+
+                                            <td>{{$customer->name}}</td>
+
+                                            @php
+                                                }
+                                                else{
+
+                                            @endphp
+
+                                            <td> </td>
+
+                                            @php
+
+                                                }
+
+                                            }
+                                            else if($free_delivery->deal_for == "reseller"){
+
+                                                $reseller = \App\Models\Reseller::where('id',$free_delivery->specific_deal_for)->first();
+
+                                                if(!empty($reseller)){
+
+                                            @endphp
+
+                                            <td>{{$reseller->name}}</td>
+
+                                            @php
+                                                }
+                                                else{
+
+                                            @endphp
+
+                                            <td> </td>
+
+                                            @php
+
+                                                }
+
+                                            }
+
+                                            @endphp
                                             <td>{{$free_delivery->status == '1' ? 'Active':'InActive'}}</td>
                                             <td>{{$free_delivery->created_at->diffForHumans()}}</td>
                                             <td>
@@ -192,6 +300,8 @@
                                     <th>Product</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
+                                    <th>Deal For</th>
+                                    <th>Specific Deal For</th>
                                     <th>Status</th>
                                     <th>Created At</th>
                                     <th>Action</th>
@@ -232,6 +342,8 @@
                                     <th>No of times</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
+                                    <th>Deal For</th>
+                                    <th>Specific Deal For</th>
                                     <th>Status</th>
                                     <th>Created At</th>
                                     <th>Action</th>
@@ -247,7 +359,58 @@
                                         <td>{{$voucher_code->discount}}</td>
                                         <td>{{$voucher_code->no_of_times}}</td>
                                         <td>{{$voucher_code->start_date}}</td>
-                                        <td>{{$voucher_code->end_date}}</td>
+                                        <td>{{$voucher_code->end_date}}
+                                        <td>{{$voucher_code->deal_for}}</td>
+                                        @php
+
+                                            if($voucher_code->deal_for == "customer"){
+
+                                                $customer = \App\Models\Customer::where('id',$voucher_code->specific_deal_for)->first();
+
+                                                if(!empty($customer)){
+
+                                        @endphp
+
+                                        <td>{{$customer->name}}</td>
+
+                                        @php
+                                            }
+                                            else{
+
+                                        @endphp
+
+                                        <td> </td>
+
+                                        @php
+
+                                            }
+
+                                        }
+                                        else if($voucher_code->deal_for == "reseller"){
+
+                                            $reseller = \App\Models\Reseller::where('id',$voucher_code->specific_deal_for)->first();
+
+                                            if(!empty($reseller)){
+
+                                        @endphp
+
+                                        <td>{{$reseller->name}}</td>
+
+                                        @php
+                                            }
+                                            else{
+
+                                        @endphp
+
+                                        <td> </td>
+
+                                        @php
+
+                                            }
+
+                                        }
+
+                                        @endphp
                                         <td>{{$voucher_code->status == '1' ? 'Active':'InActive'}}</td>
                                         <td>{{$voucher_code->created_at->diffForHumans()}}</td>
                                         <td>
@@ -294,6 +457,8 @@
                                     <th>No of times</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
+                                    <th>Deal For</th>
+                                    <th>Specific Deal For</th>
                                     <th>Status</th>
                                     <th>Created At</th>
                                     <th>Action</th>

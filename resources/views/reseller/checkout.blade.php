@@ -213,9 +213,20 @@
                                                 @endfor
                                                 @php $bool = true; @endphp
                                                 @php
+
+                                                    $reseller = \App\Models\ResellerUser::where('user_id',auth()->user())->first();
+
+                                                        if(!is_null($reseller)){
+
+                                                            $reseller = $reseller->id;
+
+                                                    }
+
                                                     $offer_product = \App\Models\Offer::where('product_id',$product->id)
                                                     ->where('size_id',$size->id)
                                                     ->where('status',1)
+                                                    ->where('deal_for','reseller')
+                                                    ->where('specific_deal_for',$reseller)
                                                     ->first();
 
                                                     if(!empty($offer_product) && $offer_product->offer == "Buy One Get One Free"){
@@ -247,6 +258,8 @@
                                                     $deal_product = \App\Models\Deal::where('product_id',$product->id)
                                                     ->where('size_id',$size->id)
                                                     ->where('status',1)
+                                                    ->where('deal_for','reseller')
+                                                    ->where('specific_deal_for',$reseller)
                                                     ->first();
 
                                                     if(!empty($deal_product) && $deal_product->deal == "pack_of_two"){
@@ -296,6 +309,8 @@
                                                 @php
                                                     $general_product = \App\Models\GeneralDiscount::where('product_id',$product->id)
                                                     ->where('status',1)
+                                                    ->where('deal_for','reseller')
+                                                    ->where('specific_deal_for',$reseller)
                                                     ->first();
 
                                                     if(!empty($general_product) && $general_product->general_discount == "Product"){
@@ -315,6 +330,8 @@
 
                                                     $general_category = \App\Models\GeneralDiscount::where('category_id',$category_product->category_id)
                                                     ->where('status',1)
+                                                    ->where('deal_for','reseller')
+                                                    ->where('specific_deal_for',$reseller)
                                                     ->first();
 
                                                     if(!empty($general_category) && $general_category->general_discount == "Category"){
@@ -322,15 +339,21 @@
                                                         $general_category_deal_product = \App\Models\Deal::where('product_id',$product->id)
                                                         ->where('size_id',$size->id)
                                                         ->where('status',1)
+                                                        ->where('deal_for','reseller')
+                                                        ->where('specific_deal_for',$reseller)
                                                         ->first();
 
                                                         $general_category_offer_product = \App\Models\Offer::where('product_id',$product->id)
                                                         ->where('size_id',$size->id)
                                                         ->where('status',1)
+                                                        ->where('deal_for','reseller')
+                                                        ->where('specific_deal_for',$reseller)
                                                         ->first();
 
                                                         $general_category_product = \App\Models\GeneralDiscount::where('product_id',$product->id)
                                                         ->where('status',1)
+                                                        ->where('deal_for','reseller')
+                                                        ->where('specific_deal_for',$reseller)
                                                         ->first();
 
                                                         if(empty($general_category_deal_product) && empty($general_category_offer_product) && empty($general_category_product)){
@@ -349,6 +372,8 @@
                                                 @php
                                                     $offer_category = \App\Models\offer::where('product_id',$product->id)
                                                     ->where('status',1)
+                                                    ->where('deal_for','reseller')
+                                                    ->where('specific_deal_for',$reseller)
                                                     ->first();
 
                                                     if(!empty($offer_category) && $offer_category->offer == "Free Delivery"){
@@ -356,6 +381,8 @@
                                                     $offer_category_free_delivery = \App\Models\offer::where('product_id',$product->id)
                                                     ->where('offer','Free Delivery')
                                                     ->where('status',1)
+                                                    ->where('deal_for','reseller')
+                                                    ->where('specific_deal_for',$reseller)
                                                     ->first();
 
                                                 @endphp

@@ -458,10 +458,20 @@ class OfferController extends Controller
             'coupon_code' => ['required'],
         ]);
 
+        $customer = \App\Models\CustomerUser::where('user_id',auth()->user())->first();
+
+        if(!is_null($customer)){
+
+            $customer = $customer->id;
+
+        }
+
         $checkCode = Offer::where('code',$request->coupon_code)
             ->where('status',1)
             ->where('no_of_times','>=',1)
             ->where('min_amount','<=',$request->total_amount)
+            ->where('deal_for','customer')
+            ->where('specific_deal_for',$customer)
             ->first();
 
         if(!empty($checkCode)){
