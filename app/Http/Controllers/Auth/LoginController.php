@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Permission;
 
 class LoginController extends Controller
 {
@@ -30,22 +32,60 @@ class LoginController extends Controller
 
     public function redirectTo() {
 
-        $role = Auth::user()->getRoleNames()->first();
+        $role = Auth::user()->roles->first();
 
-        switch ($role) {
-            case 'super-admin':
-                return route('admin.dashboard');
-                break;
-            case 'admin':
-                return route('admin.dashboard');
-                break;
-            case 'reseller':
-                return route('reseller.dashboard');
-                break;
-            default:
-                return '/home';
-                break;
+        $permissions = Permission::all();
+
+        foreach($permissions as $permission){
+
+             $item =   DB::table('role_has_permissions')
+                    ->where('permission_id',$permission->id)
+                    ->where('role_id',$role->id)
+                    ->first();
+
+             if(!empty($item)){
+
+                 break;
+             }
         }
+
+        if(!empty($item)){
+
+            return route('admin.dashboard');
+
+        }
+        else if($role->name == "reseller"){
+
+            return route('reseller.dashboard');
+
+        }
+        else if($role->name == "salecenter"){
+
+            return route('salecenter.dashboard');
+        }
+        else{
+
+            return '/home';
+        }
+
+
+        //$role = Auth::user()->getRoleNames()->first();
+
+//        switch ($role) {
+//            case 'super-admin':
+//                return route('admin.dashboard');
+//                break;
+//            case 'admin':
+//                return route('admin.dashboard');
+//                break;
+//            case 'reseller':
+//                return route('reseller.dashboard');
+//                break;
+//            default:
+//                return '/home';
+//                break;
+//        }
+
     }
 
     //protected $redirectTo = RouteServiceProvider::HOME;

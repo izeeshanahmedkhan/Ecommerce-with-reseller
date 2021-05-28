@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2021 at 02:15 PM
+-- Generation Time: May 28, 2021 at 02:38 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -878,7 +878,7 @@ CREATE TABLE `deals` (
 --
 
 INSERT INTO `deals` (`id`, `deal`, `product_id`, `size_id`, `discount`, `start_date`, `end_date`, `deal_for`, `specific_deal_for`, `status`, `created_at`, `updated_at`) VALUES
-(3, 'pack_of_two', 1, 1, 10, '2021-05-27 15:18:00', '2021-05-28 15:18:00', 'reseller', '4', 1, '2021-05-27 10:18:18', '2021-05-27 11:57:45');
+(3, 'pack_of_two', 1, 1, 10, '2021-05-27 15:18:00', '2021-05-28 15:18:00', 'reseller', '4', 0, '2021-05-27 10:18:18', '2021-05-27 11:57:45');
 
 -- --------------------------------------------------------
 
@@ -1084,6 +1084,7 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (4, 'App\\Models\\User', 5),
 (4, 'App\\Models\\User', 14),
 (5, 'App\\Models\\User', 7),
+(5, 'App\\Models\\User', 16),
 (6, 'App\\Models\\User', 9),
 (6, 'App\\Models\\User', 10),
 (6, 'App\\Models\\User', 11),
@@ -1648,6 +1649,13 @@ CREATE TABLE `sale_centers` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `sale_centers`
+--
+
+INSERT INTO `sale_centers` (`id`, `name`, `owner_name`, `address`, `city`, `area`, `contact`, `cnic_no`, `cnic_front`, `cnic_back`, `messaging_service_name`, `messaging_service_no`, `email`, `social_media_name_1`, `social_media_name_2`, `social_media_name_3`, `link_1`, `link_2`, `link_3`, `bank_account_title`, `bank_name`, `bank_branch`, `account_or_iban_no`, `money_transfer_no`, `money_transfer_service`, `status`, `created_at`, `updated_at`) VALUES
+(3, 'Sale Center', 'Ahmed', 'Gulshan Iqbal 13-C Karachi', 'Karachi', 'Gulshan', '03335252546', '58896589652365', 'mi_gaming_laptop_2019_image_1565003115644.jpg', 'unnamed.jpg', NULL, '123', 'salecenter@example.com', NULL, NULL, NULL, NULL, NULL, NULL, 'Sale Center', 'Meezan', 'Ghulshan', '123456789', '455512', 'EasyPaisa', 1, '2021-05-28 11:34:49', '2021-05-28 11:34:49');
+
 -- --------------------------------------------------------
 
 --
@@ -1660,6 +1668,13 @@ CREATE TABLE `sale_center_user` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sale_center_user`
+--
+
+INSERT INTO `sale_center_user` (`sale_center_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(3, 16, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1782,8 +1797,9 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `im
 (5, 'Ahmed', 'ahmed1@gmail.com', NULL, '$2y$10$z1pCJYgeD5yVCaeh7PUBK.Iuv3aWCo8w7BFdqea/VaGUDqQd04E/C', NULL, '12345', 1, NULL, '2021-05-17 10:25:06', '2021-05-17 10:25:06'),
 (7, 'Gulshan', 'ahmed5@gmail.com', NULL, '$2y$10$wXupEqDdSgtG4IhUrkR1eesvWyz9GbmMo8BnqrzAueXxu/cdcLOF.', NULL, '12345', 1, NULL, '2021-05-17 11:34:52', '2021-05-17 11:34:52'),
 (13, 'Hameed', 'hameed@gmail.com', NULL, '$2y$10$bV1oG9BczjmSl1Cx1vAcSuIUqEVFVuMZgR64PbC6Ls77i1urnVVpK', NULL, '12345', 1, NULL, '2021-05-17 18:03:00', '2021-05-17 18:03:00'),
-(14, 'reseller', 'reseller@example.com', NULL, '$2y$10$.Ujx5zqvGuL602sSyG8mLOu8TQc74UWQ1TBsG61ypNIVoEc.C2SzO', NULL, '12345', 1, NULL, '2021-05-19 11:43:59', '2021-05-19 11:43:59'),
-(15, 'Customer', 'customer@example.com', NULL, '$2y$10$SydSMnNLZwMNywghF5GrlOxS3LdfVhb5dgjgApGqVylYQLKnBlW06', NULL, '12345', 1, NULL, '2021-05-27 09:11:37', '2021-05-27 09:11:37');
+(14, 'reseller', 'reseller@example.com', NULL, '$2y$10$.Ujx5zqvGuL602sSyG8mLOu8TQc74UWQ1TBsG61ypNIVoEc.C2SzO', NULL, '12345', 0, NULL, '2021-05-19 11:43:59', '2021-05-28 12:02:43'),
+(15, 'Customer', 'customer@example.com', NULL, '$2y$10$SydSMnNLZwMNywghF5GrlOxS3LdfVhb5dgjgApGqVylYQLKnBlW06', NULL, '12345', 1, NULL, '2021-05-27 09:11:37', '2021-05-27 09:11:37'),
+(16, 'Sale Center', 'salecenter@example.com', NULL, '$2y$10$jbsycyAU2uKnPAj2zZ0EcOUVcGyKbQ0RyVaEGQblIX2hiXKzkyyqe', NULL, '12345', 0, NULL, '2021-05-28 11:34:50', '2021-05-28 11:34:50');
 
 --
 -- Indexes for dumped tables
@@ -2105,7 +2121,7 @@ ALTER TABLE `block_floor_products`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `catalogues`
@@ -2231,7 +2247,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `resellers`
 --
 ALTER TABLE `resellers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `reseller_carts`
@@ -2261,13 +2277,13 @@ ALTER TABLE `riders`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `sale_centers`
 --
 ALTER TABLE `sale_centers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `sizes`
@@ -2291,7 +2307,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables

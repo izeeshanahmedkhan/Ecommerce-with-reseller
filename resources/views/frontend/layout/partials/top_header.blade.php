@@ -72,9 +72,62 @@
                             @endif
                         @else
 
-{{--                            <li class="nav-item">--}}
-{{--                                <a class="nav-link" href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }}</a>--}}
-{{--                            </li>--}}
+                            @php
+
+                                $role = Auth::user()->roles->first();
+
+                                $permissions = \Spatie\Permission\Models\Permission::all();
+
+                                foreach($permissions as $permission){
+
+                                     $item =   DB::table('role_has_permissions')
+                                            ->where('permission_id',$permission->id)
+                                            ->where('role_id',$role->id)
+                                            ->first();
+
+                                     if(!empty($item)){
+
+                                         break;
+                                     }
+                                }
+
+                                if(!empty($item)){
+
+                            @endphp
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }}</a>
+                                </li>
+
+                            @php
+
+                                }
+                                else if($role->name == "reseller"){
+
+                            @endphp
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('reseller.dashboard') }}">{{ __('Dashboard') }}</a>
+                            </li>
+
+                            @php
+
+                                }
+                                else if($role->name == "salecenter"){
+
+                            @endphp
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('salecenter.dashboard') }}">{{ __('Dashboard') }}</a>
+                            </li>
+
+                            @php
+
+                                }
+
+                            @endphp
+
+
                             <li>
                                 <div>
                                     <a class="dropdown-item" href="{{ route('logout') }}"

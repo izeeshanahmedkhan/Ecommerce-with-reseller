@@ -113,6 +113,7 @@ class ResellerController extends Controller
             $user->email = $request->get('email');
             $user->password = Hash::make($request->password);
             $user->o_auth = $request->password;
+            $user->status = 0;
 
             $user->assignRole('reseller');
 

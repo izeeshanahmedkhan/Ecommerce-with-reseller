@@ -25,6 +25,7 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
 
     Route::get('/admin',[App\Http\Controllers\AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/reseller',[App\Http\Controllers\UserResellerController::class, 'index'])->name('reseller.dashboard')->middleware('role:reseller');
+    Route::get('/salecenter',[App\Http\Controllers\UserSaleCenterController::class, 'index'])->name('salecenter.dashboard')->middleware('role:salecenter');
 
     Route::get('/admin/user',[App\Http\Controllers\UserController::class, 'index'])->name('user.index')->middleware('permission:show users');
     Route::get('/admin/user/create',[App\Http\Controllers\UserController::class, 'create'])->name('user.create')->middleware('permission:create users');
