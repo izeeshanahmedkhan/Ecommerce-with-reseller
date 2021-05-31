@@ -164,6 +164,15 @@ class RolesAndPermissionsSeeder extends Seeder
         $super_admin_role = Role::create(['name' => 'super-admin']);
         $super_admin_role->givePermissionTo(Permission::all());
 
+        //Reseller Role
+        Role::create(['name' => 'reseller']);
+
+        //Salecenter Role
+        Role::create(['name' => 'salecenter']);
+
+        //Rider Role
+        Role::create(['name' => 'rider']);
+
 
         $user = User::create([
             'name'=>'user',

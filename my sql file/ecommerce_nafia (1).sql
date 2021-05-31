@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2021 at 02:38 PM
+-- Generation Time: May 31, 2021 at 02:26 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -101,7 +101,14 @@ INSERT INTO `billings` (`id`, `user_id`, `name`, `email`, `address`, `country`, 
 (2, 14, 'reseller', 'reseller@example.com', 'Ghulshan Iqbal, Karachi', 1, 1, 54, '75300', '+923345652528', 700.00, 'UT4BL', '2021-05-21 12:32:21', '2021-05-21 12:32:21'),
 (3, 14, 'reseller', 'reseller@example.com', 'Ghulshan Iqbal, Karachi', 1, 1, 54, '72400', '+923345652528', 700.00, 'lLa65', '2021-05-21 12:34:33', '2021-05-21 12:34:33'),
 (4, 14, 'reseller', 'reseller@example.com', 'Ghulshan Iqbal, Karachi', 1, 1, 54, '55500', '+923345652528', 860.00, '0n4b1', '2021-05-24 09:58:14', '2021-05-24 09:58:14'),
-(5, 14, 'reseller', 'reseller@example.com', 'Ghulshan Iqbal, Karachi', 1, 1, 54, '55500', '+923345652528', 380.00, 'QOQxU', '2021-05-24 10:08:58', '2021-05-24 10:08:58');
+(5, 14, 'reseller', 'reseller@example.com', 'Ghulshan Iqbal, Karachi', 1, 1, 54, '55500', '+923345652528', 380.00, 'QOQxU', '2021-05-24 10:08:58', '2021-05-24 10:08:58'),
+(6, 14, 'reseller', 'reseller@example.com', 'Ghulshan Iqbal, Karachi', 1, 1, 54, '55500', '+923345652528', 700.00, '57MvZ', '2021-05-31 09:37:31', '2021-05-31 09:37:31'),
+(7, 1, 'user', 'user@example.com', 'Gulshan Iqbal 13-C Karachi', 1, 1, 54, '75300', '+923353287084', 400.00, 'KHFGT', '2021-05-31 09:45:35', '2021-05-31 09:45:35'),
+(8, 1, 'user', 'user@example.com', 'Gulshan Iqbal 13-C Karachi', 1, 1, 54, '75300', '+923353287084', 400.00, '1FG7I', '2021-05-31 09:47:53', '2021-05-31 09:47:53'),
+(9, 1, 'user', 'user@example.com', 'Gulshan Iqbal 13-C Karachi', 1, 1, 54, '75300', '+923353287084', 400.00, 'ifHqC', '2021-05-31 09:49:19', '2021-05-31 09:49:19'),
+(10, 1, 'user', 'user@example.com', 'Gulshan Iqbal 13-C Karachi', 1, 1, 54, '75300', '+923353287084', 400.00, 'wNRgj', '2021-05-31 09:51:29', '2021-05-31 09:51:29'),
+(11, 1, 'user', 'user@example.com', 'Gulshan Iqbal 13-C Karachi', 1, 1, 54, '75300', '+923353287084', 400.00, 'tbWrl', '2021-05-31 09:54:06', '2021-05-31 09:54:06'),
+(12, 14, 'reseller', 'reseller@example.com', 'Ghulshan Iqbal, Karachi', 1, 1, 54, '55500', '+923345652528', 700.00, 'SAFYD', '2021-05-31 09:56:25', '2021-05-31 09:56:25');
 
 -- --------------------------------------------------------
 
@@ -966,7 +973,7 @@ CREATE TABLE `home_settings` (
 --
 
 INSERT INTO `home_settings` (`id`, `page_name`, `key`, `value`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'all-pages', 'logo', 'logo.png', 1, '2021-05-19 11:18:07', '2021-05-19 11:18:10'),
+(1, 'all-pages', 'logo', 'logo.png', 1, '2021-05-19 11:18:07', '2021-05-31 08:42:27'),
 (2, 'all-pages', 'address', 'Example Street 68, Mahattan,New York, USA', 1, '2021-05-19 11:19:38', '2021-05-19 11:19:43'),
 (3, 'all-pages', 'phone', '12345678952', 1, '2021-05-19 11:19:38', '2021-05-19 11:19:46'),
 (4, 'all-pages', 'email', 'Support@ovicsoft.com', 1, '2021-05-19 11:19:38', '2021-05-19 11:19:49'),
@@ -977,7 +984,7 @@ INSERT INTO `home_settings` (`id`, `page_name`, `key`, `value`, `status`, `creat
 (13, 'home-page', 'service', 'FREE SHIPPING~On order over $200~fa fa-plane', 1, '2021-05-19 11:27:36', '2021-05-19 11:27:40'),
 (14, 'home-page', 'service', '30-DAY RETURN~Moneyback guarantee~fa fa-clock', 1, '2021-05-19 11:27:54', '2021-05-19 11:27:59'),
 (15, 'home-page', 'service', '24/7 SUPPORT~Online consultations~fas fa-phone-alt', 1, '2021-05-19 11:28:13', '2021-05-19 11:28:17'),
-(16, 'home-page', 'service', 'SAFE SHOPPING~Safe Shopping Guarantee~fas fa-umbrella', 1, '2021-05-19 11:28:31', '2021-05-19 11:28:34');
+(17, 'home-page', 'service', 'SAFE SHOPPING~Safe Shopping Guarantee~fas fa-umbrella', 1, '2021-05-31 08:53:35', '2021-05-31 08:53:57');
 
 -- --------------------------------------------------------
 
@@ -1045,7 +1052,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (48, '2021_05_25_211242_create_catalogues_table', 13),
 (49, '2021_05_25_232418_create_catalogue_products_table', 13),
 (50, '2021_05_02_184218_create_general_discounts_table', 14),
-(51, '2021_05_07_092808_create_offers_table', 14);
+(51, '2021_05_07_092808_create_offers_table', 14),
+(53, '2021_04_22_195943_create_orders_table', 15);
 
 -- --------------------------------------------------------
 
@@ -1130,6 +1138,7 @@ CREATE TABLE `orders` (
   `product_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `payment_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `order_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `total_amount` double(36,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -1140,14 +1149,14 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `order_number`, `quantity`, `size_id`, `colour_id`, `product_id`, `user_id`, `payment_type`, `status`, `total_amount`, `created_at`, `updated_at`) VALUES
-(1, '34RCz', 1, 1, 1, 1, 14, 'cash on delivery', 1, 700.00, '2021-05-21 12:25:23', '2021-05-21 12:25:23'),
-(2, 'UT4BL', 1, 1, 1, 1, 14, 'cash on delivery', 1, 700.00, '2021-05-21 12:32:21', '2021-05-21 12:32:21'),
-(3, 'UT4BL', 3, 2, 2, 1, 14, 'cash on delivery', 1, 700.00, '2021-05-21 12:32:21', '2021-05-21 12:32:21'),
-(4, 'lLa65', 1, 1, 1, 1, 14, 'cash on delivery', 1, 700.00, '2021-05-21 12:34:33', '2021-05-21 12:34:33'),
-(5, 'lLa65', 3, 2, 2, 1, 14, 'cash on delivery', 1, 700.00, '2021-05-21 12:34:33', '2021-05-21 12:34:33'),
-(6, '0n4b1', 7, 1, 1, 1, 14, 'cash on delivery', 1, 860.00, '2021-05-24 09:58:14', '2021-05-24 09:58:14'),
-(7, 'QOQxU', 1, 1, 1, 1, 14, 'cash on delivery', 1, 380.00, '2021-05-24 10:08:58', '2021-05-24 10:08:58');
+INSERT INTO `orders` (`id`, `order_number`, `quantity`, `size_id`, `colour_id`, `product_id`, `user_id`, `payment_type`, `order_type`, `status`, `total_amount`, `created_at`, `updated_at`) VALUES
+(1, '57MvZ', 5, 1, 1, 1, 14, 'cash on delivery', NULL, 1, 700.00, '2021-05-31 09:37:31', '2021-05-31 09:37:31'),
+(2, 'KHFGT', 1, 1, 1, 1, 1, 'cash on delivery', NULL, 1, 400.00, '2021-05-31 09:45:35', '2021-05-31 09:45:35'),
+(3, '1FG7I', 1, 1, 1, 1, 1, 'cash on delivery', NULL, 1, 400.00, '2021-05-31 09:47:53', '2021-05-31 09:47:53'),
+(4, 'ifHqC', 1, 1, 1, 1, 1, 'cash on delivery', NULL, 1, 400.00, '2021-05-31 09:49:19', '2021-05-31 09:49:19'),
+(5, 'wNRgj', 1, 1, 1, 1, 1, 'cash on delivery', 'Customer', 1, 400.00, '2021-05-31 09:51:29', '2021-05-31 09:51:29'),
+(6, 'tbWrl', 1, 1, 1, 1, 1, 'cash on delivery', 'Customer', 1, 400.00, '2021-05-31 09:54:06', '2021-05-31 09:54:06'),
+(7, 'SAFYD', 5, 1, 1, 1, 14, 'cash on delivery', 'Reseller', 1, 700.00, '2021-05-31 09:56:25', '2021-05-31 09:56:25');
 
 -- --------------------------------------------------------
 
@@ -1302,7 +1311,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `status`, `stock_availability`, `sku_code`, `description`, `owner`, `vendor`, `video_link`, `quantity`, `price`, `purchase_discount`, `purchase_cost`, `labour_cost`, `transportation_cost`, `list_price_for_salesman`, `commission`, `inventory_category`, `created_at`, `updated_at`) VALUES
-(1, 'Product - 1', 1, 1, 'SKU01', '<p style=\"text-align: left;\"><strong>Product - 1 Description</strong></p>', NULL, NULL, NULL, 483, 100.00, NULL, NULL, NULL, NULL, 80.00, NULL, '0', '2021-05-18 11:32:19', '2021-05-24 10:08:58');
+(1, 'Product - 1', 1, 1, 'SKU01', '<p style=\"text-align: left;\"><strong>Product - 1 Description</strong></p>', NULL, NULL, NULL, 475, 100.00, NULL, NULL, NULL, NULL, 80.00, NULL, '0', '2021-05-18 11:32:19', '2021-05-31 09:56:25');
 
 -- --------------------------------------------------------
 
@@ -1361,13 +1370,6 @@ CREATE TABLE `reseller_carts` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `reseller_carts`
---
-
-INSERT INTO `reseller_carts` (`id`, `quantity`, `size_id`, `colour_id`, `product_id`, `user_id`, `created_at`, `updated_at`) VALUES
-(9, 5, 1, 1, 1, 14, '2021-05-25 18:52:37', '2021-05-25 19:49:34');
 
 -- --------------------------------------------------------
 
@@ -2109,7 +2111,7 @@ ALTER TABLE `batches`
 -- AUTO_INCREMENT for table `billings`
 --
 ALTER TABLE `billings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `block_floor_products`
@@ -2121,7 +2123,7 @@ ALTER TABLE `block_floor_products`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `catalogues`
@@ -2211,13 +2213,13 @@ ALTER TABLE `general_discounts`
 -- AUTO_INCREMENT for table `home_settings`
 --
 ALTER TABLE `home_settings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `offers`

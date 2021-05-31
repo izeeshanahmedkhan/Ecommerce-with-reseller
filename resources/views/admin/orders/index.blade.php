@@ -20,6 +20,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Order Num</th>
+                                    <th>Order Type</th>
                                     <th>Customer</th>
                                     <th>Payment Type</th>
                                     <th>Status</th>
@@ -32,6 +33,7 @@
                                     <tr>
                                         <td>{{$order->id}}</td>
                                         <td>{{$order->order_number}}</td>
+                                        <td>{{$order->order_type}}</td>
                                         <td>
                                             @php
 
@@ -100,6 +102,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Order Num</th>
+                                    <th>Order Type</th>
                                     <th>Customer</th>
                                     <th>Payment Type</th>
                                     <th>Status</th>

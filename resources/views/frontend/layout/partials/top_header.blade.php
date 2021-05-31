@@ -124,6 +124,28 @@
                             @php
 
                                 }
+                                else if($role->name == "rider"){
+
+                            @endphp
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('rider.dashboard') }}">{{ __('Dashboard') }}</a>
+                            </li>
+
+                            @php
+
+                                }
+                                else if($role->name == "customer"){
+
+                            @endphp
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('customer.dashboard') }}">{{ __('My Profile') }}</a>
+                            </li>
+
+                            @php
+
+                                }
 
                             @endphp
 

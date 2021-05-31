@@ -22,6 +22,7 @@ class CreateOrdersTable extends Migration
             $table->integer('product_id');
             $table->integer('user_id');
             $table->string('payment_type');
+            $table->string('order_type')->nullable();
             $table->boolean('status')->default(1);
             $table->float('total_amount',36);
             $table->timestamps();

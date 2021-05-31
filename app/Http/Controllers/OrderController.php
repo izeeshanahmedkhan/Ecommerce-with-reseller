@@ -98,13 +98,33 @@ class OrderController extends Controller
 
                 $order = Order::create(['order_number' => $order_num, 'quantity' => $c->quantity, 'size_id' => $c->size_id, 'colour_id' => $c->colour_id, 'product_id' => $c->product_id, 'user_id' => $user->id, 'payment_type' => $request->get('cod'), 'total_amount' => $request->get('total_amount')]);
 
+                if($request->get('reseller_cart') != null){
+
+                    Order::where('id',$order->id)->update(['order_type'=>"Reseller"]);
+
+                }
+                else{
+
+                    Order::where('id',$order->id)->update(['order_type'=>"Customer"]);
+
+                }
+
                 $product = Product::where('id',$c->product_id)->first();
 
                 $new_quantity = $product->quantity - $c->quantity;
 
                 Product::where('id',$c->product_id)->update(['quantity'=>$new_quantity]);
 
-                ResellerCart::destroy($c->id);
+                if($request->get('reseller_cart') != null){
+
+                    ResellerCart::destroy($c->id);
+
+                }
+                else{
+
+                    Cart::destroy($c->id);
+
+                }
 
             }
 

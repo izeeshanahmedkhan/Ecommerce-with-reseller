@@ -43,20 +43,25 @@
                                             @endforeach
                                         </td>
                                         <td>{{$role->created_at->diffForHumans()}}</td>
-                                        <td>
-                                            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('edit roles'))
-                                            <a href="{{route('role.edit',$role)}}" class="btn btn-raised btn-raised-primary m-1" style="color: white"><i
-                                                    class="nav-icon i-Pen-2 font-weight-bold"></i></a>
-                                            @endif
-                                            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('delete roles'))
-                                            <form method="POST" action="{{route('role.destroy',$role)}}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"  class="btn btn-raised btn-raised-danger m-1" style="color: white"><i
-                                                        class="nav-icon i-Close-Window font-weight-bold"></i></button>
-                                            </form>
-                                            @endif
-                                        </td>
+                                        @if(count($role->permissions) !== 0)
+                                            <td>
+                                                @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('edit roles'))
+                                                <a href="{{route('role.edit',$role)}}" class="btn btn-raised btn-raised-primary m-1" style="color: white"><i
+                                                        class="nav-icon i-Pen-2 font-weight-bold"></i></a>
+                                                @endif
+                                                @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('delete roles'))
+                                                <form method="POST" action="{{route('role.destroy',$role)}}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"  class="btn btn-raised btn-raised-danger m-1" style="color: white"><i
+                                                            class="nav-icon i-Close-Window font-weight-bold"></i></button>
+                                                </form>
+                                                @endif
+                                            </td>
+
+                                            @else
+                                            <td></td>
+                                        @endif
                                     </tr>
                                 @endforeach
 

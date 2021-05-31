@@ -63,6 +63,14 @@ class LoginController extends Controller
 
             return route('salecenter.dashboard');
         }
+        else if($role->name == "rider"){
+
+            return route('rider.dashboard');
+        }
+        else if($role->name == "customer"){
+
+            return '/home';
+        }
         else{
 
             return '/home';
