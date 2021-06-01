@@ -443,6 +443,7 @@
                                         <td colspan="3" rowspan="4"></td>
                                         <td colspan="3">Total products (tax incl.)</td>
                                         <td colspan="2">{{ $total_price }} Rs/-</td>
+                                        <input type="hidden" name="sub_total_amount" value="{{$total_price }}" />
                                     </tr>
                                     @php $total_price = $total_price - $discount; @endphp
                                     <tr>
@@ -452,6 +453,8 @@
                                             <td colspan="3"> Discount </td>
                                         @endif
                                         <td colspan="2">{{ $discount }} Rs/-</td>
+                                        <input type="hidden" name="discount" value="{{$discount}}" />
+
                                     </tr>
 
                                         @php
@@ -467,12 +470,13 @@
                                                 <tr>
                                                         <td colspan="3"> Delivery Charges <Charges></Charges> </td>
                                                         <td colspan="2" id=""> 0 Rs/-</td>
+                                                    <input type="hidden" name="delivery_charges" value="{{0}}" />
                                                 </tr>
                                                 <tr>
                                                     <td colspan="3"><strong>Total</strong></td>
                                                     <td colspan="2"><strong>{{ $total_price }} Rs/-</strong></td>
                                                 </tr>
-                                                <input type="hidden" name="total_amount" value="{{  $total_price }}" />
+                                                <input type="hidden" name="total_amount" value="{{$total_price}}" />
                                                 @php
                                             }
                                             else{
@@ -585,11 +589,14 @@
                                 '                                            <td colspan="3"><strong>Total</strong></td>\n' +
                                 '                                            <td colspan="2"><strong>' + ({{ $total_price }} + 300) +' Rs/-</strong></td>\n' +
                                 '                                        </tr>' +
-                                '<input type="hidden" name="total_amount" value="{{  $total_price + 300 }}" />');
+                                '<input type="hidden" name="total_amount" value="{{ $total_price + 300  }}" />'+
+                                '<input type="hidden" name="delivery_charges" value="{{ 300  }}" />');
                         }
                         else{
                             $('#deliverycharge').html('<td colspan="3"> Delivery Charges <Charges></Charges> </td>\n' +
-                                '                                        <td colspan="2" id="">' + result.delivery_charges.delivery_charge + ' Rs/- </td>');
+                                '                                        <td colspan="2" id="">' + result.delivery_charges.delivery_charge + ' Rs/- </td>'+
+                                '<input type="hidden" name="delivery_charges" value="'+ result.delivery_charges.delivery_charge +'" />'
+                                );
                             $("#deliverycharge").after('<tr id="deliverychargeafter">\n' +
                                 '                                            <td colspan="3"><strong>Total</strong></td>\n' +
                                 '                                            <td colspan="2"><strong>' + ({{ $total_price }} + result.delivery_charges.delivery_charge) +' Rs/-</strong></td>\n' +

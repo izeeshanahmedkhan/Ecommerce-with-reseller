@@ -357,6 +357,13 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
 
     Route::post('/reseller/catalogue/product/store',[App\Http\Controllers\CatalogueProductController::class, 'store'])->name('catalogue_product.store');
 
+    //sale center order assign and show on salecenter
+
+    Route::post('/salecenter/order/assign',[App\Http\Controllers\SaleCenterOrderController::class, 'assign'])->name('sale_center_order.assign');
+    Route::get('/salecenter/order',[App\Http\Controllers\SaleCenterOrderController::class, 'index'])->name('sale_center_order.index');
+    Route::get('/salecenter/order/{order}/edit',[App\Http\Controllers\SaleCenterOrderController::class, 'edit'])->name('sale_center_order.edit');
+    Route::put('/salecenter/order/{order}/update',[App\Http\Controllers\SaleCenterOrderController::class, 'update'])->name('sale_center_order.update');
+
 });
 
 

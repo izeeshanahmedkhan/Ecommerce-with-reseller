@@ -24,6 +24,9 @@ class CreateOrdersTable extends Migration
             $table->string('payment_type');
             $table->string('order_type')->nullable();
             $table->boolean('status')->default(1);
+            $table->float('discount',36);
+            $table->float('sub_total_amount',36);
+            $table->float('delivery_charges',36);
             $table->float('total_amount',36);
             $table->timestamps();
         });

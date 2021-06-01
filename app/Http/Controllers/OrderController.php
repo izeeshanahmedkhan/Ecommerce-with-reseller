@@ -96,7 +96,7 @@ class OrderController extends Controller
 
             foreach ($cart as $c) {
 
-                $order = Order::create(['order_number' => $order_num, 'quantity' => $c->quantity, 'size_id' => $c->size_id, 'colour_id' => $c->colour_id, 'product_id' => $c->product_id, 'user_id' => $user->id, 'payment_type' => $request->get('cod'), 'total_amount' => $request->get('total_amount')]);
+                $order = Order::create(['delivery_charges'=>$request->get('delivery_charges'),'discount'=> $request->get('discount'),'sub_total_amount'=> $request->get('sub_total_amount'),'order_number' => $order_num, 'quantity' => $c->quantity, 'size_id' => $c->size_id, 'colour_id' => $c->colour_id, 'product_id' => $c->product_id, 'user_id' => $user->id, 'payment_type' => $request->get('cod'), 'total_amount' => $request->get('total_amount')]);
 
                 if($request->get('reseller_cart') != null){
 

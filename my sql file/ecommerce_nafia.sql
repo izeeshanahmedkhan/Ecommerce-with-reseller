@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2021 at 02:26 PM
+-- Generation Time: Jun 01, 2021 at 02:41 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -108,7 +108,9 @@ INSERT INTO `billings` (`id`, `user_id`, `name`, `email`, `address`, `country`, 
 (9, 1, 'user', 'user@example.com', 'Gulshan Iqbal 13-C Karachi', 1, 1, 54, '75300', '+923353287084', 400.00, 'ifHqC', '2021-05-31 09:49:19', '2021-05-31 09:49:19'),
 (10, 1, 'user', 'user@example.com', 'Gulshan Iqbal 13-C Karachi', 1, 1, 54, '75300', '+923353287084', 400.00, 'wNRgj', '2021-05-31 09:51:29', '2021-05-31 09:51:29'),
 (11, 1, 'user', 'user@example.com', 'Gulshan Iqbal 13-C Karachi', 1, 1, 54, '75300', '+923353287084', 400.00, 'tbWrl', '2021-05-31 09:54:06', '2021-05-31 09:54:06'),
-(12, 14, 'reseller', 'reseller@example.com', 'Ghulshan Iqbal, Karachi', 1, 1, 54, '55500', '+923345652528', 700.00, 'SAFYD', '2021-05-31 09:56:25', '2021-05-31 09:56:25');
+(12, 14, 'reseller', 'reseller@example.com', 'Ghulshan Iqbal, Karachi', 1, 1, 54, '55500', '+923345652528', 700.00, 'SAFYD', '2021-05-31 09:56:25', '2021-05-31 09:56:25'),
+(13, 3, 'super admin', 'superadmin@example.com', 'Gulshan Iqbal 13-C Karachi', 1, 1, 54, '75300', '+923353287084', 600.00, 'dSMmK', '2021-06-01 10:27:37', '2021-06-01 10:27:37'),
+(14, 3, 'super admin', 'superadmin@example.com', 'Gulshan Iqbal 13-C Karachi', 1, 1, 54, '75300', '+923353287084', 600.00, 'KXJ5g', '2021-06-01 10:29:40', '2021-06-01 10:29:40');
 
 -- --------------------------------------------------------
 
@@ -165,7 +167,7 @@ CREATE TABLE `carts` (
 --
 
 INSERT INTO `carts` (`id`, `quantity`, `size_id`, `colour_id`, `product_id`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, 1, 1, 3, '2021-05-19 11:31:38', '2021-05-20 12:29:55');
+(15, 1, 1, 1, 1, 3, '2021-06-01 10:33:19', '2021-06-01 10:33:19');
 
 -- --------------------------------------------------------
 
@@ -901,6 +903,13 @@ CREATE TABLE `delivery_charges` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `delivery_charges`
+--
+
+INSERT INTO `delivery_charges` (`id`, `city_id`, `delivery_charge`, `created_at`, `updated_at`) VALUES
+(1, 54, 250.00, '2021-06-01 10:42:13', '2021-06-01 10:42:13');
+
 -- --------------------------------------------------------
 
 --
@@ -1053,7 +1062,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (49, '2021_05_25_232418_create_catalogue_products_table', 13),
 (50, '2021_05_02_184218_create_general_discounts_table', 14),
 (51, '2021_05_07_092808_create_offers_table', 14),
-(53, '2021_04_22_195943_create_orders_table', 15);
+(53, '2021_04_22_195943_create_orders_table', 15),
+(54, '2021_04_22_195944_create_orders_table', 16),
+(55, '2021_04_22_195945_create_orders_table', 17),
+(56, '2021_06_01_153928_create_sale_center_orders_table', 18);
 
 -- --------------------------------------------------------
 
@@ -1140,6 +1152,9 @@ CREATE TABLE `orders` (
   `payment_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `order_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
+  `discount` double(36,2) NOT NULL,
+  `sub_total_amount` double(36,2) NOT NULL,
+  `delivery_charges` double(36,2) NOT NULL,
   `total_amount` double(36,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -1149,14 +1164,8 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `order_number`, `quantity`, `size_id`, `colour_id`, `product_id`, `user_id`, `payment_type`, `order_type`, `status`, `total_amount`, `created_at`, `updated_at`) VALUES
-(1, '57MvZ', 5, 1, 1, 1, 14, 'cash on delivery', NULL, 1, 700.00, '2021-05-31 09:37:31', '2021-05-31 09:37:31'),
-(2, 'KHFGT', 1, 1, 1, 1, 1, 'cash on delivery', NULL, 1, 400.00, '2021-05-31 09:45:35', '2021-05-31 09:45:35'),
-(3, '1FG7I', 1, 1, 1, 1, 1, 'cash on delivery', NULL, 1, 400.00, '2021-05-31 09:47:53', '2021-05-31 09:47:53'),
-(4, 'ifHqC', 1, 1, 1, 1, 1, 'cash on delivery', NULL, 1, 400.00, '2021-05-31 09:49:19', '2021-05-31 09:49:19'),
-(5, 'wNRgj', 1, 1, 1, 1, 1, 'cash on delivery', 'Customer', 1, 400.00, '2021-05-31 09:51:29', '2021-05-31 09:51:29'),
-(6, 'tbWrl', 1, 1, 1, 1, 1, 'cash on delivery', 'Customer', 1, 400.00, '2021-05-31 09:54:06', '2021-05-31 09:54:06'),
-(7, 'SAFYD', 5, 1, 1, 1, 14, 'cash on delivery', 'Reseller', 1, 700.00, '2021-05-31 09:56:25', '2021-05-31 09:56:25');
+INSERT INTO `orders` (`id`, `order_number`, `quantity`, `size_id`, `colour_id`, `product_id`, `user_id`, `payment_type`, `order_type`, `status`, `discount`, `sub_total_amount`, `delivery_charges`, `total_amount`, `created_at`, `updated_at`) VALUES
+(1, 'KXJ5g', 3, 1, 1, 1, 3, 'cash on delivery', 'Customer', 1, 0.00, 300.00, 300.00, 600.00, '2021-06-01 10:29:40', '2021-06-01 12:23:09');
 
 -- --------------------------------------------------------
 
@@ -1311,7 +1320,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `status`, `stock_availability`, `sku_code`, `description`, `owner`, `vendor`, `video_link`, `quantity`, `price`, `purchase_discount`, `purchase_cost`, `labour_cost`, `transportation_cost`, `list_price_for_salesman`, `commission`, `inventory_category`, `created_at`, `updated_at`) VALUES
-(1, 'Product - 1', 1, 1, 'SKU01', '<p style=\"text-align: left;\"><strong>Product - 1 Description</strong></p>', NULL, NULL, NULL, 475, 100.00, NULL, NULL, NULL, NULL, 80.00, NULL, '0', '2021-05-18 11:32:19', '2021-05-31 09:56:25');
+(1, 'Product - 1', 1, 1, 'SKU01', '<p style=\"text-align: left;\"><strong>Product - 1 Description</strong></p>', NULL, NULL, NULL, 472, 100.00, NULL, NULL, NULL, NULL, 80.00, NULL, '0', '2021-05-18 11:32:19', '2021-06-01 10:29:40');
 
 -- --------------------------------------------------------
 
@@ -1657,6 +1666,32 @@ CREATE TABLE `sale_centers` (
 
 INSERT INTO `sale_centers` (`id`, `name`, `owner_name`, `address`, `city`, `area`, `contact`, `cnic_no`, `cnic_front`, `cnic_back`, `messaging_service_name`, `messaging_service_no`, `email`, `social_media_name_1`, `social_media_name_2`, `social_media_name_3`, `link_1`, `link_2`, `link_3`, `bank_account_title`, `bank_name`, `bank_branch`, `account_or_iban_no`, `money_transfer_no`, `money_transfer_service`, `status`, `created_at`, `updated_at`) VALUES
 (3, 'Sale Center', 'Ahmed', 'Gulshan Iqbal 13-C Karachi', 'Karachi', 'Gulshan', '03335252546', '58896589652365', 'mi_gaming_laptop_2019_image_1565003115644.jpg', 'unnamed.jpg', NULL, '123', 'salecenter@example.com', NULL, NULL, NULL, NULL, NULL, NULL, 'Sale Center', 'Meezan', 'Ghulshan', '123456789', '455512', 'EasyPaisa', 1, '2021-05-28 11:34:49', '2021-05-28 11:34:49');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sale_center_orders`
+--
+
+CREATE TABLE `sale_center_orders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `salecenter_id` int(11) NOT NULL,
+  `order_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` bigint(20) UNSIGNED NOT NULL,
+  `colour_id` int(11) NOT NULL,
+  `size_id` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sale_center_orders`
+--
+
+INSERT INTO `sale_center_orders` (`id`, `salecenter_id`, `order_number`, `product_id`, `quantity`, `colour_id`, `size_id`, `status`, `created_at`, `updated_at`) VALUES
+(1, 3, 'KXJ5g', 1, 3, 1, 1, 2, '2021-06-01 11:31:40', '2021-06-01 12:27:51');
 
 -- --------------------------------------------------------
 
@@ -2063,6 +2098,12 @@ ALTER TABLE `sale_centers`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `sale_center_orders`
+--
+ALTER TABLE `sale_center_orders`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `sale_center_user`
 --
 ALTER TABLE `sale_center_user`
@@ -2111,7 +2152,7 @@ ALTER TABLE `batches`
 -- AUTO_INCREMENT for table `billings`
 --
 ALTER TABLE `billings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `block_floor_products`
@@ -2123,7 +2164,7 @@ ALTER TABLE `block_floor_products`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `catalogues`
@@ -2189,7 +2230,7 @@ ALTER TABLE `deals`
 -- AUTO_INCREMENT for table `delivery_charges`
 --
 ALTER TABLE `delivery_charges`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -2219,7 +2260,7 @@ ALTER TABLE `home_settings`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `offers`
@@ -2231,7 +2272,7 @@ ALTER TABLE `offers`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -2286,6 +2327,12 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `sale_centers`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `sale_center_orders`
+--
+ALTER TABLE `sale_center_orders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `sizes`
