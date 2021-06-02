@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 01, 2021 at 02:41 PM
+-- Generation Time: Jun 02, 2021 at 03:07 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -67,7 +67,8 @@ CREATE TABLE `batch_product` (
 --
 
 INSERT INTO `batch_product` (`batch_id`, `product_id`, `created_at`, `updated_at`) VALUES
-(1, 1, NULL, NULL);
+(1, 1, NULL, NULL),
+(1, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -110,7 +111,8 @@ INSERT INTO `billings` (`id`, `user_id`, `name`, `email`, `address`, `country`, 
 (11, 1, 'user', 'user@example.com', 'Gulshan Iqbal 13-C Karachi', 1, 1, 54, '75300', '+923353287084', 400.00, 'tbWrl', '2021-05-31 09:54:06', '2021-05-31 09:54:06'),
 (12, 14, 'reseller', 'reseller@example.com', 'Ghulshan Iqbal, Karachi', 1, 1, 54, '55500', '+923345652528', 700.00, 'SAFYD', '2021-05-31 09:56:25', '2021-05-31 09:56:25'),
 (13, 3, 'super admin', 'superadmin@example.com', 'Gulshan Iqbal 13-C Karachi', 1, 1, 54, '75300', '+923353287084', 600.00, 'dSMmK', '2021-06-01 10:27:37', '2021-06-01 10:27:37'),
-(14, 3, 'super admin', 'superadmin@example.com', 'Gulshan Iqbal 13-C Karachi', 1, 1, 54, '75300', '+923353287084', 600.00, 'KXJ5g', '2021-06-01 10:29:40', '2021-06-01 10:29:40');
+(14, 3, 'super admin', 'superadmin@example.com', 'Gulshan Iqbal 13-C Karachi', 1, 1, 54, '75300', '+923353287084', 600.00, 'KXJ5g', '2021-06-01 10:29:40', '2021-06-01 10:29:40'),
+(15, 3, 'super admin', 'superadmin@example.com', 'Gulshan Iqbal 13-C Karachi', 1, 1, 54, '75300', '+923353287084', 1750.00, 'oORum', '2021-06-02 10:59:32', '2021-06-02 10:59:32');
 
 -- --------------------------------------------------------
 
@@ -161,13 +163,6 @@ CREATE TABLE `carts` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `carts`
---
-
-INSERT INTO `carts` (`id`, `quantity`, `size_id`, `colour_id`, `product_id`, `user_id`, `created_at`, `updated_at`) VALUES
-(15, 1, 1, 1, 1, 3, '2021-06-01 10:33:19', '2021-06-01 10:33:19');
 
 -- --------------------------------------------------------
 
@@ -263,7 +258,8 @@ CREATE TABLE `category_product` (
 --
 
 INSERT INTO `category_product` (`category_id`, `product_id`, `created_at`, `updated_at`) VALUES
-(2, 1, NULL, NULL);
+(2, 1, NULL, NULL),
+(3, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -769,7 +765,11 @@ INSERT INTO `colour_image_product_sizes` (`id`, `colour_id`, `product_id`, `size
 (5, 2, 1, 2, '1621337539floor5-1.jpg', '2021-05-18 11:32:19', '2021-05-18 11:32:19'),
 (6, 2, 1, 2, '1621337539floor5-2.jpg', '2021-05-18 11:32:19', '2021-05-18 11:32:19'),
 (7, 2, 1, 2, '1621337539floor5-3.jpg', '2021-05-18 11:32:19', '2021-05-18 11:32:19'),
-(8, 2, 1, 2, '1621337539floor5-4.jpg', '2021-05-18 11:32:19', '2021-05-18 11:32:19');
+(8, 2, 1, 2, '1621337539floor5-4.jpg', '2021-05-18 11:32:19', '2021-05-18 11:32:19'),
+(9, 4, 2, 1, '1622631235images (1).jpg', '2021-06-02 10:53:55', '2021-06-02 10:53:55'),
+(10, 4, 2, 1, '1622631235images (2).jpg', '2021-06-02 10:53:55', '2021-06-02 10:53:55'),
+(11, 3, 2, 2, '16226312351920_Panel1_Hero_Laptop.jpg', '2021-06-02 10:53:55', '2021-06-02 10:53:55'),
+(12, 3, 2, 2, '16226312351568788430-1206740205d81cfce2b4423-60645169.png', '2021-06-02 10:53:55', '2021-06-02 10:53:55');
 
 -- --------------------------------------------------------
 
@@ -1105,6 +1105,7 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (4, 'App\\Models\\User', 14),
 (5, 'App\\Models\\User', 7),
 (5, 'App\\Models\\User', 16),
+(5, 'App\\Models\\User', 19),
 (6, 'App\\Models\\User', 9),
 (6, 'App\\Models\\User', 10),
 (6, 'App\\Models\\User', 11),
@@ -1165,7 +1166,9 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `order_number`, `quantity`, `size_id`, `colour_id`, `product_id`, `user_id`, `payment_type`, `order_type`, `status`, `discount`, `sub_total_amount`, `delivery_charges`, `total_amount`, `created_at`, `updated_at`) VALUES
-(1, 'KXJ5g', 3, 1, 1, 1, 3, 'cash on delivery', 'Customer', 1, 0.00, 300.00, 300.00, 600.00, '2021-06-01 10:29:40', '2021-06-01 12:23:09');
+(1, 'KXJ5g', 3, 1, 1, 1, 3, 'cash on delivery', 'Customer', 1, 0.00, 300.00, 300.00, 600.00, '2021-06-01 10:29:40', '2021-06-01 12:23:09'),
+(2, 'oORum', 6, 1, 1, 1, 3, 'cash on delivery', 'Customer', 1, 0.00, 1500.00, 250.00, 1750.00, '2021-06-02 10:59:32', '2021-06-02 10:59:32'),
+(3, 'oORum', 3, 1, 4, 2, 3, 'cash on delivery', 'Customer', 1, 0.00, 1500.00, 250.00, 1750.00, '2021-06-02 10:59:32', '2021-06-02 10:59:32');
 
 -- --------------------------------------------------------
 
@@ -1320,7 +1323,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `status`, `stock_availability`, `sku_code`, `description`, `owner`, `vendor`, `video_link`, `quantity`, `price`, `purchase_discount`, `purchase_cost`, `labour_cost`, `transportation_cost`, `list_price_for_salesman`, `commission`, `inventory_category`, `created_at`, `updated_at`) VALUES
-(1, 'Product - 1', 1, 1, 'SKU01', '<p style=\"text-align: left;\"><strong>Product - 1 Description</strong></p>', NULL, NULL, NULL, 472, 100.00, NULL, NULL, NULL, NULL, 80.00, NULL, '0', '2021-05-18 11:32:19', '2021-06-01 10:29:40');
+(1, 'Product - 1', 1, 1, 'SKU01', '<p style=\"text-align: left;\"><strong>Product - 1 Description</strong></p>', NULL, NULL, NULL, 466, 100.00, NULL, NULL, NULL, NULL, 80.00, NULL, '0', '2021-05-18 11:32:19', '2021-06-02 10:59:32'),
+(2, 'Product - 2', 1, 1, 'SKU02', '<p>Product - 2 Description</p>', NULL, NULL, NULL, 997, 300.00, NULL, NULL, NULL, NULL, 250.00, NULL, '0', '2021-06-02 10:53:55', '2021-06-02 10:59:32');
 
 -- --------------------------------------------------------
 
@@ -1416,6 +1420,13 @@ CREATE TABLE `reviews` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `reviews`
+--
+
+INSERT INTO `reviews` (`id`, `user_id`, `product_id`, `comment`, `rating`, `created_at`, `updated_at`) VALUES
+(1, 3, 1, 'customer - review', 5, '2021-06-02 10:55:08', '2021-06-02 10:55:08');
+
 -- --------------------------------------------------------
 
 --
@@ -1430,6 +1441,14 @@ CREATE TABLE `review_replies` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `review_replies`
+--
+
+INSERT INTO `review_replies` (`id`, `user_id`, `review_id`, `reply`, `created_at`, `updated_at`) VALUES
+(1, 3, 1, 'admin first reply', '2021-06-02 10:55:36', '2021-06-02 10:55:36'),
+(2, 3, 1, 'admin second reply', '2021-06-02 10:55:54', '2021-06-02 10:55:54');
 
 -- --------------------------------------------------------
 
@@ -1665,7 +1684,8 @@ CREATE TABLE `sale_centers` (
 --
 
 INSERT INTO `sale_centers` (`id`, `name`, `owner_name`, `address`, `city`, `area`, `contact`, `cnic_no`, `cnic_front`, `cnic_back`, `messaging_service_name`, `messaging_service_no`, `email`, `social_media_name_1`, `social_media_name_2`, `social_media_name_3`, `link_1`, `link_2`, `link_3`, `bank_account_title`, `bank_name`, `bank_branch`, `account_or_iban_no`, `money_transfer_no`, `money_transfer_service`, `status`, `created_at`, `updated_at`) VALUES
-(3, 'Sale Center', 'Ahmed', 'Gulshan Iqbal 13-C Karachi', 'Karachi', 'Gulshan', '03335252546', '58896589652365', 'mi_gaming_laptop_2019_image_1565003115644.jpg', 'unnamed.jpg', NULL, '123', 'salecenter@example.com', NULL, NULL, NULL, NULL, NULL, NULL, 'Sale Center', 'Meezan', 'Ghulshan', '123456789', '455512', 'EasyPaisa', 1, '2021-05-28 11:34:49', '2021-05-28 11:34:49');
+(3, 'Sale Center', 'Ahmed', 'Gulshan Iqbal 13-C Karachi', 'Karachi', 'Gulshan', '03335252546', '58896589652365', 'mi_gaming_laptop_2019_image_1565003115644.jpg', 'unnamed.jpg', NULL, '123', 'salecenter@example.com', NULL, NULL, NULL, NULL, NULL, NULL, 'Sale Center', 'Meezan', 'Ghulshan', '123456789', '455512', 'EasyPaisa', 1, '2021-05-28 11:34:49', '2021-05-28 11:34:49'),
+(5, 'Sale Center - 2', 'Aslam', 'Gulshan Iqbal 13-C Karachi', 'Karachi', 'Gulshan', '03335252565', '58896589652876', 'mi_gaming_laptop_2019_image_1565003115644.jpg', 'unnamed.jpg', NULL, '123', 'salecenter2@example.com', NULL, NULL, NULL, NULL, NULL, NULL, 'Sale Center', 'Meezan', 'Ghulshan', '123456789', '455512', 'EasyPaisa', 1, '2021-05-28 11:34:49', '2021-05-28 11:34:49');
 
 -- --------------------------------------------------------
 
@@ -1691,7 +1711,9 @@ CREATE TABLE `sale_center_orders` (
 --
 
 INSERT INTO `sale_center_orders` (`id`, `salecenter_id`, `order_number`, `product_id`, `quantity`, `colour_id`, `size_id`, `status`, `created_at`, `updated_at`) VALUES
-(1, 3, 'KXJ5g', 1, 3, 1, 1, 2, '2021-06-01 11:31:40', '2021-06-01 12:27:51');
+(3, 3, 'KXJ5g', 1, 3, 1, 1, 1, '2021-06-02 10:44:17', '2021-06-02 13:06:57'),
+(4, 5, 'oORum', 1, 6, 1, 1, 1, '2021-06-02 11:23:24', '2021-06-02 12:27:43'),
+(5, 3, 'oORum', 2, 3, 4, 1, 1, '2021-06-02 12:27:43', '2021-06-02 12:29:00');
 
 -- --------------------------------------------------------
 
@@ -1711,7 +1733,8 @@ CREATE TABLE `sale_center_user` (
 --
 
 INSERT INTO `sale_center_user` (`sale_center_id`, `user_id`, `created_at`, `updated_at`) VALUES
-(3, 16, NULL, NULL);
+(3, 16, NULL, NULL),
+(5, 19, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1836,7 +1859,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `im
 (13, 'Hameed', 'hameed@gmail.com', NULL, '$2y$10$bV1oG9BczjmSl1Cx1vAcSuIUqEVFVuMZgR64PbC6Ls77i1urnVVpK', NULL, '12345', 1, NULL, '2021-05-17 18:03:00', '2021-05-17 18:03:00'),
 (14, 'reseller', 'reseller@example.com', NULL, '$2y$10$.Ujx5zqvGuL602sSyG8mLOu8TQc74UWQ1TBsG61ypNIVoEc.C2SzO', NULL, '12345', 0, NULL, '2021-05-19 11:43:59', '2021-05-28 12:02:43'),
 (15, 'Customer', 'customer@example.com', NULL, '$2y$10$SydSMnNLZwMNywghF5GrlOxS3LdfVhb5dgjgApGqVylYQLKnBlW06', NULL, '12345', 1, NULL, '2021-05-27 09:11:37', '2021-05-27 09:11:37'),
-(16, 'Sale Center', 'salecenter@example.com', NULL, '$2y$10$jbsycyAU2uKnPAj2zZ0EcOUVcGyKbQ0RyVaEGQblIX2hiXKzkyyqe', NULL, '12345', 0, NULL, '2021-05-28 11:34:50', '2021-05-28 11:34:50');
+(16, 'Sale Center', 'salecenter@example.com', NULL, '$2y$10$jbsycyAU2uKnPAj2zZ0EcOUVcGyKbQ0RyVaEGQblIX2hiXKzkyyqe', NULL, '12345', 0, NULL, '2021-05-28 11:34:50', '2021-05-28 11:34:50'),
+(19, 'Sale Center - 2', 'salecenter2@example.com', NULL, '$2y$10$jQ/iVDkZlpGGvlkuZENoouFiNotmiRNuBC4VWS.BT0QNGHCkg23fy', NULL, '12345', 0, NULL, '2021-06-02 07:55:40', '2021-06-02 07:55:40');
 
 --
 -- Indexes for dumped tables
@@ -2152,7 +2176,7 @@ ALTER TABLE `batches`
 -- AUTO_INCREMENT for table `billings`
 --
 ALTER TABLE `billings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `block_floor_products`
@@ -2164,7 +2188,7 @@ ALTER TABLE `block_floor_products`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `catalogues`
@@ -2200,7 +2224,7 @@ ALTER TABLE `colours`
 -- AUTO_INCREMENT for table `colour_image_product_sizes`
 --
 ALTER TABLE `colour_image_product_sizes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `countries`
@@ -2272,7 +2296,7 @@ ALTER TABLE `offers`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -2284,7 +2308,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `resellers`
@@ -2302,13 +2326,13 @@ ALTER TABLE `reseller_carts`
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `review_replies`
 --
 ALTER TABLE `review_replies`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `riders`
@@ -2326,13 +2350,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `sale_centers`
 --
 ALTER TABLE `sale_centers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `sale_center_orders`
 --
 ALTER TABLE `sale_center_orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `sizes`
@@ -2356,7 +2380,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Constraints for dumped tables

@@ -163,9 +163,9 @@
                                                         @php $catalogues = \App\Models\Catalogue::all(); @endphp
 
 
-                                                        <!-- Button trigger modal for catalogue -->
+                                                    <!-- Button trigger modal for catalogue -->
                                                         <button type="button"  class="btn btn-raised btn-raised-success m-1" data-toggle="modal" data-target="#exampleModalCenterCatalogue{{ $catalogue_for_controls }}" style="color: white"><i
-                                                                class="nav-icon fa fa-list font-weight-bold"> </i> Add To Catalogue </button>
+                                                            class="nav-icon fa fa-list font-weight-bold"> </i> Add To Catalogue </button>
 
                                                     <form method="POST" action="{{ route('catalogue_product.store') }}">
                                                     @csrf

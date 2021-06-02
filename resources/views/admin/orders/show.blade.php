@@ -86,12 +86,14 @@
                                                     <th scope="col">Quantity</th>
                                                     <th scope="col">Colour</th>
                                                     <th scope="col">Size</th>
-                                                    <th scope="col">Sale Center Status
+                                                    <th scope="col">Sale Center</th>
+                                                    <th scope="col">Sale Center Status</th>
                                                     <th scope="col">Assign Order</th>
                                                     <th scope="col">Action</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
+                                                {{ $count = 1 }}
                                                 @foreach($orders as $order)
                                                     <form method="POST" action="{{route('sale_center_order.assign')}}">
                                                         @csrf
@@ -129,44 +131,57 @@
 
                                                                 <input type="hidden" name="size_id" value="{{ $size->id }}">
                                                             </td>
-                                                            <td>
                                                                 @php $sale_center = \App\Models\SaleCenterOrder::where('order_number',$orders[0]->order_number)
-                                                                            ->where('product_id',$product->id)
-                                                                            ->first();
+                                                                                ->where('product_id',$product->id)
+                                                                                ->first();
                                                                 @endphp
-                                                                @if($sale_center->status == 1)
+                                                            <td>
+                                                                @if(!empty($sale_center))
+                                                                    @php $sc = \App\Models\SaleCenter::where('id',$sale_center->salecenter_id)->first() @endphp
 
-                                                                    <span class="badge badge-primary" style="font-size:15px;">{{ 'Pending' }}</span>
+                                                                    {{ $sc->name }}
+                                                                @else
+                                                                    Not Assigned
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                @if(!empty($sale_center))
+                                                                        @if($sale_center->status == 1)
 
-                                                                @elseif($sale_center->status == 2)
+                                                                            <span class="badge badge-primary" style="font-size:15px;">{{ 'Pending' }}</span>
 
-                                                                    <span class="badge badge-secondary" style="font-size:15px;">{{ 'Process' }}</span>
+                                                                        @elseif($sale_center->status == 2)
 
-                                                                @elseif($sale_center->status == 3)
+                                                                            <span class="badge badge-secondary" style="font-size:15px;">{{ 'Process' }}</span>
 
-                                                                    <span class="badge badge-warning" style="font-size:15px;">{{ 'Shipment' }}</span>
+                                                                        @elseif($sale_center->status == 3)
 
-                                                                @elseif($sale_center->status == 4)
+                                                                            <span class="badge badge-warning" style="font-size:15px;">{{ 'Shipment' }}</span>
 
-                                                                    <span class="badge badge-success" style="font-size:15px;">{{ 'delivered' }}</span>
+                                                                        @elseif($sale_center->status == 4)
 
+                                                                            <span class="badge badge-success" style="font-size:15px;">{{ 'delivered' }}</span>
+
+                                                                        @endif
+                                                                    @else
+                                                                        Not Defined
                                                                 @endif
                                                             </td>
                                                             <td>
                                                                 @php $salecenters = \App\Models\SaleCenter::all(); @endphp
 
-                                                                <select class="form-control js-example-basic-single @error('salecenter_id') is-invalid @enderror" id="selectSaleCenter" name="salecenter_id">
+                                                                <select class="form-control js-example-basic-single{{ $count }}  @error('salecenter_id') is-invalid @enderror" name="salecenter_id">
                                                                     <option selected disabled> Select SaleCenter </option>
-                                                                    @foreach($salecenters as $salecenter)
+                                                                    @foreach($salecenters as $index=>$salecenter)
                                                                         @php
-                                                                            $sale_center = \App\Models\SaleCenterOrder::where('salecenter_id',$salecenter->id)
-                                                                            ->where('product_id',$product->id);
+                                                                            ${"$sale_center"} = \App\Models\SaleCenterOrder::where('salecenter_id',$salecenter->id)
+                                                                            ->where('product_id',$product->id)
+                                                                            ->where('order_number',$orders[0]->order_number)
+                                                                            ->first();
 
-                                                                            if(!empty($sale_center)){
-
+                                                                            if(!empty(${"$sale_center"})){
                                                                                 continue;
                                                                             }
-
                                                                         @endphp
                                                                         <option value="{{ $salecenter->id }}">{{ $salecenter->name  }}</option>
                                                                     @endforeach
@@ -179,11 +194,20 @@
 
                                                             </td>
                                                             <td>
+                                                                @if(!empty($sale_center))
+
+                                                                    <input type="hidden" name="reassign" value="reassign">
+
+                                                                    <button type="submit"  class="btn btn-raised btn-raised-primary m-1" style="color: white"><i
+                                                                            class="nav-icon font-weight-bold"></i> Reassign </button>
+                                                                    @else
                                                                     <button type="submit"  class="btn btn-raised btn-raised-primary m-1" style="color: white"><i
                                                                             class="nav-icon font-weight-bold"></i> Assign </button>
+                                                                @endif
                                                             </td>
                                                         </tr>
                                                     </form>
+                                                    @php $count++; @endphp
                                                 @endforeach
                                                 </tbody>
                                             </table>
@@ -221,13 +245,24 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 @section('page_script')
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{ asset('admin-assets/js/plugins/toastr.min.js') }}"></script>
-    {{--    <script src="{{asset('admin/js/scripts/toastr.script.min.js')}}"></script>--}}
-
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
+
+        var i;
+
         $(document).ready(function() {
-            $('.js-example-basic-single').select2();
+
+            for(var i=1;i<{{ $count }};i++){
+
+                $('.js-example-basic-single'+i).select2({
+                    dropdownAutoWidth : true,
+                    width: 'auto'
+                });
+
+            }
+
         });
+
     </script>
 @endsection

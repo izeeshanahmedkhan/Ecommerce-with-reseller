@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\SaleCenter;
 use App\Models\SaleCenterOrder;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -17,6 +19,111 @@ class SaleCenterOrderController extends Controller
             'salecenter_id' => ['required'],
 
         ]);
+
+        if($request->get('assign_full_order') != null){
+
+            $sale_center_order = SaleCenterOrder::where('order_number',$request->get('order_number'))->first();
+
+            if($sale_center_order != null){
+
+                SaleCenterOrder::where('order_number',$request->get('order_number'))
+                    ->update(['salecenter_id'=>$request->get('salecenter_id'),'status'=>1]);
+
+                $orders = Order::where('order_number',$request->get('order_number'))->get();
+
+                foreach ($orders as $order){
+
+                    if($sale_center_order->product_id == $order->product_id){
+                        continue;
+                    }
+
+                    $SaleCenterOrder = new SaleCenterOrder();
+
+                    $SaleCenterOrder->salecenter_id = $request->get('salecenter_id');
+                    $SaleCenterOrder->order_number = $request->get('order_number');
+                    $SaleCenterOrder->product_id = $order->product_id;
+                    $SaleCenterOrder->quantity = $order->quantity;
+                    $SaleCenterOrder->colour_id = $order->colour_id;
+                    $SaleCenterOrder->size_id = $order->size_id;
+
+                    $SaleCenterOrder->save();
+                }
+
+                Session::flash('message','Order Assign to Sale Center Successfully');
+                Session::flash('alert-type','success');
+                return back();
+            }
+            else{
+
+                $orders = Order::where('order_number',$request->get('order_number'))->get();
+
+                foreach ($orders as $order){
+
+                    $SaleCenterOrder = new SaleCenterOrder();
+
+                    $SaleCenterOrder->salecenter_id = $request->get('salecenter_id');
+                    $SaleCenterOrder->order_number = $request->get('order_number');
+                    $SaleCenterOrder->product_id = $order->product_id;
+                    $SaleCenterOrder->quantity = $order->quantity;
+                    $SaleCenterOrder->colour_id = $order->colour_id;
+                    $SaleCenterOrder->size_id = $order->size_id;
+
+                    $SaleCenterOrder->save();
+                }
+
+                Session::flash('message','Order Assign to Sale Center Successfully');
+                Session::flash('alert-type','success');
+                return back();
+
+            }
+        }
+
+        if($request->get('reassign_full_order') != null){
+
+            $sale_center_order = SaleCenterOrder::where('order_number',$request->get('order_number'))->first();
+
+            if($sale_center_order != null){
+
+                SaleCenterOrder::where('order_number',$request->get('order_number'))
+                    ->update(['salecenter_id'=>$request->get('salecenter_id'),'status'=>1]);
+
+                $orders = Order::where('order_number',$request->get('order_number'))->get();
+
+                foreach ($orders as $order){
+
+                    if($sale_center_order->product_id == $order->product_id){
+                        continue;
+                    }
+
+                    $SaleCenterOrder = new SaleCenterOrder();
+
+                    $SaleCenterOrder->salecenter_id = $request->get('salecenter_id');
+                    $SaleCenterOrder->order_number = $request->get('order_number');
+                    $SaleCenterOrder->product_id = $order->product_id;
+                    $SaleCenterOrder->quantity = $order->quantity;
+                    $SaleCenterOrder->colour_id = $order->colour_id;
+                    $SaleCenterOrder->size_id = $order->size_id;
+
+                    $SaleCenterOrder->save();
+                }
+
+                Session::flash('message','Order Reassign to Sale Center Successfully');
+                Session::flash('alert-type','success');
+                return back();
+            }
+        }
+
+
+        if($request->get('reassign') != null){
+
+            SaleCenterOrder::where('order_number',$request->get('order_number'))
+                ->where('product_id',$request->get('product_id'))
+                ->update(['salecenter_id'=>$request->get('salecenter_id'),'status'=>1]);
+
+            Session::flash('message','Product Reassign to Sale Center Successfully');
+            Session::flash('alert-type','success');
+            return back();
+        }
 
         $SaleCenterOrder = new SaleCenterOrder();
 
