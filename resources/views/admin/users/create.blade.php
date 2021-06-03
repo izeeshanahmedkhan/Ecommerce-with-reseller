@@ -50,7 +50,7 @@
                                 </div>
 
                                 <div class="col-md-6 form-group mb-3">
-                                    <label for="role">Select</label>
+                                    <label for="role">Select Role</label>
                                     <select class="form-control form-control-rounded @error('role') is-invalid @enderror" id="role" name="role">
                                         @foreach($roles as $role)
                                             <option value="{{ $role->id }}">{{ $role->name }}</option>

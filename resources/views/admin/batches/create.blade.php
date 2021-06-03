@@ -25,7 +25,7 @@
                             <div class="form-group">
                                 <label>Batch Number</label>
 
-                                <input type="number" name="number" class="form-control @error('number') is-invalid @enderror" placeholder="Enter New Batch Number" value="{{ old('number') }}" aria-label="number">
+                                <input type="text" name="number" class="form-control @error('number') is-invalid @enderror" placeholder="Enter New Batch Number" value="{{ old('number', \Illuminate\Support\Str::random(10) )}}" aria-label="number">
                                 @error('number')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -93,7 +93,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label>Batch Vendor</label>
+                                <label>Supplier</label>
 
                                 <input type="string" name="vendor" class="form-control @error('vendor') is-invalid @enderror" placeholder="Enter New Vendor Name" value="{{ old('vendor') }}" aria-label="vendor">
                                 @error('vendor')

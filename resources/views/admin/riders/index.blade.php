@@ -28,6 +28,7 @@
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Contact No</th>
+                                    <th>Cnic Image</th>
                                     <th>Status</th>
                                     <th>Created At</th>
                                     <th>Action</th>
@@ -39,6 +40,12 @@
                                         <td>{{$rider->id}}</td>
                                         <td>{{$rider->name}}</td>
                                         <td>{{$rider->contact}}</td>
+                                        <td>
+                                            <div style="width:75px; height: 75px; font-size: 0;">
+                                                <img src="{{ asset('storage/images/riderImages/'.$rider->cnic_front) }}" alt="cnic image not found" />
+                                            </div>
+
+                                        </td>
                                         <td>{{$rider->status == '1' ? 'Active':'InActive'}}</td>
                                         <td>{{$rider->created_at->diffForHumans()}}</td>
                                         <td>
@@ -64,6 +71,7 @@
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Contact No</th>
+                                    <th>Cnic Image</th>
                                     <th>Status</th>
                                     <th>Created At</th>
                                     <th>Action</th>

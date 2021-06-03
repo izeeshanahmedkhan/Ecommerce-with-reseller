@@ -29,6 +29,7 @@
                                     <th>Name</th>
                                     <th>Contact No</th>
                                     <th>City</th>
+                                    <th>Cnic Image</th>
                                     <th>Status</th>
                                     <th>Created At</th>
                                     <th>Action</th>
@@ -41,6 +42,12 @@
                                         <td>{{$reseller->name}}</td>
                                         <td>{{$reseller->contact}}</td>
                                         <td>{{$reseller->city}}</td>
+                                        <td>
+                                            <div style="width:75px; height: 75px; font-size: 0;">
+                                                <img src="{{ asset('storage/images/resellerImages/'.$reseller->cnic_front) }}" alt="cnic image not found" />
+                                            </div>
+
+                                        </td>
                                         <td>{{$reseller->status == '1' ? 'Active':'InActive'}}</td>
                                         <td>{{$reseller->created_at->diffForHumans()}}</td>
                                         <td>
@@ -66,6 +73,7 @@
                                     <th>Name</th>
                                     <th>Contact No</th>
                                     <th>City</th>
+                                    <th>Cnic Image</th>
                                     <th>Status</th>
                                     <th>Created At</th>
                                     <th>Action</th>

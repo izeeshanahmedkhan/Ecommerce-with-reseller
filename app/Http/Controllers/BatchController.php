@@ -38,13 +38,12 @@ class BatchController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=> ['required', 'max:255'],
-            'number'=> ['required', 'numeric', 'min:1'],
+            'number'=> ['required'],
             'date'=> ['required', 'date','max:255'],
             'labour_cost'=> ['required', 'numeric', 'min:1'],
             'transportation_cost'=> ['required', 'numeric', 'min:1'],
-            'other_cost_one'=> ['numeric','nullable', 'min:1'],
-            'other_cost_two'=> ['numeric','nullable', 'min:1'],
+            'other_cost_one'=> ['numeric','required', 'min:1'],
+            'other_cost_two'=> ['numeric','required', 'min:1'],
             'owner'=> 'string|nullable',
             'vendor'=> 'string|nullable',
         ]);
@@ -98,13 +97,12 @@ class BatchController extends Controller
     public function update(Request $request, Batch $batch)
     {
         $request->validate([
-            'name'=> ['required', 'max:255'],
-            'number'=> ['required', 'numeric', 'min:1'],
+            'number'=> ['required'],
             'date'=> ['nullable', 'date','max:255'],
             'labour_cost'=> ['required', 'numeric', 'min:1'],
             'transportation_cost'=> ['required', 'numeric', 'min:1'],
-            'other_cost_one'=> ['numeric','nullable'],
-            'other_cost_two'=> ['numeric','nullable'],
+            'other_cost_one'=> ['numeric','required'],
+            'other_cost_two'=> ['numeric','required'],
             'owner'=> 'string|nullable',
             'vendor'=> 'string|nullable',
         ]);

@@ -36,7 +36,7 @@
                                 @foreach($logos as $logo)
                                     <tr>
                                         <td>{{$logo->id}}</td>
-                                        <td >
+                                        <td>
                                             <div style="width:75px; height: 75px; font-size: 0;">
                                                 <img src="{{ asset('storage/images/logos/'.$logo->value) }}" alt="logo not found" />
                                             </div>

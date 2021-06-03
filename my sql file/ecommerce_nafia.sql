@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2021 at 03:07 PM
+-- Generation Time: Jun 03, 2021 at 03:04 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -1711,7 +1711,7 @@ CREATE TABLE `sale_center_orders` (
 --
 
 INSERT INTO `sale_center_orders` (`id`, `salecenter_id`, `order_number`, `product_id`, `quantity`, `colour_id`, `size_id`, `status`, `created_at`, `updated_at`) VALUES
-(3, 3, 'KXJ5g', 1, 3, 1, 1, 1, '2021-06-02 10:44:17', '2021-06-02 13:06:57'),
+(3, 3, 'KXJ5g', 1, 3, 1, 1, 2, '2021-06-02 10:44:17', '2021-06-03 07:04:56'),
 (4, 5, 'oORum', 1, 6, 1, 1, 1, '2021-06-02 11:23:24', '2021-06-02 12:27:43'),
 (5, 3, 'oORum', 2, 3, 4, 1, 1, '2021-06-02 12:27:43', '2021-06-02 12:29:00');
 

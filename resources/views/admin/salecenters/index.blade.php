@@ -26,6 +26,7 @@
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Sale Center Owner Name</th>
+                                    <th>Cnic Image</th>
                                     <th>Status</th>
                                     <th>Created At</th>
                                     <th>Action</th>
@@ -37,6 +38,12 @@
                                         <td>{{$SaleCenter->id}}</td>
                                         <td>{{$SaleCenter->name}}</td>
                                         <td>{{$SaleCenter->owner_name}}</td>
+                                        <td>
+                                            <div style="width:75px; height: 75px; font-size: 0;">
+                                                <img src="{{ asset('storage/images/SaleCenterImages/'.$SaleCenter->cnic_front) }}" alt="cnic image not found" />
+                                            </div>
+
+                                        </td>
                                         <td>{{$SaleCenter->status == '1' ? 'Active':'InActive'}}</td>
                                         <td>{{$SaleCenter->created_at->diffForHumans()}}</td>
                                         <td>
@@ -58,6 +65,7 @@
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Sale Center Owner Name</th>
+                                    <th>Cnic Image</th>
                                     <th>Status</th>
                                     <th>Created At</th>
                                     <th>Action</th>

@@ -34,8 +34,8 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label>Edit Date - MM/DD/YYYY</label>
-                                <input type="datetime-local" name="date" class="form-control @error('date') is-invalid @enderror"  value="{{ $batch->date }}" aria-label="date">
+                                <label>Edit Date</label>
+                                <input type="datetime-local" name="date" class="form-control @error('date') is-invalid @enderror"  value="{{ date('Y-m-d\TH:i', strtotime($batch->date)) }}" aria-label="date">
                                 @error('date')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -93,7 +93,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label>Vendor</label>
+                                <label>Supplier</label>
 
                                 <input type="string" name="vendor" class="form-control @error('vendor') is-invalid @enderror" placeholder="Enter Vendor Name" value="{{ $batch->vendor }}" aria-label="vendor">
                                 @error('vendor')

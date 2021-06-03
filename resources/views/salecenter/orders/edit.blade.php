@@ -20,27 +20,23 @@
                                         @if($order->status == 1)
                                             <option value="1" {{ $order->status == 1 ? 'selected':'' }}> {{ 'Pending' }} </option>
                                             <option value="2"> {{ 'Process' }} </option>
-                                            <option value="3"> {{ 'Shipment' }} </option>
-                                            <option value="4"> {{ 'delivered' }} </option>
-                                            <option value="5"> {{ 'canceled' }} </option>
+                                            <option value="3"> {{ 'Ready To Dispatch' }} </option>
+                                            <option value="4"> {{ 'Dispatched' }} </option>
                                         @elseif($order->status == 2)
                                             <option value="2" {{ $order->status == 2 ? 'selected':'' }}> {{ 'Process' }} </option>
                                             <option value="1"> {{ 'Pending' }} </option>
-                                            <option value="3"> {{ 'Shipment' }} </option>
-                                            <option value="4"> {{ 'delivered' }} </option>
-                                            <option value="5"> {{ 'canceled' }} </option>
+                                            <option value="3"> {{ 'Ready To Dispatch' }} </option>
+                                            <option value="4"> {{ 'Dispatched' }} </option>
                                         @elseif($order->status == 3)
-                                            <option value="3" {{ $order->status == 3 ? 'selected':'' }}> {{ 'Shipment' }} </option>
+                                            <option value="3" {{ $order->status == 3 ? 'selected':'' }}> {{ 'Ready To Dispatch' }} </option>
                                             <option value="1"> {{ 'Pending' }} </option>
                                             <option value="2"> {{ 'Process' }} </option>
-                                            <option value="4"> {{ 'delivered' }} </option>
-                                            <option value="5"> {{ 'canceled' }} </option>
+                                            <option value="4"> {{ 'Dispatched' }} </option>
                                         @elseif($order->status == 4)
-                                            <option value="4" {{ $order->status == 4 ? 'selected':'' }}> {{ 'delivered' }} </option>
+                                            <option value="4" {{ $order->status == 4 ? 'selected':'' }}> {{ 'Dispatched' }} </option>
                                             <option value="1"> {{ 'Pending' }} </option>
                                             <option value="2"> {{ 'Process' }} </option>
-                                            <option value="3"> {{ 'Shipment' }} </option>
-                                            <option value="5"> {{ 'canceled' }} </option>
+                                            <option value="3"> {{ 'Ready To Dispatch' }} </option>
                                         @endif
                                     </select>
                                         @error('status')
