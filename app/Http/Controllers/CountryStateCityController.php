@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Batch;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\DeliveryCharges;
@@ -29,5 +30,17 @@ class CountryStateCityController extends Controller
             ->first();
 
         return response()->json($data);
+    }
+
+    public function getBatch(Request $request){
+
+        if($request->inventory_id == 0){
+
+            $data['batches'] = Batch::all();
+
+            return response()->json($data);
+
+        }
+
     }
 }

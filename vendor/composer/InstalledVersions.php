@@ -24,12 +24,12 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => 'dev-master',
-    'version' => 'dev-master',
+    'pretty_version' => 'dev-main',
+    'version' => 'dev-main',
     'aliases' => 
     array (
     ),
-    'reference' => '1c9767e6382ded79ac61ea97e06904bdfc81c2a7',
+    'reference' => '5b4926ecc646288b98a7ce2da4032ed453fad60e',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -42,6 +42,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '8d8f88b3b3830916be94292c1fbce84433efb1aa',
+    ),
+    'binary-cats/laravel-sku' => 
+    array (
+      'pretty_version' => '0.4.0',
+      'version' => '0.4.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '56a251a6db7520c81ee32108d6ab5470d5ab5750',
     ),
     'brick/math' => 
     array (
@@ -508,12 +517,12 @@ private static $installed = array (
     ),
     'laravel/laravel' => 
     array (
-      'pretty_version' => 'dev-master',
-      'version' => 'dev-master',
+      'pretty_version' => 'dev-main',
+      'version' => 'dev-main',
       'aliases' => 
       array (
       ),
-      'reference' => '1c9767e6382ded79ac61ea97e06904bdfc81c2a7',
+      'reference' => '5b4926ecc646288b98a7ce2da4032ed453fad60e',
     ),
     'laravel/sail' => 
     array (
@@ -1045,6 +1054,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '29c05324c170c0be108ccb86dd29f6a719c0a617',
+    ),
+    'spatie/laravel-sluggable' => 
+    array (
+      'pretty_version' => '2.6.2',
+      'version' => '2.6.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '297097239a675747d74fbd1ecb3ae0d4724a17de',
     ),
     'swiftmailer/swiftmailer' => 
     array (

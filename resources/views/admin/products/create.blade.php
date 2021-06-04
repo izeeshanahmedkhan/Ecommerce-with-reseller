@@ -15,7 +15,7 @@
 
                             @csrf()
                             <div class="form-group">
-                                <label>New Product</label>
+                                <label>Product Name /Title</label>
 
                                 <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Enter New Product Name" value="{{ old('name') }}" aria-label="name">
                                 @error('name')
@@ -26,25 +26,6 @@
                             </div>
                             <div class="form-group">
                                 <label for="selectCategory">Select Category</label>
-{{--                                <select id="parentCategory"--}}
-{{--                                        name="categories[]"--}}
-{{--                                        class="form-control round @error('product_category') is-invalid @enderror"--}}
-{{--                                        multiple>--}}
-{{--                                    <option value="none" selected="" disabled="">Select Product Category</option>--}}
-{{--                                    @foreach($categories as $category)--}}
-{{--                                        @if($category->parent_id == 0)--}}
-{{--                                            <optgroup value="{{$category->id}}" label="{{$category->title}}">--}}
-{{--                                                @foreach($categories as $subcategory)--}}
-{{--                                                    @if($subcategory->parent_id == $category->id)--}}
-{{--                                                        <option value="{{$subcategory->id}}" >{{$subcategory->title}}</option>--}}
-{{--                                                    @endif--}}
-{{--                                                @endforeach--}}
-{{--                                            </optgroup>--}}
-{{--                                        @endif--}}
-
-{{--                                    @endforeach--}}
-
-{{--                                </select>--}}
                                 <select class="form-control @error('categories') is-invalid @enderror" id="selectCategory" name="categories[]" multiple size="10">
                                     <option value="none" selected="" disabled="">Select Product Category</option>
                                     @foreach($categories as $category)
@@ -122,41 +103,6 @@
 
                                         @endif
 
-{{--                                                {{ $parent_one = $category->id }}--}}
-
-
-
-{{--                                                {{ $parent_two = $category->id }}--}}
-
-    {{--                                                    {{$length = strlen($category->title) }}--}}
-
-
-{{--                                            @if($category->parent_id == $parent_two)--}}
-
-{{--                                                <option value="{{ $category->id }}"> --{{ $category->title }} </option>--}}
-
-{{--                                            @endif--}}
-
-{{--                                                    {{ $parent_three = $category->id }}--}}
-
-{{--                                            @if($category->parent_id == $parent_three)--}}
-
-{{--                                                <option value="{{ $category->id }}"> ---{{ $category->title }} </option>--}}
-
-{{--                                            @endif--}}
-
-{{--                                                    {{ $parent_four = $category->id }}--}}
-
-
-{{--                                            @if($category->parent_id == $parent_four)--}}
-
-{{--                                                <option value="{{ $category->id }}"> ----{{ $category->title }} </option>--}}
-
-{{--                                            @endif--}}
-
-
-
-
                                     @endforeach
 
 
@@ -167,36 +113,7 @@
                                     </span>
                                 @enderror
                             </div>
-                            <div class="form-group">
-                                <label for="selectBatch">Select Batch</label>
-                                <select class="form-control @error('batch') is-invalid @enderror" id="selectBatch" name="batch">
-                                    <option selected disabled> Select Batch </option>
-                                    @foreach($batches as $batch)
-                                        <option value="{{ $batch->id }}">{{ $batch->name  }}</option>
-                                    @endforeach
-                                </select>
-                                @error('batch')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
 
-                            <div class="form-group">
-                                <label for="selectInventory">Inventory</label>
-                                <select class="form-control @error('inventory_category') is-invalid @enderror" id="selectInventory" name="inventory_category">
-                                    <option selected disabled> Select Inventory </option>
-                                    <option value="0"> In-House </option>
-                                    <option value="1"> Purchase to Order</option>
-                                </select>
-                                @error('inventory_category')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <br>
                         <div class="form-group">
                             <label> Product Attributes </label>
                         </div>
@@ -293,42 +210,48 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label>SKU Code</label>
-
-                            <input type="text" name="sku_code" class="form-control @error('sku_code') is-invalid @enderror" placeholder="Enter SKU Code" value="{{ old('sku_code') }}" aria-label="sku_code">
-                            @error('sku_code')
+                            <label for="product_weight">Product Weight </label>
+                            <input type="text" name="product_weight" class="form-control @error('product_weight') is-invalid @enderror" placeholder="Enter Product Weight" value="{{ old('product_weight') }}" aria-label="product_weight">
+                            @error('product_weight')
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="selectStockAvailability">Select Stock</label>
-                            <select class="form-control @error('stock_availability') is-invalid @enderror" id="selectStockAvailability" name="stock_availability">
-                                <option selected disabled> Select Stock Availability </option>
-                                <option value="1"> Available </option>
-                                <option value="0"> Not Available </option>
-                            </select>
-                            @error('stock_availability')
+                            <label>Purchase Cost</label>
+
+                            <input type="text" name="purchase_cost" id="purchase_cost" class="form-control @error('purchase_cost') is-invalid @enderror" placeholder="Enter Purchase Cost Here" value="{{ old('purchase_cost') }}" aria-label="purchase_cost">
+                            @error('purchase_cost')
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label>Quantity</label>
+                            <label>Purchase Discount Amount</label>
 
-                            <input type="text" name="quantity" class="form-control @error('quantity') is-invalid @enderror" placeholder="Enter Quantity Here" value="{{ old('quantity') }}" aria-label="quantity">
-                            @error('quantity')
+                            <input type="text" name="purchase_discount" id="purchase_discount" class="form-control @error('purchase_discount') is-invalid @enderror" placeholder="Enter Discount Here" value="{{ old('purchase_discount') }}" aria-label="purchase_discount">
+                            @error('purchase_discount')
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label>Price</label>
+                            <label>Purchase Discount Percentage (%)</label>
 
-                            <input type="text" name="price" class="form-control @error('price') is-invalid @enderror" placeholder="Enter Price Here" value="{{ old('price') }}" aria-label="price">
+                            <input type="text" name="purchase_discount_percentage" id="purchase_discount_percentage" class="form-control @error('purchase_discount_percentage') is-invalid @enderror" placeholder="Enter Purchase Discount Percentage" value="{{ old('purchase_discount_percentage') }}" aria-label="purchase_discount_percentage">
+                            @error('purchase_discount_percentage')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>Retail Price</label>
+
+                            <input type="text" name="price" id="price" class="form-control @error('price') is-invalid @enderror" placeholder="Enter Price Here" value="{{ old('price') }}" aria-label="price">
                             @error('price')
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -336,7 +259,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label>Price For Salesman</label>
+                            <label>Reseller Price</label>
 
                             <input type="text" name="list_price_for_salesman" class="form-control @error('list_price_for_salesman') is-invalid @enderror" placeholder="Enter Price for Salesman Here" value="{{ old('list_price_for_salesman') }}" aria-label="list_price_for_salesman">
                             @error('list_price_for_salesman')
@@ -346,9 +269,19 @@
                             @enderror
                         </div>
                         <div class="form-group">
+                            <label>Commission Amount</label>
+
+                            <input type="text" name="commission_amount" id="commission_amount" class="form-control @error('commission_amount') is-invalid @enderror" placeholder="Enter Commission Amount" value="{{ old('commission_amount') }}" aria-label="commission_amount">
+                            @error('commission_amount')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
                             <label>Commission (%)</label>
 
-                            <input type="text" name="commission" class="form-control @error('commission') is-invalid @enderror" placeholder="Enter Commission in percent" value="{{ old('commission') }}" aria-label="commission">
+                            <input type="text" name="commission" id="commission" class="form-control @error('commission') is-invalid @enderror" placeholder="Enter Commission in percent" value="{{ old('commission') }}" aria-label="commission">
                             @error('commission')
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -360,27 +293,6 @@
 
                             <input type="text" name="video_link" class="form-control @error('video_link') is-invalid @enderror" placeholder="Enter Video Link Here" value="{{ old('video_link') }}" aria-label="video_link">
                             @error('video_link')
-                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label>Purchase Discount</label>
-
-                            <input type="text" name="purchase_discount" class="form-control @error('purchase_discount') is-invalid @enderror" placeholder="Enter Discount Here" value="{{ old('purchase_discount') }}" aria-label="purchase_discount">
-                            @error('purchase_discount')
-                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label>Purchase Cost</label>
-
-                            <input type="text" name="purchase_cost" class="form-control @error('purchase_cost') is-invalid @enderror" placeholder="Enter Purchase Cost Here" value="{{ old('purchase_cost') }}" aria-label="purchase_cost">
-                            @error('purchase_cost')
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -417,7 +329,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label>Vendor</label>
+                            <label>Supplier</label>
 
                             <input type="text" name="vendor" class="form-control @error('vendor') is-invalid @enderror" placeholder="Enter Vendor Name" value="{{ old('vendor') }}" aria-label="vendor">
                             @error('vendor')
@@ -437,7 +349,7 @@
 
 
 @section('page_css')
-    <link rel="stylesheet" href="{{asset('admin/css/plugins/toastr.css')}}" />
+    <link rel="stylesheet" href="{{asset('admin-assets/css/plugins/toastr.css')}}" />
 
 
 @endsection
@@ -505,7 +417,42 @@
         });
     </script>
 
-    <script src="{{ asset('admin/js/plugins/toastr.min.js') }}"></script>
-{{--    <script src="{{asset('admin/js/scripts/toastr.script.min.js')}}"></script>--}}
+    <script src="{{ asset('admin-assets/js/plugins/toastr.min.js') }}"></script>
+
+    <script>
+
+        $(document).ready(function () {
+
+            $("#commission_amount").on("keyup", function(){
+                var Commission_amount = $(this).val();
+                var total_amount = $('#price').val();
+                var percent = Commission_amount/total_amount * 100;
+                $("#commission").val(percent);
+            });
+
+            $("#commission").on("keyup", function(){
+                var Commission_percentage = $(this).val();
+                var total_amount = $('#price').val();
+                var amount = (Commission_percentage*total_amount) / 100;
+                $("#commission_amount").val(amount);
+            });
+
+            $("#purchase_discount").on("keyup", function(){
+                var purchase_discount_amount = $(this).val();
+                var total_cost_amount = $('#purchase_cost').val();
+                var percent = purchase_discount_amount/total_cost_amount * 100;
+                $("#purchase_discount_percentage").val(percent);
+            });
+
+            $("#purchase_discount_percentage").on("keyup", function(){
+                var purchase_discount_percentage = $(this).val();
+                var total_cost_amount = $('#purchase_cost').val();
+                var amount = (purchase_discount_percentage*total_cost_amount) / 100;
+                $("#purchase_discount").val(amount);
+            });
+
+        });
+
+    </script>
 
 @endsection

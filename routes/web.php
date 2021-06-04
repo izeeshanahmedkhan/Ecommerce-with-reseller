@@ -311,11 +311,12 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
 
     Route::get('/checkout',[App\Http\Controllers\FrontEndController::class, 'checkout'])->name('checkout');
 
-//city - state
+// Ajax work of city - state - city delivery - batch
 
     Route::post('states',[App\Http\Controllers\CountryStateCityController::class, 'getState']);
     Route::post('cities',[App\Http\Controllers\CountryStateCityController::class, 'getCity']);
     Route::post('citydeliverycharges',[App\Http\Controllers\CountryStateCityController::class, 'getDeliveryCharges']);
+    Route::post('batches',[App\Http\Controllers\CountryStateCityController::class, 'getBatch']);
 
 // delivery charges
 

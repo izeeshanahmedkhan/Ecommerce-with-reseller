@@ -82,36 +82,37 @@ class ProductController extends Controller
         }
 
 
-        $checkSkuCode = Product::where('sku_code',$request->sku_code)->get();
+        //$checkSkuCode = Product::where('sku_code',$request->sku_code)->get();
 
-        if(sizeof($checkSkuCode) == 0){
+        //if(sizeof($checkSkuCode) == 0){
 
             $product->name = $request->name;
             $product->status = $request->status;
-            $product->stock_availability = $request->stock_availability;
-            $product->sku_code = $request->sku_code;
             $product->description = trim($request->description);
             $product->owner = $request->owner;
             $product->vendor = $request->vendor;
             $product->video_link = $request->video_link;
-            $product->quantity = $request->quantity;
+            $product->product_weight = $request->get('product_weight');
             $product->price = $request->price;
-            $product->purchase_discount = $request->purchase_discount;
             $product->purchase_cost = $request->purchase_cost;
+            $product->purchase_discount = $request->purchase_discount;
+            $product->purchase_discount_percentage = $request->purchase_discount_percentage;
             $product->labour_cost = $request->labour_cost;
             $product->transportation_cost = $request->transportation_cost;
             $product->list_price_for_salesman = $request->list_price_for_salesman;
+            $product->commission_amount = $request->get('commission_amount');
             $product->commission = $request->get('commission');
-            $product->inventory_category = $request->get('inventory_category');
 
             $product->save();
+
+            $sku_code = $product->product_sku_code;
 
             foreach ($request->categories as $category)
             {
                 $product->categories()->attach($category);
             }
 
-            $product->batches()->attach($request->batch);
+            //$product->batches()->attach($request->batch);
 
             for($i=0; $i<=$request->length; $i++)
             {
@@ -120,13 +121,12 @@ class ProductController extends Controller
                 $image = $request->file(['image_' . $i]);
                 $image_length = sizeof($image);
 
-
                 for($j=0; $j< $image_length; $j++)
                 {
                     $check_image = $image[$j];
-                    $image_name = time(). $check_image->getClientOriginalName();
+                    $image_name = time().$check_image->getClientOriginalName();
 
-                    ColourImageProductSize::create(['colour_id' => $colour[$i], 'product_id' => $product->id, 'size_id' => $size[$i], 'image' => $image_name]);
+                    ColourImageProductSize::create(['variant_sku_code'=>$sku_code."-".$j,'colour_id' => $colour[$i], 'product_id' => $product->id, 'size_id' => $size[$i], 'image' => $image_name]);
 
                     $check_image->storeAs('/images/productImages',$image_name);
 
@@ -140,7 +140,7 @@ class ProductController extends Controller
 
             return redirect()->route('product.index');
 
-        }
+        //}
 
             session::flash('message','Product Already Exist');
             session::flash('alert-type','error');
@@ -188,6 +188,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+
         for($i=1; $i<=$request->length; $i++) {
 
             $colour = $request['colour_'.$i];
@@ -216,27 +217,26 @@ class ProductController extends Controller
 
         }
 
-        $checkSkuCode = Product::where('sku_code',$request->sku_code)->get();
+        //$checkSkuCode = Product::where('sku_code',$request->sku_code)->get();
 
-        if(sizeof($checkSkuCode) == 0 || $request->sku_code == $product->sku_code){
+        //if(sizeof($checkSkuCode) == 0 || $request->sku_code == $product->sku_code){
 
             $product->name = $request->name;
             $product->status = $request->status;
-            $product->stock_availability = $request->stock_availability;
-            $product->sku_code = $request->sku_code;
             $product->description = trim($request->description);
             $product->owner = $request->owner;
             $product->vendor = $request->vendor;
             $product->video_link = $request->video_link;
-            $product->quantity = $request->quantity;
+            $product->product_weight = $request->get('product_weight');
             $product->price = $request->price;
-            $product->purchase_discount = $request->purchase_discount;
             $product->purchase_cost = $request->purchase_cost;
+            $product->purchase_discount = $request->purchase_discount;
+            $product->purchase_discount_percentage = $request->purchase_discount_percentage;
             $product->labour_cost = $request->labour_cost;
             $product->transportation_cost = $request->transportation_cost;
             $product->list_price_for_salesman = $request->list_price_for_salesman;
-            $product->commission = $request->commission;
-            $product->inventory_category = $request->inventory_category;
+            $product->commission_amount = $request->get('commission_amount');
+            $product->commission = $request->get('commission');
 
             $product->save();
 
@@ -248,9 +248,13 @@ class ProductController extends Controller
                 $product->categories()->attach($category);
             }
 
-            $product->batches()->detach();
+            //$product->batches()->detach();
 
-            $product->batches()->attach($request->batch);
+            //$product->batches()->attach($request->batch);
+
+            $cips = ColourImageProductSize::where('product_id',$product->id)->get();
+
+            $count = count($cips);
 
             for($i=1; $i<=$request->length; $i++)
             {
@@ -260,12 +264,12 @@ class ProductController extends Controller
                 $image_length = sizeof($image);
 
 
-                for($j=0; $j< $image_length; $j++)
+                for($j=0; $j<$image_length; $j++)
                 {
                     $check_image = $image[$j];
                     $image_name = time(). $check_image->getClientOriginalName();
 
-                    ColourImageProductSize::create(['colour_id' => $colour[$i], 'product_id' => $product->id, 'size_id' => $size[$i], 'image' => $image_name]);
+                    ColourImageProductSize::create(['variant_sku_code'=>$product->product_sku_code."-".($count + $j),'colour_id' => $colour[$i], 'product_id' => $product->id, 'size_id' => $size[$i], 'image' => $image_name]);
 
                     $check_image->storeAs('/images/productImages',$image_name);
 
@@ -279,7 +283,7 @@ class ProductController extends Controller
 
             return redirect()->route('product.index');
 
-        }
+        //}
 
         session::flash('message','Product Failed to Update');
         session::flash('alert-type','error');

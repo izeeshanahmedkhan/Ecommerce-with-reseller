@@ -91,6 +91,7 @@ class ComposerStaticInitb99aa3997c32c07c649b12e8643e13a9
             'Symfony\\Component\\ErrorHandler\\' => 31,
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
+            'Spatie\\Sluggable\\' => 17,
             'Spatie\\Permission\\' => 18,
         ),
         'R' => 
@@ -184,6 +185,7 @@ class ComposerStaticInitb99aa3997c32c07c649b12e8643e13a9
         'B' => 
         array (
             'Brick\\Math\\' => 11,
+            'BinaryCats\\Sku\\' => 15,
         ),
         'A' => 
         array (
@@ -330,6 +332,10 @@ class ComposerStaticInitb99aa3997c32c07c649b12e8643e13a9
         'Symfony\\Component\\Console\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
+        ),
+        'Spatie\\Sluggable\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/spatie/laravel-sluggable/src',
         ),
         'Spatie\\Permission\\' => 
         array (
@@ -536,6 +542,10 @@ class ComposerStaticInitb99aa3997c32c07c649b12e8643e13a9
         array (
             0 => __DIR__ . '/..' . '/brick/math/src',
         ),
+        'BinaryCats\\Sku\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/binary-cats/laravel-sku/src',
+        ),
         'Asm89\\Stack\\' => 
         array (
             0 => __DIR__ . '/..' . '/asm89/stack-cors/src',
@@ -599,6 +609,7 @@ class ComposerStaticInitb99aa3997c32c07c649b12e8643e13a9
         'App\\Http\\Controllers\\RiderController' => __DIR__ . '/../..' . '/app/Http/Controllers/RiderController.php',
         'App\\Http\\Controllers\\RoleController' => __DIR__ . '/../..' . '/app/Http/Controllers/RoleController.php',
         'App\\Http\\Controllers\\SaleCenterController' => __DIR__ . '/../..' . '/app/Http/Controllers/SaleCenterController.php',
+        'App\\Http\\Controllers\\SaleCenterOrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/SaleCenterOrderController.php',
         'App\\Http\\Controllers\\SizeController' => __DIR__ . '/../..' . '/app/Http/Controllers/SizeController.php',
         'App\\Http\\Controllers\\SupplierController' => __DIR__ . '/../..' . '/app/Http/Controllers/SupplierController.php',
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
@@ -667,6 +678,15 @@ class ComposerStaticInitb99aa3997c32c07c649b12e8643e13a9
         'Asm89\\Stack\\Cors' => __DIR__ . '/..' . '/asm89/stack-cors/src/Cors.php',
         'Asm89\\Stack\\CorsService' => __DIR__ . '/..' . '/asm89/stack-cors/src/CorsService.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
+        'BinaryCats\\Sku\\Concerns\\SkuGenerator' => __DIR__ . '/..' . '/binary-cats/laravel-sku/src/Concerns/SkuGenerator.php',
+        'BinaryCats\\Sku\\Concerns\\SkuMacro' => __DIR__ . '/..' . '/binary-cats/laravel-sku/src/Concerns/SkuMacro.php',
+        'BinaryCats\\Sku\\Concerns\\SkuObserver' => __DIR__ . '/..' . '/binary-cats/laravel-sku/src/Concerns/SkuObserver.php',
+        'BinaryCats\\Sku\\Concerns\\SkuOptions' => __DIR__ . '/..' . '/binary-cats/laravel-sku/src/Concerns/SkuOptions.php',
+        'BinaryCats\\Sku\\Contracts\\SkuGenerator' => __DIR__ . '/..' . '/binary-cats/laravel-sku/src/Contracts/SkuGenerator.php',
+        'BinaryCats\\Sku\\Contracts\\SkuOptions' => __DIR__ . '/..' . '/binary-cats/laravel-sku/src/Contracts/SkuOptions.php',
+        'BinaryCats\\Sku\\Exceptions\\SkuException' => __DIR__ . '/..' . '/binary-cats/laravel-sku/src/Exceptions/SkuException.php',
+        'BinaryCats\\Sku\\HasSku' => __DIR__ . '/..' . '/binary-cats/laravel-sku/src/HasSku.php',
+        'BinaryCats\\Sku\\SkuServiceProvider' => __DIR__ . '/..' . '/binary-cats/laravel-sku/src/SkuServiceProvider.php',
         'Brick\\Math\\BigDecimal' => __DIR__ . '/..' . '/brick/math/src/BigDecimal.php',
         'Brick\\Math\\BigInteger' => __DIR__ . '/..' . '/brick/math/src/BigInteger.php',
         'Brick\\Math\\BigNumber' => __DIR__ . '/..' . '/brick/math/src/BigNumber.php',
@@ -4859,6 +4879,10 @@ class ComposerStaticInitb99aa3997c32c07c649b12e8643e13a9
         'Spatie\\Permission\\Traits\\HasRoles' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Traits/HasRoles.php',
         'Spatie\\Permission\\Traits\\RefreshesPermissionCache' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Traits/RefreshesPermissionCache.php',
         'Spatie\\Permission\\WildcardPermission' => __DIR__ . '/..' . '/spatie/laravel-permission/src/WildcardPermission.php',
+        'Spatie\\Sluggable\\HasSlug' => __DIR__ . '/..' . '/spatie/laravel-sluggable/src/HasSlug.php',
+        'Spatie\\Sluggable\\HasTranslatableSlug' => __DIR__ . '/..' . '/spatie/laravel-sluggable/src/HasTranslatableSlug.php',
+        'Spatie\\Sluggable\\InvalidOption' => __DIR__ . '/..' . '/spatie/laravel-sluggable/src/InvalidOption.php',
+        'Spatie\\Sluggable\\SlugOptions' => __DIR__ . '/..' . '/spatie/laravel-sluggable/src/SlugOptions.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
         'Symfony\\Component\\Console\\Color' => __DIR__ . '/..' . '/symfony/console/Color.php',

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 03, 2021 at 03:04 PM
+-- Generation Time: Jun 04, 2021 at 02:30 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -61,14 +61,6 @@ CREATE TABLE `batch_product` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `batch_product`
---
-
-INSERT INTO `batch_product` (`batch_id`, `product_id`, `created_at`, `updated_at`) VALUES
-(1, 1, NULL, NULL),
-(1, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -258,8 +250,7 @@ CREATE TABLE `category_product` (
 --
 
 INSERT INTO `category_product` (`category_id`, `product_id`, `created_at`, `updated_at`) VALUES
-(2, 1, NULL, NULL),
-(3, 2, NULL, NULL);
+(3, 9, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -749,6 +740,8 @@ CREATE TABLE `colour_image_product_sizes` (
   `product_id` int(11) NOT NULL,
   `size_id` int(11) NOT NULL,
   `image` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `quantity` bigint(20) UNSIGNED DEFAULT NULL,
+  `variant_sku_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -757,19 +750,10 @@ CREATE TABLE `colour_image_product_sizes` (
 -- Dumping data for table `colour_image_product_sizes`
 --
 
-INSERT INTO `colour_image_product_sizes` (`id`, `colour_id`, `product_id`, `size_id`, `image`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, '1621337539floor4-1.jpg', '2021-05-18 11:32:19', '2021-05-18 11:32:19'),
-(2, 1, 1, 1, '1621337539floor4-2.jpg', '2021-05-18 11:32:19', '2021-05-18 11:32:19'),
-(3, 1, 1, 1, '1621337539floor4-3.jpg', '2021-05-18 11:32:19', '2021-05-18 11:32:19'),
-(4, 1, 1, 1, '1621337539floor4-4.jpg', '2021-05-18 11:32:19', '2021-05-18 11:32:19'),
-(5, 2, 1, 2, '1621337539floor5-1.jpg', '2021-05-18 11:32:19', '2021-05-18 11:32:19'),
-(6, 2, 1, 2, '1621337539floor5-2.jpg', '2021-05-18 11:32:19', '2021-05-18 11:32:19'),
-(7, 2, 1, 2, '1621337539floor5-3.jpg', '2021-05-18 11:32:19', '2021-05-18 11:32:19'),
-(8, 2, 1, 2, '1621337539floor5-4.jpg', '2021-05-18 11:32:19', '2021-05-18 11:32:19'),
-(9, 4, 2, 1, '1622631235images (1).jpg', '2021-06-02 10:53:55', '2021-06-02 10:53:55'),
-(10, 4, 2, 1, '1622631235images (2).jpg', '2021-06-02 10:53:55', '2021-06-02 10:53:55'),
-(11, 3, 2, 2, '16226312351920_Panel1_Hero_Laptop.jpg', '2021-06-02 10:53:55', '2021-06-02 10:53:55'),
-(12, 3, 2, 2, '16226312351568788430-1206740205d81cfce2b4423-60645169.png', '2021-06-02 10:53:55', '2021-06-02 10:53:55');
+INSERT INTO `colour_image_product_sizes` (`id`, `colour_id`, `product_id`, `size_id`, `image`, `quantity`, `variant_sku_code`, `created_at`, `updated_at`) VALUES
+(11, 2, 9, 1, '16228097811568788430-1206740205d81cfce2b4423-60645169.png', NULL, 'PHO_61201788-0', '2021-06-04 12:29:41', '2021-06-04 12:29:41'),
+(12, 2, 9, 1, '1622809781images (1).jpg', NULL, 'PHO_61201788-1', '2021-06-04 12:29:41', '2021-06-04 12:29:41'),
+(13, 2, 9, 1, '1622809781images (2).jpg', NULL, 'PHO_61201788-2', '2021-06-04 12:29:41', '2021-06-04 12:29:41');
 
 -- --------------------------------------------------------
 
@@ -1065,7 +1049,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (53, '2021_04_22_195943_create_orders_table', 15),
 (54, '2021_04_22_195944_create_orders_table', 16),
 (55, '2021_04_22_195945_create_orders_table', 17),
-(56, '2021_06_01_153928_create_sale_center_orders_table', 18);
+(56, '2021_06_01_153928_create_sale_center_orders_table', 18),
+(57, '2021_03_02_064732_create_products_table', 19),
+(58, '2021_03_09_114540_create_colour_image_product_sizes_table', 19),
+(59, '2021_03_02_094321_create_batches_products_table', 20),
+(60, '2021_03_02_094341_create_categories_products_table', 20);
 
 -- --------------------------------------------------------
 
@@ -1298,22 +1286,23 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 CREATE TABLE `products` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` tinyint(1) NOT NULL,
-  `stock_availability` tinyint(1) NOT NULL,
-  `sku_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_sku_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `owner` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `vendor` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `video_link` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `quantity` bigint(20) UNSIGNED NOT NULL,
+  `product_weight` bigint(20) UNSIGNED NOT NULL,
   `price` double(36,2) NOT NULL,
-  `purchase_discount` double(36,2) DEFAULT NULL,
   `purchase_cost` double(36,2) DEFAULT NULL,
+  `purchase_discount` double(36,2) DEFAULT NULL,
+  `purchase_discount_percentage` bigint(20) DEFAULT NULL,
   `labour_cost` double(36,2) DEFAULT NULL,
   `transportation_cost` double(36,2) DEFAULT NULL,
   `list_price_for_salesman` double(36,2) DEFAULT NULL,
+  `commission_amount` double(36,2) DEFAULT NULL,
   `commission` bigint(20) DEFAULT NULL,
-  `inventory_category` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1322,9 +1311,8 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `status`, `stock_availability`, `sku_code`, `description`, `owner`, `vendor`, `video_link`, `quantity`, `price`, `purchase_discount`, `purchase_cost`, `labour_cost`, `transportation_cost`, `list_price_for_salesman`, `commission`, `inventory_category`, `created_at`, `updated_at`) VALUES
-(1, 'Product - 1', 1, 1, 'SKU01', '<p style=\"text-align: left;\"><strong>Product - 1 Description</strong></p>', NULL, NULL, NULL, 466, 100.00, NULL, NULL, NULL, NULL, 80.00, NULL, '0', '2021-05-18 11:32:19', '2021-06-02 10:59:32'),
-(2, 'Product - 2', 1, 1, 'SKU02', '<p>Product - 2 Description</p>', NULL, NULL, NULL, 997, 300.00, NULL, NULL, NULL, NULL, 250.00, NULL, '0', '2021-06-02 10:53:55', '2021-06-02 10:59:32');
+INSERT INTO `products` (`id`, `name`, `slug`, `status`, `product_sku_code`, `description`, `owner`, `vendor`, `video_link`, `product_weight`, `price`, `purchase_cost`, `purchase_discount`, `purchase_discount_percentage`, `labour_cost`, `transportation_cost`, `list_price_for_salesman`, `commission_amount`, `commission`, `created_at`, `updated_at`) VALUES
+(9, 'Phone', 'phone', 1, 'PHO_61201788', '<p>dfdfdf</p>', NULL, NULL, NULL, 1, 102.00, 50.00, NULL, NULL, NULL, NULL, 90.00, 5.10, 5, '2021-06-04 11:48:45', '2021-06-04 11:48:45');
 
 -- --------------------------------------------------------
 
@@ -2224,7 +2212,7 @@ ALTER TABLE `colours`
 -- AUTO_INCREMENT for table `colour_image_product_sizes`
 --
 ALTER TABLE `colour_image_product_sizes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `countries`
@@ -2284,7 +2272,7 @@ ALTER TABLE `home_settings`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `offers`
@@ -2308,7 +2296,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `resellers`

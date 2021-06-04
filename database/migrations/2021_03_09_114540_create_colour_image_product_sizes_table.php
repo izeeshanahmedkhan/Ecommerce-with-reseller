@@ -19,6 +19,8 @@ class CreateColourImageProductSizesTable extends Migration
             $table->integer('product_id');
             $table->integer('size_id');
             $table->text('image');
+            $table->unsignedBigInteger('quantity')->nullable();
+            $table->string('variant_sku_code');
             $table->timestamps();
         });
     }

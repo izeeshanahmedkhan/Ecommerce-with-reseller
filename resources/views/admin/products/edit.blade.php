@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 @section('content')
-    <input type="hidden" value="{{$activePage = 'productCreate', $title = 'Create Product - Nafia Garments'}}">
+    <input type="hidden" value="{{$activePage = 'productCreate', $title = 'Edit Product - Nafia Garments'}}">
 
     <div class="main-content">
         <div class="breadcrumb">
@@ -15,9 +15,7 @@
                 <div class="col-md-9">
                     <div class="card mb-4">
                         <div class="card-body">
-                            <div class="card-title mb-3">Create New Product</div>
-
-                            @csrf()
+                            <div class="card-title mb-3">Edit Product</div>
                             <div class="form-group">
                                 <label>New Product</label>
 
@@ -224,185 +222,6 @@
 
                                     @endforeach
 
-
-{{--                                    @foreach($categories as $category)--}}
-{{--                                        --}}
-{{--                                        @if($category->parent_id == 0)--}}
-
-{{--                                            <optgroup value="{{ $category->id }}" label="{{ $category->title }}">--}}
-
-{{--                                                --}}{{--   {{ $parent_one = $category->id }}--}}
-
-{{--                                                @php--}}
-{{--                                                    $first_child_categories =  DB::table('categories')--}}
-{{--                                                    ->where('parent_id',$category->id)--}}
-{{--                                                    ->get()--}}
-{{--                                                @endphp--}}
-{{--                                                --}}
-{{--                                                @elseif(count($first_child_categories) != false)--}}
-
-{{--                                                    @for($i=0; $i<$length; $i++)--}}
-
-{{--                                                        @if($category->id == $categoryProduct[$i]->category->id)--}}
-
-{{--                                                            <option--}}
-{{--                                                                value="{{ $category->id }}" {{ $category->id == $categoryProduct[$i]->category->id ? 'selected':'' }}>--}}
-{{--                                                                -{{ $category->title }}</option>--}}
-
-{{--                                                            {{ $j = 1 }}--}}
-{{--                                                        --}}
-{{--                                                            {{ $parent_one_category_id = $category->id }}--}}
-
-{{--                                                            @break--}}
-
-{{--                                                        @else--}}
-
-{{--                                                            {{ $j = 0 }}--}}
-
-{{--                                                            {{ $parent_one_category_id = $category->id }}--}}
-
-{{--                                                            @continue--}}
-
-{{--                                                        @endif--}}
-
-{{--                                                    @endfor--}}
-
-{{--                                                    @if($j == 0)--}}
-
-{{--                                                        <option value="{{ $category->id }}">--}}
-{{--                                                            -{{ $category->title }}</option>--}}
-
-{{--                                                    @endif--}}
-
-{{--                                                    --}}{{--                                                        <option value="{{ $category->id }}" {{ $category->id == $categoryProduct[$i]->category->id ? 'selected':'' }}> -{{ $category->title }}</option>--}}
-
-{{--                                                    {{ $parent_two = $category->id }}--}}
-
-
-{{--                                                        @php--}}
-{{--                                                            $first_child_categories =  DB::table('categories')--}}
-{{--                                                            ->where('parent_id',$parent_one_category_id)--}}
-{{--                                                            ->get()--}}
-{{--                                                        @endphp--}}
-
-
-
-{{--                                                @elseif(count($first_child_categories) != false)--}}
-
-
-{{--                                                    @for($i=0; $i<$length; $i++)--}}
-
-{{--                                                        @if($category->id == $categoryProduct[$i]->category->id)--}}
-
-{{--                                                            <option--}}
-{{--                                                                value="{{ $category->id }}" {{ $category->id == $categoryProduct[$i]->category->id ? 'selected':'' }}>--}}
-{{--                                                                --{{ $category->title }}</option>--}}
-
-{{--                                                            {{ $j = 1 }}--}}
-
-{{--                                                            @break--}}
-
-{{--                                                        @else--}}
-
-{{--                                                            {{ $j = 0 }}--}}
-
-{{--                                                            @continue--}}
-
-{{--                                                        @endif--}}
-
-{{--                                                    @endfor--}}
-
-{{--                                                    @if($j == 0)--}}
-
-{{--                                                        <option value="{{ $category->id }}">--}}
-{{--                                                            --{{ $category->title }}</option>--}}
-
-{{--                                                    @endif--}}
-
-{{--                                                    --}}{{--                                                    <option value="{{ $category->id }}" {{ $category->id == $categoryProduct[$i]->category->id ? 'selected':'' }}> --{{ $category->title }} </option>--}}
-
-{{--                                                    {{ $parent_three = $category->id }}--}}
-
-
-
-{{--                                                @elseif($category->parent_id == $parent_three )--}}
-
-{{--                                                    @for($i=0; $i<$length; $i++)--}}
-
-{{--                                                        @if($category->id == $categoryProduct[$i]->category->id)--}}
-
-{{--                                                            <option--}}
-{{--                                                                value="{{ $category->id }}" {{ $category->id == $categoryProduct[$i]->category->id ? 'selected':'' }}>--}}
-{{--                                                                ---{{ $category->title }}</option>--}}
-
-{{--                                                            {{ $j = 1 }}--}}
-
-{{--                                                            @break--}}
-
-{{--                                                        @else--}}
-
-{{--                                                            {{ $j = 0 }}--}}
-
-{{--                                                            @continue--}}
-
-{{--                                                        @endif--}}
-
-{{--                                                    @endfor--}}
-
-{{--                                                    @if($j == 0)--}}
-
-{{--                                                        <option value="{{ $category->id }}">--}}
-{{--                                                            ---{{ $category->title }}</option>--}}
-
-{{--                                                    @endif--}}
-
-{{--                                                    --}}{{--                                                    <option value="{{ $category->id }}" {{ $category->id == $categoryProduct[$i]->category->id ? 'selected':'' }}> ---{{ $category->title }} </option>--}}
-
-{{--                                                    {{ $parent_four = $category->id }}--}}
-
-
-{{--                                                @elseif($category->parent_id == $parent_four )--}}
-
-{{--                                                    @for($i=0; $i<$length; $i++)--}}
-
-{{--                                                        @if($category->id == $categoryProduct[$i]->category->id)--}}
-
-{{--                                                            <option--}}
-{{--                                                                value="{{ $category->id }}" {{ $category->id == $categoryProduct[$i]->category->id ? 'selected':'' }}>--}}
-{{--                                                                ----{{ $category->title }}</option>--}}
-
-{{--                                                            {{ $j = 1 }}--}}
-
-{{--                                                            @break--}}
-
-{{--                                                        @else--}}
-
-{{--                                                            {{ $j = 0 }}--}}
-
-{{--                                                            @continue--}}
-
-{{--                                                        @endif--}}
-
-{{--                                                    @endfor--}}
-
-{{--                                                    @if($j == 0)--}}
-
-{{--                                                        <option value="{{ $category->id }}">--}}
-{{--                                                            ----{{ $category->title }}</option>--}}
-
-{{--                                                    @endif--}}
-
-{{--                                                    --}}{{--                                                    <option value="{{ $category->id }}" {{ $category->id == $categoryProduct[$i]->category->id ? 'selected':'' }}> ----{{ $category->title }} </option>--}}
-
-{{--                                            </optgroup>--}}
-
-{{--                                        @endif--}}
-
-
-
-{{--                                    @endforeach--}}
-
-
                                 </select>
                                 @error('categories')
                                 <span class="invalid-feedback" role="alert">
@@ -410,43 +229,7 @@
                                     </span>
                                 @enderror
                             </div>
-                            <div class="form-group">
-                                <label for="selectBatch">Select Batch</label>
-                                <select class="form-control @error('batch') is-invalid @enderror" id="selectBatch"
-                                        name="batch">
-                                    <option selected disabled> Select Batch</option>
-                                    @foreach($batches as $batch)
-                                        <option
-                                            value="{{ $batch->id }}" {{ $batchProduct[0]->batch_id == $batch->id ? 'Selected':'' }}>{{ $batch->name  }}</option>
-                                    @endforeach
-                                </select>
-                                @error('batch')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
 
-                            <div class="form-group">
-                                <label for="selectInventory">Inventory</label>
-                                <select class="form-control @error('inventory_category') is-invalid @enderror"
-                                        id="selectInventory" name="inventory_category">
-                                    <option selected disabled> Select Inventory</option>
-                                    <option value="0" {{ $product->inventory_category == 0 ? 'Selected':'' }}>
-                                        In-House
-                                    </option>
-                                    <option value="1" {{ $product->inventory_category == 1 ? 'Selected':'' }}> Purchase
-                                        to Order
-                                    </option>
-                                </select>
-                                @error('inventory_category')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <br>
                             <div class="form-group" style="display:inline">
                                 <label> Product Attributes </label>
                                 <button style="float:right;" type="button" name="add" id="add" class="btn btn-success">Add More
@@ -460,56 +243,6 @@
                                     <th> Image</th>
                                     <th> Action</th>
                                 </tr>
-
-{{--                                <tr>--}}
-{{--                                    <td>--}}
-{{--                                        <div class="form-group">--}}
-{{--                                            <label for="selectColour">Select Colour</label>--}}
-{{--                                            <select class="form-control @error('colour_0') is-invalid @enderror"--}}
-{{--                                                    id="selectColour" name="colour_0[0]">--}}
-{{--                                                <option selected disabled> Select Colour</option>--}}
-{{--                                                @foreach($colours as $colour)--}}
-{{--                                                    <option value="{{ $colour->id }}"--}}
-{{--                                                            style="background-color:{{ $colour->colourCode }}">{{ $colour->colourCode }}</option>--}}
-{{--                                                @endforeach--}}
-{{--                                            </select>--}}
-{{--                                            @error('colour_0')--}}
-{{--                                            <span class="invalid-feedback" role="alert">--}}
-{{--                                                        <strong>{{ $message }}</strong>--}}
-{{--                                                    </span>--}}
-{{--                                            @enderror--}}
-{{--                                        </div>--}}
-{{--                                    </td>--}}
-{{--                                    <td>--}}
-{{--                                        <div class="form-group">--}}
-{{--                                            <label for="selectSize">Select Size</label>--}}
-{{--                                            <select class="form-control @error('size_0') is-invalid @enderror"--}}
-{{--                                                    id="selectSize" name="size_0[0]">--}}
-{{--                                                <option selected disabled> Select Size</option>--}}
-{{--                                                @foreach($sizes as $size)--}}
-{{--                                                    <option value="{{ $size->id }}">{{$size->sizeName}}</option>--}}
-{{--                                                @endforeach--}}
-{{--                                            </select>--}}
-{{--                                            @error('size_0')--}}
-{{--                                            <span class="invalid-feedback" role="alert">--}}
-{{--                                                        <strong>{{ $message }}</strong>--}}
-{{--                                                    </span>--}}
-{{--                                            @enderror--}}
-{{--                                        </div>--}}
-{{--                                    </td>--}}
-{{--                                    <td>--}}
-{{--                                        <label for="selectImage">Select Image</label>--}}
-{{--                                        <input type="file" class="form-control @error('image_0') is-invalid @enderror"--}}
-{{--                                               name="image_0[]" multiple>--}}
-{{--                                        @error('image_0')--}}
-{{--                                        <span class="invalid-feedback" role="alert">--}}
-{{--                                                        <strong>{{ $message }}</strong>--}}
-{{--                                                    </span>--}}
-{{--                                        @enderror--}}
-
-{{--                                    </td>--}}
-
-{{--                                </tr>--}}
                             </table>
 
                             <div class="form-group">
@@ -527,7 +260,7 @@
 
 
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Update</button>
                             </div>
                         </div>
                     </div>
@@ -551,51 +284,52 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label>SKU Code</label>
+                                <label for="product_weight">Product Weight </label>
+                                <input type="text" name="product_weight" class="form-control @error('product_weight') is-invalid @enderror" placeholder="Enter Product Weight" value="{{ $product->product_weight }}" aria-label="product_weight">
+                                @error('product_weight')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Purchase Cost</label>
 
-                                <input type="text" name="sku_code"
-                                       class="form-control @error('sku_code') is-invalid @enderror"
-                                       placeholder="Enter SKU Code" value="{{ $product->sku_code }}"
-                                       aria-label="sku_code">
-                                @error('sku_code')
+                                <input type="text" name="purchase_cost"
+                                       class="form-control @error('purchase_cost') is-invalid @enderror"
+                                       placeholder="Enter Purchase Cost Here" value="{{ $product->purchase_cost }}"
+                                       aria-label="purchase_cost">
+                                @error('purchase_cost')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="selectStockAvailability">Select Stock</label>
-                                <select class="form-control @error('stock_availability') is-invalid @enderror"
-                                        id="selectStockAvailability" name="stock_availability">
-                                    <option selected disabled> Select Stock Availability</option>
-                                    <option value="1" {{ $product->stock_availability == 1 ? 'Selected':'' }}>
-                                        Available
-                                    </option>
-                                    <option value="0" {{ $product->stock_availability == 0 ? 'Selected':'' }}> Not
-                                        Available
-                                    </option>
-                                </select>
-                                @error('stock_availability')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label>Quantity</label>
+                                <label>Purchase Discount Amount</label>
 
-                                <input type="text" name="quantity"
-                                       class="form-control @error('quantity') is-invalid @enderror"
-                                       placeholder="Enter Quantity Here" value="{{ $product->quantity }}"
-                                       aria-label="quantity">
-                                @error('quantity')
+                                <input type="text" name="purchase_discount"
+                                       class="form-control @error('purchase_discount') is-invalid @enderror"
+                                       placeholder="Enter Discount Here" value="{{ $product->purchase_discount }}"
+                                       aria-label="purchase_discount">
+                                @error('purchase_discount')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label>Price</label>
+                                <label>Purchase Discount Percentage (%)</label>
+
+                                <input type="text" name="purchase_discount_percentage" id="purchase_discount_percentage" class="form-control @error('purchase_discount_percentage') is-invalid @enderror" placeholder="Enter Purchase Discount Percentage" value="{{ $product->purchase_discount_percentage }}" aria-label="purchase_discount_percentage">
+                                @error('purchase_discount_percentage')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Retail Price</label>
 
                                 <input type="text" name="price"
                                        class="form-control @error('price') is-invalid @enderror"
@@ -607,7 +341,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label>Price For Salesman</label>
+                                <label>Reseller Price</label>
 
                                 <input type="text" name="list_price_for_salesman"
                                        class="form-control @error('list_price_for_salesman') is-invalid @enderror"
@@ -615,6 +349,16 @@
                                        value="{{ $product->list_price_for_salesman }}"
                                        aria-label="list_price_for_salesman">
                                 @error('list_price_for_salesman')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label>Commission Amount</label>
+
+                                <input type="text" name="commission_amount" id="commission_amount" class="form-control @error('commission_amount') is-invalid @enderror" placeholder="Enter Commission Amount" value="{{ $product->commission_amount }}" aria-label="commission_amount">
+                                @error('commission_amount')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -647,32 +391,6 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group">
-                                <label>Purchase Discount</label>
-
-                                <input type="text" name="purchase_discount"
-                                       class="form-control @error('purchase_discount') is-invalid @enderror"
-                                       placeholder="Enter Discount Here" value="{{ $product->purchase_discount }}"
-                                       aria-label="purchase_discount">
-                                @error('purchase_discount')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label>Purchase Cost</label>
-
-                                <input type="text" name="purchase_cost"
-                                       class="form-control @error('purchase_cost') is-invalid @enderror"
-                                       placeholder="Enter Purchase Cost Here" value="{{ $product->purchase_cost }}"
-                                       aria-label="purchase_cost">
-                                @error('purchase_cost')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
                             <div class="form-group">
                                 <label>Labour Cost</label>
 
@@ -712,7 +430,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label>Vendor</label>
+                                <label>Supplier</label>
 
                                 <input type="text" name="vendor"
                                        class="form-control @error('vendor') is-invalid @enderror"
@@ -735,14 +453,14 @@
 
 
 @section('page_css')
-    <link rel="stylesheet" href="{{asset('admin/css/plugins/toastr.css')}}"/>
-    <link rel="stylesheet" href="{{asset('admin/css/plugins/sweetalert2.min.css')}}"/>
+    <link rel="stylesheet" href="{{asset('admin-assets/css/plugins/toastr.css')}}"/>
+    <link rel="stylesheet" href="{{asset('admin-assets/css/plugins/sweetalert2.min.css')}}"/>
 
 
 @endsection
 @section('page_script')
-    <script src="{{ asset('admin/js/plugins/toastr.min.js') }}"></script>
-    <script src="{{asset('admin/js/plugins/sweetalert2.min.js')}}"></script>
+    <script src="{{ asset('admin-assets/js/plugins/toastr.min.js') }}"></script>
+    <script src="{{asset('admin-assets/js/plugins/sweetalert2.min.js')}}"></script>
 
     <script>
 
@@ -837,7 +555,6 @@
                 for (let j=0; j < {{$countP}}; j++){
                     $(".rm"+j).on('click', function () {
                         var id = $("#inputRemove"+j).val();
-                        console.log(id);
                         swal({
                             title: 'Are you sure?',
                             text: "You won't be able to revert this!",
@@ -851,16 +568,6 @@
                             cancelButtonClass: 'btn btn-danger',
                             buttonsStyling: false
                         }).then(() => {
-                            //naya wal code
-                                {{--$.each(function({{ $ColoursImagesProductsSizes}},{{ $ColourImageProductSize }}) {--}}
-                                {{--    var checkid = $("{{ $ColourImageProductSize->id }}").data('re');--}}
-                                {{--    console.log(checkid);--}}
-                                {{--    if( checkid === {{ $ColourImageProductSize->id }}){--}}
-                                {{--        var id = $("{{$ColourImageProductSize->id }}").data('re');--}}
-                                {{--        console.log(id);--}}
-                                {{--        break;--}}
-                                {{--    }--}}
-                                {{--});--}}
                             var token = $("meta[name='csrf-token']").attr("content");
                             $.ajax(
                                 {
@@ -872,7 +579,6 @@
                                     },
                                     success: function () {
                                         swal('Deleted!', 'Your imaginary file has been deleted.', 'success');
-                                        location.reload();
                                     }
                                 });
 
@@ -899,8 +605,5 @@
             selector: 'textarea#tiny'
         });
     </script>
-
-
-    {{--    <script src="{{asset('admin/js/scripts/toastr.script.min.js')}}"></script>--}}
 
 @endsection

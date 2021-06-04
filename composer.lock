@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e42da4288a8fce0820d2fd3750c53e13",
+    "content-hash": "2584059e0b5deddd42ce8c0c5c8f9273",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -61,6 +61,70 @@
                 "source": "https://github.com/asm89/stack-cors/tree/v2.0.2"
             },
             "time": "2020-10-29T16:03:21+00:00"
+        },
+        {
+            "name": "binary-cats/laravel-sku",
+            "version": "0.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/binary-cats/laravel-sku.git",
+                "reference": "56a251a6db7520c81ee32108d6ab5470d5ab5750"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/binary-cats/laravel-sku/zipball/56a251a6db7520c81ee32108d6ab5470d5ab5750",
+                "reference": "56a251a6db7520c81ee32108d6ab5470d5ab5750",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.6|^6.0|^7.0|^8.0",
+                "php": "^7.2|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.6|^4.0|^5.0|^6.0",
+                "phpunit/phpunit": "^7.0|^8.2|^9.0"
+            },
+            "suggest": {
+                "binary-cats/laravel-mailgun-webhooks": "Handle Mailgun webhooks in your Laravel application"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "BinaryCats\\Sku\\SkuServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "BinaryCats\\Sku\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cyrill Kalita",
+                    "email": "cyrill.kalita@gmail.com",
+                    "homepage": "https://github.com/binary-cats",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Generate SKUs for Eloquent models",
+            "homepage": "https://github.com/binary-cats/laravel-sku",
+            "keywords": [
+                "binary-cats",
+                "eloquent",
+                "laravel",
+                "sku"
+            ],
+            "support": {
+                "issues": "https://github.com/binary-cats/laravel-sku/issues",
+                "source": "https://github.com/binary-cats/laravel-sku/tree/0.4.0"
+            },
+            "time": "2021-02-20T22:20:18+00:00"
         },
         {
             "name": "brick/math",
@@ -2492,6 +2556,67 @@
                 }
             ],
             "time": "2021-03-22T18:38:29+00:00"
+        },
+        {
+            "name": "spatie/laravel-sluggable",
+            "version": "2.6.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-sluggable.git",
+                "reference": "297097239a675747d74fbd1ecb3ae0d4724a17de"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-sluggable/zipball/297097239a675747d74fbd1ecb3ae0d4724a17de",
+                "reference": "297097239a675747d74fbd1ecb3ae0d4724a17de",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^7.30|^8.0",
+                "illuminate/support": "^7.30|^8.0",
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.18",
+                "orchestra/testbench": "^5.16|^6.11",
+                "phpunit/phpunit": "^9.5.1",
+                "spatie/laravel-translatable": "^4.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Sluggable\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Generate slugs when saving Eloquent models",
+            "homepage": "https://github.com/spatie/laravel-sluggable",
+            "keywords": [
+                "laravel-sluggable",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-sluggable/issues",
+                "source": "https://github.com/spatie/laravel-sluggable/tree/2.6.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-03-20T18:07:00+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

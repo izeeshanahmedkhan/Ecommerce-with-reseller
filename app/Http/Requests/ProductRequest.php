@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use phpDocumentor\Reflection\Types\Nullable;
 
 class ProductRequest extends FormRequest
 {
@@ -26,19 +27,17 @@ class ProductRequest extends FormRequest
         return [
             'name' => ['required','string','max:255'],
             'categories' => ['required'],
-            'batch' => ['required','string'],
-            'inventory_category' => ['required','numeric'],
             'description' => ['nullable','string'],
             'status' => ['required','numeric'],
-            'sku_code' => ['required','max:255','string'],
-            'stock_availability' => ['required','numeric'],
-            'quantity' => ['required','numeric'],
-            'price' => ['required','numeric'],
-            'list_price_for_salesman' => ['numeric','nullable'],
-            'commission' => ['numeric','nullable'],
-            'video_link' => ['string','nullable'],
+            'product_weight'=>['required','numeric'],
+            'purchase_cost' => ['numeric','required'],
             'purchase_discount' => ['numeric','nullable'],
-            'purchase_cost' => ['numeric','nullable'],
+            'purchase_discount_percentage' => ['numeric','nullable','min:1','max:100'],
+            'price' => ['required','numeric'],
+            'list_price_for_salesman' => ['numeric','required'],
+            'commission_amount'=>['numeric','required'],
+            'commission' => ['numeric','required','min:1','max:100'],
+            'video_link' => ['string','nullable'],
             'labour_cost' => ['numeric','nullable'],
             'transportation_cost' => ['numeric','nullable'],
             'owner' => ['string','nullable','max:255'],
