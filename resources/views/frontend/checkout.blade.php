@@ -156,7 +156,6 @@
                                     <tr>
                                         <th class="cart_product">Product</th>
                                         <th>Description</th>
-                                        <th>Avail.</th>
                                         <th>Unit price</th>
                                         <th>Discount</th>
                                         <th>Qty</th>
@@ -205,10 +204,6 @@
                                                 @php $size = \App\Models\Size::where('id',$c->size_id)->first() @endphp
                                                 <small><a href="#">Size : {{ $size->sizeName }}</a></small>
                                             </td>
-                                            @if($product->stock_availability == 1)
-                                                <td class="cart_avail"><span
-                                                        class="label label-success">{{ 'In stock' }}</span></td>
-                                            @endif
                                             <td class="price"><span>{{$product->price}} Rs/-</span></td>
                                             @for($i=0;$i<$c->quantity;$i++)
 

@@ -57,7 +57,7 @@
             @endif
 
             @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show logos') || auth()->user()->hasPermissionTo('show ape') || auth()->user()->hasPermissionTo('show sliders') || auth()->user()->hasPermissionTo('show banners') || auth()->user()->hasPermissionTo('show services') || auth()->user()->hasPermissionTo('show floors'))
-            <li class="nav-item {{$activePage == 'logoIndex' ? 'active' : ''}} {{$activePage == 'apeIndex' ? 'active' : ''}} {{$activePage == 'sliderIndex' ? 'active' : ''}} {{$activePage == 'bannerIndex' ? 'active' : ''}} {{$activePage == 'serviceIndex' ? 'active' : ''}} {{$activePage == 'floorIndex' ? 'active' : ''}}" data-item="homesettings"><a class="nav-item-hold" href="#">
+            <li class="nav-item {{$activePage == 'aboutIndex' ? 'active' : ''}} {{$activePage == 'logoIndex' ? 'active' : ''}} {{$activePage == 'apeIndex' ? 'active' : ''}} {{$activePage == 'sliderIndex' ? 'active' : ''}} {{$activePage == 'bannerIndex' ? 'active' : ''}} {{$activePage == 'serviceIndex' ? 'active' : ''}} {{$activePage == 'floorIndex' ? 'active' : ''}}" data-item="homesettings"><a class="nav-item-hold" href="#">
                     <i class="nav-icon fas fa-cogs"></i><span class="nav-text">Home Page Settings</span></a>
                 <div class="triangle"></div>
             </li>
@@ -87,6 +87,18 @@
             @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show resellers'))
                 <li class="nav-item {{$activePage == 'resellerIndex' ? 'active' : ''}}"><a class="nav-item-hold" href="{{route('reseller.index')}}">
                         <i class="nav-icon fas fa-users"></i><span class="nav-text">Resellers</span></a>
+                    <div class="triangle"></div>
+                </li>
+            @endif
+
+            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show contact us'))
+                <li class="nav-item {{$activePage == 'contactusIndex' ? 'active' : ''}}"><a class="nav-item-hold" href="{{route('contactus.index')}}"><i class="nav-icon fas fa-envelope-open-text"></i><span class="nav-text">Customers Contacted</span></a>
+                    <div class="triangle"></div>
+                </li>
+            @endif
+
+            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show reviews'))
+                <li class="nav-item {{$activePage == 'reviewsIndex' ? 'active' : ''}}"><a class="nav-item-hold" href="{{route('review.index')}}"><i class="nav-icon fas fa-users"></i><span class="nav-text">Customers Reviews</span></a>
                     <div class="triangle"></div>
                 </li>
             @endif
@@ -152,6 +164,12 @@
             @endif
         </ul>
 
+        <ul class="childNav" data-parent="products">
+            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show products for sale center'))
+                <li class="nav-item {{$activePage == 'productSalecenterIndex' ? 'active' : ''}}"><a href="{{route('product_salecenter.index')}}"><i class="nav-icon fal fa-box-full"></i><span class="item-name">View All Products For Sale Center</span></a></li>
+            @endif
+        </ul>
+
         <ul class="childNav" data-parent="riders_and_couriers">
             @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show riders'))
                 <li class="nav-item {{$activePage == 'riderIndex' ? 'active' : ''}}"><a href="{{route('rider.index')}}"><i class="nav-icon fas fa-biking"></i><span class="item-name">View Riders</span></a></li>
@@ -197,6 +215,12 @@
         <ul class="childNav" data-parent="homesettings">
             @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show floors'))
             <li class="nav-item {{$activePage == 'floorIndex' ? 'active' : ''}}"><a href="{{route('floor.index')}}"><i class="nav-icon fal fa-layer-group"></i><span class="item-name">View Floors</span></a></li>
+            @endif
+        </ul>
+
+        <ul class="childNav" data-parent="homesettings">
+            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show about'))
+                <li class="nav-item {{$activePage == 'aboutIndex' ? 'active' : ''}}"><a href="{{route('aboutus.index')}}"><i class="nav-icon fal fa-layer-group"></i><span class="item-name">View About us Content</span></a></li>
             @endif
         </ul>
 

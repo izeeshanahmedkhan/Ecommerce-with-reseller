@@ -6,6 +6,10 @@
                 <div class="triangle"></div>
             </li>
 
+            <li class="nav-item {{ $activePage == 'orderhistoryIndex' ? 'active':'' }}"><a class="nav-item-hold" href="{{ route('order.history') }}"><i class="nav-icon fab fa-first-order"></i><span class="nav-text">Order History</span></a>
+                <div class="triangle"></div>
+            </li>
+
 {{--            <li class="nav-item {{$activePage == 'userIndex' ? 'active' : ''}} {{$activePage == 'userCreate' ? 'active' : ''}} {{$activePage == 'roleIndex' ? 'active' : ''}}" data-item="users">--}}
 {{--                <a class="nav-item-hold" href="">--}}
 {{--                    <i class="nav-icon i-Administrator"></i>--}}

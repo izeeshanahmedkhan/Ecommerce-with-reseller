@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Review;
+use App\Models\ReviewReply;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Auth;
@@ -16,7 +17,9 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        //
+        $reviews = Review::all();
+
+        return view('admin.reviews.index',['reviews'=>$reviews]);
     }
 
     /**
@@ -107,11 +110,19 @@ class ReviewController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Review  $review
+     * @param  \App\Models\Review  $reviews
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Review $review)
+    public function destroy(Review $reviews)
     {
-        //
+        $reviewreplies=ReviewReply::where('review_id',$reviews->id)->get();
+
+        foreach ($reviewreplies as $review_reply){
+            $review_reply->delete();
+        }
+        $reviews->delete();
+        Session::flash('message','Review Deleted Successfully');
+        Session::flash('alert-type','success');
+        return redirect()->route('review.index');
     }
 }

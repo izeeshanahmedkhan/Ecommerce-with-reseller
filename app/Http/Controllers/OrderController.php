@@ -274,4 +274,11 @@ class OrderController extends Controller
             return redirect()->route('order.index');
         }
     }
+
+    public function order_history(Order $order){
+
+        $orderhistory=Order::where('user_id',Auth::User()->id)->get();
+        return view('customer.order.index',['orders'=>$orderhistory]);
+
+    }
 }

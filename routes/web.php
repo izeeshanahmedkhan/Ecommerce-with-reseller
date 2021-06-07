@@ -93,6 +93,10 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
     Route::delete('/admin/product/{product}/delete',[App\Http\Controllers\ProductController::class, 'destroy'])->name('product.destroy')->middleware('permission:delete products');
     Route::put('/admin/product/{product}/status',[App\Http\Controllers\ProductController::class, 'status'])->name('product.status')->middleware('permission:Products status');
 
+// admin product assign to sale center
+
+    Route::get('/admin/salecenter/product',[App\Http\Controllers\ProductForSaleCenterController::class, 'index'])->name('product_salecenter.index');
+
 //admin ColourImageProductSize
     Route::delete('/admin/colourimageproductsize/{id}/delete',[App\Http\Controllers\ColourImageProductSizeController::class, 'destroy'])->name('colourimageproductsize.destroy');
 
@@ -160,6 +164,15 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
     Route::delete('/admin/floor/{floor}/delete',[App\Http\Controllers\HomeSettingController::class, 'floor_destroy'])->name('floor.destroy')->middleware('permission:delete floors');
     Route::put('/admin/floor/{floor}/status',[App\Http\Controllers\HomeSettingController::class, 'floor_status'])->name('floor.status')->middleware('permission:floors status');
 
+// ---about
+    Route::get('/admin/about',[App\Http\Controllers\AboutController::class,'index'])->name('aboutus.index');
+    Route::get('admin/about/create',[App\Http\Controllers\AboutController::class,'create'])->name('aboutus.create');
+    Route::post('/admin/about/store',[App\Http\Controllers\AboutController::class, 'store'])->name('aboutus.store');
+    Route::get('/admin/about/{about}/edit',[App\Http\Controllers\AboutController::class,'edit'])->name('aboutus.edit');
+    Route::put('/admin/about/{about}/update',[App\Http\Controllers\AboutController::class,'update'])->name('aboutus.update');
+    Route::delete('/admin/about/{about}/delete',[App\Http\Controllers\AboutController::class,'destroy'])->name('aboutus.destroy');
+    Route::put('/admin/about/{about}/status',[App\Http\Controllers\AboutController::class,'status'])->name('aboutus.status');
+
 // --- general routes
     Route::post('/admin/homesetting/store',[App\Http\Controllers\HomeSettingController::class, 'store'])->name('homesetting.store');
     Route::put('/admin/homesetting/{homesetting}/update',[App\Http\Controllers\HomeSettingController::class, 'update'])->name('homesetting.update');
@@ -183,6 +196,11 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
     Route::get('/admin/reseller/{reseller}/edit',[App\Http\Controllers\ResellerController::class, 'edit'])->name('reseller.edit');
     Route::put('/admin/reseller/{reseller}/update',[App\Http\Controllers\ResellerController::class, 'update'])->name('reseller.update');
     Route::delete('/admin/reseller/{reseller}/delete',[App\Http\Controllers\ResellerController::class, 'destroy'])->name('reseller.destroy');
+
+    // ---contactus
+    Route::get('/admin/contactus',[App\Http\Controllers\ContactusController::class,'index'])->name('contactus.index');
+    Route::put('/admin/contactus/{contactus}/status',[App\Http\Controllers\ContactusController::class,'status'])->name('contactus.status');
+    Route::delete('/admin/contactus/{contactus}/delete',[App\Http\Controllers\ContactusController::class,'destroy'])->name('contactus.destroy');
 
 //admin Customer
 
@@ -290,6 +308,8 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
 //single-product rating
 
     Route::post('/rating',[App\Http\Controllers\ReviewController::class, 'store'])->name('rating');
+    Route::get('/admin/reviews',[App\Http\Controllers\ReviewController::class,'index'])->name('review.index');
+    Route::delete('/admin/reviews/{reviews}/delete',[App\Http\Controllers\ReviewController::class,'destroy'])->name('review.destroy');
     Route::post('/reply',[App\Http\Controllers\ReviewReplyController::class, 'store'])->name('reply');
 
 //cart
@@ -334,6 +354,7 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
     Route::put('/admin/order/{order}/update',[App\Http\Controllers\OrderController::class, 'update'])->name('order.update');
     Route::delete('/admin/order/{order}/delete',[App\Http\Controllers\OrderController::class, 'destroy'])->name('order.destroy')->middleware('permission:delete orders');
     Route::get('/admin/order/{order}/show',[App\Http\Controllers\OrderController::class, 'show'])->name('order.show')->middleware('permission:view orders');
+    Route::get('/customer/order_history',[App\Http\Controllers\OrderController::class, 'order_history'])->name('order.history');
 
 // -- order for frontend
     Route::post('/order',[App\Http\Controllers\OrderController::class, 'store'])->name('order');
@@ -364,6 +385,10 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
     Route::get('/salecenter/order',[App\Http\Controllers\SaleCenterOrderController::class, 'index'])->name('sale_center_order.index');
     Route::get('/salecenter/order/{order}/edit',[App\Http\Controllers\SaleCenterOrderController::class, 'edit'])->name('sale_center_order.edit');
     Route::put('/salecenter/order/{order}/update',[App\Http\Controllers\SaleCenterOrderController::class, 'update'])->name('sale_center_order.update');
+
+    //contact us from frontend
+
+    Route::post('/frontend/contact/store',[App\Http\Controllers\ContactusController::class, 'store'])->name('contactus.store');
 
 });
 

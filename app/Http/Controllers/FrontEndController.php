@@ -40,7 +40,6 @@ class FrontEndController extends Controller
         $categoryProducts = CategoryProduct::with('product','category')->get();
 
         $products = Product::where('status',1)
-            ->where('stock_availability',1)
             ->take(10)
             ->get();
 
@@ -67,7 +66,6 @@ class FrontEndController extends Controller
         $categoryProducts = CategoryProduct::with('product','category')->get();
 
         $products = Product::where('status',1)
-            ->where('stock_availability',1)
             ->take(10)
             ->get();
 
@@ -80,7 +78,8 @@ class FrontEndController extends Controller
 
     public function about(){
 
-        return view('frontend.about');
+        $about = DB::table('abouts')->first();
+        return view('frontend.about',['about'=>$about]);
 
     }
 

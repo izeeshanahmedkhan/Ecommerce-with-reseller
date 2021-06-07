@@ -88,70 +88,64 @@
                 </div>
             </div>
         </div>
+    @php $contactus= \App\Models\Contactus::where('status','0')->get(); @endphp
+    @php $orders= \App\Models\Order::where('n_status','0')->get(); @endphp
+        @php $ccu=count($contactus);
+            $co=count($orders)@endphp
         <!-- Notificaiton -->
         <div class="dropdown">
             <div class="badge-top-container" role="button" id="dropdownNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="badge badge-primary">3</span>
+                <span class="badge badge-primary">{{$ccu+$co}}</span>
                 <i class="i-Bell text-muted header-icon"></i>
             </div>
             <!-- Notification dropdown -->
             <div class="dropdown-menu dropdown-menu-right notification-dropdown rtl-ps-none" aria-labelledby="dropdownNotification" data-perfect-scrollbar data-suppress-scroll-x="true">
-                <div class="dropdown-item d-flex">
+                @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show customers'))
+
+                @foreach($contactus as $contactus)
+                <form class="forms-sample" method="POST" action="{{ route('contactus.status',$contactus->id) }}" name="notification">
+                    @csrf()
+                    @method('PUT')
+                <div class="dropdown-item d-flex" onClick="document.forms['notification'].submit();">
                     <div class="notification-icon">
                         <i class="i-Speach-Bubble-6 text-primary mr-1"></i>
                     </div>
                     <div class="notification-details flex-grow-1">
                         <p class="m-0 d-flex align-items-center">
-                            <span>New message</span>
+                            <span>{{$contactus->name}}</span>
                             <span class="badge badge-pill badge-primary ml-1 mr-1">new</span>
                             <span class="flex-grow-1"></span>
-                            <span class="text-small text-muted ml-auto">10 sec ago</span>
+                            <span class="text-small text-muted ml-auto">{{$contactus->created_at->diffForHumans()}}</span>
                         </p>
-                        <p class="text-small text-muted m-0">James: Hey! are you busy?</p>
+                        <p class="text-small text-muted m-0">{{\Illuminate\Support\Str::limit($contactus->message,15 , $end='...')}}</p>
                     </div>
                 </div>
-                <div class="dropdown-item d-flex">
-                    <div class="notification-icon">
-                        <i class="i-Receipt-3 text-success mr-1"></i>
-                    </div>
-                    <div class="notification-details flex-grow-1">
-                        <p class="m-0 d-flex align-items-center">
-                            <span>New order received</span>
-                            <span class="badge badge-pill badge-success ml-1 mr-1">new</span>
-                            <span class="flex-grow-1"></span>
-                            <span class="text-small text-muted ml-auto">2 hours ago</span>
-                        </p>
-                        <p class="text-small text-muted m-0">1 Headphone, 3 iPhone x</p>
-                    </div>
-                </div>
-                <div class="dropdown-item d-flex">
-                    <div class="notification-icon">
-                        <i class="i-Empty-Box text-danger mr-1"></i>
-                    </div>
-                    <div class="notification-details flex-grow-1">
-                        <p class="m-0 d-flex align-items-center">
-                            <span>Product out of stock</span>
-                            <span class="badge badge-pill badge-danger ml-1 mr-1">3</span>
-                            <span class="flex-grow-1"></span>
-                            <span class="text-small text-muted ml-auto">10 hours ago</span>
-                        </p>
-                        <p class="text-small text-muted m-0">Headphone E67, R98, XL90, Q77</p>
-                    </div>
-                </div>
-                <div class="dropdown-item d-flex">
-                    <div class="notification-icon">
-                        <i class="i-Data-Power text-success mr-1"></i>
-                    </div>
-                    <div class="notification-details flex-grow-1">
-                        <p class="m-0 d-flex align-items-center">
-                            <span>Server Up!</span>
-                            <span class="badge badge-pill badge-success ml-1 mr-1">3</span>
-                            <span class="flex-grow-1"></span>
-                            <span class="text-small text-muted ml-auto">14 hours ago</span>
-                        </p>
-                        <p class="text-small text-muted m-0">Server rebooted successfully</p>
-                    </div>
-                </div>
+                </form>
+                @endforeach
+                @endif
+                @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show customers'))
+                    @foreach($orders as $order)
+                        <form class="forms-sample" method="POST" action="{{ route('order.status',$order->id) }}" name="notification2">
+                            @csrf()
+                            @method('PUT')
+                            <div class="dropdown-item d-flex" onClick="document.forms['notification2'].submit();">
+                                <div class="notification-icon">
+                                    <i class="i-Data-Power text-danger mr-1"></i>
+                                </div>
+                                <div class="notification-details flex-grow-1">
+                                    <p class="m-0 d-flex align-items-center">
+                                        @php $user= \App\Models\User::where('id', $order->user_id)->first(); @endphp
+                                        <span>{{$user->name}}</span>
+                                        <span class="badge badge-pill badge-danger ml-1 mr-1">new</span>
+                                        <span class="flex-grow-1"></span>
+                                        <span class="text-small text-muted ml-auto">{{$order->created_at->diffForHumans()}}</span>
+                                    </p>
+                                    <p class="text-small text-muted m-0">{{\Illuminate\Support\Str::limit($order->order_number,15 , $end='...')}}</p>
+                                </div>
+                            </div>
+                        </form>
+                    @endforeach
+                @endif
             </div>
         </div>
         <!-- Notificaiton End -->

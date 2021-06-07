@@ -15,52 +15,26 @@
             <div class="row">
 
                 <!-- Main Content -->
-                <div class="col-md-9 col-md-push-3   col-main">
+                <div class="col-md-9 col-md-push-3 col-main">
+                    @if($about->status == 1)
+                    @csrf
+                    @method('PUT')
                     <h2 class="page-heading">
-                        <span class="page-heading-title2">About Us</span>
+                        <span class="page-heading-title2">{{$about->title}}</span>
                     </h2>
 
                     <div class="content-text clearfix">
 
-                        <img width="310" alt="" class="alignleft" src="{{ asset('frontend/images/media/detail/about-us.jpg') }}">
+                        <img width="310" alt="" class="alignleft" src="{{ asset('storage/images/about/'.$about->image) }}">
 
-                        <p>Ut tellus dolor, dapibus eget, elementum vel, cursus eleifend, elit. Aenean auctor wisi et
-                            urna. Aliquam erat volutpat. Duis ac turpis. Donec sit amet eros. Lorem ipsum dolor sit
-                            amet, consecvtetuer adipiscing elit. Mauris fermentum dictum magna. Sed laoreet aliquam leo.
-                            Ut tellus dolor, dapibus eget, elementum vel.</p>
-
-                        <p>Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Integer rutrum ante eu
-                            lacus. Vestibulum libero nisl, porta vel, scelerisque eget, malesuada at, neque. Vivamus
-                            eget nibh. Etiam cursus leo vel metus. Nulla facilisi. Aenean nec eros.</p>
-
-                        <p>Integer rutrum ante eu lacus.Vestibulum libero nisl, porta vel, scelerisque eget, <a
-                                href="#">malesuada at</a>, neque. Vivamus eget nibh. Etiam cursus leo vel metus. Nulla
-                            facilisi. Aenean nec eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-                            posuere cubilia Curae; Suspendisse sollicitudin velit sed leo. Ut pharetra augue nec augue.
-                        </p>
-
-                        <p>Nam elit agna,endrerit sit amet, tincidunt ac, viverra sed, nulla. Donec porta diam eu massa.
-                            Quisque diam lorem, interdum vitae,dapibus ac, scelerisque vitae, pede. Donec eget tellus
-                            non erat lacinia fermentum. Donec in velit vel ipsum auctor pulvinar. Vestibulum iaculis
-                            lacinia est. Proin dictum elementum velit. Fusce euismod consequat ante. Lorem ipsum dolor
-                            sit amet, consectetuer adipiscing elit. Pellentesque sed dolor. Aliquam congue fermentum
-                            nisl. </p>
-                        <p>Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Integer rutrum ante eu
-                            lacus. Vestibulum libero nisl, porta vel, scelerisque eget, malesuada at, neque. Vivamus
-                            eget nibh. Etiam cursus leo vel metus. Nulla facilisi. Aenean nec eros.</p>
-
-                        <p>Integer rutrum ante eu lacus.Vestibulum libero nisl, porta vel, scelerisque eget, <a
-                                href="#">malesuada at</a>, neque. Vivamus eget nibh. Etiam cursus leo vel metus. Nulla
-                            facilisi. Aenean nec eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-                            posuere cubilia Curae; Suspendisse sollicitudin velit sed leo. Ut pharetra augue nec augue.
-                        </p>
+                        <p>{{$about->description}}</p>
 
                     </div>
-
+                    @endif
                 </div><!-- Main Content -->
 
                 <!-- Sidebar -->
-                <div class="col-md-3 col-md-pull-9   col-sidebar">
+                <div class="col-md-3 col-md-pull-9 col-sidebar">
 
                     <!-- Block  bestseller products-->
                     <div class="block-sidebar block-sidebar-categorie">

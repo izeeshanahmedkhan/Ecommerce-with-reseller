@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\ProductForSaleCenter;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ProductResellerController extends Controller
+class ProductForSaleCenterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +16,8 @@ class ProductResellerController extends Controller
      */
     public function index()
     {
-        $products = Product::where('status',1)
-        ->where('list_price_for_salesman','!=',null)
-        ->get();
-
-        return view('reseller.products.index',['products'=>$products]);
+        $products = Product::all();
+        return view('admin.productforresellers.index',['products'=>$products]);
     }
 
     /**
@@ -46,21 +44,21 @@ class ProductResellerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\ProductForSaleCenter  $productForSaleCenter
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(ProductForSaleCenter $productForSaleCenter)
     {
-        return view ('reseller.products.show',['product'=>$product]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\ProductForSaleCenter  $productForSaleCenter
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(ProductForSaleCenter $productForSaleCenter)
     {
         //
     }
@@ -69,10 +67,10 @@ class ProductResellerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\ProductForSaleCenter  $productForSaleCenter
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, ProductForSaleCenter $productForSaleCenter)
     {
         //
     }
@@ -80,10 +78,10 @@ class ProductResellerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\ProductForSaleCenter  $productForSaleCenter
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(ProductForSaleCenter $productForSaleCenter)
     {
         //
     }

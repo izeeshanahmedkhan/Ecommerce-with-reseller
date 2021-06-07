@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2021 at 02:30 PM
+-- Generation Time: Jun 07, 2021 at 05:34 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -20,6 +20,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `ecommerce_nafia`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `abouts`
+--
+
+CREATE TABLE `abouts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `abouts`
+--
+
+INSERT INTO `abouts` (`id`, `title`, `image`, `description`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'About', '1568788430-1206740205d81cfce2b4423-60645169.png', 'this is about', '1', '2021-06-07 12:31:41', '2021-06-07 12:31:46');
 
 -- --------------------------------------------------------
 
@@ -104,7 +127,13 @@ INSERT INTO `billings` (`id`, `user_id`, `name`, `email`, `address`, `country`, 
 (12, 14, 'reseller', 'reseller@example.com', 'Ghulshan Iqbal, Karachi', 1, 1, 54, '55500', '+923345652528', 700.00, 'SAFYD', '2021-05-31 09:56:25', '2021-05-31 09:56:25'),
 (13, 3, 'super admin', 'superadmin@example.com', 'Gulshan Iqbal 13-C Karachi', 1, 1, 54, '75300', '+923353287084', 600.00, 'dSMmK', '2021-06-01 10:27:37', '2021-06-01 10:27:37'),
 (14, 3, 'super admin', 'superadmin@example.com', 'Gulshan Iqbal 13-C Karachi', 1, 1, 54, '75300', '+923353287084', 600.00, 'KXJ5g', '2021-06-01 10:29:40', '2021-06-01 10:29:40'),
-(15, 3, 'super admin', 'superadmin@example.com', 'Gulshan Iqbal 13-C Karachi', 1, 1, 54, '75300', '+923353287084', 1750.00, 'oORum', '2021-06-02 10:59:32', '2021-06-02 10:59:32');
+(15, 3, 'super admin', 'superadmin@example.com', 'Gulshan Iqbal 13-C Karachi', 1, 1, 54, '75300', '+923353287084', 1750.00, 'oORum', '2021-06-02 10:59:32', '2021-06-02 10:59:32'),
+(16, 3, 'super admin', 'superadmin@example.com', 'Gulshan Iqbal 13-C Karachi', 1, 1, 54, '75300', '+923353287084', 760.00, 'GxBvX', '2021-06-07 11:55:49', '2021-06-07 11:55:49'),
+(17, 14, 'reseller', 'reseller@example.com', 'Gulshan Iqbal 13-C Karachi', 1, 1, 54, '75300', '+923345652528', 1150.00, 'JukuV', '2021-06-07 12:04:58', '2021-06-07 12:04:58'),
+(18, 14, 'reseller', 'reseller@example.com', 'Gulshan Iqbal 13-C Karachi', 1, 1, 54, '75300', '+923345652528', 1150.00, 'PpajU', '2021-06-07 12:12:25', '2021-06-07 12:12:25'),
+(19, 14, 'reseller', 'reseller@example.com', 'Gulshan Iqbal 13-C Karachi', 1, 1, 54, '75300', '+923345652528', 1150.00, 'QCsaT', '2021-06-07 12:12:59', '2021-06-07 12:12:59'),
+(20, 14, 'reseller', 'reseller@example.com', 'Gulshan Iqbal 13-C Karachi', 1, 1, 54, '75300', '+923345652528', 1150.00, 'LRfOf', '2021-06-07 12:16:05', '2021-06-07 12:16:05'),
+(21, 14, 'reseller', 'reseller@example.com', 'Gulshan Iqbal 13-C Karachi', 1, 1, 54, '75300', '+923345652528', 1150.00, 'aMPdN', '2021-06-07 12:19:23', '2021-06-07 12:19:23');
 
 -- --------------------------------------------------------
 
@@ -155,6 +184,13 @@ CREATE TABLE `carts` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `carts`
+--
+
+INSERT INTO `carts` (`id`, `quantity`, `size_id`, `colour_id`, `product_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(17, 5, 1, 2, 9, 3, '2021-06-07 11:53:35', '2021-06-07 11:53:35');
 
 -- --------------------------------------------------------
 
@@ -230,7 +266,11 @@ INSERT INTO `categories` (`id`, `parent_id`, `title`, `icon`, `image`, `slug`, `
 (4, 2, 'Jackets', NULL, NULL, 'jackets', '2021-05-18 11:28:24', '2021-05-18 11:28:24'),
 (5, 2, 'Jumpusuits', NULL, NULL, 'jumpusuits', '2021-05-18 11:28:35', '2021-05-18 11:28:35'),
 (6, 2, 'Scarvest', NULL, NULL, 'scarvest', '2021-05-18 11:28:46', '2021-05-18 11:28:46'),
-(7, 2, 'T - Shirts', NULL, NULL, 't-shirts', '2021-05-18 11:29:00', '2021-05-18 11:29:00');
+(7, 2, 'T - Shirts', NULL, NULL, 't-shirts', '2021-05-18 11:29:00', '2021-05-18 11:29:00'),
+(8, 1, 'Mouse', NULL, NULL, 'mouse', '2021-06-07 15:09:47', '2021-06-07 15:09:47'),
+(9, 8, 'Lazer Mouse', NULL, NULL, 'lazer-mouse', '2021-06-07 15:10:42', '2021-06-07 15:10:42'),
+(10, 9, 'USB', NULL, NULL, 'usb', '2021-06-07 15:11:22', '2021-06-07 15:11:22'),
+(11, 0, 'Fan', NULL, NULL, 'fan', '2021-06-07 15:11:43', '2021-06-07 15:11:43');
 
 -- --------------------------------------------------------
 
@@ -752,8 +792,32 @@ CREATE TABLE `colour_image_product_sizes` (
 
 INSERT INTO `colour_image_product_sizes` (`id`, `colour_id`, `product_id`, `size_id`, `image`, `quantity`, `variant_sku_code`, `created_at`, `updated_at`) VALUES
 (11, 2, 9, 1, '16228097811568788430-1206740205d81cfce2b4423-60645169.png', NULL, 'PHO_61201788-0', '2021-06-04 12:29:41', '2021-06-04 12:29:41'),
-(12, 2, 9, 1, '1622809781images (1).jpg', NULL, 'PHO_61201788-1', '2021-06-04 12:29:41', '2021-06-04 12:29:41'),
+(12, 2, 9, 1, '1622809781images (1).png', NULL, 'PHO_61201788-1', '2021-06-04 12:29:41', '2021-06-04 12:29:41'),
 (13, 2, 9, 1, '1622809781images (2).jpg', NULL, 'PHO_61201788-2', '2021-06-04 12:29:41', '2021-06-04 12:29:41');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contactuses`
+--
+
+CREATE TABLE `contactuses` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contact` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `contactuses`
+--
+
+INSERT INTO `contactuses` (`id`, `name`, `email`, `contact`, `message`, `status`, `created_at`, `updated_at`) VALUES
+(2, 'abc', 'abc@gmail.com', '12345678911', 'ddfdf', '1', '2021-06-07 13:07:29', '2021-06-07 13:08:44');
 
 -- --------------------------------------------------------
 
@@ -1053,7 +1117,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (57, '2021_03_02_064732_create_products_table', 19),
 (58, '2021_03_09_114540_create_colour_image_product_sizes_table', 19),
 (59, '2021_03_02_094321_create_batches_products_table', 20),
-(60, '2021_03_02_094341_create_categories_products_table', 20);
+(60, '2021_03_02_094341_create_categories_products_table', 20),
+(61, '2021_05_31_142651_create_abouts_table', 21),
+(62, '2021_06_02_020957_create_contactuses_table', 22),
+(63, '2021_04_22_195946_create_orders_table', 23);
 
 -- --------------------------------------------------------
 
@@ -1145,18 +1212,10 @@ CREATE TABLE `orders` (
   `sub_total_amount` double(36,2) NOT NULL,
   `delivery_charges` double(36,2) NOT NULL,
   `total_amount` double(36,2) NOT NULL,
+  `n_status` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`id`, `order_number`, `quantity`, `size_id`, `colour_id`, `product_id`, `user_id`, `payment_type`, `order_type`, `status`, `discount`, `sub_total_amount`, `delivery_charges`, `total_amount`, `created_at`, `updated_at`) VALUES
-(1, 'KXJ5g', 3, 1, 1, 1, 3, 'cash on delivery', 'Customer', 1, 0.00, 300.00, 300.00, 600.00, '2021-06-01 10:29:40', '2021-06-01 12:23:09'),
-(2, 'oORum', 6, 1, 1, 1, 3, 'cash on delivery', 'Customer', 1, 0.00, 1500.00, 250.00, 1750.00, '2021-06-02 10:59:32', '2021-06-02 10:59:32'),
-(3, 'oORum', 3, 1, 4, 2, 3, 'cash on delivery', 'Customer', 1, 0.00, 1500.00, 250.00, 1750.00, '2021-06-02 10:59:32', '2021-06-02 10:59:32');
 
 -- --------------------------------------------------------
 
@@ -1372,6 +1431,13 @@ CREATE TABLE `reseller_carts` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `reseller_carts`
+--
+
+INSERT INTO `reseller_carts` (`id`, `quantity`, `size_id`, `colour_id`, `product_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(10, 10, 1, 2, 9, 14, '2021-06-07 11:58:56', '2021-06-07 12:02:08');
+
 -- --------------------------------------------------------
 
 --
@@ -1413,7 +1479,7 @@ CREATE TABLE `reviews` (
 --
 
 INSERT INTO `reviews` (`id`, `user_id`, `product_id`, `comment`, `rating`, `created_at`, `updated_at`) VALUES
-(1, 3, 1, 'customer - review', 5, '2021-06-02 10:55:08', '2021-06-02 10:55:08');
+(1, 3, 9, 'customer - review', 5, '2021-06-02 10:55:08', '2021-06-02 10:55:08');
 
 -- --------------------------------------------------------
 
@@ -1855,6 +1921,12 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `im
 --
 
 --
+-- Indexes for table `abouts`
+--
+ALTER TABLE `abouts`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `batches`
 --
 ALTER TABLE `batches`
@@ -1929,6 +2001,12 @@ ALTER TABLE `colours`
 -- Indexes for table `colour_image_product_sizes`
 --
 ALTER TABLE `colour_image_product_sizes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `contactuses`
+--
+ALTER TABLE `contactuses`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2155,6 +2233,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `abouts`
+--
+ALTER TABLE `abouts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `batches`
 --
 ALTER TABLE `batches`
@@ -2164,7 +2248,7 @@ ALTER TABLE `batches`
 -- AUTO_INCREMENT for table `billings`
 --
 ALTER TABLE `billings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `block_floor_products`
@@ -2176,7 +2260,7 @@ ALTER TABLE `block_floor_products`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `catalogues`
@@ -2194,7 +2278,7 @@ ALTER TABLE `catalogue_products`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `cities`
@@ -2213,6 +2297,12 @@ ALTER TABLE `colours`
 --
 ALTER TABLE `colour_image_product_sizes`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `contactuses`
+--
+ALTER TABLE `contactuses`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `countries`
@@ -2272,7 +2362,7 @@ ALTER TABLE `home_settings`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `offers`
@@ -2284,7 +2374,7 @@ ALTER TABLE `offers`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -2308,19 +2398,19 @@ ALTER TABLE `resellers`
 -- AUTO_INCREMENT for table `reseller_carts`
 --
 ALTER TABLE `reseller_carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `review_replies`
 --
 ALTER TABLE `review_replies`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `riders`

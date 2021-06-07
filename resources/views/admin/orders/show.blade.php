@@ -93,7 +93,7 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                {{ $count = 1 }}
+                                                @php $count = 1 @endphp
                                                 @foreach($orders as $order)
                                                     <form method="POST" action="{{route('sale_center_order.assign')}}">
                                                         @csrf

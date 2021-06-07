@@ -28,6 +28,7 @@ class CreateOrdersTable extends Migration
             $table->float('sub_total_amount',36);
             $table->float('delivery_charges',36);
             $table->float('total_amount',36);
+            $table->integer('n_status')->default(0);
             $table->timestamps();
         });
     }
