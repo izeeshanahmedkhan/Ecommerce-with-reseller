@@ -96,6 +96,7 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
 // admin product assign to sale center
 
     Route::get('/admin/salecenter/product',[App\Http\Controllers\ProductForSaleCenterController::class, 'index'])->name('product_salecenter.index');
+    Route::post('/admin/salecenter/product/store',[App\Http\Controllers\ProductForSaleCenterController::class, 'store'])->name('product_salecenter.store');
 
 //admin ColourImageProductSize
     Route::delete('/admin/colourimageproductsize/{id}/delete',[App\Http\Controllers\ColourImageProductSizeController::class, 'destroy'])->name('colourimageproductsize.destroy');

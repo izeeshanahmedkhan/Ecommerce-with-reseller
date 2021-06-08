@@ -22,6 +22,8 @@
                                     <th> Colour</th>
                                     <th> Size</th>
                                     <th> Image</th>
+                                    <th> Inventory </th>
+                                    <th> Batch </th>
                                     <th> Quantity </th>
                                     <th> Sale Center </th>
                                     <th> Action</th>
@@ -38,112 +40,137 @@
                                     @php $sale_cetner_count = 1 @endphp
                                     @foreach($product_csis as $product_csi)
                                         @if($product_csi->colour_id !== $count)
-                                            <form method="POST" action="{{ route('reseller_cart.store') }}">
-                                                @csrf
                                                 <tr>
-                                                    <td> {{ $product->name }} </td>
-                                                    <td>
-                                                        @php $colour =  \App\Models\Colour::where('id',$product_csi->colour_id)->first() @endphp
+                                                    <form method="POST" action="{{ route('product_salecenter.store') }}">
+                                                    @csrf
+                                                        <td> {{ $product->name }} </td>
+                                                        <td>
+                                                            @php $colour =  \App\Models\Colour::where('id',$product_csi->colour_id)->first() @endphp
 
-                                                        <div style="background-color: {{ $colour->colourCode }}; width:50px; height: 50px; font-size: 0;"></div>
+                                                            <div style="background-color: {{ $colour->colourCode }}; width:50px; height: 50px; font-size: 0;"></div>
 
-                                                        <input type="hidden" name="colour" value="{{ $colour->id }}">
-                                                    </td>
-                                                    <td>
+                                                            <input type="hidden" name="colour" value="{{ $colour->id }}">
+                                                        </td>
+                                                        <td>
 
-                                                        @php $size =  \App\Models\Size::where('id',$product_csi->size_id)->first() @endphp
+                                                            @php $size =  \App\Models\Size::where('id',$product_csi->size_id)->first() @endphp
 
-                                                        {{ $size->sizeName }}
+                                                            {{ $size->sizeName }}
 
-                                                        <input type="hidden" name="size" value="{{ $size->id }}">
+                                                            <input type="hidden" name="size" value="{{ $size->id }}">
 
-                                                    </td>
-                                                    <td>
+                                                        </td>
+                                                        <td>
 
-                                                        <input type="hidden" name="product" value="{{ $product->id }}">
+                                                            <input type="hidden" name="product" value="{{ $product->id }}">
 
-                                                        @php $product_colour_rows = \App\Models\ColourImageProductSize::where('colour_id',$colour->id)->get() @endphp
+                                                            @php $product_colour_rows = \App\Models\ColourImageProductSize::where('colour_id',$colour->id)->get() @endphp
 
-                                                        @php $total_colour_rows = count($product_colour_rows); @endphp
+                                                            @php $total_colour_rows = count($product_colour_rows); @endphp
 
-                                                        <div class="col-md-6 mb-4">
-                                                            <div class="card text-left">
-                                                                <div class="card-body">
-                                                                    <div class="carousel_wrap">
-                                                                        <div class="carousel slide" id="carouselExamplePause{{ $carousel_count_for_controls }}" data-ride="carousel">
-                                                                            <ol class="carousel-indicators">
-                                                                                @php $carousel_count_boolen = true @endphp
-                                                                                @for($i=0;$i<$total_colour_rows;$i++)
-                                                                                    @if($carousel_count_boolen)
-                                                                                        <li class="active" data-target="#carouselExamplePause{{ $carousel_count_for_controls }}" data-slide-to="{{ $i }}"></li>
-                                                                                        @php $carousel_count_boolen = false @endphp
-                                                                                    @else
-                                                                                        <li data-target="#carouselExamplePause{{ $carousel_count_for_controls }}" data-slide-to="{{ $i }}"></li>
-                                                                                    @endif
-                                                                                @endfor
-                                                                            </ol>
-                                                                            <div class="carousel-inner">
+                                                            <div class="col-md-6 mb-4">
+                                                                <div class="card text-left">
+                                                                    <div class="card-body">
+                                                                        <div class="carousel_wrap">
+                                                                            <div class="carousel slide" id="carouselExamplePause{{ $carousel_count_for_controls }}" data-ride="carousel">
+                                                                                <ol class="carousel-indicators">
+                                                                                    @php $carousel_count_boolen = true @endphp
+                                                                                    @for($i=0;$i<$total_colour_rows;$i++)
+                                                                                        @if($carousel_count_boolen)
+                                                                                            <li class="active" data-target="#carouselExamplePause{{ $carousel_count_for_controls }}" data-slide-to="{{ $i }}"></li>
+                                                                                            @php $carousel_count_boolen = false @endphp
+                                                                                        @else
+                                                                                            <li data-target="#carouselExamplePause{{ $carousel_count_for_controls }}" data-slide-to="{{ $i }}"></li>
+                                                                                        @endif
+                                                                                    @endfor
+                                                                                </ol>
+                                                                                <div class="carousel-inner">
 
-                                                                                @php $carousel_boolen = true @endphp
+                                                                                    @php $carousel_boolen = true @endphp
 
-                                                                                @foreach($product_colour_rows as $product_colour_row)
+                                                                                    @foreach($product_colour_rows as $product_colour_row)
 
-                                                                                    @if($carousel_boolen)
-                                                                                        <div class="carousel-item active" style="height:200px;margin-bottom:50px;"><img class="d-block w-auto" src="{{ asset('storage/images/productImages/'.$product_colour_row->image) }}" alt="Image Not Found" /></div>
-                                                                                        @php $carousel_boolen = false @endphp
-                                                                                    @else
-                                                                                        <div class="carousel-item" style="height:200px;margin-bottom:50px;"><img class="d-block w-auto" src="{{ asset('storage/images/productImages/'.$product_colour_row->image) }}" alt="Image Not Found" /></div>
-                                                                                    @endif
-                                                                                @endforeach
+                                                                                        @if($carousel_boolen)
+                                                                                            <div class="carousel-item active" style="width:200px;" ><img class="d-block w-100" src="{{ asset('storage/images/productImages/'.$product_colour_row->image) }}" alt="Image Not Found" /></div>
+                                                                                            @php $carousel_boolen = false @endphp
+                                                                                        @else
+                                                                                            <div class="carousel-item" style="width:200px;"><img class="d-block w-100" src="{{ asset('storage/images/productImages/'.$product_colour_row->image) }}" alt="Image Not Found" /></div>
+                                                                                        @endif
+                                                                                    @endforeach
+                                                                                </div>
+                                                                                <a class="carousel-control-prev" href="#carouselExamplePause{{ $carousel_count_for_controls }}" role="button" data-slide="prev">
+                                                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                                                    <span class="sr-only">Previous</span>
+                                                                                </a>
+                                                                                <a class="carousel-control-next" href="#carouselExamplePause{{ $carousel_count_for_controls }}" role="button" data-slide="next">
+                                                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                                                    <span class="sr-only">Next</span>
+                                                                                </a>
                                                                             </div>
-                                                                            <a class="carousel-control-prev" href="#carouselExamplePause{{ $carousel_count_for_controls }}" role="button" data-slide="prev">
-                                                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                                                <span class="sr-only">Previous</span>
-                                                                            </a>
-                                                                            <a class="carousel-control-next" href="#carouselExamplePause{{ $carousel_count_for_controls }}" role="button" data-slide="next">
-                                                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                                                <span class="sr-only">Next</span>
-                                                                            </a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-group">
-                                                            <input type="text" name="quantity" class="form-control @error('quantity') is-invalid @enderror" placeholder="Enter Quantity Here" value="{{ old('quantity') }}" aria-label="quantity">
-                                                            @error('quantity')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                            @enderror
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        @php $salecenters = \App\Models\SaleCenter::all(); @endphp
-
-                                                        <select class="form-control js-example-basic-single{{ $sale_cetner_count }}  @error('salecenter_id') is-invalid @enderror" name="salecenter_id">
-                                                            <option selected disabled> Select SaleCenter </option>
-                                                            @foreach($salecenters as $salecenter)
-
-                                                                <option value="{{ $salecenter->id }}">{{ $salecenter->name  }}</option>
-
-                                                            @endforeach
-                                                        </select>
-                                                        @error('salecenter_id')
-                                                        <span class="invalid-feedback" role="alert">
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <select style="width: auto;" class="form-control @error('inventory_category') is-invalid @enderror" id="Inventory" name="inventory_category">
+                                                                    <option selected disabled> Select Inventory </option>
+                                                                    <option value="0"> In-House </option>
+                                                                    <option value="1"> Purchase to Order</option>
+                                                                </select>
+                                                                @error('inventory_category')
+                                                                <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>
-                                                        @enderror
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group" style="display: none" id="Batch-div">
+                                                                <select style="width: auto;" class="form-control @error("batch") is-invalid @enderror" id="Batch" name="batch"></select>
+                                                                @error('batch')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group" style="display: none" id="quantity">
+                                                                <input style="width:150px;" type="text" name="quantity" class="form-control @error('quantity') is-invalid @enderror" placeholder="Enter Quantity" value="{{ old('quantity') }}" aria-label="quantity">
+                                                                @error('quantity')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            @php $salecenters = \App\Models\SaleCenter::all(); @endphp
 
-                                                    </td>
-                                                    </td>
-                                                <td>
-                                                    Action
-                                                </td>
+                                                            <select class="form-control js-example-basic-single{{ $sale_cetner_count }}  @error('salecenter_id') is-invalid @enderror" name="salecenter_id">
+                                                                <option selected disabled> Select SaleCenter </option>
+                                                                @foreach($salecenters as $salecenter)
+
+                                                                    <option value="{{ $salecenter->id }}">{{ $salecenter->name  }}</option>
+
+                                                                @endforeach
+                                                            </select>
+                                                            @error('salecenter_id')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                            @enderror
+
+                                                        </td>
+                                                        </td>
+                                                        <td>
+                                                            <input type="submit" value="Add" class="btn btn-raised btn-raised-success m-1" style="color: white"></input>
+                                                        </td>
+                                                    </form>
                                                 </tr>
-                                            </form>
+
 
                                             @php
                                                 $count = $colour->id;
@@ -161,6 +188,8 @@
                                             <th> Colour</th>
                                             <th> Size</th>
                                             <th> Image</th>
+                                            <th> Inventory </th>
+                                            <th> Batch </th>
                                             <th> Quantity </th>
                                             <th> Sale Center </th>
                                             <th> Action</th>
@@ -207,4 +236,40 @@
         });
 
     </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#Inventory').on('change', function () {
+                var inventory_id = this.value;
+                $("#Batch").html('');
+                $.ajax({
+                    url: "{{url('batches')}}",
+                    type: "POST",
+                    data: {
+                        inventory_id: inventory_id,
+                        _token: '{{csrf_token()}}'
+                    },
+                    dataType: 'json',
+
+                    success: function (result) {
+
+                        $('#quantity').show();
+                        $("#Batch-div").show();
+
+                        $('#Batch').html('<option value="">Select Batch</option>');
+                        $.each(result.batches, function (key, value) {
+                            $("#Batch").append('<option value="' + value.id + '">' + value.name + '</option>');
+                        });
+                    },
+                    error: function (){
+                        $("#Batch-div").hide();
+                        $('#quantity').hide();
+                    }
+                });
+            });
+        });
+
+    </script>
+
+
 @endsection

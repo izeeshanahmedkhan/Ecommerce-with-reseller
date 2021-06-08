@@ -16,8 +16,10 @@ class CreateProductForSaleCentersTable extends Migration
         Schema::create('product_for_sale_centers', function (Blueprint $table) {
             $table->id();
             $table->integer('product_id');
-            $table->integer('salecenter_id');
+            $table->integer('inventroy');
+            $table->integer('batch_id')->nullable();
             $table->unsignedBigInteger('quantity')->nullable();
+            $table->integer('salecenter_id');
             $table->timestamps();
         });
     }
