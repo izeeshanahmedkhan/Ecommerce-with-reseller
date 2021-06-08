@@ -4,6 +4,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Permission;
+use App\Http\Controllers\Account\AssetController;
+use App\Http\Controllers\Account\EquityController;
+use App\Http\Controllers\Account\ExpenseController;
+use App\Http\Controllers\Account\IncomeController;
+use App\Http\Controllers\Account\LiabilityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -390,6 +395,20 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
     //contact us from frontend
 
     Route::post('/frontend/contact/store',[App\Http\Controllers\ContactusController::class, 'store'])->name('contactus.store');
+
+    //Routes for accounts
+
+    Route::group(['prefix' => 'account'], function () {
+
+        Route::Resources([
+            'assets' => AssetController::class,
+            'equity' => EquityController::class,
+            'liabilities' => LiabilityController::class,
+            'expenses' => ExpenseController::class,
+            'income' => IncomeController::class,
+        ]);
+
+    });
 
 });
 

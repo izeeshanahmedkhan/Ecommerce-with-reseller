@@ -98,7 +98,7 @@
             @endif
 
             @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show reviews'))
-                <li class="nav-item {{$activePage == 'reviewsIndex' ? 'active' : ''}}"><a class="nav-item-hold" href="{{route('review.index')}}"><i class="nav-icon fas fa-users"></i><span class="nav-text">Customers Reviews</span></a>
+                <li class="nav-item {{$activePage == 'reviewsIndex' ? 'active' : ''}}"><a class="nav-item-hold" href="{{route('review.index')}}"><i class="nav-icon fa fa-star"></i><span class="nav-text">Customers Reviews</span></a>
                     <div class="triangle"></div>
                 </li>
             @endif
@@ -106,6 +106,16 @@
             @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show customers'))
                 <li class="nav-item {{$activePage == 'customerIndex' ? 'active' : ''}}"><a class="nav-item-hold" href="{{route('customer.index')}}">
                         <i class="nav-icon fas fa-users"></i><span class="nav-text">customers</span></a>
+                    <div class="triangle"></div>
+                </li>
+            @endif
+
+            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show accounts'))
+                <li class="nav-item {{$activePage == 'accountsIndex' ? 'active' : ''}}" data-item="accounts">
+                    <a class="nav-item-hold">
+                        <i class="nav-icon fas fa-credit-card fa-2x"></i>
+                        <span class="nav-text">Accounts</span>
+                    </a>
                     <div class="triangle"></div>
                 </li>
             @endif
@@ -240,6 +250,29 @@
             @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show general discounts'))
                 <li class="nav-item {{$activePage == 'generaldiscountIndex' ? 'active' : ''}}"><a href="{{route('general_discount.index')}}"><i class="nav-icon fas fa-badge-percent"></i><span class="item-name">View General Discounts</span></a></li>
             @endif
+        </ul>
+
+        <ul class="childNav" data-parent="accounts">
+            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show assets'))
+                <li class="nav-item"><a href="{{route('assets.index')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Assets</span></a></li>
+            @endif
+
+            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show liabilities'))
+                <li class="nav-item"><a href="{{route('liabilities.index')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Liabilities</span></a></li>
+            @endif
+
+            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show equity'))
+                <li class="nav-item"><a href="{{route('equity.index')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Equity</span></a></li>
+            @endif
+
+            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show income'))
+                <li class="nav-item"><a href="{{route('income.index')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Income</span></a></li>
+            @endif
+
+            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show expenses'))
+                <li class="nav-item"><a href="{{route('expenses.index')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Expenses</span></a></li>
+            @endif
+
         </ul>
 
     </div>
