@@ -173,10 +173,13 @@ class RolesAndPermissionsSeeder extends Seeder
         //Rider Role
         Role::create(['name' => 'rider']);
 
+        //Owner Role
+        Role::create(['name' => 'owner']);
+
 
         $user = User::create([
             'name'=>'user',
-            'email' => 'user@example.com',
+            'email' => 'user@zeeroown.com',
             'password' => bcrypt('12345'),
             'o_auth' => '12345',
             'image' => 'default-1.jpg',
@@ -186,7 +189,7 @@ class RolesAndPermissionsSeeder extends Seeder
 
         $user = User::create([
             'name'=>'admin',
-            'email' => 'admin@example.com',
+            'email' => 'admin@zeeroown.com',
             'password' => bcrypt('12345'),
             'o_auth' => '12345',
             'image' => 'default-2.jpg',
@@ -196,7 +199,7 @@ class RolesAndPermissionsSeeder extends Seeder
 
         $user = User::create([
             'name'=>'super admin',
-            'email' => 'superadmin@example.com',
+            'email' => 'superadmin@zeeroown.com',
             'password' => bcrypt('12345'),
             'o_auth' => '12345',
             'image' => 'default-3.jpg',

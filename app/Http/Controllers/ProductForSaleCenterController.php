@@ -20,7 +20,7 @@ class ProductForSaleCenterController extends Controller
     public function index()
     {
         $products = Product::all();
-        return view('admin.productforresellers.index',['products'=>$products]);
+        return view('admin.productforsalecenters.index',['products'=>$products]);
     }
 
     /**

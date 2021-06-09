@@ -14,8 +14,90 @@
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="invoice" role="tabpanel" aria-labelledby="invoice-tab">
                                 <div class="d-sm-flex mb-5" data-view="print"><span class="m-auto"></span>
-                                    <button class="btn btn-primary mb-sm-0 mb-3 print-invoice">Print Invoice</button>
+{{--                                <button class="btn btn-primary mb-sm-0 mb-3 print-invoice">Print Invoice</button>--}}
+
+                                    <?php $assigncourier = \App\Models\courierorder::where('order_number', $orders[0]->order_number)->first(); ?>
+
+
+                                    @if($assigncourier !== null)
+
+                                        <button class="btn btn-primary mb-sm-0 mb-3 print-invoice" data-toggle="modal" data-target="#myModal">Reassign Courier Company</button>
+
+
+                                    @else
+                                        <button class="btn btn-primary mb-sm-0 mb-3 print-invoice" data-toggle="modal" data-target="#myModal">Assign Courier Company</button>
+                                    @endif
+
                                 </div>
+
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="myModal" role="dialog">
+                                    <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                                                <h4 class="modal-title">Assign Courier Company</h4>
+
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <div class="container">
+
+                                                    <form action="couriercompany" method="post">
+                                                        @csrf
+                                                        <div class="form-group">
+                                                            <label for="email">Select Courier Company </label>
+                                                            <select class="form-control" id="exampleFormControlSelect1" name="courier">
+
+                                                                @foreach($checkcourier as $courier)
+                                                                    <option value="{{ $courier->id }}">{{$courier->courier_name}}</option>
+                                                                @endforeach
+
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+
+                                                            <input type="hidden" class="form-control" id="pwd"  name="trackcode" value="{{ $orders[0]->order_number }}"readonly>
+                                                        </div>
+                                                        <div class="form-group">
+
+                                                            <input type="hidden" class="form-control" id="pwd"  name="customerid" value="{{ $user->id }}"readonly>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="pwd">Track Order Number </label>
+                                                            <input type="text" class="form-control" id="pwd"  name="trackordernumber" >
+                                                        </div>
+
+                                                        @if($assigncourier !== null)
+
+                                                            <input type="hidden" name="reassign_courier" value="{{ $assigncourier->id }}">
+                                                        @endif
+
+                                                        <button type="submit" class="btn btn-default">Add</button>
+                                                    </form>
+
+                                                </div>
+
+
+
+
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- modal end -->
+
+
                                 <!-- -===== Print Area =======-->
                                 <div id="print-area">
                                     <div class="row">

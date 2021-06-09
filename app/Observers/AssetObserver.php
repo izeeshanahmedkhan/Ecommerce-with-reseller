@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\Asset;
 use Illuminate\Support\Str;
+use Alert;
 
 class AssetObserver
 {

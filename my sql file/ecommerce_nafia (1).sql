@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2021 at 06:42 PM
+-- Generation Time: Jun 09, 2021 at 06:16 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -67,7 +67,7 @@ CREATE TABLE `assets` (
 
 INSERT INTO `assets` (`id`, `guid`, `name`, `amount`, `date`, `category_id`, `created_at`, `updated_at`) VALUES
 (1, '12c0936c-272a-45ce-82ff-f5e373bdc6c7', 'Asset', 2333.00, '2021-06-08', 1, '2021-06-08 16:06:57', '2021-06-08 16:06:57'),
-(3, '38a29c3d-7c05-4d6c-a405-027ecd115bd0', 'Asset 2', 233.00, '2021-06-08', 2, '2021-06-08 16:20:46', '2021-06-08 16:20:46');
+(5, '7b0f4f64-56e5-44cd-8460-935bc69a44b3', 'Asset 2', 2333.00, '2021-06-09', 1, '2021-06-09 12:42:23', '2021-06-09 12:47:11');
 
 -- --------------------------------------------------------
 
@@ -867,6 +867,29 @@ INSERT INTO `countries` (`id`, `code`, `name`, `phonecode`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `courierorders`
+--
+
+CREATE TABLE `courierorders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `courier_company` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `order_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `courier_track_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `courierorders`
+--
+
+INSERT INTO `courierorders` (`id`, `user_id`, `courier_company`, `order_number`, `courier_track_code`, `created_at`, `updated_at`) VALUES
+(1, '3', '1', 'KXJ5g', '3435', '2021-06-03 04:35:49', '2021-06-09 16:15:19');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `couriers`
 --
 
@@ -882,6 +905,14 @@ CREATE TABLE `couriers` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `couriers`
+--
+
+INSERT INTO `couriers` (`id`, `courier_name`, `person_one`, `phone_num_one`, `person_two`, `phone_num_two`, `person_three`, `phone_num_three`, `created_at`, `updated_at`) VALUES
+(1, 'Leopards', 'moiz', '03312471883', 'akhtar', '03312471817', 'lodhi', '03312471883', '2021-06-03 01:16:55', '2021-06-03 01:16:55'),
+(2, 'Tcs', 'khizer', '03312471883', 'musab', '03312471883', 'faraz', '03312471883', '2021-06-03 01:17:29', '2021-06-03 01:17:29');
 
 -- --------------------------------------------------------
 
@@ -1229,7 +1260,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (62, '2021_06_02_020957_create_contactuses_table', 22),
 (63, '2021_04_22_195946_create_orders_table', 23),
 (64, '2021_06_07_185353_create_product_for_sale_centers_table', 24),
-(65, '2021_02_15_085316_create_assets_table', 25);
+(65, '2021_02_15_085316_create_assets_table', 25),
+(66, '2021_06_09_180754_create_owners_table', 26),
+(67, '2021_06_09_181437_create_owner_users_table', 26),
+(68, '2021_06_09_195308_create_product_for_owner_controllers_table', 27),
+(69, '2021_06_03_130419_create_courierorders_table', 28),
+(70, '2021_06_09_195730_create_product_for_owners_table', 28);
 
 -- --------------------------------------------------------
 
@@ -1274,7 +1310,8 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (6, 'App\\Models\\User', 10),
 (6, 'App\\Models\\User', 11),
 (6, 'App\\Models\\User', 12),
-(6, 'App\\Models\\User', 13);
+(6, 'App\\Models\\User', 13),
+(8, 'App\\Models\\User', 21);
 
 -- --------------------------------------------------------
 
@@ -1325,6 +1362,59 @@ CREATE TABLE `orders` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `order_number`, `quantity`, `size_id`, `colour_id`, `product_id`, `user_id`, `payment_type`, `order_type`, `status`, `discount`, `sub_total_amount`, `delivery_charges`, `total_amount`, `n_status`, `created_at`, `updated_at`) VALUES
+(1, 'KXJ5g', 3, 1, 1, 9, 3, 'cash on delivery', 'Customer', 1, 0.00, 300.00, 300.00, 600.00, 0, '2021-06-01 05:29:40', '2021-06-01 07:23:09'),
+(2, 'oORum', 6, 1, 1, 9, 3, 'cash on delivery', 'Customer', 1, 0.00, 1500.00, 250.00, 1750.00, 0, '2021-06-02 05:59:32', '2021-06-02 05:59:32'),
+(3, 'oORum', 3, 1, 4, 9, 3, 'cash on delivery', 'Customer', 1, 0.00, 1500.00, 250.00, 1750.00, 0, '2021-06-02 05:59:32', '2021-06-02 05:59:32');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `owners`
+--
+
+CREATE TABLE `owners` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contact` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `owners`
+--
+
+INSERT INTO `owners` (`id`, `name`, `email`, `contact`, `address`, `status`, `created_at`, `updated_at`) VALUES
+(2, 'Owner - 1', 'owner@example.com', '44444576543', 'Gulshan Iqbal 13-C Karachi', 1, '2021-06-09 14:33:09', '2021-06-09 14:33:09');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `owner_user`
+--
+
+CREATE TABLE `owner_user` (
+  `owner_id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `owner_user`
+--
+
+INSERT INTO `owner_user` (`owner_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(2, 21, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1481,6 +1571,20 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `name`, `slug`, `status`, `product_sku_code`, `description`, `owner`, `vendor`, `video_link`, `product_weight`, `price`, `purchase_cost`, `purchase_discount`, `purchase_discount_percentage`, `labour_cost`, `transportation_cost`, `list_price_for_salesman`, `commission_amount`, `commission`, `created_at`, `updated_at`) VALUES
 (9, 'Phone', 'phone', 1, 'PHO_61201788', '<p>dfdfdf</p>', NULL, NULL, NULL, 1, 102.00, 50.00, NULL, NULL, NULL, NULL, 90.00, 5.10, 5, '2021-06-04 11:48:45', '2021-06-04 11:48:45');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_for_owners`
+--
+
+CREATE TABLE `product_for_owners` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1719,7 +1823,8 @@ INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VAL
 (3, 'super-admin', 'web', '2021-05-17 09:24:14', '2021-05-17 09:24:14'),
 (4, 'reseller', 'web', '2021-05-17 10:03:25', '2021-05-17 10:03:25'),
 (5, 'salecenter', 'web', '2021-05-17 11:28:48', '2021-05-17 11:28:48'),
-(6, 'rider', 'web', '2021-05-17 17:28:44', '2021-05-17 17:28:44');
+(6, 'rider', 'web', '2021-05-17 17:28:44', '2021-05-17 17:28:44'),
+(8, 'owner', 'web', '2021-05-17 17:28:44', '2021-05-17 17:28:44');
 
 -- --------------------------------------------------------
 
@@ -2048,7 +2153,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `im
 (14, 'reseller', 'reseller@example.com', NULL, '$2y$10$.Ujx5zqvGuL602sSyG8mLOu8TQc74UWQ1TBsG61ypNIVoEc.C2SzO', NULL, '12345', 0, NULL, '2021-05-19 11:43:59', '2021-05-28 12:02:43'),
 (15, 'Customer', 'customer@example.com', NULL, '$2y$10$SydSMnNLZwMNywghF5GrlOxS3LdfVhb5dgjgApGqVylYQLKnBlW06', NULL, '12345', 1, NULL, '2021-05-27 09:11:37', '2021-05-27 09:11:37'),
 (16, 'Sale Center', 'salecenter@example.com', NULL, '$2y$10$jbsycyAU2uKnPAj2zZ0EcOUVcGyKbQ0RyVaEGQblIX2hiXKzkyyqe', NULL, '12345', 0, NULL, '2021-05-28 11:34:50', '2021-05-28 11:34:50'),
-(19, 'Sale Center - 2', 'salecenter2@example.com', NULL, '$2y$10$jQ/iVDkZlpGGvlkuZENoouFiNotmiRNuBC4VWS.BT0QNGHCkg23fy', NULL, '12345', 0, NULL, '2021-06-02 07:55:40', '2021-06-02 07:55:40');
+(19, 'Sale Center - 2', 'salecenter2@example.com', NULL, '$2y$10$jQ/iVDkZlpGGvlkuZENoouFiNotmiRNuBC4VWS.BT0QNGHCkg23fy', NULL, '12345', 0, NULL, '2021-06-02 07:55:40', '2021-06-02 07:55:40'),
+(21, 'Owner - 1', 'owner@example.com', NULL, '$2y$10$WquXMo6vpuqMt0kn5a7ZmehUdPu6lnyHe9/HjgQ5xPMLP/rI62Pom', NULL, '12345', 0, NULL, '2021-06-09 14:33:09', '2021-06-09 14:33:09');
 
 --
 -- Indexes for dumped tables
@@ -2156,6 +2262,12 @@ ALTER TABLE `contactuses`
 ALTER TABLE `countries`
   ADD PRIMARY KEY (`id`),
   ADD KEY `countries_id_index` (`id`);
+
+--
+-- Indexes for table `courierorders`
+--
+ALTER TABLE `courierorders`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `couriers`
@@ -2274,6 +2386,19 @@ ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `owners`
+--
+ALTER TABLE `owners`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `owner_user`
+--
+ALTER TABLE `owner_user`
+  ADD PRIMARY KEY (`owner_id`,`user_id`),
+  ADD KEY `owner_user_user_id_foreign` (`user_id`);
+
+--
 -- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
@@ -2290,6 +2415,12 @@ ALTER TABLE `permissions`
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_for_owners`
+--
+ALTER TABLE `product_for_owners`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2417,7 +2548,7 @@ ALTER TABLE `abouts`
 -- AUTO_INCREMENT for table `assets`
 --
 ALTER TABLE `assets`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `batches`
@@ -2492,10 +2623,16 @@ ALTER TABLE `countries`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `courierorders`
+--
+ALTER TABLE `courierorders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `couriers`
 --
 ALTER TABLE `couriers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `customers`
@@ -2525,7 +2662,7 @@ ALTER TABLE `equity`
 -- AUTO_INCREMENT for table `expense`
 --
 ALTER TABLE `expense`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -2567,7 +2704,7 @@ ALTER TABLE `liabilities`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `offers`
@@ -2579,7 +2716,13 @@ ALTER TABLE `offers`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `owners`
+--
+ALTER TABLE `owners`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -2592,6 +2735,12 @@ ALTER TABLE `permissions`
 --
 ALTER TABLE `products`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `product_for_owners`
+--
+ALTER TABLE `product_for_owners`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `product_for_sale_centers`
@@ -2633,7 +2782,7 @@ ALTER TABLE `riders`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `sale_centers`
@@ -2669,7 +2818,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Constraints for dumped tables
@@ -2737,6 +2886,13 @@ ALTER TABLE `model_has_permissions`
 --
 ALTER TABLE `model_has_roles`
   ADD CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `owner_user`
+--
+ALTER TABLE `owner_user`
+  ADD CONSTRAINT `owner_user_owner_id_foreign` FOREIGN KEY (`owner_id`) REFERENCES `owners` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `owner_user_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `reseller_user`

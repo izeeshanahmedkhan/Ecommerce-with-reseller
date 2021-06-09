@@ -73,4 +73,9 @@ class User extends Authenticatable
 
         return $this->belongsToMany(Rider::class);
     }
+
+    public function owners(){
+
+        return $this->belongsToMany(Owner::class);
+    }
 }

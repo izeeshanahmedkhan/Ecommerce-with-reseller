@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Courier;
+use App\Models\courierorder;
 use App\Models\Offer;
 use App\Models\Order;
 use App\Models\Billing;
@@ -176,9 +178,10 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
+        $checkcourier = Courier::all();
         $orders = Order::where('order_number',$order->order_number)->get();
 
-        return view('admin.orders.show',['orders'=>$orders]);
+        return view('admin.orders.show',['orders'=>$orders,'checkcourier'=>$checkcourier]);
     }
 
     /**
@@ -279,6 +282,30 @@ class OrderController extends Controller
 
         $orderhistory=Order::where('user_id',Auth::User()->id)->get();
         return view('customer.order.index',['orders'=>$orderhistory]);
+
+    }
+
+    public function couriercompanyorder(request $req)
+    {
+
+        if($req->reassign_courier !== null){
+
+            courierorder::where('id',$req->get('reassign_courier'))
+                ->update(['courier_company'=>$req->courier,'courier_track_code'=>$req->trackordernumber]);
+
+            return back();
+        }
+
+        $courier = new courierorder;
+
+        $courier->user_id = $req->customerid;
+        $courier->courier_company = $req->courier;
+        $courier->order_number = $req->trackcode;
+        $courier->courier_track_code = $req->trackordernumber;
+
+        $courier->save();
+
+        return back();
 
     }
 }

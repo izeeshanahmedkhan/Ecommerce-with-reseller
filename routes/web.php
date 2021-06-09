@@ -103,6 +103,11 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
     Route::get('/admin/salecenter/product',[App\Http\Controllers\ProductForSaleCenterController::class, 'index'])->name('product_salecenter.index');
     Route::post('/admin/salecenter/product/store',[App\Http\Controllers\ProductForSaleCenterController::class, 'store'])->name('product_salecenter.store');
 
+// admin product assign to owners
+
+    Route::get('/admin/owner/product',[App\Http\Controllers\ProductForOwnerController::class, 'index'])->name('product_owner.index');
+    Route::post('/admin/owner/product/store',[App\Http\Controllers\ProductForOwnerController::class, 'store'])->name('product_owner.store');
+
 //admin ColourImageProductSize
     Route::delete('/admin/colourimageproductsize/{id}/delete',[App\Http\Controllers\ColourImageProductSizeController::class, 'destroy'])->name('colourimageproductsize.destroy');
 
@@ -216,6 +221,16 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
     Route::get('/admin/customer/{customer}/edit',[App\Http\Controllers\CustomerController::class, 'edit'])->name('customer.edit');
     Route::put('/admin/customer/{customer}/update',[App\Http\Controllers\CustomerController::class, 'update'])->name('customer.update');
     Route::delete('/admin/customer/{customer}/delete',[App\Http\Controllers\CustomerController::class, 'destroy'])->name('customer.destroy');
+
+
+//admin owner
+
+    Route::get('/admin/owner',[App\Http\Controllers\OwnerController::class, 'index'])->name('owner.index');
+    Route::get('/admin/owner/create',[App\Http\Controllers\OwnerController::class, 'create'])->name('owner.create');
+    Route::post('/admin/owner/store',[App\Http\Controllers\OwnerController::class, 'store'])->name('owner.store');
+    Route::get('/admin/owner/{owner}/edit',[App\Http\Controllers\OwnerController::class, 'edit'])->name('owner.edit');
+    Route::put('/admin/owner/{owner}/update',[App\Http\Controllers\OwnerController::class, 'update'])->name('owner.update');
+    Route::delete('/admin/owner/{owner}/delete',[App\Http\Controllers\OwnerController::class, 'destroy'])->name('owner.destroy');
 
 
 //admin discounts
@@ -362,6 +377,8 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
     Route::get('/admin/order/{order}/show',[App\Http\Controllers\OrderController::class, 'show'])->name('order.show')->middleware('permission:view orders');
     Route::get('/customer/order_history',[App\Http\Controllers\OrderController::class, 'order_history'])->name('order.history');
 
+    Route::post('/admin/order/{order}/couriercompany',[App\Http\Controllers\OrderController::class, 'couriercompanyorder']);
+
 // -- order for frontend
     Route::post('/order',[App\Http\Controllers\OrderController::class, 'store'])->name('order');
 
@@ -392,6 +409,9 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
     Route::get('/salecenter/order/{order}/edit',[App\Http\Controllers\SaleCenterOrderController::class, 'edit'])->name('sale_center_order.edit');
     Route::put('/salecenter/order/{order}/update',[App\Http\Controllers\SaleCenterOrderController::class, 'update'])->name('sale_center_order.update');
 
+
+
+
     //contact us from frontend
 
     Route::post('/frontend/contact/store',[App\Http\Controllers\ContactusController::class, 'store'])->name('contactus.store');
@@ -409,6 +429,10 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
         ]);
 
     });
+
+    //order status
+
+    Route::put('/admin/order/{order}/status',[App\Http\Controllers\OrderController::class, 'status'])->name('order.status');
 
 });
 

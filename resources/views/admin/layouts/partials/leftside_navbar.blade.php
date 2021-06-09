@@ -27,8 +27,8 @@
             </li>
             @endif
 
-            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show products') || auth()->user()->hasPermissionTo('show colours') || auth()->user()->hasPermissionTo('show sizes') || auth()->user()->hasPermissionTo('show batches'))
-            <li class="nav-item {{$activePage == 'productIndex' ? 'active' : ''}} {{$activePage == 'colourIndex' ? 'active' : ''}} {{$activePage == 'sizeIndex' ? 'active' : ''}} {{$activePage == 'batchIndex' ? 'active' : ''}}" data-item="products"><a class="nav-item-hold" href="#">
+            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show products') || auth()->user()->hasPermissionTo('show colours') || auth()->user()->hasPermissionTo('show sizes') || auth()->user()->hasPermissionTo('show batches') || auth()->user()->hasPermissionTo('show products for sale center') || auth()->user()->hasPermissionTo('show products for owner'))
+            <li class="nav-item {{$activePage == 'productIndex' ? 'active' : ''}} {{$activePage == 'colourIndex' ? 'active' : ''}} {{$activePage == 'sizeIndex' ? 'active' : ''}} {{$activePage == 'batchIndex' ? 'active' : ''}} {{$activePage == 'productSalecenterIndex' ? 'active' : ''}} {{$activePage == 'productOwnerIndex' ? 'active' : ''}}" data-item="products"><a class="nav-item-hold" href="#">
                     <i class="nav-icon far fa-box"></i>
                     <span class="nav-text">Products</span></a>
                 <div class="triangle"></div>
@@ -120,6 +120,13 @@
                 </li>
             @endif
 
+            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show owners'))
+                <li class="nav-item {{$activePage == 'ownerIndex' ? 'active' : ''}}"><a class="nav-item-hold" href="{{route('owner.index')}}">
+                        <i class="nav-icon fas fa-users"></i><span class="nav-text">owners</span></a>
+                    <div class="triangle"></div>
+                </li>
+            @endif
+
         </ul>
     </div>
     <div class="sidebar-left-secondary rtl-ps-none" data-perfect-scrollbar="" data-suppress-scroll-x="true">
@@ -176,7 +183,13 @@
 
         <ul class="childNav" data-parent="products">
             @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show products for sale center'))
-                <li class="nav-item {{$activePage == 'productSalecenterIndex' ? 'active' : ''}}"><a href="{{route('product_salecenter.index')}}"><i class="nav-icon fal fa-box-full"></i><span class="item-name">View All Products For Sale Center</span></a></li>
+                <li class="nav-item {{$activePage == 'productSalecenterIndex' ? 'active' : ''}}"><a href="{{route('product_salecenter.index')}}"><i class="nav-icon fal fa-box-full"></i><span class="item-name">View All Products For Sale Centers</span></a></li>
+            @endif
+        </ul>
+
+        <ul class="childNav" data-parent="products">
+            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show products for owner'))
+                <li class="nav-item {{$activePage == 'productOwnerIndex' ? 'active' : ''}}"><a href="{{ route('product_owner.index') }}"><i class="nav-icon fal fa-box-full"></i><span class="item-name">View All Products For Owners</span></a></li>
             @endif
         </ul>
 

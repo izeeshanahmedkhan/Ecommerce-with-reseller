@@ -36,8 +36,8 @@ class ComposerStaticInitb99aa3997c32c07c649b12e8643e13a9
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
-        '377b22b161c09ed6e5152de788ca020a' => __DIR__ . '/..' . '/spatie/laravel-permission/src/helpers.php',
         '6b34c85f7b1ad6faa15aa12109e030f2' => __DIR__ . '/..' . '/realrashid/sweet-alert/src/functions.php',
+        '377b22b161c09ed6e5152de788ca020a' => __DIR__ . '/..' . '/spatie/laravel-permission/src/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -613,6 +613,7 @@ class ComposerStaticInitb99aa3997c32c07c649b12e8643e13a9
         'App\\Http\\Controllers\\LogoController' => __DIR__ . '/../..' . '/app/Http/Controllers/LogoController.php',
         'App\\Http\\Controllers\\OfferController' => __DIR__ . '/../..' . '/app/Http/Controllers/OfferController.php',
         'App\\Http\\Controllers\\OrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/OrderController.php',
+        'App\\Http\\Controllers\\OwnerController' => __DIR__ . '/../..' . '/app/Http/Controllers/OwnerController.php',
         'App\\Http\\Controllers\\ProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProductController.php',
         'App\\Http\\Controllers\\ProductForSaleCenterController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProductForSaleCenterController.php',
         'App\\Http\\Controllers\\ProductResellerController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProductResellerController.php',
@@ -675,7 +676,10 @@ class ComposerStaticInitb99aa3997c32c07c649b12e8643e13a9
         'App\\Models\\Liability' => __DIR__ . '/../..' . '/app/Models/Liability.php',
         'App\\Models\\Offer' => __DIR__ . '/../..' . '/app/Models/Offer.php',
         'App\\Models\\Order' => __DIR__ . '/../..' . '/app/Models/Order.php',
+        'App\\Models\\Owner' => __DIR__ . '/../..' . '/app/Models/Owner.php',
+        'App\\Models\\OwnerUser' => __DIR__ . '/../..' . '/app/Models/OwnerUser.php',
         'App\\Models\\Product' => __DIR__ . '/../..' . '/app/Models/Product.php',
+        'App\\Models\\ProductForOwner' => __DIR__ . '/../..' . '/app/Models/ProductForOwner.php',
         'App\\Models\\ProductForSaleCenter' => __DIR__ . '/../..' . '/app/Models/ProductForSaleCenter.php',
         'App\\Models\\ProductSize' => __DIR__ . '/../..' . '/app/Models/ProductSize.php',
         'App\\Models\\Reseller' => __DIR__ . '/../..' . '/app/Models/Reseller.php',

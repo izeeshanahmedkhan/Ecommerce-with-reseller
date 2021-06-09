@@ -1,10 +1,10 @@
 @extends('admin.layouts.master')
 @section('content')
-    <input type="hidden" value="{{$activePage = 'productIndex', $title = 'Products For Salecenter - Nafia Garments'}}">
+    <input type="hidden" value="{{$activePage = 'productIndex', $title = 'Products For owners - Nafia Garments'}}">
     <div class="main-content">
         <div class="row mb-4">
             <div class="col-md-12">
-                <h4>View All Products</h4>
+                <h4>View All Products for owners</h4>
             </div>
         </div>
         <!-- end of row-->
@@ -22,10 +22,8 @@
                                     <th> Colour</th>
                                     <th> Size</th>
                                     <th> Image</th>
-                                    <th> Inventory </th>
-                                    <th> Batch </th>
+                                    <th> Owner </th>
                                     <th> Quantity </th>
-                                    <th> Sale Center </th>
                                     <th> Action</th>
                                 </tr>
                                 </thead>
@@ -41,7 +39,7 @@
                                     @foreach($product_csis as $product_csi)
                                         @if($product_csi->colour_id !== $count)
                                                 <tr>
-                                                    <form method="POST" action="{{ route('product_salecenter.store') }}">
+                                                    <form method="POST" action="{{ route('product_owner.store') }}">
                                                     @csrf
                                                         <td> {{ $product->name }} </td>
                                                         <td>
@@ -113,31 +111,25 @@
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="form-group">
-                                                                <select style="width: auto;" class="form-control @error('inventory_category') is-invalid @enderror" id="Inventory" name="inventory_category">
-                                                                    <option selected disabled> Select Inventory </option>
-                                                                    <option value="0"> In-House </option>
-                                                                    <option value="1"> Purchase to Order</option>
-                                                                </select>
-                                                                @error('inventory_category')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                                @enderror
-                                                            </div>
+                                                            @php $owners = \App\Models\Owner::all(); @endphp
+
+                                                            <select class="form-control js-example-basic-single{{ $sale_cetner_count }}  @error('owner') is-invalid @enderror" name="owner">
+                                                                <option selected disabled> Select Owner </option>
+                                                                @foreach($owners as $owner)
+
+                                                                    <option value="{{ $owner->id }}">{{ $owner->name  }}</option>
+
+                                                                @endforeach
+                                                            </select>
+                                                            @error('owner')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                            @enderror
+
                                                         </td>
                                                         <td>
-                                                            <div class="form-group" style="display: none" id="Batch-div">
-                                                                <select style="width: auto;" class="form-control @error("batch") is-invalid @enderror" id="Batch" name="batch"></select>
-                                                                @error('batch')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                                @enderror
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="form-group" style="display: none" id="quantity">
+                                                            <div class="form-group" id="quantity">
                                                                 <input style="width:150px;" type="text" name="quantity" class="form-control @error('quantity') is-invalid @enderror" placeholder="Enter Quantity" value="{{ old('quantity') }}" aria-label="quantity">
                                                                 @error('quantity')
                                                                 <span class="invalid-feedback" role="alert">
@@ -145,25 +137,6 @@
                                                                 </span>
                                                                 @enderror
                                                             </div>
-                                                        </td>
-                                                        <td>
-                                                            @php $salecenters = \App\Models\SaleCenter::all(); @endphp
-
-                                                            <select class="form-control js-example-basic-single{{ $sale_cetner_count }}  @error('salecenter_id') is-invalid @enderror" name="salecenter_id">
-                                                                <option selected disabled> Select SaleCenter </option>
-                                                                @foreach($salecenters as $salecenter)
-
-                                                                    <option value="{{ $salecenter->id }}">{{ $salecenter->name  }}</option>
-
-                                                                @endforeach
-                                                            </select>
-                                                            @error('salecenter_id')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                        <strong>{{ $message }}</strong>
-                                                                    </span>
-                                                            @enderror
-
-                                                        </td>
                                                         </td>
                                                         <td>
                                                             <input type="submit" value="Add" class="btn btn-raised btn-raised-success m-1" style="color: white"></input>
@@ -188,10 +161,8 @@
                                             <th> Colour</th>
                                             <th> Size</th>
                                             <th> Image</th>
-                                            <th> Inventory </th>
-                                            <th> Batch </th>
+                                            <th> Owner </th>
                                             <th> Quantity </th>
-                                            <th> Sale Center </th>
                                             <th> Action</th>
                                         </tr>
                                         </tfoot>
@@ -236,40 +207,5 @@
         });
 
     </script>
-
-    <script>
-        $(document).ready(function () {
-            $('#Inventory').on('change', function () {
-                var inventory_id = this.value;
-                $("#Batch").html('');
-                $.ajax({
-                    url: "{{url('batches')}}",
-                    type: "POST",
-                    data: {
-                        inventory_id: inventory_id,
-                        _token: '{{csrf_token()}}'
-                    },
-                    dataType: 'json',
-
-                    success: function (result) {
-
-                        $('#quantity').show();
-                        $("#Batch-div").show();
-
-                        $('#Batch').html('<option value="">Select Batch</option>');
-                        $.each(result.batches, function (key, value) {
-                            $("#Batch").append('<option value="' + value.id + '">' + value.name + '</option>');
-                        });
-                    },
-                    error: function (){
-                        $("#Batch-div").hide();
-                        $('#quantity').hide();
-                    }
-                });
-            });
-        });
-
-    </script>
-
 
 @endsection

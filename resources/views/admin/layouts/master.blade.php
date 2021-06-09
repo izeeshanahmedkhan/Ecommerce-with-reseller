@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link href="{{asset('admin-assets/css/themes/lite-purple.min.css')}}" rel="stylesheet" />
     <link href="{{asset('admin-assets/css/plugins/perfect-scrollbar.min.css')}}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
 
     @yield('page_css')
 </head>
@@ -191,8 +192,9 @@
 <script src="{{asset('admin-assets/js/plugins/echarts.min.js')}}"></script>
 <script src="{{asset('admin-assets/js/scripts/echart.options.min.js')}}"></script>
 <script src="{{asset('admin-assets/js/scripts/dashboard.v1.script.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
 
-
+@include('sweetalert::alert')
 @yield('page_script')
 <script>
         @if(Session::has('message'))
