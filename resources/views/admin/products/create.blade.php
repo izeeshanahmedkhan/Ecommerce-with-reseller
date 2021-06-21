@@ -218,6 +218,23 @@
                                     </span>
                             @enderror
                         </div>
+
+
+
+<div class="form-group">
+                            <label for="qrcode">QR_Code </label>
+                            <input type="text" name="qr" class="form-control @error('qrcode') is-invalid @enderror" placeholder="Enter QR Code" value="">
+                            @error('qrcode')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+
+
+
+
+
                         <div class="form-group">
                             <label>Purchase Cost</label>
 

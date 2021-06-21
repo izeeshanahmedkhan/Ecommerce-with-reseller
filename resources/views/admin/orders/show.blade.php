@@ -294,12 +294,24 @@
                                                 </tbody>
                                             </table>
                                         </div>
+                                        
+@php
+    $sumofquantity = DB::table('Orders')->where('order_number', $orders[0]->order_number)->sum('quantity');
+    @endphp
+
                                         <div class="col-md-12">
                                             <div class="invoice-summary">
                                                 <p>Sub total: <span>{{ $orders[0]->sub_total_amount }}</span></p>
                                                 <p>Discount: <span>{{ $orders[0]->discount }}</span></p>
-                                                <p>DeliveryCharges: <span>{{ $orders[0]->delivery_charges }}</span></p>
-                                                <h5 class="font-weight-bold">Grand Total: <span>{{ $orders[0]->total_amount }}</span></h5>
+
+
+                                                @php
+                                                $delivery_total=$orders[0]->delivery_charges*$product->product_weight*$sumofquantity;
+                                                $deliv = $orders[0]->delivery_charges; 
+                                                @endphp
+                                                 <p>Delivery Charges: <span>{{  $deliv }}</span></p>
+                                                <p>Total Delivery Charges: <span>{{  $delivery_total }}</span></p>
+                                                <h5 class="font-weight-bold">Grand Total: <span>{{ $orders[0]->sub_total_amount+$delivery_total }}</span></h5>
                                             </div>
                                         </div>
                                     </div>

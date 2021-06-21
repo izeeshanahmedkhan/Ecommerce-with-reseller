@@ -35,12 +35,17 @@
             </li>
             @endif
 
-            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show sale centers'))
-            <li class="nav-item {{$activePage == 'saleCenterIndex' ? 'active' : ''}} {{$activePage == 'saleCenterCreate' ? 'active' : ''}}"><a class="nav-item-hold" href="{{route('saleCenter.index')}}">
-                    <i class="nav-icon fas fa-store"></i><span class="nav-text">Sale Centers</span></a>
-                <div class="triangle"></div>
+   @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show sale centers') || auth()->user()->hasPermissionTo('create sale centers'))
+
+            <li class="nav-item {{$activePage == 'saleCenterIndex' ? 'active' : ''}} 
+            {{$activePage == 'saleCenterCreate' ? 'active' : ''}}"
+            data-item="salecenters"><a class="nav-item-hold" href="#">
+                   <i class="nav-icon fa fa-user-friends"></i>
+                    <span class="nav-text">Sale Center</span></a>
+                <div class=""></div>
             </li>
             @endif
+
 
             @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show riders') || auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show couriers'))
             <li class="nav-item {{$activePage == 'riderIndex' ? 'active' : ''}} {{$activePage == 'riderCreate' ? 'active' : ''}} {{ $activePage == 'courierIndex' ? 'active' : ''}} {{$activePage == 'courierCreate' ? 'active' : ''}}" data-item="riders_and_couriers"><a class="nav-item-hold" href="#">
@@ -49,12 +54,41 @@
             </li>
             @endif
 
-            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show suppliers'))
-            <li class="nav-item {{$activePage == 'supplierIndex' ? 'active' : ''}} {{$activePage == 'supplierCreate' ? 'active' : ''}}"><a class="nav-item-hold" href="{{route('supplier.index')}}">
+         <!--    @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show suppliers'))
+            <li class="nav-item {{$activePage == 'supplierIndex' ? 'active' : ''}} 
+            {{$activePage == 'supplierCreate' ? 'active' : ''}}">
+            <a class="nav-item-hold" href="{{route('supplier.index')}}">
                     <i class="nav-icon fas fa-user-friends"></i><span class="nav-text">Suppliers</span></a>
                 <div class="triangle"></div>
             </li>
+            @endif -->
+
+
+
+   @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show suppliers') || auth()->user()->hasPermissionTo('create suppliers'))
+
+            <li class="nav-item {{$activePage == 'supplierIndex' ? 'active' : ''}} 
+            {{$activePage == 'supplierCreate' ? 'active' : ''}}"
+            data-item="supplierss"><a class="nav-item-hold" href="#">
+                   <i class="nav-icon fa fa-user-friends"></i>
+                    <span class="nav-text">Suppliers</span></a>
+                <div class=""></div>
+            </li>
             @endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show logos') || auth()->user()->hasPermissionTo('show ape') || auth()->user()->hasPermissionTo('show sliders') || auth()->user()->hasPermissionTo('show banners') || auth()->user()->hasPermissionTo('show services') || auth()->user()->hasPermissionTo('show floors'))
             <li class="nav-item {{$activePage == 'aboutIndex' ? 'active' : ''}} {{$activePage == 'logoIndex' ? 'active' : ''}} {{$activePage == 'apeIndex' ? 'active' : ''}} {{$activePage == 'sliderIndex' ? 'active' : ''}} {{$activePage == 'bannerIndex' ? 'active' : ''}} {{$activePage == 'serviceIndex' ? 'active' : ''}} {{$activePage == 'floorIndex' ? 'active' : ''}}" data-item="homesettings"><a class="nav-item-hold" href="#">
@@ -63,12 +97,36 @@
             </li>
             @endif
 
-            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show delivery charges'))
+          <!--   @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show delivery charges'))
                 <li class="nav-item {{$activePage == 'deliverychargesIndex' ? 'active' : ''}} "><a class="nav-item-hold" href="{{route('delivery_charges.index')}}">
                         <i class="nav-icon fas fa-dollar-sign"></i><span class="nav-text">Delivery Charges</span></a>
                     <div class="triangle"></div>
                 </li>
             @endif
+ -->
+
+
+
+   @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show delivery charges') || auth()->user()->hasPermissionTo('create delivery charges'))
+
+            <li class="nav-item {{$activePage == 'deliverychargesIndex' ? 'active' : ''}} 
+            {{$activePage == 'deliverychargesCreate' ? 'active' : ''}}"
+            data-item="delivery"><a class="nav-item-hold" href="#">
+                   <i class="nav-icon fa fa-dollar-sign"></i>
+                    <span class="nav-text">Delivery Charges</span></a>
+                <div class=""></div>
+            </li>
+            @endif
+
+
+
+
+
+
+
+
+
+
 
             @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show orders'))
                 <li class="nav-item {{$activePage == 'orderIndex' ? 'active' : ''}} "><a class="nav-item-hold" href="{{route('order.index')}}">
@@ -84,12 +142,33 @@
                 </li>
             @endif
 
-            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show resellers'))
+           <!--  @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show resellers'))
                 <li class="nav-item {{$activePage == 'resellerIndex' ? 'active' : ''}}"><a class="nav-item-hold" href="{{route('reseller.index')}}">
                         <i class="nav-icon fas fa-users"></i><span class="nav-text">Resellers</span></a>
                     <div class="triangle"></div>
                 </li>
             @endif
+ -->
+
+
+
+
+
+
+   @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show resellers') || auth()->user()->hasPermissionTo('create resellers'))
+
+            <li class="nav-item {{$activePage == 'resellerIndex' ? 'active' : ''}} 
+            {{$activePage == 'resellerCreate' ? 'active' : ''}}"
+            data-item="res"><a class="nav-item-hold" href="#">
+                   <i class="nav-icon fa fa-dollar-sign"></i>
+                    <span class="nav-text">Resellers</span></a>
+                <div class=""></div>
+            </li>
+            @endif
+
+
+
+
 
             @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show contact us'))
                 <li class="nav-item {{$activePage == 'contactusIndex' ? 'active' : ''}}"><a class="nav-item-hold" href="{{route('contactus.index')}}"><i class="nav-icon fas fa-envelope-open-text"></i><span class="nav-text">Customers Contacted</span></a>
@@ -103,12 +182,36 @@
                 </li>
             @endif
 
+<!-- 
             @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show customers'))
                 <li class="nav-item {{$activePage == 'customerIndex' ? 'active' : ''}}"><a class="nav-item-hold" href="{{route('customer.index')}}">
                         <i class="nav-icon fas fa-users"></i><span class="nav-text">customers</span></a>
                     <div class="triangle"></div>
                 </li>
+            @endif -->
+
+
+
+
+
+
+
+
+ @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show customers') || auth()->user()->hasPermissionTo('create customers'))
+
+            <li class="nav-item {{$activePage == 'customerIndex' ? 'active' : ''}} 
+            {{$activePage == 'customerCreate' ? 'active' : ''}}"
+            data-item="custo"><a class="nav-item-hold" href="#">
+                   <i class="nav-icon fa fa-users"></i>
+                    <span class="nav-text">Customers</span></a>
+                <div class=""></div>
+            </li>
             @endif
+
+
+
+
+
 
             @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show accounts'))
                 <li class="nav-item {{$activePage == 'accountsIndex' ? 'active' : ''}}" data-item="accounts">
@@ -120,12 +223,31 @@
                 </li>
             @endif
 
-            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show owners'))
+           <!--  @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show owners'))
                 <li class="nav-item {{$activePage == 'ownerIndex' ? 'active' : ''}}"><a class="nav-item-hold" href="{{route('owner.index')}}">
                         <i class="nav-icon fas fa-users"></i><span class="nav-text">owners</span></a>
                     <div class="triangle"></div>
                 </li>
             @endif
+ -->
+
+
+@if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show owners') || auth()->user()->hasPermissionTo('create owners'))
+
+            <li class="nav-item {{$activePage == 'ownerIndex' ? 'active' : ''}} 
+            {{$activePage == 'ownerCreate' ? 'active' : ''}}"
+            data-item="own"><a class="nav-item-hold" href="#">
+                   <i class="nav-icon fa fa-users"></i>
+                    <span class="nav-text">Owners</span></a>
+                <div class="triangle"></div>
+            </li>
+            @endif
+
+
+
+
+
+
 
         </ul>
     </div>
@@ -186,6 +308,89 @@
                 <li class="nav-item {{$activePage == 'productSalecenterIndex' ? 'active' : ''}}"><a href="{{route('product_salecenter.index')}}"><i class="nav-icon fal fa-box-full"></i><span class="item-name">View All Products For Sale Centers</span></a></li>
             @endif
         </ul>
+
+
+ <ul class="childNav" data-parent="salecenters">
+            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show sale centers'))
+            <li class="nav-item {{$activePage == 'saleCenterIndex' ? 'active' : ''}}"><a href="{{route('saleCenter.index')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Show Sale Center</span></a></li>
+            @endif
+                @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('create categories'))
+                <li class="nav-item {{$activePage == 'saleCenterCreate' ? 'active' : ''}}"><a href="{{route('saleCenter.create')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Add Sale Center</span></a></li>
+            @endif
+        </ul>
+
+
+        <ul class="childNav" data-parent="supplierss">
+            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show suppliers'))
+            <li class="nav-item {{$activePage == 'supplierIndex' ? 'active' : ''}}"><a href="{{route('supplier.index')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Show Suppliers</span></a></li>
+            @endif
+                @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('create suppliers'))
+                <li class="nav-item {{$activePage == 'saleCenterCreate' ? 'active' : ''}}"><a href="{{route('supplier.create')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Add Suppliers</span></a></li>
+            @endif
+        </ul>
+
+
+   <ul class="childNav" data-parent="delivery">
+            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show delivery charges'))
+            <li class="nav-item {{$activePage == 'deliverychargesIndex' ? 'active' : ''}}"><a href="{{route('delivery_charges.index')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Show Delivery Charges</span></a></li>
+            @endif
+                @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('create delivery charges'))
+                <li class="nav-item {{$activePage == 'saleCenterCreate' ? 'active' : ''}}"><a href="{{route('delivery_charges.create')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Add Delivery Charges</span></a></li>
+            @endif
+        </ul>
+
+
+
+
+
+
+
+
+
+
+ <ul class="childNav" data-parent="res">
+            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show resellers'))
+            <li class="nav-item {{$activePage == 'resellerIndex' ? 'active' : ''}}"><a href="{{route('reseller.index')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Show All Resellers</span></a></li>
+            @endif
+                @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('create resellers'))
+                <li class="nav-item {{$activePage == 'resellerCreate' ? 'active' : ''}}"><a href="{{route('reseller.create')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Add Reseller</span></a></li>
+            @endif
+        </ul>
+
+
+
+
+
+ <ul class="childNav" data-parent="custo">
+            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show customers'))
+            <li class="nav-item {{$activePage == 'customerIndex' ? 'active' : ''}}"><a href="{{route('customer.index')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Show All Customers</span></a></li>
+            @endif
+                @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('create customers'))
+                <li class="nav-item {{$activePage == 'customerCreate' ? 'active' : ''}}"><a href="{{route('customer.create')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Add Customers</span></a></li>
+            @endif
+        </ul>
+        
+ 
+
+  <ul class="childNav" data-parent="own">
+            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show owners'))
+            <li class="nav-item {{$activePage == 'ownerIndex' ? 'active' : ''}}"><a href="{{route('owner.index')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Show All Owners</span></a></li>
+            @endif
+                @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('create owners'))
+                <li class="nav-item {{$activePage == 'ownerCreate' ? 'active' : ''}}"><a href="{{route('owner.create')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Add Owners</span></a></li>
+            @endif
+        </ul>
+
+
+
+
+
+
+
+
+
+
+
 
         <ul class="childNav" data-parent="products">
             @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show products for owner'))

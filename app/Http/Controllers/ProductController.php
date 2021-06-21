@@ -102,6 +102,7 @@ class ProductController extends Controller
             $product->list_price_for_salesman = $request->list_price_for_salesman;
             $product->commission_amount = $request->get('commission_amount');
             $product->commission = $request->get('commission');
+              $product->qr_code = $request->qr;
 
             $product->save();
 
