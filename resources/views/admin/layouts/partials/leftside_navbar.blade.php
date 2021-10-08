@@ -54,6 +54,17 @@
             </li>
             @endif
 
+            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show riderorderdetail') || auth()->user()->hasPermissionTo('create riderorderdetail'))
+
+            <li class="nav-item {{$activePage == 'riderorderdetailIndex' ? 'active' : ''}} 
+            {{$activePage == 'riderorderdetailCreate' ? 'active' : ''}}"
+            data-item=""><a class="nav-item-hold" href="{{route('riderorderdetail')}}">
+                   <i class="nav-icon fas fa-biking"></i>
+                    <span class="nav-text">Rider Order Detail </span></a>
+                <div class="triangle"></div>
+            </li>
+            @endif
+
          <!--    @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show suppliers'))
             <li class="nav-item {{$activePage == 'supplierIndex' ? 'active' : ''}} 
             {{$activePage == 'supplierCreate' ? 'active' : ''}}">
@@ -126,18 +137,39 @@
 
 
 
-
+{{--{{route('order.index')}}--}}
 
             @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show orders'))
-                <li class="nav-item {{$activePage == 'orderIndex' ? 'active' : ''}} "><a class="nav-item-hold" href="{{route('order.index')}}">
+                <li class="nav-item {{$activePage == 'orderIndex' ? 'active' : ''}} "><a class="nav-item-hold" href="{{route('orderdetails')}}">
                         <i class="nav-icon fab fa-first-order"></i><span class="nav-text">Orders</span></a>
                     <div class="triangle"></div>
                 </li>
             @endif
 
+
+
+
+            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show manualorder') || auth()->user()->hasPermissionTo('create manualorder'))
+
+            <li class="nav-item {{$activePage == 'manualorderIndex' ? 'active' : ''}} 
+            {{$activePage == 'manualorderCreate' ? 'active' : ''}}"
+            data-item=""><a class="nav-item-hold" href="{{route('manualorder')}}">
+                   <i class="nav-icon fab fa-first-order"></i>
+                    <span class="nav-text">Manual Order </span></a>
+                <div class="triangle"></div>
+            </li>
+            @endif
+
+
+
+
+
+
+
+
             @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show deals') || auth()->user()->hasPermissionTo('show offers'))
                 <li class="nav-item {{$activePage == 'dealIndex' ? 'active' : ''}} {{$activePage == 'offerIndex' ? 'active' : ''}} {{$activePage == 'generaldiscountIndex' ? 'active' : ''}}" data-item="discounts"><a class="nav-item-hold" href="#">
-                        <i class="nav-icon fas fa-tags"></i><span class="nav-text">Discounts</span></a>
+                        <i class="nav-icon fas fa-tags"></i><span class="nav-text">Deals And Discounts</span></a>
                     <div class="triangle"></div>
                 </li>
             @endif
@@ -238,10 +270,37 @@
             {{$activePage == 'ownerCreate' ? 'active' : ''}}"
             data-item="own"><a class="nav-item-hold" href="#">
                    <i class="nav-icon fa fa-users"></i>
-                    <span class="nav-text">Owners</span></a>
+                    <span class="nav-text"> Product Owners</span></a>
                 <div class="triangle"></div>
             </li>
             @endif
+
+
+@if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show salereturn') || auth()->user()->hasPermissionTo('create salereturn'))
+
+            <li class="nav-item {{$activePage == 'salereturnIndex' ? 'active' : ''}} 
+            {{$activePage == 'salereturnCreate' ? 'active' : ''}}"
+            data-item="sale"><a class="nav-item-hold" href="#">
+                   <i class="nav-icon fa fa-users"></i>
+                    <span class="nav-text">Sale Return</span></a>
+                <div class="triangle"></div>
+            </li>
+            @endif
+
+
+
+@if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show purchasereturn') || auth()->user()->hasPermissionTo('create purchasereturn'))
+
+            <li class="nav-item {{$activePage == 'purchasereturnIndex' ? 'active' : ''}} 
+            {{$activePage == 'purchasereturnCreate' ? 'active' : ''}}"
+            data-item="purchase"><a class="nav-item-hold" href="#">
+                   <i class="nav-icon fa fa-users"></i>
+                    <span class="nav-text">Purchase Return</span></a>
+                <div class="triangle"></div>
+            </li>
+            @endif
+
+
 
 
 
@@ -374,10 +433,38 @@
 
   <ul class="childNav" data-parent="own">
             @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show owners'))
-            <li class="nav-item {{$activePage == 'ownerIndex' ? 'active' : ''}}"><a href="{{route('owner.index')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Show All Owners</span></a></li>
+            <li class="nav-item {{$activePage == 'ownerIndex' ? 'active' : ''}}"><a href="{{route('owner.index')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Show All Product Owners</span></a></li>
             @endif
                 @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('create owners'))
-                <li class="nav-item {{$activePage == 'ownerCreate' ? 'active' : ''}}"><a href="{{route('owner.create')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Add Owners</span></a></li>
+                <li class="nav-item {{$activePage == 'ownerCreate' ? 'active' : ''}}"><a href="{{route('owner.create')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Add  Owners</span></a></li>
+            @endif
+
+
+
+              @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('assign owners'))
+                <li class="nav-item {{$activePage == 'ownerAssign' ? 'active' : ''}}"><a href="{{route('owner.assign')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Add Product Owners</span></a></li>
+            @endif
+
+        </ul>
+
+
+<ul class="childNav" data-parent="sale">
+            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show salereturn'))
+            <li class="nav-item {{$activePage == 'salereturnIndex' ? 'active' : ''}}"><a href="{{route('salereturn.index')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Show All Sale Return</span></a></li>
+            @endif
+                @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('create salereturn'))
+                <li class="nav-item {{$activePage == 'salereturnCreate' ? 'active' : ''}}"><a href="{{route('salereturn.create')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Add Sale Return</span></a></li>
+            @endif
+        </ul>
+
+
+
+<ul class="childNav" data-parent="purchase">
+            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show purchasereturn'))
+            <li class="nav-item {{$activePage == 'purchasereturnIndex' ? 'active' : ''}}"><a href="{{url('purchasereturn')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Add New Purchase Return</span></a></li>
+            @endif
+                @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('create purchasereturn'))
+                <li class="nav-item {{$activePage == 'purchasereturnCreate' ? 'active' : ''}}"><a href="{{url('purchasereturnindex')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">View All Purchase Return</span></a></li>
             @endif
         </ul>
 
@@ -410,6 +497,15 @@
             @endif
         </ul>
 
+
+
+
+
+
+
+
+
+
         <ul class="childNav" data-parent="homesettings">
             @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show logos'))
             <li class="nav-item {{$activePage == 'logoIndex' ? 'active' : ''}}"><a href="{{route('logo.index')}}"><i class="nav-icon fal fa-layer-group"></i><span class="item-name">View Logos</span></a></li>
@@ -431,6 +527,12 @@
         <ul class="childNav" data-parent="homesettings">
             @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show banners'))
             <li class="nav-item {{$activePage == 'bannerIndex' ? 'active' : ''}}"><a href="{{route('banner.index')}}"><i class="nav-icon fal fa-layer-group"></i><span class="item-name">View Banners</span></a></li>
+            @endif
+        </ul>
+
+         <ul class="childNav" data-parent="homesettings">
+            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show banners'))
+            <li class="nav-item {{$activePage == 'bannerIndex' ? 'active' : ''}}"><a href="menubannerindex"><i class="nav-icon fal fa-layer-group"></i><span class="item-name">View Menu Banners</span></a></li>        
             @endif
         </ul>
 
@@ -489,6 +591,19 @@
 
             @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show expenses'))
                 <li class="nav-item"><a href="{{route('expenses.index')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Expenses</span></a></li>
+            @endif
+
+             @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show voucher'))
+                <li class="nav-item"><a href="{{url('generate_voucher')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Voucher</span></a></li>
+            @endif
+
+
+            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show header'))
+                <li class="nav-item"><a href="{{url('addsubheader')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Add Categories</span></a></li>
+            @endif
+
+              @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show header'))
+                <li class="nav-item"><a href="{{url('addthirdsubheader')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Add Sub-Categories</span></a></li>
             @endif
 
         </ul>

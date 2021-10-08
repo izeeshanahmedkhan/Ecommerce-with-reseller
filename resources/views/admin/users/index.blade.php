@@ -13,6 +13,11 @@
                 <div class="card text-left">
                     <div class="card-body">
                         <h4 class="card-title mb-3">Users</h4>
+                          <div style="float:right; margin-right: 1%;">
+                            <a href="{{route('user.create')}}" class="btn btn-raised btn-raised-primary m-1" style="color: white;"><i
+                                    class="nav-icon font-weight-bold"></i>Add New User</a>
+                            <br> <br>
+                        </div>
                         <div class="table-responsive">
                             <table class="display table table-striped table-bordered" id="zero_configuration_table" style="width:100%">
                                 <thead>

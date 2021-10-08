@@ -121,50 +121,107 @@
                                 <tr>
                                     <th> Colour </th>
                                     <th> Size </th>
+                                    <th> Quantity </th>
+                                      <th> QR_Code </th>
                                     <th> Image </th>
+                                    <th> Image Preview </th>
                                     <th> Action </th>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <div class="form-group">
-                                            <label for="selectColour">Select Colour</label>
-                                            <select class="form-control @error('colour_0') is-invalid @enderror" id="selectColour" name="colour_0[0]">
-                                                <option selected disabled> Select Colour </option>
-                                                @foreach($colours as $colour)
-                                                    <option value="{{ $colour->id }}" style="background-color:{{ $colour->colourCode }}">{{ $colour->colourCode  }}</option>
+             <div class="form-group">
+            <label for="selectColour">Select Colour</label>
+            <select class="form-control @error('colour_0') is-invalid @enderror" id="selectColour" name="colour_0[0]">
+            <option selected disabled> Select Colour </option>
+             @foreach($colours as $colour)
+          <option value="{{ $colour->id }}" style="background-color:{{ $colour->colourCode }}">{{ $colour->colourCode  }}</option>
                                                 @endforeach
-                                            </select>
-                                            @error('colour_0')
-                                            <span class="invalid-feedback" role="alert">
+        </select>
+            @error('colour_0')
+        <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                             @enderror
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="form-group">
-                                            <label for="selectSize">Select Size</label>
-                                            <select class="form-control @error('size_0') is-invalid @enderror" id="selectSize" name="size_0[0]">
-                                                <option selected disabled> Select Size </option>
-                                                @foreach($sizes as $size)
-                                                    <option value="{{ $size->id }}">{{ $size->sizeName  }}</option>
-                                                @endforeach
-                                            </select>
-                                            @error('size_0')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
+        <div class="form-group">
+     <label for="selectSize">Select Size</label>
+<select class="form-control @error('size_0') is-invalid @enderror" id="selectSize" name="size_0[0]">
+    <option selected disabled> Select Size </option>
+                 @foreach($sizes as $size)
+             <option value="{{ $size->id }}">{{ $size->sizeName  }}</option>
+                     @endforeach
+             </select>
+                 @error('size_0')
+         <span class="invalid-feedback" role="alert">
+     <strong>{{ $message }}</strong>
                                             </span>
                                             @enderror
                                         </div>
                                     </td>
+
+<td>
+
+
+<div class="form-group">
+                            <label for="qrcode">Quantity </label>
+            <input type="text" name="quantity_0[0]" class="form-control @error('quantity') is-invalid @enderror" placeholder="Enter Quantity" value=""id="selectQuantity">
+                            @error('quantity_0[0]')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+
+
+
+
+
+
+
+
+
+    <!--  <div class="form-group">
+          <label for="quantity">Quantity</label>
+
+                <input type="number" min ="0"name="quantity_0[0]" id="selectQuantity" class="form-control @error('quantity_0') is-invalid @enderror" placeholder="Enter Quantity Here" value="" aria-label="quantity">
+         
+                                        
+                                            <span class="invalid-feedback" role="alert">
+                                                
+                                            </span>
+                                           
+                                        </div> -->
+</td>
+
+<td>
+<div class="form-group">
+                            <label for="qrcode">QR_Code </label>
+            <input type="text" name="qr_0[0]" class="form-control @error('qr') is-invalid @enderror" placeholder="Enter QR Code" value=""id="selectQr">
+                            @error('qr')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+
+ </td>
+
+
                                     <td>
-                                        <label for="selectImage">Select Image</label>
-                                        <input type="file" class="form-control @error('image_0') is-invalid @enderror" name="image_0[]" multiple>
+                             <label for="selectImage">Select Image</label>
+                                        <input type="file" class="form-control @error('image_0') is-invalid @enderror"onchange="readURL(this);" name="image_0[]" multiple>
                                         @error('image_0')
                                         <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
+                                    </td>
+
+                                    <td> 
+                                      <img id="blah" src="#" alt="your image" />
+
                                     </td>
                                     <td>
                                         <button type="button" name="add" id="add" class="btn btn-success">Add More</button>
@@ -192,6 +249,17 @@
                     </div>
                 </div>
             </div>
+
+
+
+
+
+
+
+
+
+
+
             <div class="col-md-3">
                 <div class="card mb-4">
                     <div class="card-body">
@@ -210,7 +278,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="product_weight">Product Weight </label>
+                            <label for="product_weight">Product Weight (Kg) </label>
                             <input type="text" name="product_weight" class="form-control @error('product_weight') is-invalid @enderror" placeholder="Enter Product Weight" value="{{ old('product_weight') }}" aria-label="product_weight">
                             @error('product_weight')
                             <span class="invalid-feedback" role="alert">
@@ -245,16 +313,7 @@
                                     </span>
                             @enderror
                         </div>
-                        <div class="form-group">
-                            <label>Purchase Discount Amount</label>
-
-                            <input type="text" name="purchase_discount" id="purchase_discount" class="form-control @error('purchase_discount') is-invalid @enderror" placeholder="Enter Discount Here" value="{{ old('purchase_discount') }}" aria-label="purchase_discount">
-                            @error('purchase_discount')
-                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                            @enderror
-                        </div>
+                      
                         <div class="form-group">
                             <label>Purchase Discount Percentage (%)</label>
 
@@ -265,10 +324,22 @@
                                     </span>
                             @enderror
                         </div>
+
+
+                          <div class="form-group">
+                            <label>Purchase Discount Amount</label>
+
+                            <input type="text" name="purchase_discount" id="purchase_discount" class="form-control @error('purchase_discount') is-invalid @enderror" placeholder="Enter Discount Here" value="{{ old('purchase_discount') }}" aria-label="purchase_discount">
+                            @error('purchase_discount')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
                         <div class="form-group">
                             <label>Retail Price</label>
 
-                            <input type="text" name="price" id="price" class="form-control @error('price') is-invalid @enderror" placeholder="Enter Price Here" value="{{ old('price') }}" aria-label="price">
+                            <input type="text" name="price" id="price" class="form-control @error('price') is-invalid @enderror" placeholder="Enter Retail Price Here" value="{{ old('price') }}" aria-label="price">
                             @error('price')
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -306,7 +377,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label>Vedio Link</label>
+                            <label>Video Link</label>
 
                             <input type="text" name="video_link" class="form-control @error('video_link') is-invalid @enderror" placeholder="Enter Video Link Here" value="{{ old('video_link') }}" aria-label="video_link">
                             @error('video_link')
@@ -361,6 +432,34 @@
         </div><!-- end of main-content -->
         </form>
     </div>
+    <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+<meta charset=utf-8 />
+
+      <input type='file' onchange="readURL(this);" />
+    <img id="blah" src="#" alt="your image" />
+
+    <script>
+
+
+function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .width(150)
+                    .height(200);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+
+</script>
 
 @endsection
 
@@ -405,9 +504,39 @@
                 '</select>' +
                 '</div>' +
                 '</td>'+
+
+
+                '<td>' +
+
+                  '<div class="form-group">' +
+                '<label for="selectQuantity">Quantity</label>' +
+        '<input class="form-control"type="text" id="selectQuantity" name="quantity_'+i+'['+i+']">' +
+                
+                
+                '</div>' +
+
+                '</td>'+
+
+'<td>' +
+
+               '<div class="form-group">' +
+                '<label for="selectColour">Select Qr Code</label>' +
+        '<input class="form-control"type="text" id="selectQr" name="qr_'+i+'['+i+']">' +
+                
+                
+                '</div>' +
+
+
+     '</td>'+
+
+
+
                 '<td>' +
                 '<label for="selectImage">Select Image</label>' +
                 '<input type="file" class="form-control" name="image_'+i+'[]" multiple>' +
+                '</td>'+
+                 '<td>' +
+                '<img id="blah" src="#" alt="your image" />' +
                 '</td>'+
                 '<input type="hidden" name="length" value="'+i+'">'+
                 '<td><button type="button" class="btn btn-danger remove-tr">Remove</button></td></tr>');

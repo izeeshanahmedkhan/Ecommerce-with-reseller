@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use PDF;
 
 class SupplierController extends Controller
 {
@@ -20,6 +21,18 @@ class SupplierController extends Controller
         return view('admin.suppliers.index',['suppliers'=>$suppliers]);
     }
 
+
+ public function index_pdf()
+    {
+        // $riders =  Rider::all();
+
+        // return view('admin.riders.index',['riders'=>$riders]);
+   $suppliers =  Supplier::all();
+          
+    $pdf = PDF::loadView('admin.suppliers.index_pdf',['suppliers'=>$suppliers])->setOptions(['defaultFont' => 'sans-serif'])->setPaper('A2', 'landscape');
+    
+        return $pdf->download('allsuppliers.pdf');
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -222,4 +235,91 @@ class SupplierController extends Controller
         Session::flash('alert-type','success');
         return redirect()->route('supplier.index');
     }
+
+
+    public function selectfield(request $req)
+{
+  
+    echo $len = sizeof($req->cat);
+
+  
+      if ($len == 1)
+{
+   $products = Supplier::all($req->cat[0]);
+   // return view ('admin.products.newindex',['products'=>$products],['pro1'=>$req->cat[0]],['pro2'=>$req->cat[1]]);
+   $len =1;
+   $pro1=$req->cat[0];
+  
+
+   return view('admin.suppliers.newindex', compact('pro1','products','len'));
+} 
+
+
+elseif ($len == 2)
+{
+   $products = Supplier::all($req->cat[0], $req->cat[1]);
+   // return view ('admin.products.newindex',['products'=>$products],['pro1'=>$req->cat[0]],['pro2'=>$req->cat[1]]);
+   $len =2;
+   $pro1=$req->cat[0];
+   $pro2=$req->cat[1];
+
+   return view('admin.suppliers.newindex', compact('pro1','pro2','products','len'));
+}
+
+else if($len == 3 )
+{
+
+   $products = Supplier::all($req->cat[0], $req->cat[1],$req->cat[2]);
+   $len =3;
+   $pro1=$req->cat[0];
+   $pro2=$req->cat[1];
+   $pro3=$req->cat[2];
+
+   return view('admin.suppliers.newindex', compact('pro1','pro2','products','len','pro3'));
+
+}
+
+elseif($len == 4)
+{
+   $products = Supplier::all($req->cat[0], $req->cat[1],$req->cat[2],$req->cat[3]);
+
+   $len =4;
+   $pro1=$req->cat[0];
+   $pro2=$req->cat[1];
+   $pro3=$req->cat[2];
+   $pro4=$req->cat[3];
+
+   return view('admin.suppliers.newindex', compact('pro1','pro2','products','len','pro3','pro4'));
+}
+
+elseif($len == 5)
+{
+   $products = Supplier::all($req->cat[0], $req->cat[1],$req->cat[2],$req->cat[3],$req->cat[4]);
+
+   $len =5;
+   $pro1=$req->cat[0];
+   $pro2=$req->cat[1];
+   $pro3=$req->cat[2];
+   $pro4=$req->cat[3];
+   $pro5=$req->cat[4];
+
+   return view('admin.suppliers.newindex', compact('pro1','pro2','products','len','pro3','pro4','pro5'));
+}
+
+elseif($len == 6)
+{
+   $products = Supplier::all($req->cat[0], $req->cat[1],$req->cat[2],$req->cat[3],$req->cat[4],$req->cat[5]);
+    $len =6;
+   $pro1=$req->cat[0];
+   $pro2=$req->cat[1];
+   $pro3=$req->cat[2];
+   $pro4=$req->cat[3];
+   $pro5=$req->cat[4];
+   $pro6=$req->cat[5];
+
+   return view('admin.suppliers.newindex', compact('pro1','pro2','products','len','pro3','pro4','pro5','pro6'));
+}
+
+
+}
 }

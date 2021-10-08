@@ -27,8 +27,17 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Deal</th>
-                                    <th>Product</th>
-                                    <th>Size</th>
+                                     <th>Deal Name</th>
+                                    <th>Product 1</th>
+                                    <th>Product 2</th>
+                                    <th>Product 3</th>
+                                    <th>Product 4</th>
+                                    <th>Product 5</th>
+
+                                 <th>Deal Image 1 </th>
+                               <th>Deal Image 2 </th>
+                                  <th>Deal Image 3 </th>
+                                  
                                     <th>Discount</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
@@ -44,14 +53,32 @@
                                     <tr>
                                         <td>{{$deal->id}}</td>
                                         <td>{{$deal->deal}}</td>
+
+                                        <td>{{$deal->dealname}}</td>
+
+                                        <td>{{$deal->product_id}}</td>
+                                        <td>{{$deal->product_id_2}}</td>
+                                        <td>{{$deal->product_id_3}}</td>
+                                        <td>{{$deal->product_id_4}}</td>
+                                        <td>{{$deal->product_id_5}}</td>
                                         <td>
-                                            @php $product = \App\Models\Product::where('id',$deal->product_id)->first() @endphp
-                                            {{ $product->name }}
+    <div style="width:75px; height: 75px; font-size: 0;">
+            <img src="{{ asset('storage/images/dealimages/'.$deal->image_1) }}" alt="cnic image not found" />
+                </div>   
                                         </td>
                                         <td>
-                                            @php $size = \App\Models\Size::where('id',$deal->size_id)->first() @endphp
-                                            {{ $size->sizeName }}
+         <div style="width:75px; height: 75px; font-size: 0;">
+            <img src="{{ asset('storage/images/dealimages/'.$deal->image_2) }}" alt="cnic image not found" />
+                </div> 
                                         </td>
+                                        <td>
+                                    @php $product = \App\Models\Product::where('id',$deal->product_id)->first() @endphp
+                     <div style="width:75px; height: 75px; font-size: 0;">
+            <img src="{{ asset('storage/images/dealimages/'.$deal->image_3) }}" alt="cnic image not found" />
+                </div> 
+                                            
+                                        </td>
+                                        
                                         <td>{{$deal->discount}}</td>
                                         <td>{{$deal->start_date}}</td>
                                         <td>{{$deal->end_date}}</td>
@@ -64,7 +91,7 @@
 
                                                 if(!empty($customer)){
 
-                                                    @endphp
+                               @endphp
 
                                                         <td>{{$customer->name}}</td>
 
@@ -89,7 +116,7 @@
 
                                                     @endphp
 
-                                                    <td>{{$reseller->name}}</td>
+                  <td>{{$reseller->name}}</td>
 
                                                     @php
                                                 }
@@ -109,6 +136,17 @@
                                         <td>{{$deal->status == '1' ? 'Active':'InActive'}}</td>
                                         <td>{{$deal->created_at->diffForHumans()}}</td>
                                         <td>
+
+
+
+<a href="{{route('dealshow',$deal->id)}}" class="btn btn-raised btn-raised-success m-1" style="color: white"><i class="far fa-eye font-weight-bold">  </i></a>
+
+
+
+
+
+
+
                                             @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('edit deals'))
                                             <a href="{{route('deal.edit',$deal)}}" class="btn btn-raised btn-raised-primary m-1" style="color: white"><i
                                                     class="nav-icon i-Pen-2 font-weight-bold"></i></a>
@@ -118,7 +156,7 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"  class="btn btn-raised btn-raised-danger m-1" style="color: white"><i
-                                                        class="nav-icon i-Close-Window font-weight-bold"></i></button>
+                                                 class="nav-icon i-Close-Window font-weight-bold"></i></button>
                                             </form>
                                             @endif
                                             @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('deals status'))
@@ -145,10 +183,18 @@
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <th>#</th>
+                                   <th>#</th>
                                     <th>Deal</th>
-                                    <th>Product</th>
-                                    <th>Size</th>
+                                    <th>Product 1</th>
+                                    <th>Product 2</th>
+                                    <th>Product 3</th>
+                                    <th>Product 4</th>
+                                    <th>Product 5</th>
+
+                                 <th>Deal Image 1 </th>
+                               <th>Deal Image 2 </th>
+                                  <th>Deal Image 3 </th>
+                                  
                                     <th>Discount</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>

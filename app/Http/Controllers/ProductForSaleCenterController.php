@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ColourImageProductSize;
 use App\Models\Product;
 use App\Models\ProductForSaleCenter;
+use App\Models\SaleCenterUser;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -30,7 +31,7 @@ class ProductForSaleCenterController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.productforsalecenters.create');
     }
 
     /**
@@ -38,7 +39,80 @@ class ProductForSaleCenterController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+
+
+
      */
+
+   public function store2(Request $req)
+   {
+        //  $req->validate([
+
+        //     'product' => ['required'],
+        //     'inventory_category' => ['required'],
+        //     'batch' => ['nullable'],
+        //     'quantity' => ['nullable','numeric','min:1'],
+        //     'salecenter_id' => ['required'],
+        // ]);
+
+    $pro_salecenters = new ProductForSaleCenter;
+    $pro_salecenters->product_id = $req->product;
+    $pro_salecenters->inventroy = $req->inventory_category;
+    $pro_salecenters->batch_id = $req->batch;
+    $pro_salecenters->quantity = $req->quantity;
+    $user_salecenter =  SaleCenterUser::where('sale_center_id',$req->salecenter_id)->first()->user_id;
+    $pro_salecenters->salecenter_id = $user_salecenter;
+    $pro_salecenters->sold = "0";
+
+    $pro_salecenters->save();
+    return back();
+
+   }
+
+
+
+
+public function productsalecenter_edit_view($id)
+   {
+    return view ('admin.productforsalecenters.edit',['id'=>$id]);
+   }
+
+
+public function productsalecenter_edit_post(request $req)
+   {
+      $pro_salecenter = ProductForSaleCenter::find($req->productsalecenter_id);
+
+    $pro_salecenter->inventroy = $req->inventory_category;
+    $pro_salecenter->quantity = $req->quantity;
+    $pro_salecenter->salecenter_id = $req->salecenter_id;
+    $pro_salecenter->save();
+
+Session::flash('message', 'Updated Successfully'); 
+Session::flash('alert-class', 'alert-success'); 
+return redirect('admin/salecenter/product');
+
+
+   }
+
+
+
+public function productsalecenter_delete($id)
+   {
+
+  $pro_salecenter = ProductForSaleCenter::find($id);
+ $pro_salecenter->delete();
+Session::flash('message', 'deleted Successfully'); 
+Session::flash('alert-class', 'alert-success'); 
+return redirect('admin/salecenter/product');
+    
+
+
+
+
+   }
+
+
+
     public function store(Request $request)
     {
         $request->validate([
@@ -126,7 +200,7 @@ class ProductForSaleCenterController extends Controller
 
             if($request->get('quantity') !== null){
 
-                if ($cips->quantity === null){
+                if (isset($cips->quantity) === null){
 
                     ColourImageProductSize::where('product_id',$request->get('product'))
                         ->where('colour_id',$request->get('colour'))
@@ -200,5 +274,11 @@ class ProductForSaleCenterController extends Controller
     public function destroy(ProductForSaleCenter $productForSaleCenter)
     {
         //
+    }
+    
+    // salecenter module -> myproducts
+    public function salecenter_myproducts()
+    {
+        return view('salecenter.myproducts.index');
     }
 }

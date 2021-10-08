@@ -6,6 +6,7 @@ use App\Models\City;
 use App\Models\DeliveryCharges;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use PDF;
 
 class DeliveryChargesController extends Controller
 {
@@ -20,6 +21,18 @@ class DeliveryChargesController extends Controller
         return view('admin.deliverycharges.index',['delivery_charges'=>$delivery_charges]);
     }
 
+
+public function index_pdf()
+    {
+        // $riders =  Rider::all();
+
+        // return view('admin.riders.index',['riders'=>$riders]);
+    $delivery_charges =  DeliveryCharges::all();
+          
+    $pdf = PDF::loadView('admin.deliverycharges.index_pdf',['delivery_charges'=>$delivery_charges])->setOptions(['defaultFont' => 'sans-serif'])->setPaper('A2', 'landscape');
+    
+        return $pdf->download('all_deliverycharges.pdf');
+    }
     /**
      * Show the form for creating a new resource.
      *

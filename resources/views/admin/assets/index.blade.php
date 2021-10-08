@@ -9,25 +9,59 @@
             </div>
         @endif
         @if(auth()->user()->hasRole('super-admin') ||auth()->user()->hasPermissionTo('asset-create'))
-
+<!-- 
             <div class="col-md-12">
                 <div class="card mb-4">
                     <div class="card-body">
                         <div class="card-title mb-3">Create A New Asset</div>
-                        <form method="POST" action="{{route('assets.store')}}">
+                        <form method="POST" action="assetstore">
                             @csrf
                             <div class="row">
+
+
+
+
+
+
+
+                              
+                
+
+
+
+
+
+
+
+
                                 <div class="col-md-6 form-group mb-3">
-                                    <label for="firstName1">Enter Name</label>
-                                    <input class="form-control" id="name" name="name" type="text"
-                                           placeholder="Enter Name" required/>
+                                    <label for="serialnumber">Serial Number</label>
+                                    <input class="form-control" id="serialnumber" name="serialnumber" type="number"
+                                           placeholder="Enter serial number" required/>
                                 </div>
+
+
                                 <div class="col-md-6 form-group mb-3">
-                                    <label for="firstName1">Enter Amount</label>
-                                    <input class="form-control" id="name" name="amount" step="0" min="0.00"
+                                    <label for="description">Description</label>
+                                    <input class="form-control" id="description" name="description" step="0" min="0.00"
+                                           type="text"
+                                           placeholder="Enter description" required/>
+                                </div>
+
+
+                                <div class="col-md-6 form-group mb-3">
+                                    <label for="debit">Debit</label>
+                                    <input class="form-control" id="debit" name="debit" step="0" min="0.00"
                                            type="number"
                                            placeholder="Enter Amount" required/>
                                 </div>
+
+                                <div class="col-md-6 form-group mb-3">
+                                    <label for="credit">Credit</label>
+                                    <input class="form-control" id="credit" name="credit" type="number" required/>
+                                </div>
+
+
                                 <div class="col-md-6 form-group mb-3">
                                     <label for="firstName1">Enter Date</label>
                                     <input class="form-control" id="date" name="date" type="date" required/>
@@ -56,7 +90,7 @@
                         @endif
                     </div>
                 </div>
-            </div>
+            </div> -->
         @endif
         <div class="col-md-12 mb-3">
             <div class="card text-left">
@@ -67,9 +101,12 @@
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Amount</th>
-                                <th scope="col">Category</th>
+                                <th scope="col">Serial Number</th>
+                                <th scope="col">Particular</th>
+                                  <th scope="col">Debit</th>
+                                    <th scope="col">Credit</th>
+                            
+                              
                                 <th scope="col">Date</th>
                                 <th scope="col">Created At</th>
                                 <th scope="col">Actions</th>
@@ -82,9 +119,12 @@
                             @foreach($assets as $item)
                                 <tr>
                                     <th scope="row">{{$count++}}</th>
-                                    <td>{{$item->name}}</td>
-                                    <td>{{$item->amount}}</td>
-                                    <td>{{$item->category->title}}</td>
+                                    <td>{{$item->serialnumber}}</td>
+                                     <td>{{$item->description}}</td>
+                                     <td>{{$item->debit}}</td>
+                                     <td>{{$item->credit}}</td>
+                                   
+                                   
                                     <td>{{$item->date}}</td>
                                     <td>{{$item->created_at}}</td>
                                     <td>
@@ -120,35 +160,42 @@
                                             </div>
                                             <div class="modal-body">
                                                 <form action="{{route('assets.update',$item->id)}}" method="POST">
+                                                  
                                                     @csrf
                                                     @method('PUT')
                                                     <div class="row">
-                                                        <div class="col-md-6 form-group mb-3">
-                                                            <label for="firstName1">Enter Name</label>
-                                                            <input class="form-control" id="name"
-                                                                   value="{{$item->name}}" name="name" type="text"
-                                                                   placeholder="Enter Role Name"/>
-                                                        </div>
-                                                        <div class="col-md-6 form-group mb-3">
-                                                            <label for="firstName1">Enter Amount</label>
-                                                            <input class="form-control" id="name" name="amount"
-                                                                   value="{{$item->amount}}" step="0" min="0.00"
-                                                                   type="number"
-                                                                   placeholder="Enter Amount"/>
-                                                        </div>
+                                                         <div class="col-md-6 form-group mb-3">
+                                    <label for="description">Description</label>
+                                    <input class="form-control" id="description" name="description" step="0" min="0.00"
+                                           type="text"value="{{$item->description}}"
+                                           placeholder="Enter description" required/>
+                                </div>
+
+
+                                <div class="col-md-6 form-group mb-3">
+                                    <label for="debit">Debit</label>
+                                    <input class="form-control" id="debit" name="debit" step="0" min="0.00" value="{{$item->debit}}"
+                                           type="number"
+                                           placeholder="Enter Amount" required/>
+                                </div>
+
+                                <div class="col-md-6 form-group mb-3">
+                                    <label for="credit">Credit</label>
+                                    <input class="form-control" id="credit" value="{{$item->credit}}" name="credit" type="number" required/>
+                                </div>
                                                         <div class="col-md-6 form-group mb-3">
                                                             <label for="firstName1">Enter Date</label>
                                                             <input class="form-control" id="date" name="date"
                                                                    value="{{$item->date}}" type="date"/>
                                                         </div>
-                                                        <div class="col-md-6 form-group mb-3">
+                                                      <!--   <div class="col-md-6 form-group mb-3">
                                                             <label for="lastName1">Select Category</label>
                                                             <select name="category_id" id="" class="form-control">
                                                                 @foreach(\App\Models\Category::all() as $item)
                                                                     <option value="{{$item->id}}" {{$item->id == $item->category_id ? 'selected' : ''}}>{{$item->title}}</option>
                                                                 @endforeach
                                                             </select>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                             </div>
                                             <div class="modal-footer">

@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Reseller;
 use App\Models\User;
+use App\Models\Catalogue;
 use App\Models\ResellerUser;
+use App\Models\CatalogueProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
-
+use PDF;
 class ResellerController extends Controller
 {
     /**
@@ -23,6 +25,18 @@ class ResellerController extends Controller
         return view('admin.resellers.index',['resellers'=>$resellers]);
     }
 
+
+ public function index_pdf()
+    {
+        // $riders =  Rider::all();
+
+        // return view('admin.riders.index',['riders'=>$riders]);
+    $resellers =  Reseller::all();
+          
+    $pdf = PDF::loadView('admin.resellers.index_pdf',['resellers'=>$resellers])->setOptions(['defaultFont' => 'sans-serif'])->setPaper('A1', 'landscape');
+    
+        return $pdf->download('all_suppliers.pdf');
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -39,6 +53,10 @@ class ResellerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function hhh()
+    {
+        echo"hi";
+            }
     public function store(Request $request)
     {
         $request->validate([
@@ -309,4 +327,150 @@ class ResellerController extends Controller
         Session::flash('alert-type','success');
         return redirect()->route('reseller.index');
     }
+
+
+    public function catalogue()
+    {
+        return view('reseller.catalogues.view_catalogue');
+    }
+
+
+     public function catalogue_products(Catalogue $catalogue)
+    {
+
+
+
+        $cat = CatalogueProduct::where('catalogue_id',$catalogue->id)->get();
+
+        return view('reseller.catalogues.view_catalogue',['catalogue'=>$catalogue,'cat'=>$cat]);
+    }
+
+
+  //    public function exportimage()
+  //   {
+  //      // Browsershot::url('https://example.com')->save($pathToImage);
+  //       Browsershot::url('https://example.com')->save('example.pdf');
+  // // Browsershot::url('https://example.com')->bodyHtml();
+  //       return redirect('/');
+  //       // return view('reseller.catalogues.view_catalogue');
+  //   }
+
+
+//     public function exportimage()
+// {
+//     $content = view('reseller.catalogues.test', ['invoice' => $this])->render();
+
+//     return Browsershot::html($content)
+//         ->margins(18, 18, 24, 18)
+//         ->format('A4')
+//         ->showBackground()
+//         ->pdf();
+// }
+
+public function exportimage(Catalogue $catalogue){
+   // $data = [
+   //          'title' => 'Welcome to OnlineWebTutorBlog.com',
+   //          'author' => "Sanjay"
+   //      ];
+
+          $cat = CatalogueProduct::where('catalogue_id',$catalogue->id)->get();
+
+        // return view('reseller.catalogues.view_catalogue',['catalogue'=>$catalogue,'cat'=>$cat]);
+          
+        $pdf = PDF::loadView('reseller.catalogues.view_catalogue_pdf', ['catalogue'=>$catalogue,'cat'=>$cat])->setOptions(['defaultFont' => 'sans-serif']);
+    
+        return $pdf->download('onlinewebtutorblog.pdf');
+
+
+      
+
+}
+
+
+public function selectfield(request $req)
+{
+  
+    echo $len = sizeof($req->cat);
+
+  
+      if ($len == 1)
+{
+   $products = Reseller::all($req->cat[0]);
+   // return view ('admin.products.newindex',['products'=>$products],['pro1'=>$req->cat[0]],['pro2'=>$req->cat[1]]);
+   $len =1;
+   $pro1=$req->cat[0];
+  
+
+   return view('admin.resellers.newindex', compact('pro1','products','len'));
+} 
+
+
+elseif ($len == 2)
+{
+   $products = Reseller::all($req->cat[0], $req->cat[1]);
+   // return view ('admin.products.newindex',['products'=>$products],['pro1'=>$req->cat[0]],['pro2'=>$req->cat[1]]);
+   $len =2;
+   $pro1=$req->cat[0];
+   $pro2=$req->cat[1];
+
+   return view('admin.resellers.newindex', compact('pro1','pro2','products','len'));
+}
+
+else if($len == 3 )
+{
+
+   $products = Reseller::all($req->cat[0], $req->cat[1],$req->cat[2]);
+   $len =3;
+   $pro1=$req->cat[0];
+   $pro2=$req->cat[1];
+   $pro3=$req->cat[2];
+
+   return view('admin.resellers.newindex', compact('pro1','pro2','products','len','pro3'));
+
+}
+
+elseif($len == 4)
+{
+   $products = Reseller::all($req->cat[0], $req->cat[1],$req->cat[2],$req->cat[3]);
+
+   $len =4;
+   $pro1=$req->cat[0];
+   $pro2=$req->cat[1];
+   $pro3=$req->cat[2];
+   $pro4=$req->cat[3];
+
+   return view('admin.resellers.newindex', compact('pro1','pro2','products','len','pro3','pro4'));
+}
+
+elseif($len == 5)
+{
+   $products = Reseller::all($req->cat[0], $req->cat[1],$req->cat[2],$req->cat[3],$req->cat[4]);
+
+   $len =5;
+   $pro1=$req->cat[0];
+   $pro2=$req->cat[1];
+   $pro3=$req->cat[2];
+   $pro4=$req->cat[3];
+   $pro5=$req->cat[4];
+
+   return view('admin.resellers.newindex', compact('pro1','pro2','products','len','pro3','pro4','pro5'));
+}
+
+elseif($len == 6)
+{
+   $products = Reseller::all($req->cat[0], $req->cat[1],$req->cat[2],$req->cat[3],$req->cat[4],$req->cat[5]);
+    $len =6;
+   $pro1=$req->cat[0];
+   $pro2=$req->cat[1];
+   $pro3=$req->cat[2];
+   $pro4=$req->cat[3];
+   $pro5=$req->cat[4];
+   $pro6=$req->cat[5];
+
+   return view('admin.resellers.newindex', compact('pro1','pro2','products','len','pro3','pro4','pro5','pro6'));
+}
+
+
+}
+
 }

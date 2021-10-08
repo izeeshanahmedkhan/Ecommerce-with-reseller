@@ -27,7 +27,9 @@ use App\Http\Controllers\Account\LiabilityController;
 
 Auth::routes();
 
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/single/{product}/product',[App\Http\Controllers\FrontEndController::class, 'single_product'])->name('single_product');
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware' => ['auth','checkStatus']], function (){
 
@@ -36,6 +38,12 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
     Route::get('/salecenter',[App\Http\Controllers\UserSaleCenterController::class, 'index'])->name('salecenter.dashboard')->middleware('role:salecenter');
     Route::get('/rider',[App\Http\Controllers\UserRiderController::class, 'index'])->name('rider.dashboard')->middleware('role:rider');
     Route::get('/customer',[App\Http\Controllers\UserCustomerController::class, 'index'])->name('customer.dashboard')->middleware('role:customer');
+
+    Route::get('/owner',[App\Http\Controllers\ProductForOwnerController::class, 'index1'])->name('owner.dashboard')->middleware('role:owner');
+
+    //product details of owner route
+    Route::get('/productdetails/{id}',[App\Http\Controllers\ProductForOwnerController::class, 'productdetails']);
+    //end route
 
     Route::get('/admin/user',[App\Http\Controllers\UserController::class, 'index'])->name('user.index')->middleware('permission:show users');
     Route::get('/admin/user/create',[App\Http\Controllers\UserController::class, 'create'])->name('user.create')->middleware('permission:create users');
@@ -46,8 +54,10 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
     Route::put('/admin/user/{user}/status',[\App\Http\Controllers\UserController::class, 'status'])->name('user.status')->middleware('permission:users status');
 
 //admin roles
-    Route::get('/admin/role',[App\Http\Controllers\RoleController::class, 'index'])->name('role.index')->middleware('permission:show roles');
-    Route::get('/admin/role/create',[App\Http\Controllers\RoleController::class, 'create'])->name('role.create')->middleware('permission:create roles');
+    Route::get('/admin/role',[App\Http\Controllers\RoleController::class, 'index'])->name('role.index');
+    // ->middleware('permission:show roles')
+    Route::get('/admin/role/create',[App\Http\Controllers\RoleController::class, 'create'])->name('role.create');
+    // ->middleware('permission:create roles')
     Route::post('/admin/role/store',[App\Http\Controllers\RoleController::class, 'store'])->name('role.store');
     Route::get('/admin/role/{role}/edit',[\App\Http\Controllers\RoleController::class, 'edit'])->name('role.edit')->middleware('permission:edit roles');
     Route::put('/admin/role/{role}/update',[\App\Http\Controllers\RoleController::class, 'update'])->name('role.update');
@@ -91,7 +101,12 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
 //admin Product
 
     Route::get('/admin/product',[App\Http\Controllers\ProductController::class, 'index'])->name('product.index')->middleware('permission:show products');
+
     Route::get('/admin/product/create',[App\Http\Controllers\ProductController::class, 'create'])->name('product.create')->middleware('permission:create products');
+
+     Route::get('/admin/product/pdf',[App\Http\Controllers\ProductController::class, 'index_pdf'])->name('productindex_pdf');
+
+
     Route::post('/admin/product/store',[App\Http\Controllers\ProductController::class, 'store'])->name('product.store');
     Route::get('/admin/product/{product}/edit',[App\Http\Controllers\ProductController::class, 'edit'])->name('product.edit')->middleware('permission:edit products');
     Route::put('/admin/product/{product}/update',[App\Http\Controllers\ProductController::class, 'update'])->name('product.update');
@@ -101,12 +116,39 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
 // admin product assign to sale center
 
     Route::get('/admin/salecenter/product',[App\Http\Controllers\ProductForSaleCenterController::class, 'index'])->name('product_salecenter.index');
-    Route::post('/admin/salecenter/product/store',[App\Http\Controllers\ProductForSaleCenterController::class, 'store'])->name('product_salecenter.store');
+
+
+ Route::get('/admin/salecenter/product/create',[App\Http\Controllers\ProductForSaleCenterController::class, 'create'])->name('salecenterproductcreate');
+
+    Route::post('/admin/salecenter/product/store',[App\Http\Controllers\ProductForSaleCenterController::class, 'store2'])->name('productsalecenter_store');
+
+
+    // edit productsalecenter
+    
+    Route::get('/admin/salecenter/product/edit/{id}',[App\Http\Controllers\ProductForSaleCenterController::class, 'productsalecenter_edit_view'])->name('productsalecenteredit');
+
+     Route::post('/admin/salecenter/product/update',[App\Http\Controllers\ProductForSaleCenterController::class, 'productsalecenter_edit_post'])->name('productsalecenter_store_edit');
+     // delete
+
+Route::get('/admin/salecenter/product/delete/{id}',[App\Http\Controllers\ProductForSaleCenterController::class, 'productsalecenter_delete'])->name('productsalecenterdelete');
 
 // admin product assign to owners
 
     Route::get('/admin/owner/product',[App\Http\Controllers\ProductForOwnerController::class, 'index'])->name('product_owner.index');
     Route::post('/admin/owner/product/store',[App\Http\Controllers\ProductForOwnerController::class, 'store'])->name('product_owner.store');
+
+    Route::get('/admin/owner/product/assign',[App\Http\Controllers\ProductForOwnerController::class, 'assign'])->name('owner.assign');
+
+    // productowneredit
+     Route::get('/admin/owner/product/edit/{id}',[App\Http\Controllers\ProductForOwnerController::class, 'productowneredit_view'])->name('productownersedit');
+     Route::post('/admin/owner/product/edit/',[App\Http\Controllers\ProductForOwnerController::class, 'productowneredit_post'])->name('productownersedit_post');
+
+      Route::get('/admin/owner/product/delete/{id}',[App\Http\Controllers\ProductForOwnerController::class, 'productowner_delete'])->name('productownersdelete');
+
+
+
+    Route::post('/productassign',[App\Http\Controllers\ProductForOwnerController::class, 'assign_products']);
+
 
 //admin ColourImageProductSize
     Route::delete('/admin/colourimageproductsize/{id}/delete',[App\Http\Controllers\ColourImageProductSizeController::class, 'destroy'])->name('colourimageproductsize.destroy');
@@ -114,6 +156,10 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
 //admin SaleCenter
 
     Route::get('/admin/salecenter',[App\Http\Controllers\SaleCenterController::class, 'index'])->name('saleCenter.index')->middleware('permission:show sale centers');
+
+      Route::get('/admin/salecenter/pdf',[App\Http\Controllers\SaleCenterController::class, 'index_pdf'])->name('salecenterindex_pdf')->middleware('permission:show sale centers');
+
+
     Route::get('/admin/salecenter/create',[App\Http\Controllers\SaleCenterController::class, 'create'])->name('saleCenter.create')->middleware('permission:create sale centers');
     Route::post('/admin/salecenter/store',[App\Http\Controllers\SaleCenterController::class, 'store'])->name('saleCenter.store');
     Route::get('/admin/salecenter/{salecenter}/edit',[App\Http\Controllers\SaleCenterController::class, 'edit'])->name('salecenter.edit')->middleware('permission:edit sale centers');
@@ -123,25 +169,86 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
 //admin Rider
 
     Route::get('/admin/rider',[App\Http\Controllers\RiderController::class, 'index'])->name('rider.index')->middleware('permission:show riders');
+
+    Route::get('/admin/rider/pdf',[App\Http\Controllers\RiderController::class, 'index_pdf'])->name('riderindex_pdf')->middleware('permission:show riders');
     Route::get('/admin/rider/create',[App\Http\Controllers\RiderController::class, 'create'])->name('rider.create')->middleware('permission:create riders');
     Route::post('/admin/rider/store',[App\Http\Controllers\RiderController::class, 'store'])->name('rider.store');
     Route::get('/admin/rider/{rider}/edit',[App\Http\Controllers\RiderController::class, 'edit'])->name('rider.edit')->middleware('permission:edit riders');
     Route::put('/admin/rider/{rider}/update',[App\Http\Controllers\RiderController::class, 'update'])->name('rider.update');
     Route::delete('/admin/rider/{rider}/delete',[App\Http\Controllers\RiderController::class, 'destroy'])->name('rider.destroy')->middleware('permission:delete riders');
 
+
+//admin Rider Order Detail
+
+    Route::get('/admin/riderorderdetail',[App\Http\Controllers\RiderOrderController::class, 'riderorder_detail'])->name('riderorderdetail');
+
+Route::post('/admin/riderrdetails',[App\Http\Controllers\RiderOrderController::class, 'selectrider_work'])->name('selectrider');
+
+
+Route::get('/admin/riderpickups/{id}',[App\Http\Controllers\RiderOrderController::class, 'rider_pickups'])->name('riderpickups');
+
+Route::get('/admin/riderdeliveryy/{id}',[App\Http\Controllers\RiderOrderController::class, 'rider_delivery'])->name('riderdeliveryy');
+
+Route::get('/admin/rider/wallet/{id}',[App\Http\Controllers\RiderOrderController::class, 'rider_wallet'])->name('riderwallet');
+
+Route::get('/admin/editriderpickups/{id}',[App\Http\Controllers\RiderOrderController::class, 'edit_rider_pickups'])->name('editriderpickups');
+
+Route::get('/admin/editriderdelivery/{id}',[App\Http\Controllers\RiderOrderController::class, 'edit_rider_delivery'])->name('editriderdeliveryy');
+
+Route::post('/admin/editriderpickups/store',[App\Http\Controllers\RiderOrderController::class, 'edit_rider_pickups_post'])->name('editriderpickup_post');
+
+Route::post('/admin/editriderdelivery/store',[App\Http\Controllers\RiderOrderController::class, 'edit_rider_delivery_post'])->name('editriderdelivery_post');
+
+
+Route::get('/admin/riderwallet/update/{id}',[App\Http\Controllers\RiderOrderController::class, 'riderwalletupdate_view'])->name('riderwalletupdate');
+
+Route::post('/admin/riderwallet/store/{id}',[App\Http\Controllers\RiderOrderController::class, 'riderwalletupdate_post'])->name('riderwalletedit_post');
+
+
+    //Manual order
+
+    Route::get('/admin/manualorder',[App\Http\Controllers\OrderController::class, 'manualorder'])->name('manualorder');
+
 //admin Supplier
 
     Route::get('/admin/supplier',[App\Http\Controllers\SupplierController::class, 'index'])->name('supplier.index')->middleware('permission:show suppliers');
+
     Route::get('/admin/supplier/create',[App\Http\Controllers\SupplierController::class, 'create'])->name('supplier.create')->middleware('permission:create suppliers');
+
+    Route::get('/admin/supplier/pdf',[App\Http\Controllers\SupplierController::class, 'index_pdf'])->name('supplierindex_pdf');
+
     Route::post('/admin/supplier/store',[App\Http\Controllers\SupplierController::class, 'store'])->name('supplier.store');
     Route::get('/admin/supplier/{supplier}/edit',[App\Http\Controllers\SupplierController::class, 'edit'])->name('supplier.edit')->middleware('permission:edit suppliers');
     Route::put('/admin/supplier/{supplier}/update',[App\Http\Controllers\SupplierController::class, 'update'])->name('supplier.update');
     Route::delete('/admin/supplier/{supplier}/delete',[App\Http\Controllers\SupplierController::class, 'destroy'])->name('supplier.destroy')->middleware('permission:delete suppliers');
 
 
+
+
+
+    //puchase return
+
+    Route::get('purchasereturn',[App\Http\Controllers\purchasereturnController::class, 'select']);
+
+    Route::post('purchase/{id}',[App\Http\Controllers\purchasereturnController::class, 'create']);
+
+    Route::post('pur',[App\Http\Controllers\purchasereturnController::class,'storage']);
+
+
+    Route::get('purchasereturnindex',[App\Http\Controllers\purchasereturnController::class, 'index']);
+
+    Route::put('/admin/purchasereturn/{purchasereturn}/update',[App\Http\Controllers\purchasereturnController::class, 'update'])->name('purchasereturn.update');
+
+
+    Route::get('/admin/purchasereturn/{purchasereturn}/edit',[App\Http\Controllers\purchasereturnController::class, 'edit'])->name('purchasereturn.edit');
+
+    Route::delete('/admin/purchasereturn/{purchasereturn}/delete',[App\Http\Controllers\purchasereturnController::class, 'destroy'])->name('purchasereturn.destroy');
+
+
+
 //admin home settings
 
-// --- logo
+// --- -o
 
     Route::get('/admin/logo',[App\Http\Controllers\HomeSettingController::class, 'logo_index'])->name('logo.index')->middleware('permission:show logos');
     Route::get('/admin/logo/create',[App\Http\Controllers\HomeSettingController::class, 'logo_create'])->name('logo.create')->middleware('permission:create logos');
@@ -161,6 +268,19 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
     Route::get('/admin/banner',[App\Http\Controllers\HomeSettingController::class, 'banner_index'])->name('banner.index')->middleware('permission:show banners');
     Route::get('admin/banner/create',[App\Http\Controllers\HomeSettingController::class, 'banner_create'])->name('banner.create')->middleware('permission:create banners');
     Route::get('/admin/banner/{banner}/edit',[App\Http\Controllers\HomeSettingController::class, 'banner_edit'])->name('banner.edit')->middleware('permission:edit banners');
+
+    //menu banner
+ Route::get('menubannerindex',[App\Http\Controllers\HomeSettingController::class, 'menubannerindex']);
+
+ Route::get('menubanner',[App\Http\Controllers\HomeSettingController::class, 'menubanner']);
+
+  Route::post('menubanner',[App\Http\Controllers\HomeSettingController::class, 'saviya']);
+
+   Route::post('menubanneredit',[App\Http\Controllers\HomeSettingController::class,'saviyaupdate'])->name('menuedit');
+
+ 
+  Route::get('editmenubanner/{id}',[App\Http\Controllers\HomeSettingController::class, 'menubanneredit']);
+
 
 // --- service
     Route::get('/admin/service',[App\Http\Controllers\HomeSettingController::class, 'service_index'])->name('service.index')->middleware('permission:show services');
@@ -202,7 +322,12 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
 //admin Reseller
 
     Route::get('/admin/reseller',[App\Http\Controllers\ResellerController::class, 'index'])->name('reseller.index');
+
+
     Route::get('/admin/reseller/create',[App\Http\Controllers\ResellerController::class, 'create'])->name('reseller.create');
+
+ Route::get('/admin/reseller/pdf',[App\Http\Controllers\ResellerController::class, 'index_pdf'])->name('resellerindex_pdf');
+
     Route::post('/admin/reseller/store',[App\Http\Controllers\ResellerController::class, 'store'])->name('reseller.store');
     Route::get('/admin/reseller/{reseller}/edit',[App\Http\Controllers\ResellerController::class, 'edit'])->name('reseller.edit');
     Route::put('/admin/reseller/{reseller}/update',[App\Http\Controllers\ResellerController::class, 'update'])->name('reseller.update');
@@ -226,24 +351,47 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
 //admin owner
 
     Route::get('/admin/owner',[App\Http\Controllers\OwnerController::class, 'index'])->name('owner.index');
+
+
     Route::get('/admin/owner/create',[App\Http\Controllers\OwnerController::class, 'create'])->name('owner.create');
+
+     Route::get('/admin/owner/pdf',[App\Http\Controllers\OwnerController::class, 'index_pdf'])->name('ownerindex_pdf');
+
+
     Route::post('/admin/owner/store',[App\Http\Controllers\OwnerController::class, 'store'])->name('owner.store');
     Route::get('/admin/owner/{owner}/edit',[App\Http\Controllers\OwnerController::class, 'edit'])->name('owner.edit');
     Route::put('/admin/owner/{owner}/update',[App\Http\Controllers\OwnerController::class, 'update'])->name('owner.update');
     Route::delete('/admin/owner/{owner}/delete',[App\Http\Controllers\OwnerController::class, 'destroy'])->name('owner.destroy');
 
+//admin SALE RETURN
 
+    Route::get('/admin/salereturn',[App\Http\Controllers\salereturnController::class, 'index'])->name('salereturn.index');
+    Route::get('/admin/salereturn/create',[App\Http\Controllers\salereturnController::class, 'create'])->name('salereturn.create');
+    Route::post('/admin/salereturn/store',[App\Http\Controllers\salereturnController::class, 'store'])->name('salereturn.store');
+    Route::get('/admin/salereturn/{salereturn}/edit',[App\Http\Controllers\salereturnController::class, 'edit'])->name('salereturn.edit');
+    Route::put('/admin/salereturn/{salereturn}/update',[App\Http\Controllers\salereturnController::class, 'update'])->name('salereturn.update');
+    Route::delete('/admin/salereturn/{salereturn}/delete',[App\Http\Controllers\salereturnController::class, 'destroy'])->name('salereturn.destroy');
+
+    // END SALE RETURN
 //admin discounts
 
 //deals
 
-    Route::get('/admin/deal',[App\Http\Controllers\DealController::class, 'index'])->name('deal.index')->middleware('permission:show deals');
-    Route::get('/admin/deal/create',[App\Http\Controllers\DealController::class, 'create'])->name('deal.create')->middleware('permission:create deals');
+    Route::get('/admin/deal',[App\Http\Controllers\DealController::class, 'index'])->name('deal.index');
+    // ->middleware('permission:show deals')
+    Route::get('/admin/deal/create',[App\Http\Controllers\DealController::class, 'create'])->name('deal.create');
+    // ->middleware('permission:create deals')
     Route::post('/admin/deal/store',[App\Http\Controllers\DealController::class, 'store'])->name('deal.store');
-    Route::get('/admin/deal/{deal}/edit',[App\Http\Controllers\DealController::class, 'edit'])->name('deal.edit')->middleware('permission:edit deals');
-    Route::put('/admin/deal/{deal}/update',[App\Http\Controllers\DealController::class, 'update'])->name('deal.update');
-    Route::delete('/admin/deal/{deal}/delete',[App\Http\Controllers\DealController::class, 'destroy'])->name('deal.destroy')->middleware('permission:delete deals');
-    Route::put('/admin/deal/{deal}/status',[App\Http\Controllers\DealController::class, 'deal_status'])->name('deal.status')->middleware('permission:deals status');
+    Route::get('/admin/deal/{deal}/edit',[App\Http\Controllers\DealController::class, 'edit'])->name('deal.edit');
+    // ->middleware('permission:edit deals')
+    Route::post('/admin/deal/{deal}/update',[App\Http\Controllers\DealController::class, 'update'])->name('deal.update');
+
+Route::get('/admin/deal/show/{id}/',[App\Http\Controllers\DealController::class, 'show1'])->name('dealshow');
+
+    Route::delete('/admin/deal/{deal}/delete',[App\Http\Controllers\DealController::class, 'destroy'])->name('deal.destroy');
+    // ->middleware('permission:delete deals')
+    Route::put('/admin/deal/{deal}/status',[App\Http\Controllers\DealController::class, 'deal_status'])->name('deal.status');
+    // ->middleware('permission:deals status')
 
 // get sizes and specific deals for deals product
 
@@ -324,7 +472,10 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
 
 //front-end home
 
-    Route::get('/home',[App\Http\Controllers\FrontEndController::class, 'home']);
+    Route::get('/home/',[App\Http\Controllers\FrontEndController::class, 'home']);
+
+
+     Route::get('deletewishlist/{id}',[App\Http\Controllers\FrontEndController::class, 'delete_wishlist'])->name('deletewishlist');//wishlist delete by using ajax
 
 //single-product rating
 
@@ -337,6 +488,14 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
 
     Route::post('/cart',[App\Http\Controllers\CartController::class, 'store'])->name('cart');
     Route::get('/cart/{cart}/delete',[App\Http\Controllers\CartController::class, 'destroy'])->name('cart.destroy');
+
+
+
+
+
+    //add to wishlist
+
+    Route::get('addtowishlist/{id}',[App\Http\Controllers\WishlistController::class, 'add_wishlist'])->name('addtowishlist');
 
     // reseller cart
 
@@ -362,7 +521,14 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
 // delivery charges
 
     Route::get('/admin/deliverycharges',[App\Http\Controllers\DeliveryChargesController::class, 'index'])->name('delivery_charges.index');
+
+
     Route::get('/admin/deliverycharges/create',[App\Http\Controllers\DeliveryChargesController::class, 'create'])->name('delivery_charges.create');
+
+
+  Route::get('/admin/deliverycharges/pdf',[App\Http\Controllers\DeliveryChargesController::class, 'index_pdf'])->name('deliverychargesindex_pdf');
+
+
     Route::post('/admin/deliverycharges/store',[App\Http\Controllers\DeliveryChargesController::class, 'store'])->name('delivery_charges.store');
     Route::get('/admin/deliverycharges/{deliverycharges}/edit',[App\Http\Controllers\DeliveryChargesController::class, 'edit'])->name('delivery_charges.edit');
     Route::put('/admin/deliverycharges/{deliverycharges}/update',[App\Http\Controllers\DeliveryChargesController::class, 'update'])->name('delivery_charges.update');
@@ -370,11 +536,65 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
 
 //order
 
-    Route::get('/admin/order',[App\Http\Controllers\OrderController::class, 'index'])->name('order.index')->middleware('permission:show orders');
-    Route::get('/admin/order/{order}/edit',[App\Http\Controllers\OrderController::class, 'edit'])->name('order.edit')->middleware('permission:edit orders');
+
+Route::get('orderdetails',[App\Http\Controllers\OrderController::class, 'index2'])->name('orderdetails');
+
+Route::get('orderdetails/pdf',[App\Http\Controllers\OrderController::class, 'index2_pdf'])->name('orderdetails_pdf');
+
+
+Route::get('orderproductdetails/{id}',[App\Http\Controllers\OrderController::class, 'orderproduct_details']);
+
+Route::get('assignproduct/{id}/{name}',[App\Http\Controllers\OrderController::class, 'assign_product'])->name('assignproduct');
+
+Route::post('salecenterorder',[App\Http\Controllers\OrderController::class, 'salecenter_order'])->name('salecenterorder');
+
+Route::get('editassignproduct/{id}/{name}/{name2}',[App\Http\Controllers\OrderController::class, 'edit_assign_product_view'])->name('editassignproduct');
+
+Route::post('editsalecenterorder',[App\Http\Controllers\OrderController::class, 'edit_assign_product'])->name('editsalecenterorder');
+
+
+Route::get('assignrider/{id}/{name}/{name2}',[App\Http\Controllers\OrderController::class, 'assign_rider'])->name('assignrider');
+
+Route::get('editassignrider/{id}/{name}/{name2}/{name3}',[App\Http\Controllers\OrderController::class, 'edit_assign_rider_view'])->name('editassignrider');
+
+
+Route::post('riderorder',[App\Http\Controllers\OrderController::class, 'rider_order'])->name('riderorder');
+
+Route::post('editriderorder',[App\Http\Controllers\OrderController::class, 'edit_assign_rider'])->name('editriderorder');
+
+
+// salecenter my products module
+
+Route::get('salecenter/myproducts',[App\Http\Controllers\ProductForSaleCenterController::class, 'salecenter_myproducts'])->name('salecenter_myproducts');
+
+// product details module #2
+
+
+Route::get('rider/courier/{id}/{name}',[App\Http\Controllers\OrderController::class, 'courier_rider'])->name('courier_rider'); 
+
+Route::get('assignrider2/{id}/{name}',[App\Http\Controllers\OrderController::class, 'assign_rider2'])->name('assignrider2');
+
+Route::get('assignrider3/{id}/{name}',[App\Http\Controllers\OrderController::class, 'assign_rider3'])->name('assignrider3');
+
+Route::get('notavaialble/{pro_id}/{pro_order_id}/{pro_weight},/{pro_totalprice}',[App\Http\Controllers\OrderController::class, 'not_available'])->name('notavailable');
+
+
+Route::post('riderorder2',[App\Http\Controllers\OrderController::class, 'rider_order2'])->name('riderorder2');
+
+Route::post('riderorder3',[App\Http\Controllers\OrderController::class, 'rider_order3'])->name('riderorder3');
+
+Route::get('editassignrider2/{id}/{name}/{name2}',[App\Http\Controllers\OrderController::class, 'edit_assign_rider2_view'])->name('editassignrider2');
+
+Route::post('editriderorder2',[App\Http\Controllers\OrderController::class, 'edit_assign_rider2'])->name('editriderorder2');
+
+// end module #2
+
+
+    Route::get('/admin/order',[App\Http\Controllers\OrderController::class, 'index'])->name('order.index');
+    Route::get('/admin/order/{order}/edit',[App\Http\Controllers\OrderController::class, 'edit'])->name('order.edit');
     Route::put('/admin/order/{order}/update',[App\Http\Controllers\OrderController::class, 'update'])->name('order.update');
     Route::delete('/admin/order/{order}/delete',[App\Http\Controllers\OrderController::class, 'destroy'])->name('order.destroy')->middleware('permission:delete orders');
-    Route::get('/admin/order/{order}/show',[App\Http\Controllers\OrderController::class, 'show'])->name('order.show')->middleware('permission:view orders');
+    Route::get('/admin/order/{order}/show',[App\Http\Controllers\OrderController::class, 'show'])->name('order.show');
     Route::get('/customer/order_history',[App\Http\Controllers\OrderController::class, 'order_history'])->name('order.history');
 
     Route::post('/admin/order/{order}/couriercompany',[App\Http\Controllers\OrderController::class, 'couriercompanyorder']);
@@ -409,6 +629,28 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
     Route::get('/salecenter/order/{order}/edit',[App\Http\Controllers\SaleCenterOrderController::class, 'edit'])->name('sale_center_order.edit');
     Route::put('/salecenter/order/{order}/update',[App\Http\Controllers\SaleCenterOrderController::class, 'update'])->name('sale_center_order.update');
 
+    //Rider order assign  rider module order
+Route::get('riderorderindex',[App\Http\Controllers\RiderOrderController::class, 'index'])->name('riderorderindex');
+
+Route::get('riderorderindex2',[App\Http\Controllers\RiderOrderController::class, 'index2'])->name('riderorderindex2');
+
+Route::get('/rider/order/{order}/edit',[App\Http\Controllers\RiderOrderController::class, 'edit'])->name('rider_order.edit');
+
+Route::get('/rider/order/{order}/edit2',[App\Http\Controllers\RiderOrderController::class, 'edit2'])->name('rider_order.edit2');
+
+Route::get('/pick',[App\Http\Controllers\RiderOrderController::class, 'pick'])->name('pick');
+
+Route::get('/todaypick',[App\Http\Controllers\RiderOrderController::class, 'todaypick'])->name('today');
+
+ Route::put('/rider/order/{order}/update',[App\Http\Controllers\RiderOrderController::class, 'update'])->name('rider_order.update');
+
+ Route::put('/rider2/order/{order}/update2',[App\Http\Controllers\RiderOrderController::class, 'update2'])->name('rider_order.update2');
+
+Route::post('/checkdate',[App\Http\Controllers\RiderOrderController::class, 'date'])->name('checkdate');
+
+Route::get('rider/defer/{id}',[App\Http\Controllers\RiderOrderController::class, 'defer'])->name('rider_defer');
+
+Route::post('rider/defer/store/{id}',[App\Http\Controllers\RiderOrderController::class, 'defer_update'])->name('defernewdate');
 
 
 
@@ -429,10 +671,66 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
         ]);
 
     });
+    Route::post('account/assetstore',[App\Http\Controllers\Account\AssetController::class, 'store']);
+
+    Route::post('account/liabilitystore',[App\Http\Controllers\Account\LiabilityController::class, 'store']);
+
+    Route::post('account/equitystore',[App\Http\Controllers\Account\EquityController::class, 'store']);
+
+    Route::post('account/incomestore',[App\Http\Controllers\Account\IncomeController::class, 'store']);
+
+    Route::post('account/expensestore',[App\Http\Controllers\Account\ExpenseController::class, 'store']);
+
+
+
+
+    Route::get('generate_voucher',[App\Http\Controllers\Account\AssetController::class, 'voucher']);
+
+    Route::post('generate_voucher',[App\Http\Controllers\Account\AssetController::class, 'voucher_store']);
 
     //order status
 
     Route::put('/admin/order/{order}/status',[App\Http\Controllers\OrderController::class, 'status'])->name('order.status');
+
+
+    //ACCOUNT -> VOUCHER
+    Route::get('bankpaymentvoucher',[App\Http\Controllers\Account\VoucherController::class, 'bankpaymentvoucher']);
+
+    Route::get('bankrecievevoucher',[App\Http\Controllers\Account\VoucherController::class, 'bankrecievevoucher']);
+
+    Route::get('cashpaymentvoucher',[App\Http\Controllers\Account\VoucherController::class, 'cashpaymentvoucher']);
+
+    Route::get('cashrecievevoucher',[App\Http\Controllers\Account\VoucherController::class, 'cashrecievevoucher']);
+
+    Route::get('journalvoucher',[App\Http\Controllers\Account\VoucherController::class, 'journalvoucher']);
+
+//post
+
+    Route::post('bankpaymentvoucher',[App\Http\Controllers\Account\VoucherController::class, 'bankpaymentvoucher_post']);
+
+    Route::post('bankrecievevoucher',[App\Http\Controllers\Account\VoucherController::class, 'bankrecievevoucher_post']);
+
+    Route::post('cashpaymentvoucher',[App\Http\Controllers\Account\VoucherController::class, 'cashpaymentvoucher_post']);
+
+    Route::post('cashrecievevoucher',[App\Http\Controllers\Account\VoucherController::class, 'cashrecievevoucher_post']);
+
+
+    Route::post('journalvoucher',[App\Http\Controllers\Account\VoucherController::class, 'journalvoucher_post']);
+
+    //ACCOUNT ->HEADER
+    Route::get('addsubheader',[App\Http\Controllers\Account\HeaderController::class, 'subheader']);
+    Route::get('addthirdsubheader',[App\Http\Controllers\Account\HeaderController::class, 'thirdsubheader']);
+
+    Route::post('subheader_post',[App\Http\Controllers\Account\HeaderController::class, 'subheader_post']);
+
+    Route::post(' thirdsubheader_post',[App\Http\Controllers\Account\HeaderController::class, 'ThirdSubheaderPost']);
+
+
+    Route::get('ajax-autocomplete-search', [VoucherController::class,'selectSearch']);
+
+
+
+
 
 });
 
@@ -446,3 +744,196 @@ Route::get('/contact',[App\Http\Controllers\FrontEndController::class, 'contact'
 //Route::get('/order',[App\Http\Controllers\FrontEndController::class, 'order'])->name('order');
 Route::get('/single/{product}/product',[App\Http\Controllers\FrontEndController::class, 'single_product'])->name('single_product');
 Route::get('/single/{colour}/colour/{product}/product',[App\Http\Controllers\FrontEndController::class, 'single_colour'])->name('single_colour');
+
+
+
+Route::post('/single/{product}/hello',[App\Http\Controllers\CartController::class, 'addcart']);
+
+
+Route::get('clearcart',[App\Http\Controllers\CartController::class, 'clear_cart'])->name('clearcart');
+
+
+
+
+Route::post('admin/selectuseradmin',[App\Http\Controllers\CartController::class, 'select_user_admin'])->name('selectuseradmin');
+
+Route::post('admin/manualorder/',[App\Http\Controllers\CartController::class, 'addcart_admin'])->name('addcartadmin');
+
+Route::get('admin/admincart/{id}',[App\Http\Controllers\CartController::class, 'admin_cart_view'])->name('admincart');
+
+// edit & delete admin cart for customers
+Route::get('admin/editadmincart/{id}/{name}',[App\Http\Controllers\CartController::class, 'edit_admin_cart'])->name('editadmincart');
+
+Route::get('admin/deleteadmincart/{id}/{name}',[App\Http\Controllers\CartController::class, 'delete_admin_cart'])->name('deleteadmincart');
+
+Route::get('admin/checkoutadmincart/{id}',[App\Http\Controllers\CartController::class, 'checkout_admin_cart'])->name('checkoutadmincart');
+
+Route::post('checkoutadmin_manualorder/{userid}',[App\Http\Controllers\CheckoutController::class, 'checkoutadmin_post'])->name('checkoutadminpost');
+
+
+Route::get('customer/dashboard',[App\Http\Controllers\FrontEndController::class, 'customer_dashboard'])->name('dasboardcustomer');
+
+
+Route::get('customer/order_history',[App\Http\Controllers\FrontEndController::class, 'customer_orderhistory'])->name('dashboard_order');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Reseller Catalogue
+
+Route::get('view_catalogue',[App\Http\Controllers\ResellerController::class, 'catalogue']);
+Route::get('view_catalogue/{catalogue}',[App\Http\Controllers\ResellerController::class, 'catalogue_products']);
+
+Route::get('exportimage/{catalogue}/',[App\Http\Controllers\ResellerController::class, 'exportimage'])->name('exportimage');
+
+
+Route::get('/admin/clear', function () {
+    Artisan::call('optimize');
+    Artisan::call('view:clear');
+    return 'done';
+});
+
+
+
+
+
+// For Home Pge(front-end)
+Route::get('blog',[App\Http\Controllers\BlogController::class, 'blog']);
+
+Route::get('forgotpassword',[App\Http\Controllers\Auth\ForgotPasswordController::class, 'forgot_password']);
+
+Route::get('checkoutshipping/{id}',[App\Http\Controllers\CheckoutController::class, 'checkout_shipping']);
+
+Route::get('cart/checkoutshipping/{id}',[App\Http\Controllers\CheckoutController::class, 'checkout_shipping']);
+
+Route::get('checkoutreview',[App\Http\Controllers\CheckoutController::class, 'checkout_review']);
+
+Route::post('shippingcheckout/{id}',[App\Http\Controllers\CheckoutController::class, 'shippingcheckout'])->name('shippingcheckout');
+
+Route::post('checkoutshipping/shipcheck/{id}',[App\Http\Controllers\CheckoutController::class, 'shipcheck']);
+
+
+Route::post('cart/checkoutshipping/shippingcheckout/{id}',[App\Http\Controllers\CheckoutController::class, 'shippingcheckout']);
+  
+
+  // order proceed or decline
+
+Route::get('accept/{id}',[App\Http\Controllers\CheckoutController::class,'accept'])->name('accept');
+
+Route::get('decline/{id}',[App\Http\Controllers\CheckoutController::class,'decline'])->name('decline');
+
+
+
+
+
+// for reseller checkout
+
+Route::get('mydispatch/{id}',[App\Http\Controllers\CheckoutController::class,'customer_dispatch'])->name('customerdispatch');
+
+Route::get('customer-dispatch/{id}',[App\Http\Controllers\CheckoutController::class,'my_dispatch'])->name('mydispatch');
+
+// on admin panel resller checkout
+Route::get('customer/dispatch/{id}',[App\Http\Controllers\CheckoutController::class,'admin_customer_dispatch'])->name('customerdispatch2');
+
+Route::get('customer-dispatch2/{id}',[App\Http\Controllers\CheckoutController::class,'admin_reseller_dispatch'])->name('mydispatch2');
+
+
+//filteration
+Route::post('category/pricerange/{id}',[App\Http\Controllers\CategoryController::class, 'category_products_sub_price'])->name('pricefilter');
+
+
+Route::post('category/size/{id}',[App\Http\Controllers\CategoryController::class, 'category_products_sub_size'])->name('sizefilter');
+
+Route::post('category/color/{id}',[App\Http\Controllers\CategoryController::class, 'category_products_sub_color'])->name('colorfilter');
+
+
+
+
+
+
+
+
+
+
+
+Route::get('category',[App\Http\Controllers\CategoryController::class, 'category_products']);
+//shop by category 
+Route::get('category/{id}',[App\Http\Controllers\CategoryController::class, 'category_products_all']);
+ //by menu category
+Route::get('cat/{id}',[App\Http\Controllers\CategoryController::class, 'category_products_specific1']);
+Route::get('cat2/{id}',[App\Http\Controllers\CategoryController::class, 'category_products_specific2']); //ye sub category ka route he
+Route::get('cat/cat3/{id}',[App\Http\Controllers\CategoryController::class, 'category_products_specific2']); // ye first category ka route he 
+
+
+Route::get('cat3/{id}',[App\Http\Controllers\CategoryController::class, 'category_products_specific3']);
+
+Route::get('cat/cat3/cat3/{id}',[App\Http\Controllers\CategoryController::class, 'category_products_specific3']); // ye jab 1 category se hote howe aega to uska route he
+
+Route::get('category/cat3/{id}',[App\Http\Controllers\CategoryController::class, 'category_products_specific3']);
+Route::get('cat2/cat3/{id}',[App\Http\Controllers\CategoryController::class, 'category_products_specific3']);
+
+//category 2 attempt 
+
+Route::get('categorysub/{id}',[App\Http\Controllers\CategoryController::class, 'category_products_sub'])->name('cat.sub');
+
+ //CART 
+Route::get('viewcart',[App\Http\Controllers\CartController::class, 'cart_view']); 
+
+//promodiscount code cart view
+Route::post('productdiscount',[App\Http\Controllers\CartController::class, 'cart_view_discount'])->name('promo');
+
+Route::post('updateitems/{id}',[App\Http\Controllers\CartController::class, 'update_cart_item']);
+// Route::post('/single/{product}/updateitems/{id}',[App\Http\Controllers\CartController::class, 'update_cart_item']);
+
+
+Route::get('deletecartitem/{id}',[App\Http\Controllers\CartController::class, 'delete_cart_item']);
+// Route::get('single/{product}/deletecartitem/{id}',[App\Http\Controllers\CartController::class, 'delete_cart_item']);
+
+Route::get('cat/{id}',[App\Http\Controllers\CategoryController::class,'category_products_specific1'])->name('cat1');
+
+Route::get('cat2/{id}',[App\Http\Controllers\CategoryController::class, 'category_products_specific2'])->name('cat2');
+
+Route::get('cat3/{id}',[App\Http\Controllers\CategoryController::class, 'category_products_specific3'])->name('cat3');
+
+Route::get('generate-pdf','PDFController@generatePDF');
+
+
+Route::post('generate-pdf',[App\Http\Controllers\PDFController::class, 'generatePDF'])->name('pdf');
+
+Route::get('pdff',[App\Http\Controllers\PDFController::class, 'view']);
+
+
+// filter table for products tables
+Route::post('admin\products\details',[App\Http\Controllers\CategoryController::class, 'selectfield'])->name('selectfield');
+
+// filter table for salecenters tables
+Route::post('admin\salecenters\details',[App\Http\Controllers\SaleCenterController::class, 'selectfield'])->name('selectfield_salecenter');
+
+// filter table for riders tables
+Route::post('admin\rider\details',[App\Http\Controllers\RiderController::class, 'selectfield'])->name('selectfield_rider');
+
+// filtertable for order tables
+
+Route::post('admin\order\details',[App\Http\Controllers\OrderController::class, 'selectfield'])->name('selectfield_order');
+
+// filter table for supplier tables
+Route::post('admin\supplier\details',[App\Http\Controllers\SupplierController::class, 'selectfield'])->name('selectfield_supplier');
+
+// filter table for supplier tables
+Route::post('admin\reseller\details',[App\Http\Controllers\ResellerController::class, 'selectfield'])->name('selectfield_reseller');
+
+
+
+
+
+

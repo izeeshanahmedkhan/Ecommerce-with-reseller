@@ -38,6 +38,14 @@
 
                                             <a href="{{route('catalogue.edit',$catalogue)}}" class="btn btn-raised btn-raised-primary m-1" style="color: white"><i
                                                     class="nav-icon i-Pen-2 font-weight-bold"></i></a>
+
+
+                                            <a href="{{url('view_catalogue')}}" class="btn btn-raised btn-raised-primary m-1" style="color: white"><i
+                                                    class="nav-icon i-Pen-2 font-weight-bold"></i>view</a>
+
+
+                                                      <a href="{{url('view_catalogue',$catalogue)}}" class="btn btn-raised btn-raised-primary m-1" style="color: white">view products</a>
+
                                             <form method="POST" action="{{route('catalogue.destroy',$catalogue)}}">
                                                 @csrf
                                                 @method('DELETE')

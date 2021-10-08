@@ -13,6 +13,11 @@
                 <div class="card text-left">
                     <div class="card-body">
                         <h4 class="card-title mb-3">Category</h4>
+                         <div style="float:right; margin-right: 1%;">
+                            <a href="{{route('category.create')}}" class="btn btn-raised btn-raised-primary m-1" style="color: white;"><i
+                                    class="nav-icon font-weight-bold"></i>Add New Category</a>
+                            <br> <br>
+                        </div>
                         <div class="table-responsive">
                             <table class="display table table-striped table-bordered" id="zero_configuration_table" style="width:100%">
                                 <thead>
@@ -22,6 +27,7 @@
                                     <th>Title</th>
                                     <th>Icon</th>
                                     <th>Image</th>
+                                     <th>gender</th>
                                     <th>Created At</th>
                                     <th>Action</th>
                                 </tr>
@@ -37,6 +43,7 @@
                                         </td>
                                         <td>{{$category->title}}</td>
                                         <td class="text-center"><div class="{{$category->icon}}"></div></td>
+
                                         <td>
                                             @if($category->image != null)
                                                 <div style="width:70px; height:70px; font-size: 0;">
@@ -44,6 +51,8 @@
                                                 </div>
                                             @endif
                                         </td>
+
+                                        <td>{{$category->gender}}</td>
                                         <td>{{$category->created_at->diffForHumans()}}</td>
                                         <td>
                                             @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('edit categories'))

@@ -1,0 +1,39 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateRiderordercustomersTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('riderordercustomers', function (Blueprint $table) {
+            $table->id();
+            $table->integer('rider_id');
+            $table->string('product_name');
+            $table->string('description');
+            $table->string('address');
+            $table->string('date');
+            $table->string('cash');
+            $table->integer('order_id');
+            $table->integer('status');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('riderordercustomers');
+    }
+}

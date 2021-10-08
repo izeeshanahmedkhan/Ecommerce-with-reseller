@@ -29,6 +29,12 @@
                                     <th>Batch Name</th>
                                     <th>Batch Number</th>
                                     <th>Batch Date</th>
+                                    <th>Labour Cost</th>
+                                    <th>Transportation Cost</th>
+                                    <th>Other Cost One</th>
+                                     <th>Other Cost Two</th>
+                                      <th>Owner</th>
+                                       <th>Vendor</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -39,6 +45,16 @@
                                         <td>{{$batch->name}}</td>
                                         <td>{{$batch->number}}</td>
                                         <td>{{$batch->date}}</td>
+                                 <td>{{$batch->labour_cost}}</td>
+                                         <td>{{$batch->transportation_cost}}</td>
+
+                                         <td>{{$batch->other_cost_one}}</td>
+                                         <td>{{$batch->other_cost_two}}</td>
+
+                                         <td>{{$batch->owner}}</td>
+                                         <td>{{$batch->vendor}}</td>
+
+
                                         <td>
                                             @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('view batches'))
                                             <a href="{{route('batch.show',$batch)}}" class="btn btn-raised btn-raised-success m-1" style="color: white"><i

@@ -33,8 +33,10 @@ class LoginController extends Controller
     public function redirectTo() {
 
         $role = Auth::user()->roles->first();
+        echo $role;
 
         $permissions = Permission::all();
+        $u = Auth::user()->id;
 
         foreach($permissions as $permission){
 
@@ -67,9 +69,15 @@ class LoginController extends Controller
 
             return route('rider.dashboard');
         }
+
+         else if($role->name == "owner"){
+
+            return route('owner.dashboard',$u);
+        }
+
         else if($role->name == "customer"){
 
-            return '/home';
+             return '/home';
         }
         else{
 

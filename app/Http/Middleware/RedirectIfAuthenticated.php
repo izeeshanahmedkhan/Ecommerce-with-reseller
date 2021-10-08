@@ -24,6 +24,7 @@ class RedirectIfAuthenticated
         if (Auth::guard($guard)->check()) {
 
             $role = Auth::user()->roles->first();
+            echo $role;
 
             $permissions = Permission::all();
 
@@ -59,6 +60,12 @@ class RedirectIfAuthenticated
 
                 return route('rider.dashboard');
             }
+
+              else if($role->name == "owner"){
+
+                return route('owner.dashboard',);
+            }
+
             else if($role->name == "customer"){
 
                 return '/home';

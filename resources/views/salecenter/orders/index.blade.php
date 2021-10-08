@@ -30,8 +30,8 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($orders as $order)
-                                        <tr>
+                @foreach($orders as $order)
+                <tr>
                                             <td>{{$order->id}}</td>
                                             <td>
 
@@ -51,7 +51,7 @@
 
                                             </td>
                                             <td>
-                                                @php $colour = \App\Models\Colour::where('id',$order->colour_id)->first() @endphp
+                                                @php $colour = \App\Models\Colour::where('id',2)->first() @endphp
 
                                                 <div style="background-color: {{ $colour->colourCode }}; width:25px; height: 25px; font-size: 0;">
 
@@ -73,15 +73,15 @@
 
                                                     <span class="badge badge-primary" style="font-size:15px;">{{ 'Pending' }}</span>
 
-                                                @elseif($order->status == 2)
+                     @elseif($order->status == 2)
 
                                                     <span class="badge badge-secondary" style="font-size:15px;">{{ 'Process' }}</span>
 
-                                                @elseif($order->status == 3)
+                  @elseif($order->status == 3)
 
                                                     <span class="badge badge-warning" style="font-size:15px;">{{ 'Ready To Dispatch' }}</span>
 
-                                                @elseif($order->status == 4)
+                     @elseif($order->status == 4)
 
                                                     <span class="badge badge-success" style="font-size:15px;">{{ 'Dispatched' }}</span>
 
@@ -89,9 +89,9 @@
 
                                             </td>
                                             <td>{{$order->created_at->diffForHumans()}}</td>
+                                            
                                             <td>
-                                                <a href="{{route('sale_center_order.edit',$order)}}" class="btn btn-raised btn-raised-primary m-1" style="color: white"><i
-                                                        class="nav-icon i-Pen-2 font-weight-bold"></i></a>
+             <a href="{{route('sale_center_order.edit',$order)}}" class="btn btn-raised btn-raised-primary m-1" style="color: white"><i class="nav-icon i-Pen-2 font-weight-bold"></i></a>
                                             </td>
                                         </tr>
                                 @endforeach

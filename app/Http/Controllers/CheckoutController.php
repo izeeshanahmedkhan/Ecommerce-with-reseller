@@ -1,0 +1,328 @@
+<?php
+
+namespace App\Http\Controllers;
+use App\Models\orderdetail;
+use App\Models\productorderdetail;
+use App\Models\Offer;
+use App\Models\ResellerUser;
+use App\Models\DeliveryCharges;
+use Illuminate\Http\Request;
+use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\DB;
+
+class CheckoutController extends Controller
+{
+
+
+public function admin_customer_dispatch($id)
+    {
+      return view('admin.manualorder.checkoutresellerview',['userid'=>  $id]);
+    }
+
+    public function admin_reseller_dispatch($id)
+    {
+      return view('admin.manualorder.checkoutresellerview2',['userid'=>  $id]);
+    }
+ 
+
+    public function checkout_shipping($id)
+    {
+ 
+
+      $userId = auth()->user()->id;
+      $reseller = ResellerUser::where('user_id',$userId)->first();
+      if($reseller!=null)
+      {
+     return view('checkoutshippingReseller',['total'=>  $id]);
+      }
+      else 
+      {
+    return view('checkoutshipping',['total'=>  $id]);
+      }
+    	// return view('checkoutshipping',['total'=>  $id]);
+    }
+public function customer_dispatch($id)
+    {
+
+  return view('checkoutshipping_customer_dispatch',['total'=>  $id]);
+    }
+
+
+    public function my_dispatch($id)
+    {
+
+  return view('checkoutshipping_my_dispatch',['total'=>  $id]);
+    }
+
+
+
+     public function checkout_review()
+    {
+
+    	return view('checkoutreview');
+    }
+
+
+
+
+     public function decline($id)
+    {
+
+    $del = orderdetail::where('id',$id)->first();
+    $del->delete();
+
+productorderdetail::where('order_id',$id)->delete();
+return redirect('category'); 
+    
+    }
+
+       public function accept($id)
+    {
+ $ordernumber = $id;
+
+return view('frontend.thankyouorder',['order_num'=> $ordernumber]); 
+    
+    }
+
+    public function shippingcheckout(request $req,$id)
+    { 
+       $total = $id;
+
+       $order = new orderdetail;
+       
+       $order->user_id = $req->userid;
+       $order->name = $req->naam;
+       $order->address = $req->address;
+       $order->city = $req->city;
+       $order->district = $req->district;
+       $order->tehsil = $req->tehsil;
+       $order->location = $req->nearlocation;
+       $order->contactno = $req->contactno;
+       $order->special_delivery_instruction = $req->deliveryinstruction;
+       $order->far_fetched_town = "far";
+       $order->urgentdelivery = "urgent";
+       $order->delivery_required_before = $req->deliveryrequire;
+       $order->totalamount = $total;
+
+
+    $deliverycharges=DeliveryCharges::where('city_id',$req->city)->first();
+     $delivery = $deliverycharges->delivery_charge;
+
+       $order->deliverycharges =$delivery;
+       if($req->advancepayment!=null)
+       {
+        $order->advancepayment = $req->advancepayment;
+       }
+
+       $img3 = $req->file('img1');
+
+        if($img3!= null)
+        {
+         $image3 = $img3->getClientOriginalName();
+        $img3->storeAs('/images/transferslips',$image3);
+        $order->advancepayment_transfer_slip = $image3;
+        }
+       
+       if($req->cashdelivery!=null)
+       {
+         $order->cashofdeliveryamount=$req->cashdelivery;
+       }
+
+    $order->refundable_amount_after_delivery = $req->refundableamount;
+
+    $order->amount_to_be_charged_to_customer = $req->amountcharge;
+
+    $order->resellerprofit = $req->resellerprofit;
+    
+  $order->advance_payment_from_commission_balance =$req->advancecommission;
+
+
+      
+       $order->save();
+       $lastiya = $order->id;
+
+       // return view('checkoutreview');
+      $ordernumberdetail = orderdetail::all()->last();
+      $ordernumberid = $ordernumberdetail->id;
+
+       $cartCollection = Cart::getContent();
+      $userId = auth()->user()->id; // or any string represents user identifier
+      $u = Cart::session($userId)->getContent();
+
+     
+
+      foreach($u as $product)
+      {
+      	$productdetail = new productorderdetail;
+      	$productdetail->order_id = $ordernumberid;
+      	$productdetail->product_id = $product->id;
+        $productdetail->supplier = $product->supplier;
+
+        
+
+ 
+
+      $buyonegetone_offer = Offer::where('product_id',$product->id)->where('offer','Buy One Get One Free')->first();
+        if($buyonegetone_offer)
+        {
+          $productdetail->product_quantity = $product->quantity*2;
+        }
+        else 
+        {
+          $productdetail->product_quantity = $product->quantity;
+        }
+      	
+      	$productdetail->total_price = ($product->price)*($product->quantity);
+
+        $productdetail->size = "1"; 
+        // $product->size;
+        $productdetail->color = "1"; 
+        // $product->color;
+        $productdetail->user_id = $req->userid;
+
+      $freedelivery_offer = Offer::where('product_id',$product->id)->where('offer','Free Delivery')->first();
+
+    if($freedelivery_offer)
+    { 
+
+    $productdetail->product_weight = "0";
+
+    }
+    else
+    {
+
+    $productdetail->product_weight = $delivery*$product->attributes->weight*$product->quantity; //where 1 is product weight could be added
+    }
+    
+
+      	$productdetail->save();
+
+
+
+
+      }
+      
+
+  $totaldeliverycharges = DB::table('productorderdetails')
+        ->where('order_id',$ordernumberid)->sum('product_weight'); 
+
+  // $tt = DB::table('productorderdetails')
+  //       ->where('order_id',$ordernumberid)->first();
+  //       echo $tt;
+  $or_id = orderdetail::where('id',$ordernumberid)->first();
+  $id_order = $or_id->id;
+
+
+
+
+        DB::table('orderdetails')
+        ->where('id',$id_order)
+        ->update(['deliverycharges' => $totaldeliverycharges]);
+
+
+      $userId = auth()->user()->id; // or any string represents user identifier
+     Cart::session($userId)->clear();
+      // echo"successfuull";
+     $ordernumber = "090078601";
+
+      return view('frontend.paymentinvoice',['order_num'=> $ordernumber],['last'=> $lastiya]);
+
+
+
+    }
+
+
+    
+
+     public function checkoutadmin_post(request $req,$userid)
+    { 
+       
+
+       $order = new orderdetail;
+       $order->user_id = $userid;
+       $order->name = $req->name;
+       $order->address = $req->address;
+       $order->city = $req->city;
+       $order->district = $req->district;
+       $order->tehsil = $req->tehsil;
+       $order->location = $req->location;
+       $order->contactno = $req->contact;
+       $order->special_delivery_instruction = $req->deliveryinstruction;
+       $order->far_fetched_town = "far";
+       $order->urgentdelivery = "no";
+       $order->delivery_required_before = $req->deliverybefore;
+       $order->totalamount = $req->totalamount;
+       $order->deliverycharges =$req->deliverycharges;
+       $order->advancepayment = $req->advancepayment;
+   
+
+        $img3 = $req->file('advancepaymentslip');
+
+        if($img3!= null)
+        {
+         $image3 = $img3->getClientOriginalName();
+        $img3->storeAs('/images/transferslips',$image3);
+        $order->advancepayment_transfer_slip = $image3;
+        }
+       
+       $order->cashofdeliveryamount=$req->cashofdeliveryamount;
+       if($req->amountcharge!=null)
+      {
+        $order->amount_to_be_charged_to_customer=$req->amountcharge;
+      }
+        if($req->amountchargereseller!=null)
+      {
+        $order->amount_to_be_charged_to_customer_reseller=$req->amountchargereseller;
+      }
+        if($req->resellerprofit!=null)
+      {
+        $order->resellerprofit = $req->resellerprofit;
+      }
+        if($req->refundable!=null)
+      {
+        $order->refundable_amount_after_delivery = $req->refundable;
+      }
+
+         if($req->commission!=null)
+      {
+        $order->advance_payment_from_commission_balance = $req->commission;
+      }
+       $order->save();
+
+       // return view('checkoutreview');
+      $ordernumberdetail = orderdetail::all()->last();
+      $ordernumberid = $ordernumberdetail->id;
+
+       $cartCollection = Cart::getContent();
+      $userId = $userid; // or any string represents user identifier
+      $u = Cart::session($userId)->getContent();
+
+     
+
+      foreach($u as $product)
+      {
+        $productdetail = new productorderdetail;
+        $productdetail->order_id = $ordernumberid;
+        $productdetail->user_id = $userid;
+        $productdetail->product_id = $product->id;
+        $productdetail->product_quantity = $product->quantity;
+         $productdetail->product_weight = "1";
+          $productdetail->size = "1";
+           $productdetail->color = "1";
+        $productdetail->total_price = ($product->price)*($product->quantity);
+        $productdetail->save();
+
+
+
+
+      }
+      // $userId = auth()->user()->id; // or any string represents user identifier
+     Cart::session($userId)->clear();
+      // echo"successfuull";
+     $ordernumber = "090078601";
+      return view('admin.manualorder.thankyou',['order_num'=> $ordernumber]);
+
+
+
+    }
+}

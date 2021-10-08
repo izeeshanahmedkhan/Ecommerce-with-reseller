@@ -3,23 +3,38 @@
 @section('content')
 
     <!-- MAIN -->
-    <main class="site-main">
 
-        <div class="columns container">
-            <!-- Block  Breadcrumb-->
+   <main class="main">
+            <nav aria-label="breadcrumb" class="breadcrumb-nav mb-md-4">
+                <div class="container">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Men</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Accessories</li>
+                    </ol>
+                </div><!-- End .container -->
+            </nav>
 
-            <ol class="breadcrumb no-hide">
-                <li><a href="#">Home    </a></li>
-                <li><a href="#">Electronics    </a></li>
-                <li class="active">Machine Pro</li>
-            </ol><!-- Block  Breadcrumb-->
+            <div class="container mb-3">
+                <div class="row row-sparse">
+                    <div class="col-lg-9 main-content">
+                        <!-- <div class="category-banner">
+                            <img class="slide-bg" src="assets/images/banners/banner-1.jpg" alt="banner" width="1500" height="320">
+                            <div class="category-slide-content">
+                                <h2 class="m-b-3">Winter Fashion Trends</h2>
+                                <h3 class="text-uppercase m-b-4">Up to 30% off on Jackets</h3>
 
-            <div class="row">
+                                <h5 class="text-uppercase d-inline-block mb-0">Starting at<span class="coupon-sale-text"><sup>$</sup>199<sup>99</sup></span></h5>
+                                <a href="category.html" class="btn btn-dark btn-xl" role="button">Shop Now</a>
+                            </div>
+                           
+                        </div> -->
+                        <!-- End .category-slide -->
 
-                <!-- Main Content -->
-                <div class="col-md-9 col-md-push-3  col-main">
 
-                    <!-- images categori -->
+
+
+   <!-- images categori -->
                     <div class="category-view">
                         <div class="owl-carousel "
                              data-nav="true"
@@ -38,1285 +53,301 @@
                         </div>
                     </div><!-- images categori -->
 
-                    <!-- link categori -->
-                    <ul class="category-links">
-                        <li class="current-cate"><a href="#">All Products</a></li>
-                        <li><a href="#">Tops</a></li>
-                        <li><a href="#">Dresses</a></li>
-                        <li><a href="#">Bags & Shoes</a></li>
-                        <li><a href="#">Scaves</a></li>
-                        <li><a href="#">Pants</a></li>
-                        <li><a href="#">Blouses</a></li>
-                    </ul><!-- link categori -->
-
-                    <!-- Toolbar -->
-                    <div class=" toolbar-products toolbar-top">
-
-                        <div class="btn-filter-products">
-                            <span>Filter</span>
-                        </div>
-
-                        <h1 class="cate-title">Electronics</h1>
-
-                        <div class="modes">
-                            <strong  class="label">View as:</strong>
-                            <strong  class="modes-mode active mode-grid" title="Grid">
-                                <span>grid</span>
-                            </strong>
-                            <a  href="Category2.html" title="List" class="modes-mode mode-list">
-                                <span>list</span>
-                            </a>
-                        </div><!-- View as -->
-
-                        <div class="toolbar-option">
-
-                            <div class="toolbar-sorter ">
-                                <label    class="label">Short by:</label>
-                                <select class="sorter-options form-control" >
-                                    <option selected="selected" value="position">Position</option>
-                                    <option value="name">Name</option>
-                                    <option value="price">Price</option>
-                                </select>
-                                <a href="#" class="sorter-action"></a>
-                            </div><!-- Short by -->
-
-                            <div class="toolbar-limiter">
-                                <label   class="label">
-                                    <span>Show:</span>
-                                </label>
-
-                                <select class="limiter-options form-control" >
-                                    <option selected="selected" value="9">Show 18</option>
-                                    <option value="15">Show 15</option>
-                                    <option value="30">Show 30</option>
-                                </select>
-
-                            </div><!-- Show per page -->
-
-                        </div>
-
-                        <ul class="pagination">
-                            <li class="action">
-                                <a href="#">
-                                    <span><i aria-hidden="true" class="fa fa-angle-left"></i></span>
-                                </a>
-                            </li>
-
-                            <li class="active">
-                                <a href="#">1</a>
-                            </li>
-                            <li>
-                                <a href="#">2</a>
-                            </li>
-                            <li>
-                                <a href="#">3</a>
-                            </li>
-                            <li class="action">
-                                <a href="#">
-                                    <span><i aria-hidden="true" class="fa fa-angle-right"></i></span>
-                                </a>
-                            </li>
-                        </ul>
-
-                    </div><!-- Toolbar -->
-
-                    <!-- List Products -->
-                    <div class="products  products-grid">
-                        <ol class="product-items row">
-                            <li class="col-sm-4 product-item ">
-                                <div class="product-item-opt-1">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a href="#" class="product-item-img"><img src="{{ asset('frontend/images/media/product1.jpg') }}" alt="product name"></a>
-                                            <div class="product-item-actions">
-                                                <a href="#" class="btn btn-wishlist"><span>wishlist</span></a>
-                                                <a href="#" class="btn btn-compare"><span>compare</span></a>
-                                                <a href="#" class="btn btn-quickview"><span>quickview</span></a>
-                                            </div>
-                                            <button class="btn btn-cart" type="button"><span>Add to Cart</span></button>
-                                            <span class="product-item-label label-price">30% <span>off</span></span>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Nano Washing Machine</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                    <span class="old-price">$52.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div class="rating-result" title="80%">
-                                                                <span style="width:80%">
-                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="col-sm-4 product-item ">
-                                <div class="product-item-opt-1">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a href="#" class="product-item-img"><img src="{{ asset('frontend/images/media/product2.jpg') }}" alt="product name"></a>
-                                            <div class="product-item-actions">
-                                                <a href="#" class="btn btn-wishlist"><span>wishlist</span></a>
-                                                <a href="#" class="btn btn-compare"><span>compare</span></a>
-                                                <a href="#" class="btn btn-quickview"><span>quickview</span></a>
-                                            </div>
-                                            <button class="btn btn-cart" type="button"><span>Add to Cart</span></button>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Electronic Cleaning Machine</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                    <span class="old-price">$52.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div class="rating-result" title="80%">
-                                                                <span style="width:80%">
-                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="col-sm-4 product-item ">
-                                <div class="product-item-opt-1">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a href="#" class="product-item-img"><img src="{{ asset('frontend/images/media/product3.jpg') }}" alt="product name"></a>
-                                            <div class="product-item-actions">
-                                                <a href="#" class="btn btn-wishlist"><span>wishlist</span></a>
-                                                <a href="#" class="btn btn-compare"><span>compare</span></a>
-                                                <a href="#" class="btn btn-quickview"><span>quickview</span></a>
-                                            </div>
-                                            <button class="btn btn-cart" type="button"><span>Add to Cart</span></button>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Holdhand Cleaning Machine</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                    <span class="old-price">$52.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div class="rating-result" title="80%">
-                                                                <span style="width:80%">
-                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="col-sm-4 product-item ">
-                                <div class="product-item-opt-1">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a href="#" class="product-item-img"><img src="{{ asset('frontend/images/media/product4.jpg') }}" alt="product name"></a>
-                                            <div class="product-item-actions">
-                                                <a href="#" class="btn btn-wishlist"><span>wishlist</span></a>
-                                                <a href="#" class="btn btn-compare"><span>compare</span></a>
-                                                <a href="#" class="btn btn-quickview"><span>quickview</span></a>
-                                            </div>
-                                            <button class="btn btn-cart" type="button"><span>Add to Cart</span></button>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Advanced Dark Blue Coast</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                    <span class="old-price">$52.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div class="rating-result" title="80%">
-                                                                <span style="width:80%">
-                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="col-sm-4 product-item ">
-                                <div class="product-item-opt-1">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a href="#" class="product-item-img"><img src="{{ asset('frontend/images/media/product5.jpg') }}" alt="product name"></a>
-                                            <div class="product-item-actions">
-                                                <a href="#" class="btn btn-wishlist"><span>wishlist</span></a>
-                                                <a href="#" class="btn btn-compare"><span>compare</span></a>
-                                                <a href="#" class="btn btn-quickview"><span>quickview</span></a>
-                                            </div>
-                                            <button class="btn btn-cart" type="button"><span>Add to Cart</span></button>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Edge A3 Smart Phone</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                    <span class="old-price">$52.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div class="rating-result" title="80%">
-                                                                <span style="width:80%">
-                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="col-sm-4 product-item ">
-                                <div class="product-item-opt-1">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a href="#" class="product-item-img"><img src="{{ asset('frontend/images/media/product6.jpg') }}" alt="product name"></a>
-                                            <div class="product-item-actions">
-                                                <a href="#" class="btn btn-wishlist"><span>wishlist</span></a>
-                                                <a href="#" class="btn btn-compare"><span>compare</span></a>
-                                                <a href="#" class="btn btn-quickview"><span>quickview</span></a>
-                                            </div>
-                                            <button class="btn btn-cart" type="button"><span>Add to Cart</span></button>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Silver Drop Camera</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                    <span class="old-price">$52.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div class="rating-result" title="80%">
-                                                                <span style="width:80%">
-                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="col-sm-4 product-item ">
-                                <div class="product-item-opt-1">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a href="#" class="product-item-img"><img src="{{ asset('frontend/images/media/product7.jpg') }}" alt="product name"></a>
-                                            <div class="product-item-actions">
-                                                <a href="#" class="btn btn-wishlist"><span>wishlist</span></a>
-                                                <a href="#" class="btn btn-compare"><span>compare</span></a>
-                                                <a href="#" class="btn btn-quickview"><span>quickview</span></a>
-                                            </div>
-                                            <button class="btn btn-cart" type="button"><span>Add to Cart</span></button>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Multi-Directions Camera</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                    <span class="old-price">$52.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div class="rating-result" title="80%">
-                                                                <span style="width:80%">
-                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="col-sm-4 product-item ">
-                                <div class="product-item-opt-1">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a href="#" class="product-item-img"><img src="{{ asset('frontend/images/media/product8.jpg') }}" alt="product name"></a>
-                                            <div class="product-item-actions">
-                                                <a href="#" class="btn btn-wishlist"><span>wishlist</span></a>
-                                                <a href="#" class="btn btn-compare"><span>compare</span></a>
-                                                <a href="#" class="btn btn-quickview"><span>quickview</span></a>
-                                            </div>
-                                            <button class="btn btn-cart" type="button"><span>Add to Cart</span></button>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Ag On Board Camera</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                    <span class="old-price">$52.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div class="rating-result" title="80%">
-                                                                <span style="width:80%">
-                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="col-sm-4 product-item ">
-                                <div class="product-item-opt-1">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a href="#" class="product-item-img"><img src="{{ asset('frontend/images/media/product9.jpg') }}" alt="product name"></a>
-                                            <div class="product-item-actions">
-                                                <a href="#" class="btn btn-wishlist"><span>wishlist</span></a>
-                                                <a href="#" class="btn btn-compare"><span>compare</span></a>
-                                                <a href="#" class="btn btn-quickview"><span>quickview</span></a>
-                                            </div>
-                                            <button class="btn btn-cart" type="button"><span>Add to Cart</span></button>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">iZon White Silver Camera</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                    <span class="old-price">$52.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div class="rating-result" title="80%">
-                                                                <span style="width:80%">
-                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="col-sm-4 product-item ">
-                                <div class="product-item-opt-1">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a href="#" class="product-item-img"><img src="{{ asset('frontend/images/media/product10.jpg') }}" alt="product name"></a>
-                                            <div class="product-item-actions">
-                                                <a href="#" class="btn btn-wishlist"><span>wishlist</span></a>
-                                                <a href="#" class="btn btn-compare"><span>compare</span></a>
-                                                <a href="#" class="btn btn-quickview"><span>quickview</span></a>
-                                            </div>
-                                            <button class="btn btn-cart" type="button"><span>Add to Cart</span></button>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Microwave Compared</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                    <span class="old-price">$52.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div class="rating-result" title="80%">
-                                                                <span style="width:80%">
-                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="col-sm-4 product-item ">
-                                <div class="product-item-opt-1">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a href="#" class="product-item-img"><img src="{{ asset('frontend/images/media/product11.jpg') }}" alt="product name"></a>
-                                            <div class="product-item-actions">
-                                                <a href="#" class="btn btn-wishlist"><span>wishlist</span></a>
-                                                <a href="#" class="btn btn-compare"><span>compare</span></a>
-                                                <a href="#" class="btn btn-quickview"><span>quickview</span></a>
-                                            </div>
-                                            <button class="btn btn-cart" type="button"><span>Add to Cart</span></button>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Perfect Device For Kitchen</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                    <span class="old-price">$52.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div class="rating-result" title="80%">
-                                                                <span style="width:80%">
-                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="col-sm-4 product-item ">
-                                <div class="product-item-opt-1">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a href="#" class="product-item-img"><img src="{{ asset('frontend/images/media/product12.jpg') }}" alt="product name"></a>
-                                            <div class="product-item-actions">
-                                                <a href="#" class="btn btn-wishlist"><span>wishlist</span></a>
-                                                <a href="#" class="btn btn-compare"><span>compare</span></a>
-                                                <a href="#" class="btn btn-quickview"><span>quickview</span></a>
-                                            </div>
-                                            <button class="btn btn-cart" type="button"><span>Add to Cart</span></button>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Holdhand Cleaning Machine</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                    <span class="old-price">$52.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div class="rating-result" title="80%">
-                                                                <span style="width:80%">
-                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-sm-4 product-item ">
-                                <div class="product-item-opt-1">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a href="#" class="product-item-img"><img src="{{ asset('frontend/images/media/product13.jpg') }}" alt="product name"></a>
-                                            <div class="product-item-actions">
-                                                <a href="#" class="btn btn-wishlist"><span>wishlist</span></a>
-                                                <a href="#" class="btn btn-compare"><span>compare</span></a>
-                                                <a href="#" class="btn btn-quickview"><span>quickview</span></a>
-                                            </div>
-                                            <button class="btn btn-cart" type="button"><span>Add to Cart</span></button>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Nano Internet Smart TV</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                    <span class="old-price">$52.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div class="rating-result" title="80%">
-                                                                <span style="width:80%">
-                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-sm-4 product-item ">
-                                <div class="product-item-opt-1">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a href="#" class="product-item-img"><img src="{{ asset('frontend/images/media/product14.jpg') }}" alt="product name"></a>
-                                            <div class="product-item-actions">
-                                                <a href="#" class="btn btn-wishlist"><span>wishlist</span></a>
-                                                <a href="#" class="btn btn-compare"><span>compare</span></a>
-                                                <a href="#" class="btn btn-quickview"><span>quickview</span></a>
-                                            </div>
-                                            <button class="btn btn-cart" type="button"><span>Add to Cart</span></button>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Super Thin Internet TV</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                    <span class="old-price">$52.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div class="rating-result" title="80%">
-                                                                <span style="width:80%">
-                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-sm-4 product-item ">
-                                <div class="product-item-opt-1">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a href="#" class="product-item-img"><img src="{{ asset('frontend/images/media/product15.jpg') }}" alt="product name"></a>
-                                            <div class="product-item-actions">
-                                                <a href="#" class="btn btn-wishlist"><span>wishlist</span></a>
-                                                <a href="#" class="btn btn-compare"><span>compare</span></a>
-                                                <a href="#" class="btn btn-quickview"><span>quickview</span></a>
-                                            </div>
-                                            <button class="btn btn-cart" type="button"><span>Add to Cart</span></button>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">SamSung Led TV</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                    <span class="old-price">$52.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div class="rating-result" title="80%">
-                                                                <span style="width:80%">
-                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-sm-4 product-item ">
-                                <div class="product-item-opt-1">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a href="#" class="product-item-img"><img src="{{ asset('frontend/images/media/product16.jpg') }}" alt="product name"></a>
-                                            <div class="product-item-actions">
-                                                <a href="#" class="btn btn-wishlist"><span>wishlist</span></a>
-                                                <a href="#" class="btn btn-compare"><span>compare</span></a>
-                                                <a href="#" class="btn btn-quickview"><span>quickview</span></a>
-                                            </div>
-                                            <button class="btn btn-cart" type="button"><span>Add to Cart</span></button>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Black Electric Teapot</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                    <span class="old-price">$52.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div class="rating-result" title="80%">
-                                                                <span style="width:80%">
-                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-sm-4 product-item ">
-                                <div class="product-item-opt-1">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a href="#" class="product-item-img"><img src="{{ asset('frontend/images/media/product17.jpg') }}" alt="product name"></a>
-                                            <div class="product-item-actions">
-                                                <a href="#" class="btn btn-wishlist"><span>wishlist</span></a>
-                                                <a href="#" class="btn btn-compare"><span>compare</span></a>
-                                                <a href="#" class="btn btn-quickview"><span>quickview</span></a>
-                                            </div>
-                                            <button class="btn btn-cart" type="button"><span>Add to Cart</span></button>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Luxury Sleeping Light</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                    <span class="old-price">$52.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div class="rating-result" title="80%">
-                                                                <span style="width:80%">
-                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="col-sm-4 product-item ">
-                                <div class="product-item-opt-1">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a href="#" class="product-item-img"><img src="{{ asset('frontend/images/media/product18.jpg') }}" alt="product name"></a>
-                                            <div class="product-item-actions">
-                                                <a href="#" class="btn btn-wishlist"><span>wishlist</span></a>
-                                                <a href="#" class="btn btn-compare"><span>compare</span></a>
-                                                <a href="#" class="btn btn-quickview"><span>quickview</span></a>
-                                            </div>
-                                            <button class="btn btn-cart" type="button"><span>Add to Cart</span></button>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Pogy Pretty Iron Chair</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                    <span class="old-price">$52.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div class="rating-result" title="80%">
-                                                                <span style="width:80%">
-                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-
-                        </ol><!-- list product -->
-                    </div> <!-- List Products -->
-
-                    <!-- Toolbar -->
-                    <div class=" toolbar-products toolbar-bottom">
-
-                        <div class="modes">
-                            <strong  class="label">View as:</strong>
-                            <strong  class="modes-mode active mode-grid" title="Grid">
-                                <span>grid</span>
-                            </strong>
-                            <a  href="Category2.html" title="List" class="modes-mode mode-list">
-                                <span>list</span>
-                            </a>
-                        </div><!-- View as -->
-
-                        <div class="toolbar-option">
-
-                            <div class="toolbar-sorter ">
-                                <label    class="label">Short by:</label>
-                                <select class="sorter-options form-control" >
-                                    <option selected="selected" value="position">Product name</option>
-                                    <option value="name">Name</option>
-                                    <option value="price">Price</option>
-                                </select>
-                                <a href="#" class="sorter-action"></a>
-                            </div><!-- Short by -->
-
-                            <div class="toolbar-limiter">
-                                <label   class="label">
-                                    <span>Show:</span>
-                                </label>
-
-                                <select class="limiter-options form-control" >
-                                    <option selected="selected" value="9"> Show 18</option>
-                                    <option value="15">Show 15</option>
-                                    <option value="30">Show 30</option>
-                                </select>
-
-                            </div><!-- Show per page -->
-
-                        </div>
-
-                        <ul class="pagination">
-
-
-                            <li class="active">
-                                <a href="#">1</a>
-                            </li>
-                            <li>
-                                <a href="#">2</a>
-                            </li>
-                            <li>
-                                <a href="#">3</a>
-                            </li>
-                            <li>
-                                <a href="#">4</a>
-                            </li>
-                            <li>
-                                <a href="#">5</a>
-                            </li>
-                            <li class="action action-next">
-                                <a href="#">
-                                    Next <span><i aria-hidden="true" class="fa fa-angle-double-right"></i></span>
-                                </a>
-                            </li>
-                        </ul>
-
-                    </div><!-- Toolbar -->
-
-                </div><!-- Main Content -->
-
-                <!-- Sidebar -->
-                <div class="col-md-3 col-md-pull-9  col-sidebar">
-
-                    <!-- Block  bestseller products-->
-                    <div class="block-sidebar block-sidebar-categorie">
-                        <div class="block-title">
-                            <strong>PRODUCT TYPES</strong>
-                        </div>
-                        <div class="block-content">
-                            <ul class="items">
-                                <li class="parent">
-                                    <a href="#">Dress</a>
-                                    <span class="toggle-submenu"></span>
-                                    <ul class="subcategory">
-                                        <li >
-                                            <a href="#">subcategory 1</a>
-
-                                        </li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">Bags</a>
-                                </li>
-                                <li class="parent">
-                                    <a href="#">Cost &amp; Jackets</a>
-                                    <span class="toggle-submenu"></span>
-                                    <ul class="subcategory">
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                    </ul>
-                                </li>
-                                <li class="parent">
-                                    <a href="#">Beauty</a>
-                                    <span class="toggle-submenu"></span>
-                                    <ul class="subcategory">
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                    </ul>
-                                </li>
-                                <li class="parent">
-                                    <a href="#">Jewellery</a>
-                                    <span class="toggle-submenu"></span>
-                                    <ul class="subcategory">
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                    </ul>
-                                </li>
-                                <li class="parent">
-                                    <a href="#">Nightwear</a>
-                                    <span class="toggle-submenu"></span>
-                                    <ul class="subcategory">
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                    </ul>
-                                </li>
-                                <li class="parent">
-                                    <a href="#">Jumpers &amp; Cardigans</a>
-                                    <span class="toggle-submenu"></span>
-                                    <ul class="subcategory">
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </div><!-- Block  bestseller products-->
-
-                    <!-- block filter products -->
-                    <div id="layered-filter-block" class="block-sidebar block-filter no-hide">
-                        <div class="close-filter-products"><i class="fa fa-times" aria-hidden="true"></i></div>
-                        <div class="block-title">
-                            <strong>FILTER SELECTION</strong>
-                        </div>
-                        <div class="block-content">
-
-                            <!-- Filter Item  categori-->
-                            <div class="filter-options-item filter-options-categori">
-                                <div class="filter-options-title">Categories</div>
-                                <div class="filter-options-content">
-                                    <ol class="items">
-                                        <li class="item ">
-                                            <label>
-                                                <input type="checkbox"><span>Tops <span class="count">(20)</span></span>
-                                            </label>
-                                        </li>
-                                        <li class="item ">
-                                            <label>
-                                                <input type="checkbox"><span>Network & Computer <span class="count">(20)</span></span>
-                                            </label>
-                                        </li>
-                                        <li class="item ">
-                                            <label>
-                                                <input type="checkbox"><span>Batteries & Chargers <span class="count">(20)</span></span>
-                                            </label>
-                                        </li>
-                                        <li class="item ">
-                                            <label>
-                                                <input type="checkbox"><span>Dresses <span class="count">(20)</span></span>
-                                            </label>
-                                        </li>
-                                        <li class="item ">
-                                            <label>
-                                                <input type="checkbox"><span>Knitted <span class="count">(20)</span></span>
-                                            </label>
-                                        </li>
-                                        <li class="item ">
-                                            <label>
-                                                <input type="checkbox"><span>Pants <span class="count">(20)</span></span>
-                                            </label>
-                                        </li>
-                                        <li class="item ">
-                                            <label>
-                                                <input type="checkbox"><span>Best selling <span class="count">(20)</span></span>
-                                            </label>
-                                        </li>
-                                        <li class="item ">
-                                            <label>
-                                                <input type="checkbox"><span>Headphone & Headset <span class="count">(20)</span></span>
-                                            </label>
-                                        </li>
-                                    </ol>
-                                </div>
-                            </div><!-- Filter Item  categori-->
-
-                            <!-- filter price -->
-                            <div class="filter-options-item filter-options-price">
-                                <div class="filter-options-title">Price</div>
-                                <div class="filter-options-content">
-                                    <div class="slider-range">
-
-                                        <div id="slider-range" ></div>
-
-                                        <div class="action">
-                                                <span class="price">
-                                                    <span>Range:</span>
-                                                    $<span id="amount-left"></span>
-                                                    -
-                                                    $<span id="amount-right"></span>
-                                                </span>
-                                        </div>
-                                    </div>
-                                    <ol class="items">
-                                        <li class="item ">
-                                            <label>
-                                                <input type="checkbox"><span>$20 - $50 <span class="count">(20)</span>  </span>
-                                            </label>
-                                        </li>
-                                        <li class="item ">
-                                            <label>
-                                                <input type="checkbox"><span>$50 - $100 <span class="count">(20)</span> </span>
-                                            </label>
-                                        </li>
-                                        <li class="item ">
-                                            <label>
-                                                <input type="checkbox"><span>$100 - $250 <span class="count">(20)</span> </span>
-                                            </label>
-                                        </li>
-
-                                    </ol>
-                                </div>
-                            </div><!-- filter price -->
-
-                            <!-- filter brad-->
-                            <div class="filter-options-item filter-options-brand">
-                                <div class="filter-options-title">BRAND</div>
-                                <div class="filter-options-content">
-                                    <ol class="items">
-                                        <li class="item ">
-                                            <label>
-                                                <input type="checkbox"><span>Channelo <span class="count">(20)</span>  </span>
-                                            </label>
-                                        </li>
-                                        <li class="item ">
-                                            <label>
-                                                <input type="checkbox"><span>Mamypokon <span class="count">(20)</span> </span>
-                                            </label>
-                                        </li>
-                                        <li class="item ">
-                                            <label>
-                                                <input type="checkbox"><span>Pamperson <span class="count">(20)</span> </span>
-                                            </label>
-                                        </li>
-                                        <li class="item ">
-                                            <label>
-                                                <input type="checkbox"><span>Pradano <span class="count">(20)</span> </span>
-                                            </label>
-                                        </li>
-                                        <li class="item ">
-                                            <label>
-                                                <input type="checkbox"><span>Pumano <span class="count">(20)</span> </span>
-                                            </label>
-                                        </li>
-                                        <li class="item ">
-                                            <label>
-                                                <input type="checkbox"><span>AME <span class="count">(20)</span> </span>
-                                            </label>
-                                        </li>
-                                    </ol>
-                                </div>
-                            </div><!-- Filter Item -->
-
-                            <!-- filter color-->
-                            <div class="filter-options-item filter-options-color">
-                                <div class="filter-options-title">COLOR</div>
-                                <div class="filter-options-content">
-                                    <ol class="items">
-                                        <li class="item">
-                                            <label>
-                                                <input type="checkbox">
-                                                <span>
-                                                        <span class="img" style="background-color: #fca53c;"></span>
-                                                        <span class="count">(30)</span>
-                                                    </span>
-
-                                            </label>
-                                        </li>
-                                        <li class="item">
-                                            <label>
-                                                <input type="checkbox">
-                                                <span>
-                                                        <span class="img" style="background-color: #6b5a5c;"></span>
-                                                        <span class="count">(20)</span>
-                                                    </span>
-
-                                            </label>
-                                        </li>
-                                        <li class="item">
-                                            <label>
-                                                <input type="checkbox">
-                                                <span>
-                                                        <span class="img" style="background-color: #000000;"></span>
-                                                        <span class="count">(20)</span>
-                                                    </span>
-
-                                            </label>
-                                        </li>
-                                        <li class="item">
-                                            <label>
-                                                <input type="checkbox">
-                                                <span>
-                                                        <span class="img" style="background-color: #3063f2;"></span>
-                                                        <span class="count">(20)</span>
-                                                    </span>
-
-                                            </label>
-                                        </li>
-
-                                        <li class="item">
-                                            <label>
-                                                <input type="checkbox">
-                                                <span>
-                                                        <span class="img" style="background-color: #f9334a;"></span>
-                                                        <span class="count">(20)</span>
-                                                    </span>
-
-                                            </label>
-                                        </li>
-
-                                        <li class="item">
-                                            <label>
-                                                <input type="checkbox">
-                                                <span>
-                                                        <span class="img" style="background-color: #964b00;"></span>
-                                                        <span class="count">(20)</span>
-                                                    </span>
-
-                                            </label>
-                                        </li>
-                                        <li class="item">
-                                            <label>
-                                                <input type="checkbox">
-                                                <span>
-                                                        <span class="img" style="background-color: #faebd7;"></span>
-                                                        <span class="count">(20)</span>
-                                                    </span>
-
-                                            </label>
-                                        </li>
-                                        <li class="item">
-                                            <label>
-                                                <input type="checkbox">
-                                                <span>
-                                                        <span class="img" style="background-color: #e84c3d;"></span>
-                                                        <span class="count">(20)</span>
-                                                    </span>
-
-                                            </label>
-                                        </li>
-                                        <li class="item">
-                                            <label>
-                                                <input type="checkbox">
-                                                <span>
-                                                        <span class="img" style="background-color: #fccacd;"></span>
-                                                        <span class="count">(20)</span>
-                                                    </span>
-
-                                            </label>
-                                        </li>
-
-                                    </ol>
-                                </div>
-                            </div><!-- Filter Item -->
-
-                            <!-- Filter Item  size-->
-                            <div class="filter-options-item filter-options-size">
-                                <div class="filter-options-title">SIZE</div>
-                                <div class="filter-options-content">
-                                    <ol class="items">
-                                        <li class="item ">
-                                            <label>
-                                                <input type="checkbox"><span>X <span class="count">(20)</span></span>
-                                            </label>
-                                        </li>
-                                        <li class="item ">
-                                            <label>
-                                                <input type="checkbox"><span>XXL <span class="count">(20)</span></span>
-                                            </label>
-                                        </li>
-                                        <li class="item ">
-                                            <label>
-                                                <input type="checkbox"><span>XXL <span class="count">(20)</span></span>
-                                            </label>
-                                        </li>
-                                        <li class="item ">
-                                            <label>
-                                                <input type="checkbox"><span>m <span class="count">(20)</span></span>
-                                            </label>
-                                        </li>
-                                        <li class="item ">
-                                            <label>
-                                                <input type="checkbox"><span>L <span class="count">(20)</span></span>
-                                            </label>
-                                        </li>
-                                        <li class="item ">
-                                            <label>
-                                                <input type="checkbox"><span>32 <span class="count">(20)</span></span>
-                                            </label>
-                                        </li>
-                                        <li class="item ">
-                                            <label>
-                                                <input type="checkbox"><span>36 <span class="count">(20)</span></span>
-                                            </label>
-                                        </li>
-                                        <li class="item ">
-                                            <label>
-                                                <input type="checkbox"><span>37 <span class="count">(20)</span></span>
-                                            </label>
-                                        </li>
-                                        <li class="item ">
-                                            <label>
-                                                <input type="checkbox"><span>X <span class="count">(20)</span></span>
-                                            </label>
-                                        </li>
-                                        <li class="item ">
-                                            <label>
-                                                <input type="checkbox"><span>XXL <span class="count">(20)</span></span>
-                                            </label>
-                                        </li>
-                                        <li class="item ">
-                                            <label>
-                                                <input type="checkbox"><span>XXL <span class="count">(20)</span></span>
-                                            </label>
-                                        </li>
-                                        <li class="item ">
-                                            <label>
-                                                <input type="checkbox"><span>m <span class="count">(20)</span></span>
-                                            </label>
-                                        </li>
-
-                                    </ol>
-                                </div>
-                            </div><!-- Filter Item  size-->
-
-                        </div>
-                    </div><!-- Filter -->
-
-                    <!-- block slide top -->
-                    <div class="block-sidebar block-banner-sidebar">
-                        <div class="owl-carousel"
-                             data-nav="false"
-                             data-dots="true"
-                             data-margin="0"
-                             data-items='1'
-                             data-autoplayTimeout="700"
-                             data-autoplay="true"
-                             data-loop="true">
-                            <div class="item item1" >
-                                <img src="{{ asset('frontend/images/media/banner-sidebar1.jpg') }}" alt="images">
-                            </div>
-                            <div class="item item2" >
-                                <img src="{{ asset('frontend/images/media/banner-sidebar1.jpg') }}" alt="images">
-                            </div>
-                            <div class="item item3" >
-                                <img src="{{ asset('frontend/images/media/banner-sidebar1.jpg') }}" alt="images">
-                            </div>
-                        </div>
-                    </div><!-- block slide top -->
-
-                    <!-- Block  bestseller products-->
-                    <div class="block-sidebar block-sidebar-products">
-                        <div class="block-title">
-                            <strong>SPECIAL PRODUCTS</strong>
-                        </div>
-                        <div class="block-content">
-                            <div class="product-item product-item-opt-1">
-                                <div class="product-item-info">
-                                    <div class="product-item-photo">
-                                        <a class="product-item-img" href="#"><img alt="product name" src="{{ asset('frontend/images/media/floor5-1.jpg') }}"></a>
-                                    </div>
-                                    <div class="product-item-detail">
-                                        <strong class="product-item-name"><a href="#">Security Camera Size Flared</a></strong>
-                                        <div class="clearfix">
-                                            <div class="product-item-price">
-                                                <span class="price">$45.00</span>
-                                            </div>
-                                            <div class="product-reviews-summary">
-                                                <div class="rating-summary">
-                                                    <div title="70%" class="rating-result">
-                                                            <span style="width:70%">
-                                                                <span><span>70</span>% of <span>100</span></span>
-                                                            </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                <a href="#" class="btn all-products">All products <i aria-hidden="true" class="fa fa-angle-double-right"></i></a>
-                            </div>
-                        </div>
-                    </div><!-- Block  bestseller products-->
-
-                    <!-- Block  tags-->
-                    <div class="block-sidebar block-sidebar-tags">
-                        <div class="block-title">
-                            <strong>product tags</strong>
-                        </div>
-                        <div class="block-content">
-                            <ul>
-                                <li><a href="#" class="lv2">actual</a></li>
-                                <li><a href="#" class="lv1">adorable</a></li>
-                                <li><a href="#" class="lv3">amaze</a></li>
-                                <li><a href="#" class="lv5">change</a></li>
-                                <li><a href="#" class="lv2">consider</a></li>
-                                <li><a href="#" class="lv1">delivery</a></li>
-                                <li><a href="#" class="lv1">Top</a></li>
-                                <li><a href="#" class="lv4">flexib</a></li>
-                                <li><a href="#" class="lv1">phenomenon </a></li>
-                            </ul>
-                        </div>
-                    </div><!-- Block  tags-->
-
-                    <!-- block slide top -->
-                    <div class="block-sidebar block-sidebar-testimonials">
-                        <div class="block-title">
-                            <strong>Testimonials</strong>
-                        </div>
-                        <div class="block-content">
-                            <div class="owl-carousel"
-                                 data-nav="false"
-                                 data-dots="true"
-                                 data-margin="0"
-                                 data-items='1'
-                                 data-autoplayTimeout="700"
-                                 data-autoplay="true"
-                                 data-loop="true">
-                                <div class="item " >
-                                    <strong class="name">Roverto & Maria</strong>
-                                    <div class="avata">
-                                        <img src="{{ asset('frontend/images/media/avata.jpg') }}" alt="avata">
-                                    </div>
-                                    <div class="des">
-                                        "Your product needs to improve more. To suit the needs and update your image up"
-                                    </div>
-                                </div>
-                                <div class="item " >
-                                    <strong class="name">Roverto & Maria</strong>
-                                    <div class="avata">
-                                        <img src="{{ asset('frontend/images/media/avata.jpg') }}" alt="avata">
-                                    </div>
-                                    <div class="des">
-                                        "Your product needs to improve more. To suit the needs and update your image up"
-                                    </div>
-                                </div>
-                                <div class="item " >
-                                    <strong class="name">Roverto & Maria</strong>
-                                    <div class="avata">
-                                        <img src="{{ asset('frontend/images/media/avata.jpg') }}" alt="avata">
-                                    </div>
-                                    <div class="des">
-                                        "Your product needs to improve more. To suit the needs and update your image up"
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- block slide top -->
-                </div><!-- Sidebar -->
+                        <nav class="toolbox">
+                            <div class="toolbox-left">
+                                <div class="toolbox-item toolbox-sort">
+                                    <label>Sort By:</label>
+
+                                    <div class="select-custom">
+                                        <select name="orderby" class="form-control">
+                                            <option value="menu_order" selected="selected">Default sorting</option>
+                                            <option value="popularity">Sort by popularity</option>
+                                            <option value="rating">Sort by average rating</option>
+                                            <option value="date">Sort by newness</option>
+                                            <option value="price">Sort by price: low to high</option>
+                                            <option value="price-desc">Sort by price: high to low</option>
+                                        </select>
+                                    </div><!-- End .select-custom -->
+
+                                    
+                                </div><!-- End .toolbox-item -->
+                            </div><!-- End .toolbox-left -->
+
+                            <div class="toolbox-right">
+                                <div class="toolbox-item toolbox-show">
+                                    <label>Show:</label>
+
+                                    <div class="select-custom">
+                                        <select name="count" class="form-control">
+                                            <option value="20">20</option>
+                                            <option value="30">30</option>
+                                            <option value="40">40</option>
+                                            <option value="50">50</option>
+                                        </select>
+                                    </div><!-- End .select-custom -->
+                                </div><!-- End .toolbox-item -->
+
+                                <div class="toolbox-item layout-modes">
+                                    <a href="category.html" class="layout-btn btn-grid active" title="Grid">
+                                        <i class="icon-mode-grid"></i>
+                                    </a>
+                                    <a href="category-list.html" class="layout-btn btn-list" title="List">
+                                        <i class="icon-mode-list"></i>
+                                    </a>
+                                </div><!-- End .layout-modes -->
+                            </div><!-- End .toolbox-right -->
+                        </nav>
+             <div class="row">
+                           
+                          
+                                                                                     
+                  @foreach($categories  as $cat)  
+                            
+                     @php
+                    $product = App\Models\Product::where('id',$cat->product_id)->first();
+                     @endphp
+                       
+                        
+                            
+            <div class="col-6 col-sm-4 col-md-3 col-xl-5col">
+             <div class="product-default inner-quickview inner-icon">
+             <figure>
+              <a href="product.html">
+            <img src="{{asset('assets/images/products/product-1.jpg')}}">
+            </a>
+            <div class="label-group">
+            <span class="product-label label-sale">-20%</span>
             </div>
+            <div class="btn-icon-group">
+             <button class="btn-icon btn-add-cart" data-toggle="modal" data-target="#addCartModal"><i class="icon-shopping-cart"></i></button>
         </div>
-    </main><!-- end MAIN -->
+             <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick View</a> 
+                </figure>
+                            <div class="product-details">
+                         <div class="category-wrap">
+                         <div class="category-list">
+                          <a href="category.html" class="product-category"></a>
+                  </div>
+                         </div>
+                                        @if(!$product)
+                        <h2 class="product-title">
+                               <a href="cat3/{{$cat->id}}">{{$cat->title}}</a>
+                                        </h2>
+                                        @else
+                             <h2 class="product-title">
+                                 <a href="product.html">{{$product->name}}</a>
+                             <form action="{{route('single_product',$product)}}" method="post">
+                                      @csrf
+                                                <button> ORDER NOW </button>
+                                            </form>
+                                        </h2>
+                                        @endif
+                                        <div class="ratings-container">
+                                            <div class="product-ratings">
+                                                <span class="ratings" style="width:100%"></span><!-- End .ratings -->
+                                                <span class="tooltiptext tooltip-top"></span>
+                                            </div><!-- End .product-ratings -->
+                                        </div><!-- End .product-container -->
+                                        <div class="price-box">
+                                              @if(!$product)
+                                               <span class="old-price">$</span>
+                                               @else
+                                            <span class="old-price">${{$product->price}}</span>
+                                             <span class="product-price">${{$product->price}}</span>
+                                            @endif
+                                            <span class="product-price"></span>
+                                        </div><!-- End .price-box -->
+                                    </div><!-- End .product-details -->
+                                </div>
+                            </div>
+
+                          
+                         
+                             @endforeach
+
+
+
+                          
+
+
+                                                      
+                            
+
+                           
+                            <!--  -->
+                           
+                            
+                        </div>
+
+                        <nav class="toolbox toolbox-pagination">
+                            <div class="toolbox-item toolbox-show">
+                                <label>Show:</label>
+
+                                <div class="select-custom">
+                                    <select name="count" class="form-control">
+                                        <option value="12">12</option>
+                                        <option value="24">24</option>
+                                        <option value="36">36</option>
+                                    </select>
+                                </div><!-- End .select-custom -->
+                            </div><!-- End .toolbox-item -->
+
+                            <ul class="pagination toolbox-item">
+                                <li class="page-item active">
+                                    <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                <li class="page-item"><span class="page-link">...</span></li>
+                                <li class="page-item">
+                                    <a class="page-link page-link-btn" href="#"><i class="icon-angle-right"></i></a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div><!-- End .main-content -->
+
+                    <div class="sidebar-overlay"></div>
+                    <div class="sidebar-toggle"><i class="fas fa-sliders-h"></i></div>
+                    <aside class="sidebar-shop col-lg-3 order-lg-first mobile-sidebar">
+                        <div class="sidebar-wrapper">
+                            
+                              <div class="widget">
+                                <h3 class="widget-title">
+                                    <a data-toggle="collapse" href="#widget-body-3" role="button" aria-expanded="true" aria-controls="widget-body-3">Price</a>
+                                </h3>
+
+                                <div class="collapse show" id="widget-body-3">
+                                    <div class="widget-body">
+                            <form action="{{route('pricefilter',$id)}}"method="post">
+                                            @csrf
+                                            {{$id}}
+         <div class="price-slider-wrapper">
+         <div id="price-slider"></div><!-- End #price-slider -->
+             </div><!-- End .price-slider-wrapper -->
+
+         <div class="filter-price-action d-flex align-items-center justify-content-between flex-wrap">
+
+
+     <div class="form-group required-field">
+                    <label for="contact-email">Price To</label>
+                                <input type="number" class="form-control"min="0" id="contact-email" name="start" required>
+                            </div><!-- End .form-group -->
+
+                            <div class="form-group required-field">
+                                <label for="contact-email">Price From</label>
+                                <input type="number" class="form-control" id="contact-email" name="end"min="0" required>
+                            </div><!-- End .form-group -->
+
+                                              <button class="btn btn-primary float-right">FILTER</button><!-- End .filter-price-text -->
+                                            </div><!-- End .filter-price-action -->
+                                        </form>
+                                    </div><!-- End .widget-body -->
+                                </div><!-- End .collapse -->
+                            </div><!-- End .widget -->
+
+                            <div class="widget">
+                                <h3 class="widget-title">
+                                    <a data-toggle="collapse" href="#widget-body-4" role="button" aria-expanded="true" aria-controls="widget-body-4">Size</a>
+                                </h3>
+
+                                <div class="collapse show" id="widget-body-4">
+                                    <div class="widget-body">
+                                        <ul class="cat-list">
+                                    
+ <li>
+    <form action="{{route('sizefilter',$id)}}"
+    method ="post">
+    @csrf
+     <input type="hidden" name="sizeid" value="1">
+    <button class="btn btn-success ">Small</button>
+</form>
+</li>
+
+ <li>
+    <form action="{{route('sizefilter',$id)}}"method ="post">
+        @csrf
+     <input type="hidden" name="sizeid" value="2">
+    <button class="btn btn-success ">Medium</button>
+</form>
+</li>
+
+ <li>
+    <form action="{{route('sizefilter',$id)}}"method ="post">
+        @csrf
+     <input type="hidden" name="sizeid" value="3">
+    <button class="btn btn-success ">Large</button>
+</form>
+</li>
+
+ <li>
+    <form action="{{route('sizefilter',$id)}}"method ="post">
+        @csrf
+     <input type="hidden" name="sizeid" value="4">
+    <button class="btn btn-success ">Extra Large</button>
+</form>
+</li>
+                                        </ul>
+                                    </div><!-- End .widget-body -->
+                                </div><!-- End .collapse -->
+                            </div><!-- End .widget -->
+
+                          
+
+                            <div class="widget">
+                                <h3 class="widget-title">
+                                    <a data-toggle="collapse" href="#widget-body-6" role="button" aria-expanded="true" aria-controls="widget-body-6">Color</a>
+                                </h3>
+
+                                <div class="collapse show" id="widget-body-6">
+                                    <div class="widget-body">
+                                        <ul class="config-swatch-list">
+                        <li class="active">
+                          <a href="#" style="background-color: #1645f3;"></a>
+                           <form action="{{route('sizefilter',$id)}}"method ="post">
+        @csrf
+
+        <input type="hidden" name="colorid" value="1">
+                          <button>Blue</button>
+                      </form>
+                                            </li>
+                                            <li>
+                                                <a href="#" style="background-color: #f11010;"></a>
+                                                  <form action="{{route('colorfilter',$id)}}"method ="post">
+        @csrf
+
+        <input type="hidden" name="colorid" value="2">
+                          <button>Red</button>
+                      </form>
+                                            </li>
+                                <li>
+                     <a href="#" style="background-color: #fe8504;"></a>
+                                                 <form action="{{route('colorfilter',$id)}}"method ="post">
+        @csrf
+
+        <input type="hidden" name="colorid" value="3">
+                          <button>Orange</button>
+                      </form>
+                                            </li>
+                                            <li>
+             <a href="#" style="background-color: #2da819;"></a>
+                                                  <form action="{{route('colorfilter',$id)}}"method ="post">
+        @csrf
+
+        <input type="hidden" name="colorid" value="4">
+                          <button>Green</button>
+                      </form>
+                                            </li>
+                                        </ul>
+                                    </div><!-- End .widget-body -->
+                                </div><!-- End .collapse -->
+                            </div><!-- End .widget -->
+                        </div><!-- End .sidebar-wrapper -->
+                    </aside><!-- End .col-lg-3 -->
+                </div><!-- End .row -->
+            </div><!-- End .container -->
+        </main><!-- End .main -->
+
 
 @endsection

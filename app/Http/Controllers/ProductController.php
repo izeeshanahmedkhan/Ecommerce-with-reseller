@@ -14,6 +14,7 @@ use App\Models\Size;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\Process\Process;
+use PDF;
 
 class ProductController extends Controller
 {
@@ -27,6 +28,19 @@ class ProductController extends Controller
         $product = Product::all();
 
         return view('admin.products.index',['products'=>$product]);
+    }
+
+
+ public function index_pdf()
+    {
+        // $riders =  Rider::all();
+
+        // return view('admin.riders.index',['riders'=>$riders]);
+  $product = Product::all();
+          
+    $pdf = PDF::loadView('admin.products.index_pdf',['products'=>$product])->setOptions(['defaultFont' => 'sans-serif'])->setPaper('A2', 'landscape');
+    
+        return $pdf->download('All_Products.pdf');
     }
 
     /**
@@ -55,9 +69,18 @@ class ProductController extends Controller
 
         for($i=0; $i<=$request->length; $i++) {
 
+            
             $colour = $request['colour_'.$i];
             $size = $request['size_'.$i];
+           $quantity = $request['quantity_'.$i];
+            $qr = $request['qr_'.$i];
             $image = $request['image_'.$i];
+
+            
+              // print_r($size);
+ // print_r($quantity);
+    
+           
 
             if ($colour == null){
 
@@ -72,6 +95,21 @@ class ProductController extends Controller
                 session::flash('alert-type','error');
                 return back();
             }
+
+              if ($quantity == null){
+
+                session::flash('message',"Quantity" . strval($i) .  " filed is required");
+                session::flash('alert-type','error');
+                return back();
+            }
+
+                if ($qr == null){
+
+                session::flash('message',"Qr Field" . strval($i) .  " filed is required");
+                session::flash('alert-type','error');
+                return back();
+            }
+
             if ($image == null){
 
                 session::flash('message',"Image" . strval($i) .  " filed is required");
@@ -120,6 +158,9 @@ class ProductController extends Controller
                 $colour = $request['colour_' . $i];
                 $size = $request['size_' . $i];
                 $image = $request->file(['image_' . $i]);
+            $quantity = $request['quantity_' . $i];
+               $qr = $request['qr_' . $i];
+
                 $image_length = sizeof($image);
 
                 for($j=0; $j< $image_length; $j++)
@@ -127,7 +168,12 @@ class ProductController extends Controller
                     $check_image = $image[$j];
                     $image_name = time().$check_image->getClientOriginalName();
 
-                    ColourImageProductSize::create(['variant_sku_code'=>$sku_code."-".$j,'colour_id' => $colour[$i], 'product_id' => $product->id, 'size_id' => $size[$i], 'image' => $image_name]);
+                    ColourImageProductSize::create(['variant_sku_code'=>$sku_code."-".$j,'colour_id' => $colour[$i], 'product_id' => $product->id, 'size_id' => $size[$i],
+                        'quantity' => $quantity[$i],
+
+                       
+                       'qr_code' => $qr[$i],
+                       'image' => $image_name]);
 
                     $check_image->storeAs('/images/productImages',$image_name);
 
@@ -141,13 +187,17 @@ class ProductController extends Controller
 
             return redirect()->route('product.index');
 
-        //}
+        }
 
-            session::flash('message','Product Already Exist');
-            session::flash('alert-type','error');
-            return back();
+//             session::flash('message','Product Already Exist');
+//             session::flash('alert-type','error');
+//             return back();
 
-    }
+    // }
+ 
+
+
+// }
 
     /**
      * Display the specified resource.

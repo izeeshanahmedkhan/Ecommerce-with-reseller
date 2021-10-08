@@ -27,7 +27,8 @@ class HomeController extends Controller
         DB::table('deals')->where('end_date','<',now())->update(['status' => 0]);
         DB::table('offers')->where('end_date','<',now())->update(['status' => 0]);
         DB::table('general_discounts')->where('end_date','<',now())->update(['status' => 0]);
-
+     $user = 1;
         return view('home');
+          return view('frontend.index',['useriya'=>$user]);
     }
 }

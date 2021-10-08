@@ -38,8 +38,7 @@
                                         <td>{{ $product->name }}</td>
                                         <td>{{ $product->list_price_for_salesman }}</td>
                                         <td>
-                                            <a href="{{route('product_reseller.show',$product)}}" class="btn btn-raised btn-raised-success m-1" style="color: white"><i
-                                                    class="far fa-eye font-weight-bold"> View </i></a>
+                 <a href="{{route('product_reseller.show',$product)}}" class="btn btn-raised btn-raised-success m-1" style="color: white"><i class="far fa-eye font-weight-bold"> View </i></a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -13,7 +13,10 @@
                         <form class="forms-sample" method="POST" action="{{ route('rider.store') }}" enctype="multipart/form-data">
                             @csrf()
                             <div class="row">
-                                <div class="col-md-6 form-group mb-3">
+                                
+
+
+<div class="col-md-6 form-group mb-3">
                                     <label for="riderName">Rider Name</label>
                                     <input type="text"  name="name" class="form-control form-control @error('name') is-invalid @enderror" id="riderName" type="text" placeholder="Enter your rider name" value="{{ old('name') }}" autocomplete="name" autofocus />
                                     @error('name')
@@ -22,7 +25,6 @@
                                     </span>
                                     @enderror
                                 </div>
-
                                 <div class="col-md-6 form-group mb-3">
                                     <label for="riderAddress">Address</label>
 
@@ -76,25 +78,150 @@
                                     @enderror
                                 </div>
 
+
+                                
+                                <div class="col-md-6 form-group mb-3">
+                                    <label for="riderimage">Rider Image</label>
+                                    <input id="file-input" type="file" multiple  name="riderimage" class="form-control form-control @error('riderimage') is-invalid @enderror" id="riderimage" value="" autocomplete="riderimage" autofocus/>
+                                    @error('riderimage')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                           
+                           <div class="col-md-6 form-group mb-3">
+                                <div id="preview"></div>
+                            </div>
+                                <script>
+                                    function previewImages() {
+
+  var preview = document.querySelector('#preview');
+  
+  if (this.files) {
+    [].forEach.call(this.files, readAndPreview);
+  }
+
+  function readAndPreview(file) {
+
+    // Make sure `file.name` matches our extensions criteria
+    if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+      return alert(file.name + " is not an image");
+    } // else...
+    
+    var reader = new FileReader();
+    
+    reader.addEventListener("load", function() {
+      var image = new Image();
+      image.height = 100;
+      image.title  = file.name;
+      image.src    = this.result;
+      preview.appendChild(image);
+    });
+    
+    reader.readAsDataURL(file);
+    
+  }
+
+}
+
+document.querySelector('#file-input').addEventListener("change", previewImages);
+                                </script>
+
                                 <div class="col-md-6 form-group mb-3">
                                     <label for="resellerCnicFront">CNIC Front Image</label>
-                                    <input type="file"  name="cnic_front" class="form-control form-control @error('cnic_front') is-invalid @enderror" id="resellerCnicFront" value="{{ old('cnic_front') }}" autocomplete="cnic_front" autofocus/>
+                                    <input id="file-inputt" type="file" multiple  name="cnic_front" class="form-control form-control @error('cnic_front') is-invalid @enderror" id="resellerCnicFront" value="{{ old('cnic_front') }}" autocomplete="cnic_front" autofocus/>
                                     @error('cnic_front')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
+                                <div class="col-md-6 form-group mb-3">
+                                <div id="preview2"></div>
+                            </div>
+                                <script>
+                                    function previewImages() {
+
+  var preview = document.querySelector('#preview2');
+  
+  if (this.files) {
+    [].forEach.call(this.files, readAndPreview);
+  }
+
+  function readAndPreview(file) {
+
+    // Make sure `file.name` matches our extensions criteria
+    if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+      return alert(file.name + " is not an image");
+    } // else...
+    
+    var reader = new FileReader();
+    
+    reader.addEventListener("load", function() {
+      var image = new Image();
+      image.height = 100;
+      image.title  = file.name;
+      image.src    = this.result;
+      preview.appendChild(image);
+    });
+    
+    reader.readAsDataURL(file);
+    
+  }
+
+}
+
+document.querySelector('#file-inputt').addEventListener("change", previewImages);
+                                </script>
 
                                 <div class="col-md-6 form-group mb-3">
                                     <label for="resellerCnicBack">CNIC Back Image</label>
-                                    <input type="file"  name="cnic_back" class="form-control form-control @error('cnic_back') is-invalid @enderror" id="resellerCnicBack" value="{{ old('cnic_back') }}" autocomplete="cnic_back" autofocus/>
+                                    <input id="file-inputtt" type="file" multiple  name="cnic_back" class="form-control form-control @error('cnic_back') is-invalid @enderror" id="resellerCnicBack" value="{{ old('cnic_back') }}" autocomplete="cnic_back" autofocus/>
                                     @error('cnic_back')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
+                                <div class="col-md-6 form-group mb-3">
+                                <div id="preview3"></div>
+                            </div>
+                                <script>
+                                    function previewImages() {
+
+  var preview = document.querySelector('#preview3');
+  
+  if (this.files) {
+    [].forEach.call(this.files, readAndPreview);
+  }
+
+  function readAndPreview(file) {
+
+    // Make sure `file.name` matches our extensions criteria
+    if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+      return alert(file.name + " is not an image");
+    } // else...
+    
+    var reader = new FileReader();
+    
+    reader.addEventListener("load", function() {
+      var image = new Image();
+      image.height = 100;
+      image.title  = file.name;
+      image.src    = this.result;
+      preview.appendChild(image);
+    });
+    
+    reader.readAsDataURL(file);
+    
+  }
+
+}
+
+document.querySelector('#file-inputtt').addEventListener("change", previewImages);
+                                </script>
+
 
                                 <div class="col-md-6 form-group mb-3">
                                     <label for="riderMessagingServiceNo">Messaging Service Number</label>

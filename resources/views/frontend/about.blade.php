@@ -2,146 +2,125 @@
 
 @section('content')
 
-    <!-- MAIN -->
-    <main class="site-main">
-        <div class="columns container">
-            <!-- Block  Breadcrumb-->
 
-            <ol class="breadcrumb no-hide">
-                <li><a href="#">Home </a></li>
-                <li class="active">About Us</li>
-            </ol><!-- Block  Breadcrumb-->
+    <main class="main">
+            <nav aria-label="breadcrumb" class="breadcrumb-nav">
+                <div class="container">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">About Us</li>
+                    </ol>
+                </div><!-- End .container -->
+            </nav>
 
-            <div class="row">
+            <div class="page-header">
+                <div class="container">
+                    <h1>The New Way to Success</h1>
+                </div><!-- End .container -->
+            </div><!-- End .page-header -->
 
-                <!-- Main Content -->
-                <div class="col-md-9 col-md-push-3 col-main">
-                    @if($about->status == 1)
-                    @csrf
-                    @method('PUT')
-                    <h2 class="page-heading">
-                        <span class="page-heading-title2">{{$about->title}}</span>
-                    </h2>
+            <div class="container">
+                <h2 class="mb-4">Who we are</h2>
+                <div class="row row-sparse">
+                    <div class="col-md-6">
+                        <p>Aliquam consectetur et lorem semper scelerisque. Proin est nibh, vestibulum vitae congue nec, tristique eu justo. Maecenas eu nunc lacinia, porta lorem vitae, viverra velit. Nulla dolor libero, rhoncus quis luctus eu, fermentum sed leo. Morbi ut risus porttitor odio sodales pulvinar. Sed gravida nulla sed sapien vulputate, eget malesuada justo egestas. Pellentesque sem mi, vulputate ac iaculis sit amet, sagittis feugiat dui. Proin non pellentesque leo. Vestibulum varius laoreet posuere. Etiam fringilla diam odio.</p>
 
-                    <div class="content-text clearfix">
+                        <p>Nulla felis nibh, bibendum a leo ut, egestas ornare felis. Nam pretium mauris justo, eget commodo est fringilla vel. Proin condimentum, lacus sit amet finibus gravida, sapien ligula mattis leo, sit amet mattis leo lacus sit amet lectus. Nulla facilisi. Etiam porta iaculis velit id pulvinar. Sed dolor odio, eleifend eget aliquam vitae, efficitur vitae dolor. Integer ornare neque ac leo sollicitudin, at vestibulum ante scelerisque. Nullam ut elit sed lorem tempus feugiat in et lectus. Mauris interdum molestie placerat. Nullam dolor nunc, elementum et tincidunt id, vestibulum quis turpis. Integer imperdiet a eros a laoreet. Nam mattis vel ligula non imperdiet. Suspendisse potenti. Fusce purus sem, dapibus eu fermentum eget, aliquam vehicula ligula.</p>
+                    </div><!-- End .col-md-6 -->
 
-                        <img width="310" alt="" class="alignleft" src="{{ asset('storage/images/about/'.$about->image) }}">
+                    <div class="col-md-6">
+                        <p>Quisque congue dignissim dui sed luctus. Morbi nec mi vitae magna finibus ullamcorper. Etiam mattis blandit convallis. Suspendisse eu elementum leo. Vestibulum molestie nunc et efficitur egestas. Vivamus arcu lectus, laoreet vel consectetur bibendum, elementum non nunc. Proin porttitor velit odio, ac mattis quam tincidunt eget. Fusce semper nunc eget efficitur efficitur. Nam ullamcorper, enim id tincidunt feugiat, velit mauris fermentum nulla, at tempor eros turpis sit amet massa. Ut a semper lectus, sed hendrerit risus. In hac habitasse platea dictumst. Curabitur venenatis cursus posuere. Praesent turpis nisi, aliquam at facilisis non, sagittis vel urna. Donec diam lorem, feugiat vitae laoreet in, sagittis a lorem.</p>
 
-                        <p>{{$about->description}}</p>
+                        <p>Aliquam consectetur et lorem semper scelerisque. Proin est nibh, vestibulum vitae congue nec, tristique eu justo. Maecenas eu nunc lacinia, porta lorem vitae, viverra velit. Nulla dolor libero, rhoncus quis luctus eu, fermentum sed leo. Morbi ut risus porttitor odio sodales pulvinar. Sed gravida nulla sed sapien vulputate, eget malesuada justo egestas. Pellentesque sem mi, vulputate ac iaculis sit amet, sagittis feugiat dui. Proin non pellentesque leo. Vestibulum varius laoreet posuere. Etiam fringilla diam odio.</p>
+                    </div><!-- End .col-md-6 -->
+                </div><!-- End .row -->
+            </div><!-- End .container -->
 
-                    </div>
-                    @endif
-                </div><!-- Main Content -->
+            <p>&nbsp;</p>
+            <hr>
+            <p>&nbsp;</p>
+            
+                 
 
-                <!-- Sidebar -->
-                <div class="col-md-3 col-md-pull-9 col-sidebar">
+            <div class="history-section">
+                <div class="container">
+                     @if($about->status == 1)
+                                    @csrf
+                                    @method('PUT')
+                    <h1 class="page-title">{{$about->title}}</h1>
+                    <div class="row row-sparse">
+                        <div class="col-lg-5">
+                            <div class="about-slider owl-carousel owl-theme">
+                                <div class="about-slider-item">
+                                   
+                                    <img class="owl-lazy" src="{{ asset('storage/images/about/'.$about->image) }}" alt="About image description">
+                                </div>
+                                <div class="about-slider-item">
+                                    <img class="owl-lazy" data-src="assets/images/about/img-2.jpg" src="assets/images/lazy.png" alt="About image description">
+                                </div>
+                                <div class="about-slider-item">
+                                    <img class="owl-lazy" data-src="assets/images/about/img-3.jpg" src="assets/images/lazy.png" alt="About image description">
+                                </div>
+                            </div><!-- End .about-slider -->
+                        </div><!-- End .col-lg-5 -->
+                        <div class="col-lg-7">
+                            <h2 class="mb-4">2014</h2>
+                            <p>{{$about->description}}</p>
+                               @endif
 
-                    <!-- Block  bestseller products-->
-                    <div class="block-sidebar block-sidebar-categorie">
-                        <div class="block-title">
-                            <strong>PRODUCT TYPES</strong>
-                        </div>
-                        <div class="block-content">
-                            <ul class="items">
-                                <li class="parent">
-                                    <a href="#">Dress</a>
-                                    <span class="toggle-submenu"></span>
-                                    <ul class="subcategory">
-                                        <li>
-                                            <a href="#">subcategory 1</a>
+                            <p>Nulla felis nibh, bibendum a leo ut, egestas ornare felis. Nam pretium mauris justo, eget commodo est fringilla vel. Proin condimentum, lacus sit amet finibus gravida, sapien ligula mattis leo, sit amet mattis leo lacus sit amet lectus. Nulla facilisi. Etiam porta iaculis velit id pulvinar. Sed dolor odio, eleifend eget aliquam vitae, efficitur vitae dolor. Integer ornare neque ac leo sollicitudin, at vestibulum ante scelerisque. Nullam ut elit sed lorem tempus feugiat in et lectus. Mauris interdum molestie placerat. Nullam dolor nunc, elementum et tincidunt id, vestibulum quis turpis. Integer imperdiet a eros a laoreet. Nam mattis vel ligula non imperdiet. Suspendisse potenti. Fusce purus sem, dapibus eu fermentum eget, aliquam vehicula ligula.</p>
+                        </div><!-- End .col-lg-7 -->
+                    </div><!-- End .row -->
 
-                                        </li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">Bags</a>
-                                </li>
-                                <li class="parent">
-                                    <a href="#">Cost &amp; Jackets</a>
-                                    <span class="toggle-submenu"></span>
-                                    <ul class="subcategory">
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                    </ul>
-                                </li>
-                                <li class="parent">
-                                    <a href="#">Beauty</a>
-                                    <span class="toggle-submenu"></span>
-                                    <ul class="subcategory">
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                    </ul>
-                                </li>
-                                <li class="parent">
-                                    <a href="#">Jewellery</a>
-                                    <span class="toggle-submenu"></span>
-                                    <ul class="subcategory">
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                    </ul>
-                                </li>
-                                <li class="parent">
-                                    <a href="#">Nightwear</a>
-                                    <span class="toggle-submenu"></span>
-                                    <ul class="subcategory">
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                    </ul>
-                                </li>
-                                <li class="parent">
-                                    <a href="#">Jumpers &amp; Cardigans</a>
-                                    <span class="toggle-submenu"></span>
-                                    <ul class="subcategory">
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                        <li><a href="#">subcategory 1</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </div><!-- Block  bestseller products-->
+                    <div class="row row-sparse">
+                        <div class="col-lg-5">
+                            <div class="about-slider owl-carousel owl-theme">
+                                <div class="about-slider-item">
+                                    <img class="owl-lazy" data-src="assets/images/about/img-2.jpg" src="assets/images/lazy.png" alt="About image description">
+                                </div>
+                                <div class="about-slider-item">
+                                    <img class="owl-lazy" data-src="assets/images/about/img-3.jpg" src="assets/images/lazy.png" alt="About image description">
+                                </div>
+                                <div class="about-slider-item">
+                                    <img class="owl-lazy" data-src="assets/images/about/img-1.jpg" src="assets/images/lazy.png" alt="About image description">
+                                </div>
+                            </div><!-- End .about-slider -->
+                        </div><!-- End .col-lg-5 -->
+                        <div class="col-lg-7 order-lg-first">
+                            <h2 class="mb-4">2015</h2>
+                            <p>Aliquam consectetur et lorem semper scelerisque. Proin est nibh, vestibulum vitae congue nec, tristique eu justo. Maecenas eu nunc lacinia, porta lorem vitae, viverra velit. Nulla dolor libero, rhoncus quis luctus eu, fermentum sed leo. Morbi ut risus porttitor odio sodales pulvinar. Sed gravida nulla sed sapien vulputate, eget malesuada justo egestas. Pellentesque sem mi, vulputate ac iaculis sit amet, sagittis feugiat dui. Proin non pellentesque leo. Vestibulum varius laoreet posuere. Etiam fringilla diam odio.</p>
 
+                            <p>Nulla felis nibh, bibendum a leo ut, egestas ornare felis. Nam pretium mauris justo, eget commodo est fringilla vel. Proin condimentum, lacus sit amet finibus gravida, sapien ligula mattis leo, sit amet mattis leo lacus sit amet lectus. Nulla facilisi. Etiam porta iaculis velit id pulvinar. Sed dolor odio, eleifend eget aliquam vitae, efficitur vitae dolor. Integer ornare neque ac leo sollicitudin, at vestibulum ante scelerisque. Nullam ut elit sed lorem tempus feugiat in et lectus. Mauris interdum molestie placerat. Nullam dolor nunc, elementum et tincidunt id, vestibulum quis turpis. Integer imperdiet a eros a laoreet. Nam mattis vel ligula non imperdiet. Suspendisse potenti. Fusce purus sem, dapibus eu fermentum eget, aliquam vehicula ligula.</p>
+                        </div><!-- End .col-lg-7 -->
+                    </div><!-- End .row -->
 
-                    <!-- block slide top -->
-                    <div class="block-sidebar block-banner-sidebar">
-                        <div class="owl-carousel"
-                             data-nav="false"
-                             data-dots="true"
-                             data-margin="0"
-                             data-items='1'
-                             data-autoplayTimeout="700"
-                             data-autoplay="true"
-                             data-loop="true">
-                            <div class="item item1">
-                                <img src="{{ asset('frontend/images/media/banner-sidebar1.jpg') }}" alt="images">
-                            </div>
-                            <div class="item item2">
-                                <img src="{{ asset('frontend/images/media/banner-sidebar1.jpg') }}" alt="images">
-                            </div>
-                            <div class="item item3">
-                                <img src="{{ asset('frontend/images/media/banner-sidebar1.jpg') }}" alt="images">
-                            </div>
-                        </div>
-                    </div><!-- block slide top -->
+                    <div class="row row-sparse">
+                        <div class="col-lg-5">
+                            <div class="about-slider owl-carousel owl-theme">
+                                <div class="about-slider-item">
+                                    <img class="owl-lazy" data-src="assets/images/about/img-3.jpg" src="assets/images/lazy.png" alt="About image description">
+                                </div>
+                                <div class="about-slider-item">
+                                    <img class="owl-lazy" data-src="assets/images/about/img-2.jpg" src="assets/images/lazy.png" alt="About image description">
+                                </div>
+                                <div class="about-slider-item">
+                                    <img class="owl-lazy" data-src="assets/images/about/img-1.jpg" src="assets/images/lazy.png" alt="About image description">
+                                </div>
+                            </div><!-- End .about-slider -->
+                        </div><!-- End .col-lg-5 -->
+                        <div class="col-lg-7">
+                            <h2 class="mb-4">2016</h2>
+                            <p>Aliquam consectetur et lorem semper scelerisque. Proin est nibh, vestibulum vitae congue nec, tristique eu justo. Maecenas eu nunc lacinia, porta lorem vitae, viverra velit. Nulla dolor libero, rhoncus quis luctus eu, fermentum sed leo. Morbi ut risus porttitor odio sodales pulvinar. Sed gravida nulla sed sapien vulputate, eget malesuada justo egestas. Pellentesque sem mi, vulputate ac iaculis sit amet, sagittis feugiat dui. Proin non pellentesque leo. Vestibulum varius laoreet posuere. Etiam fringilla diam odio.</p>
 
+                            <p>Nulla felis nibh, bibendum a leo ut, egestas ornare felis. Nam pretium mauris justo, eget commodo est fringilla vel. Proin condimentum, lacus sit amet finibus gravida, sapien ligula mattis leo, sit amet mattis leo lacus sit amet lectus. Nulla facilisi. Etiam porta iaculis velit id pulvinar. Sed dolor odio, eleifend eget aliquam vitae, efficitur vitae dolor. Integer ornare neque ac leo sollicitudin, at vestibulum ante scelerisque. Nullam ut elit sed lorem tempus feugiat in et lectus. Mauris interdum molestie placerat. Nullam dolor nunc, elementum et tincidunt id, vestibulum quis turpis. Integer imperdiet a eros a laoreet. Nam mattis vel ligula non imperdiet. Suspendisse potenti. Fusce purus sem, dapibus eu fermentum eget, aliquam vehicula ligula.</p>
+                        </div><!-- End .col-lg-7 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .history-section -->
 
-                </div><!-- Sidebar -->
+            <div class="mb-8"></div><!-- margin -->
+        </main><!-- End .main -->
 
-
-            </div>
-        </div>
-    </main><!-- end MAIN -->
 
 @endsection

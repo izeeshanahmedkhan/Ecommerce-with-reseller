@@ -6,15 +6,22 @@ use App\Models\Cart;
 use App\Models\Courier;
 use App\Models\courierorder;
 use App\Models\Offer;
+use App\Models\SaleCenter;
+use App\Models\SaleCenterOrder;
+use App\Models\riderordercustomer;
 use App\Models\Order;
 use App\Models\Billing;
 use App\Models\Product;
 use App\Models\ResellerCart;
+use App\Models\orderdetail;
+use App\Models\productorderdetail;
+use App\Models\riderproductorder;
 use App\Notifications\OrderProcessed;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+use PDF;
 
 class OrderController extends Controller
 {
@@ -23,6 +30,133 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+
+    public function courier_rider($id,$name)
+{
+    
+return view('admin.orders.courier_rider', compact('id','name'));
+}
+
+
+
+    public function not_available($pro_id,$pro_order_id,$pro_weight,$pro_totalprice)
+{
+$order = orderdetail::where('id',$pro_order_id)->first();
+$updateddeliverycharges = $order->deliverycharges-$pro_weight;
+$order->deliverycharges = $updateddeliverycharges;
+
+
+$updatedtotalamount = $order->totalamount-$pro_totalprice;
+$order->totalamount = $updatedtotalamount;
+
+$order->save();
+
+$delete = productorderdetail::where('id',$pro_id)->first();
+$delete->delete();
+
+Session::flash('message', 'Product Remove Successfully !');
+Session::flash('alert-class', 'alert-success');
+ return back();
+
+
+
+}
+  
+
+
+
+
+
+
+    public function selectfield(request $req)
+{
+  
+    echo $len = sizeof($req->cat);
+
+  
+      if ($len == 1)
+{
+   $products = orderdetail::all($req->cat[0]);
+   // return view ('admin.products.newindex',['products'=>$products],['pro1'=>$req->cat[0]],['pro2'=>$req->cat[1]]);
+   $len =1;
+   $pro1=$req->cat[0];
+  
+
+   return view('admin.orders.newindex', compact('pro1','products','len'));
+} 
+
+
+elseif ($len == 2)
+{
+   $products = orderdetail::all($req->cat[0], $req->cat[1]);
+   // return view ('admin.products.newindex',['products'=>$products],['pro1'=>$req->cat[0]],['pro2'=>$req->cat[1]]);
+   $len =2;
+   $pro1=$req->cat[0];
+   $pro2=$req->cat[1];
+
+   return view('admin.orders.newindex', compact('pro1','pro2','products','len'));
+}
+
+else if($len == 3 )
+{
+
+   $products = orderdetail::all($req->cat[0], $req->cat[1],$req->cat[2]);
+   $len =3;
+   $pro1=$req->cat[0];
+   $pro2=$req->cat[1];
+   $pro3=$req->cat[2];
+
+   return view('admin.orders.newindex', compact('pro1','pro2','products','len','pro3'));
+
+}
+
+elseif($len == 4)
+{
+   $products = orderdetail::all($req->cat[0], $req->cat[1],$req->cat[2],$req->cat[3]);
+
+   $len =4;
+   $pro1=$req->cat[0];
+   $pro2=$req->cat[1];
+   $pro3=$req->cat[2];
+   $pro4=$req->cat[3];
+
+   return view('admin.orders.newindex', compact('pro1','pro2','products','len','pro3','pro4'));
+}
+
+elseif($len == 5)
+{
+   $products = orderdetail::all($req->cat[0], $req->cat[1],$req->cat[2],$req->cat[3],$req->cat[4]);
+
+   $len =5;
+   $pro1=$req->cat[0];
+   $pro2=$req->cat[1];
+   $pro3=$req->cat[2];
+   $pro4=$req->cat[3];
+   $pro5=$req->cat[4];
+
+   return view('admin.orders.newindex', compact('pro1','pro2','products','len','pro3','pro4','pro5'));
+}
+
+elseif($len == 6)
+{
+   $products = orderdetail::all($req->cat[0], $req->cat[1],$req->cat[2],$req->cat[3],$req->cat[4],$req->cat[5]);
+    $len =6;
+   $pro1=$req->cat[0];
+   $pro2=$req->cat[1];
+   $pro3=$req->cat[2];
+   $pro4=$req->cat[3];
+   $pro5=$req->cat[4];
+   $pro6=$req->cat[5];
+
+   return view('admin.orders.newindex', compact('pro1','pro2','products','len','pro3','pro4','pro5','pro6'));
+}
+
+
+}
+
+
     public function index()
     {
         $orders  = Order::orderby('id','DESC')->get()->unique('order_number');
@@ -31,15 +165,281 @@ class OrderController extends Controller
 
     }
 
+    public function index2()
+    {
+        $orders  = orderdetail::all();
+
+       return view('admin.orders.index2',['orders'=>$orders]);
+
+    }
+
+      public function index2_pdf()
+    {
+       $orders  = orderdetail::all();
+          
+    $pdf = PDF::loadView('admin.orders.index2_pdf',['orders'=>$orders])->setOptions(['defaultFont' => 'sans-serif'])->setPaper('A2', 'landscape');
+    
+        return $pdf->download('allorders.pdf');
+    }
+   
+   
+
+     public function orderproduct_details($id)
+    {
+        
+        // $orders_products  = productorderdetail::where('id',$id)->get();
+        // echo $orders_products;
+         $orders_products = productorderdetail::where('order_id', $id)->get();
+       
+       return view('admin.orders.productdetails',['products'=>$orders_products]);
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
+
+
+
      */
+
+
+
+    // ==============================ORDER PROCESSING=========================
+
+    public function assign_product($id,$name)
+    { 
+        $order_products = productorderdetail::where('order_id', $name)->first();
+        
+         return view('admin.orders.assignsalecenter',['product_id'=>$id],['products'=>$order_products]);
+    }
+
+    public function salecenter_order(request $req)
+    { 
+        // echo $req->productidi;
+       $salecenterorder = new SaleCenterOrder;
+       $salecenterorder->salecenter_id = $req->salecenterid;
+       $salecenterorder->order_number = $req->orderid;
+       $salecenterorder->product_id = $req->productidi;
+       $salecenterorder->quantity = $req->productquantity;
+       $salecenterorder->colour_id = "1";
+       $salecenterorder->size_id = "1";
+       $salecenterorder->status = "1";
+
+       $salecenterorder->save();
+       Session::flash('flash_message', 'Sale Center Assigned Successfully !');
+    Session::flash('flash_type', 'alert-success');
+       return redirect ('/orderdetails');
+
+    }
+
+       public function edit_assign_product(request $req)
+    { 
+        $editsalecenter = SaleCenterOrder::where('id', $req->salecenterorderid)->first();
+        $editsalecenter->salecenter_id = $req->salecenterid;
+        $editsalecenter->save();
+        Session::flash('flash_message', 'Sale Center Reassigned Successfully !');
+    Session::flash('flash_type', 'alert-success');
+          return redirect ('/orderdetails');
+
+
+        // $editsalecenter->
+
+        
+         // return view('admin.orders.assignsalecenter',['product_id'=>$id],['products'=>$order_products]);
+    }
+
+      public function edit_assign_product_view($id,$name,$name2)
+
+    { 
+
+        // echo $name2;
+          $order_products = productorderdetail::where('order_id', $name)->first();
+        
+         // return view('admin.orders.editsalecenter',['salecenterorderid'=>$id],['products'=>$order_products]);
+
+         return view('admin.orders.editsalecenter', compact(['id', 'order_products','name2']));
+
+
+       // return view('admin.orders.editsalecenter',['salecenterid'=>$id]);
+
+        
+         // return view('admin.orders.assignsalecenter',['product_id'=>$id],['products'=>$order_products]);
+    }
+
+ public function assign_rider($id,$name,$name2)
+    { 
+        $salecenter = SaleCenter::where('id',$name2)->first();
+
+        
+          return view('admin.orders.assignrider', compact(['id', 'name','salecenter']));
+    }
+
+
+public function rider_order(request $req)
+    {
+
+       $riderproductorder = new riderordercustomer;
+       $riderproductorder->rider_id = $req->riderid;
+       $riderproductorder->product_name = $req->productname;
+       $riderproductorder->description = $req->description;
+       $riderproductorder->address = $req->address;
+       $riderproductorder->date = $req->date;
+       $riderproductorder->cash = $req->cash;
+       $riderproductorder->order_id = $req->orderid;
+       $riderproductorder->status = "1";
+
+       $riderproductorder->save();
+
+        Session::flash('flash_message', 'Rider Assigned Successfully !');
+        Session::flash('flash_type', 'alert-success');
+       return redirect ('/orderdetails');
+
+
+        
+    }
+
+
+
+
+   public function edit_assign_rider_view($id,$name,$name2,$name3)
+    {
+
+    // $order_riders = riderproductorder::where('id', $name3)->first();
+    // echo $order_riders;
+
+         return view('admin.orders.editrider', compact(['id', 'name','name2','name3']));
+    }
+
+    public function edit_assign_rider(request $req)
+    {
+     
+     $order_riders = riderordercustomer::where('id', $req->editriderid)->first();
+     
+        $order_riders->rider_id = $req->riderid;
+        $order_riders->description = $req->description;
+        $order_riders->date = $req->date;
+
+        $order_riders->save();
+
+Session::flash('flash_message', 'Rider Reassigned Successfully !');
+Session::flash('flash_type', 'alert-success');
+
+        return redirect ('/orderdetails');
+    }
+
+ // product details module #02
+
+
+ public function assign_rider2($id,$name)
+    { 
+        
+    return view('admin.orders.assignrider2', compact(['id', 'name']));
+    }
+
+
+ public function assign_rider3($id,$name)
+    { 
+        
+    return view('admin.orders.assignrider3', compact(['id', 'name']));
+    }
+
+
+
+
+
+   
+public function rider_order2(request $req)
+    {
+
+       $riderproductorder = new riderproductorder;
+       $riderproductorder->rider_id = $req->riderid;
+       $riderproductorder->product_name = $req->productname;
+       $riderproductorder->description = $req->description;
+       $riderproductorder->address = $req->address;
+       $riderproductorder->date = $req->date;
+       $riderproductorder->cash = $req->productprice;
+       $riderproductorder->order_id = $req->orderid;
+       $riderproductorder->status = "1";
+
+       $riderproductorder->save();
+
+        Session::flash('flash_message', 'Rider Assigned Successfully !');
+        Session::flash('flash_type', 'alert-success');
+       return redirect ('/orderdetails');
+
+
+        
+    }
+
+    public function rider_order3(request $req)
+    {
+
+       $riderproductorder = new riderordercustomer;
+       $riderproductorder->rider_id = $req->riderid;
+       $riderproductorder->product_name = $req->productname;
+       $riderproductorder->description = $req->description;
+       $riderproductorder->address = $req->address;
+       $riderproductorder->date = $req->date;
+       $riderproductorder->cash = $req->productprice;
+       $riderproductorder->order_id = $req->orderid;
+       $riderproductorder->status = "1";
+
+       $riderproductorder->save();
+
+        Session::flash('flash_message', 'Rider Assigned Successfully !');
+        Session::flash('flash_type', 'alert-success');
+       return redirect ('/orderdetails');
+
+
+        
+    }
+
+public function edit_assign_rider2_view($id,$name,$name2)
+    {
+
+    // $order_riders = riderproductorder::where('id', $name3)->first();
+    // echo $order_riders;
+
+ return view('admin.orders.editrider2', compact(['id', 'name','name2']));
+    }
+
+
+    public function edit_assign_rider2(request $req)
+    {
+     
+     $order_riders = riderproductorder::where('id', $req->editriderid)->first();
+     
+        $order_riders->rider_id = $req->riderid;
+        $order_riders->description = $req->description;
+        $order_riders->date = $req->date;
+
+        $order_riders->save();
+
+Session::flash('flash_message', 'Rider Reassigned Successfully !');
+Session::flash('flash_type', 'alert-success');
+
+        return redirect ('/orderdetails');
+    }
+
+
+
+     public function manualorder()
+    {
+        // $orders  = Order::orderby('id','DESC')->get()->unique('order_number');
+
+        return view('admin.manualorder.productorder');
+
+    }
+
+
     public function create()
     {
         //
     }
+
+  
 
     /**
      * Store a newly created resource in storage.

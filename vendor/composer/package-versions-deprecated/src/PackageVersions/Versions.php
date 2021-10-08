@@ -34,10 +34,14 @@ final class Versions
      */
     const VERSIONS          = array (
   'asm89/stack-cors' => 'v2.0.3@9cb795bf30988e8c96dd3c40623c48a877bc6714',
+  'barryvdh/laravel-dompdf' => 'v0.9.0@5b99e1f94157d74e450f4c97e8444fcaffa2144b',
   'binary-cats/laravel-sku' => '0.4.0@56a251a6db7520c81ee32108d6ab5470d5ab5750',
   'brick/math' => '0.9.2@dff976c2f3487d42c1db75a3b180e2b9f0e72ce0',
+  'bumbummen99/shoppingcart' => '4.0.0@f2c763e311b0fc58b2dfdfa2c41c6318a7c884e1',
+  'darryldecode/cart' => '4.2.1@2ad23e070af341da80300ef990b1fb529af88893',
   'doctrine/inflector' => '2.0.3@9cf661f4eb38f7c881cac67c75ea9b00bf97b210',
   'doctrine/lexer' => '1.2.1@e864bbf5904cb8f5bb334f99209b48018522f042',
+  'dompdf/dompdf' => 'v1.0.2@8768448244967a46d6e67b891d30878e0e15d25c',
   'dragonmantank/cron-expression' => 'v3.1.0@7a8c6e56ab3ffcc538d05e8155bb42269abf1a0c',
   'egulias/email-validator' => '2.1.25@0dbf5d78455d4d6a41d186da50adc1122ec066f4',
   'fideloper/proxy' => '4.4.1@c073b2bd04d1c90e04dc1b787662b558dd65ade0',
@@ -46,6 +50,7 @@ final class Versions
   'guzzlehttp/guzzle' => '7.3.0@7008573787b430c1c1f650e3722d9bba59967628',
   'guzzlehttp/promises' => '1.4.1@8e7d04f1f6450fef59366c399cfad4b9383aa30d',
   'guzzlehttp/psr7' => '1.8.2@dc960a912984efb74d0a90222870c72c87f10c91',
+  'hardevine/shoppingcart' => '3.0@8dea942f3c61ed450fe7dfee968dc9943fa649f8',
   'laravel/framework' => 'v8.46.0@a18266c612e0e6aba5e0174b3c873d2d217dccfb',
   'laravel/tinker' => 'v2.6.1@04ad32c1a3328081097a181875733fa51f402083',
   'laravel/ui' => 'v3.3.0@07d725813350c695c779382cbd6dac0ab8665537',
@@ -56,6 +61,8 @@ final class Versions
   'nesbot/carbon' => '2.49.0@93d9db91c0235c486875d22f1e08b50bdf3e6eee',
   'nikic/php-parser' => 'v4.10.5@4432ba399e47c66624bc73c8c0f811e5c109576f',
   'opis/closure' => '3.6.2@06e2ebd25f2869e54a306dda991f7db58066f7f6',
+  'phenx/php-font-lib' => '0.5.2@ca6ad461f032145fff5971b5985e5af9e7fa88d8',
+  'phenx/php-svg-lib' => 'v0.3.3@5fa61b65e612ce1ae15f69b3d223cb14ecc60e32',
   'phpoption/phpoption' => '1.7.5@994ecccd8f3283ecf5ac33254543eb0ac946d525',
   'psr/container' => '1.1.1@8622567409010282b7aeebe4bb841fe98b58dcaf',
   'psr/event-dispatcher' => '1.0.0@dbefd12671e8a14ec7f180cab83036ed26714bb0',
@@ -68,6 +75,7 @@ final class Versions
   'ramsey/collection' => '1.1.3@28a5c4ab2f5111db6a60b2b4ec84057e0f43b9c1',
   'ramsey/uuid' => '4.1.1@cd4032040a750077205918c86049aa0f43d22947',
   'realrashid/sweet-alert' => 'v3.2.3@d4e40b4956e1f040bd709d54410b360023cea67f',
+  'sabberworm/php-css-parser' => '8.3.1@d217848e1396ef962fb1997cf3e2421acba7f796',
   'spatie/laravel-permission' => '4.2.0@a6e4122b65094baba7f98df153af0768ef910c85',
   'spatie/laravel-sluggable' => '2.6.2@297097239a675747d74fbd1ecb3ae0d4724a17de',
   'swiftmailer/swiftmailer' => 'v6.2.7@15f7faf8508e04471f666633addacf54c0ab5933',
@@ -150,7 +158,7 @@ final class Versions
   'sebastian/type' => '2.3.2@0d1c587401514d17e8f9258a27e23527cb1b06c1',
   'sebastian/version' => '3.0.2@c6c1022351a901512170118436c764e473f6de8c',
   'theseer/tokenizer' => '1.2.0@75a63c33a8577608444246075ea0af0d052e452a',
-  'laravel/laravel' => 'dev-main@5d0b6f4edc5edaca3dc0154194d078cb8a5822a4',
+  'laravel/laravel' => '1.0.0+no-version-set@',
 );
 
     private function __construct()

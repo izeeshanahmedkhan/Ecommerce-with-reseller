@@ -2,8 +2,644 @@
 @section('content')
 
 
-    @include('frontend.layout.partials.top_side_categories_slider_sidebanner')
 
+
+
+   @include('frontend.layout.partials.top_side_categories_slider_sidebanner')
+
+
+
+            <section class="container">
+                <h2 class="section-title ls-n-10 text-center pt-2 m-b-4">Shop By Category</h2>
+
+                <div class="owl-carousel owl-theme nav-image-center show-nav-hover nav-outer cats-slider">
+                    @php
+                    $category = App\Models\Category::where('parent_id',0)->get();
+                    @endphp  
+
+                    @foreach( $category as $cat) 
+                    <div class="product-category">
+                        <a href="{{route('cat1', ['id' => $cat->id])}}">
+
+                            <figure>
+                                <img src="assets/images/categories/category-1.jpg">
+                            </figure>
+                            <div class="category-content">
+                                <h3>{{$cat->title}}</h3>
+                                 <h3>{{$cat->id}}</h3>
+                                <span><mark class="count">8</mark> products</span>
+                            </div>
+                        </a>
+                    </div>
+                    @endforeach
+                    <!-- <div class="product-category">
+                        <a href="category.html">
+                            <figure>
+                                <img src="assets/images/categories/category-2.jpg">
+                            </figure>
+                            <div class="category-content">
+                                <h3>Bags</h3>
+                                <span><mark class="count">4</mark> products</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="product-category">
+                        <a href="category.html">
+                            <figure>
+                                <img src="assets/images/categories/category-3.jpg">
+                            </figure>
+                            <div class="category-content">
+                                <h3>Electronics</h3>
+                                <span><mark class="count">8</mark> products</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="product-category">
+                        <a href="category.html">
+                            <figure>
+                                <img src="assets/images/categories/category-4.jpg">
+                            </figure>
+                            <div class="category-content">
+                                <h3>Fashion</h3>
+                                <span><mark class="count">11</mark> products</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="product-category">
+                        <a href="category.html">
+                            <figure>
+                                <img src="assets/images/categories/category-5.jpg">
+                            </figure>
+                            <div class="category-content">
+                                <h3>Headphone</h3>
+                                <span><mark class="count">3</mark> products</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="product-category">
+                        <a href="category.html">
+                            <figure>
+                                <img src="assets/images/categories/category-6.jpg">
+                            </figure>
+                            <div class="category-content">
+                                <h3>Shoes</h3>
+                                <span><mark class="count">4</mark> products</span>
+                            </div>
+                        </a>
+                    </div> -->
+                    <!-- <div class="product-category">
+                        <a href="category.html">
+                            <figure>
+                                <img src="assets/images/categories/category-1.jpg">
+                            </figure>
+                            <div class="category-content">
+                                <h3>Sunglasses</h3>
+                                <span><mark class="count">8</mark> products</span>
+                            </div>
+                        </a>
+                    </div> -->
+                </div>
+            </section>
+  @php
+    $menubanner = App\Models\menubanner::all();
+     
+ @endphp
+            <section class="bg-gray banners-section text-center">
+                <div class="container py-2">
+                    <div class="row">
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="home-banner banner banner-sm-vw mb-2">
+
+                                <img src="/images/banner2/{{$menubanner[0]->value}}">
+                                <div class="banner-layer banner-layer-bottom text-left">
+                                    <h3 class="m-b-2">Sunglasses Sale</h3>
+                                    <h4 class="m-b-3">See all and find yours</h4>
+                                    <a href="category.html" class="btn  btn-primary" role="button">Shop By Glasses</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="home-banner banner banner-sm-vw mb-2">
+                               <img src="/images/banner2/{{$menubanner[1]->value}}">
+                                <div class="banner-layer banner-layer-top ">
+                                    <h3 class="mb-0">Cosmetics Trends</h3>
+                                    <h4 class="m-b-4">Browse in all our categories</h4>
+                                    <a href="category.html" class="btn  btn-primary" role="button">Shop By Cosmetics</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="home-banner banner banner-sm-vw mb-2">
+                               <img src="/images/banner2/{{$menubanner[2]->value}}">
+                                <div class="banner-layer banner-layer-middle">
+                                    <h3 class="text-white m-b-1">Fashion Summer Sale</h3>
+                                    <h4 class="text-white m-b-4">Browse in all our categories</h4>
+                                    <a href="category.html" class="btn btn-light bg-white" role="button">Shop By Fashion</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="home-banner banner banner-sm-vw mb-2">
+                               <img src="/images/banner2/{{$menubanner[3]->value}}">
+                                <div class="banner-layer banner-layer-bottom banner-layer-boxed">
+                                    <h3 class="m-b-2">UP TO 70% IN ALL BAGS</h3>
+                                    <h4 class="mb-0">Starting at $99</h4>
+                                    <a href="category.html" class="btn  btn-primary" role="button">Shop By Bags</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+
+
+
+
+
+
+            <section class="container pb-3 mb-1">
+                <h2 class="section-title ls-n-10 text-center pb-2 m-b-4">Featured Products</h2>
+
+                <div class="row py-4">
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2">
+                        <div class="product-default inner-quickview inner-icon">
+                            <figure>
+                                <a href="product.html">
+                                    <img src="assets/images/products/product-10.jpg">
+                                </a>
+                                <div class="label-group">
+                                    <span class="product-label label-sale">-30%</span>
+                                </div>
+                                <div class="btn-icon-group">
+                                    <button class="btn-icon btn-add-cart" data-toggle="modal" data-target="#addCartModal"><i class="icon-shopping-cart"></i></button>
+                                </div>
+                                <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick View</a>
+                            </figure>
+                            <div class="product-details">
+                                <div class="category-wrap">
+                                    <div class="category-list">
+                                        <a href="category.html" class="product-category">category</a>
+                                    </div>
+                                </div>
+                                <h3 class="product-title">
+                                    <a href="product.html">Product Short Name</a>
+                                </h3>
+                                <div class="ratings-container">
+                                    <div class="product-ratings">
+                                        <span class="ratings" style="width:100%"></span><!-- End .ratings -->
+                                        <span class="tooltiptext tooltip-top"></span>
+                                    </div><!-- End .product-ratings -->
+                                </div><!-- End .product-container -->
+                                <div class="price-box">
+                                    <span class="old-price">$59.00</span>
+                                    <span class="product-price">$49.00</span>
+                                </div><!-- End .price-box -->
+                            </div><!-- End .product-details -->
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2">
+                        <div class="product-default inner-quickview inner-icon">
+                            <figure>
+                                <a href="product.html">
+                                    <img src="assets/images/products/product-11.jpg">
+                                </a>
+                                <div class="label-group">
+                                    <span class="product-label label-hot">HOT</span>
+                                </div>
+                                <div class="btn-icon-group">
+                                    <button class="btn-icon btn-add-cart" data-toggle="modal" data-target="#addCartModal"><i class="icon-shopping-cart"></i></button>
+                                </div>
+                                <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick View</a>
+                            </figure>
+                            <div class="product-details">
+                                <div class="category-wrap">
+                                    <div class="category-list">
+                                        <a href="category.html" class="product-category">category</a>
+                                    </div>
+                                </div>
+                                <h3 class="product-title">
+                                    <a href="product.html">Product Short Name</a>
+                                </h3>
+                                <div class="ratings-container">
+                                    <div class="product-ratings">
+                                        <span class="ratings" style="width:100%"></span><!-- End .ratings -->
+                                        <span class="tooltiptext tooltip-top"></span>
+                                    </div><!-- End .product-ratings -->
+                                </div><!-- End .product-container -->
+                                <div class="price-box">
+                                    <span class="old-price">$59.00</span>
+                                    <span class="product-price">$49.00</span>
+                                </div><!-- End .price-box -->
+                            </div><!-- End .product-details -->
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2">
+                        <div class="product-default inner-quickview inner-icon">
+                            <figure>
+                                <a href="product.html">
+                                    <img src="assets/images/products/product-12.jpg">
+                                </a>
+                                <div class="label-group">
+                                    <span class="product-label label-sale">-20%</span>
+                                </div>
+                                <div class="btn-icon-group">
+                                    <button class="btn-icon btn-add-cart" data-toggle="modal" data-target="#addCartModal"><i class="icon-shopping-cart"></i></button>
+                                </div>
+                                <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick View</a>
+                            </figure>
+                            <div class="product-details">
+                                <div class="category-wrap">
+                                    <div class="category-list">
+                                        <a href="category.html" class="product-category">category</a>
+                                    </div>
+                                </div>
+                                <h3 class="product-title">
+                                    <a href="product.html">Product Short Name</a>
+                                </h3>
+                                <div class="ratings-container">
+                                    <div class="product-ratings">
+                                        <span class="ratings" style="width:100%"></span><!-- End .ratings -->
+                                        <span class="tooltiptext tooltip-top"></span>
+                                    </div><!-- End .product-ratings -->
+                                </div><!-- End .product-container -->
+                                <div class="price-box">
+                                    <span class="old-price">$59.00</span>
+                                    <span class="product-price">$49.00</span>
+                                </div><!-- End .price-box -->
+                            </div><!-- End .product-details -->
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2">
+                        <div class="product-default inner-quickview inner-icon">
+                            <figure>
+                                <a href="product.html">
+                                    <img src="assets/images/products/product-1.jpg">
+                                </a>
+                                <div class="btn-icon-group">
+                                    <button class="btn-icon btn-add-cart" data-toggle="modal" data-target="#addCartModal"><i class="icon-shopping-cart"></i></button>
+                                </div>
+                                <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick View</a>
+                            </figure>
+                            <div class="product-details">
+                                <div class="category-wrap">
+                                    <div class="category-list">
+                                        <a href="category.html" class="product-category">category</a>
+                                    </div>
+                                </div>
+                                <h3 class="product-title">
+                                    <a href="product.html">Product Short Name</a>
+                                </h3>
+                                <div class="ratings-container">
+                                    <div class="product-ratings">
+                                        <span class="ratings" style="width:100%"></span><!-- End .ratings -->
+                                        <span class="tooltiptext tooltip-top"></span>
+                                    </div><!-- End .product-ratings -->
+                                </div><!-- End .product-container -->
+                                <div class="price-box">
+                                    <span class="old-price">$59.00</span>
+                                    <span class="product-price">$49.00</span>
+                                </div><!-- End .price-box -->
+                            </div><!-- End .product-details -->
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2">
+                        <div class="product-default inner-quickview inner-icon">
+                            <figure>
+                                <a href="product.html">
+                                    <img src="assets/images/products/product-2.jpg">
+                                </a>
+                                <div class="btn-icon-group">
+                                    <button class="btn-icon btn-add-cart" data-toggle="modal" data-target="#addCartModal"><i class="icon-shopping-cart"></i></button>
+                                </div>
+                                <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick View</a>
+                            </figure>
+                            <div class="product-details">
+                                <div class="category-wrap">
+                                    <div class="category-list">
+                                        <a href="category.html" class="product-category">category</a>
+                                    </div>
+                                </div>
+                                <h3 class="product-title">
+                                    <a href="product.html">Product Short Name</a>
+                                </h3>
+                                <div class="ratings-container">
+                                    <div class="product-ratings">
+                                        <span class="ratings" style="width:100%"></span><!-- End .ratings -->
+                                        <span class="tooltiptext tooltip-top"></span>
+                                    </div><!-- End .product-ratings -->
+                                </div><!-- End .product-container -->
+                                <div class="price-box">
+                                    <span class="old-price">$59.00</span>
+                                    <span class="product-price">$49.00</span>
+                                </div><!-- End .price-box -->
+                            </div><!-- End .product-details -->
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2">
+                        <div class="product-default inner-quickview inner-icon">
+                            <figure>
+                                <a href="product.html">
+                                    <img src="assets/images/products/product-3.jpg">
+                                </a>
+                                <div class="label-group">
+                                    <span class="product-label label-hot">HOT</span>
+                                </div>
+                                <div class="btn-icon-group">
+                                    <button class="btn-icon btn-add-cart" data-toggle="modal" data-target="#addCartModal"><i class="icon-shopping-cart"></i></button>
+                                </div>
+                                <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick View</a>
+                            </figure>
+                            <div class="product-details">
+                                <div class="category-wrap">
+                                    <div class="category-list">
+                                        <a href="category.html" class="product-category">category</a>
+                                    </div>
+                                </div>
+                                <h3 class="product-title">
+                                    <a href="product.html">Product Short Name</a>
+                                </h3>
+                                <div class="ratings-container">
+                                    <div class="product-ratings">
+                                        <span class="ratings" style="width:100%"></span><!-- End .ratings -->
+                                        <span class="tooltiptext tooltip-top"></span>
+                                    </div><!-- End .product-ratings -->
+                                </div><!-- End .product-container -->
+                                <div class="price-box">
+                                    <span class="old-price">$59.00</span>
+                                    <span class="product-price">$49.00</span>
+                                </div><!-- End .price-box -->
+                            </div><!-- End .product-details -->
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2">
+                        <div class="product-default inner-quickview inner-icon">
+                            <figure>
+                                <a href="product.html">
+                                    <img src="assets/images/products/product-4.jpg">
+                                </a>
+                                <div class="btn-icon-group">
+                                    <button class="btn-icon btn-add-cart" data-toggle="modal" data-target="#addCartModal"><i class="icon-shopping-cart"></i></button>
+                                </div>
+                                <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick View</a>
+                            </figure>
+                            <div class="product-details">
+                                <div class="category-wrap">
+                                    <div class="category-list">
+                                        <a href="category.html" class="product-category">category</a>
+                                    </div>
+                                </div>
+                                <h3 class="product-title">
+                                    <a href="product.html">Product Short Name</a>
+                                </h3>
+                                <div class="ratings-container">
+                                    <div class="product-ratings">
+                                        <span class="ratings" style="width:100%"></span><!-- End .ratings -->
+                                        <span class="tooltiptext tooltip-top"></span>
+                                    </div><!-- End .product-ratings -->
+                                </div><!-- End .product-container -->
+                                <div class="price-box">
+                                    <span class="old-price">$59.00</span>
+                                    <span class="product-price">$49.00</span>
+                                </div><!-- End .price-box -->
+                            </div><!-- End .product-details -->
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2">
+                        <div class="product-default inner-quickview inner-icon">
+                            <figure>
+                                <a href="product.html">
+                                    <img src="assets/images/products/product-5.jpg">
+                                </a>
+                                <div class="btn-icon-group">
+                                    <button class="btn-icon btn-add-cart" data-toggle="modal" data-target="#addCartModal"><i class="icon-shopping-cart"></i></button>
+                                </div>
+                                <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick View</a>
+                            </figure>
+                            <div class="product-details">
+                                <div class="category-wrap">
+                                    <div class="category-list">
+                                        <a href="category.html" class="product-category">category</a>
+                                    </div>
+                                </div>
+                                <h3 class="product-title">
+                                    <a href="product.html">Product Short Name</a>
+                                </h3>
+                                <div class="ratings-container">
+                                    <div class="product-ratings">
+                                        <span class="ratings" style="width:100%"></span><!-- End .ratings -->
+                                        <span class="tooltiptext tooltip-top"></span>
+                                    </div><!-- End .product-ratings -->
+                                </div><!-- End .product-container -->
+                                <div class="price-box">
+                                    <span class="old-price">$59.00</span>
+                                    <span class="product-price">$49.00</span>
+                                </div><!-- End .price-box -->
+                            </div><!-- End .product-details -->
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2">
+                        <div class="product-default inner-quickview inner-icon">
+                            <figure>
+                                <a href="product.html">
+                                    <img src="assets/images/products/product-6.jpg">
+                                </a>
+                                <div class="label-group">
+                                    <span class="product-label label-hot">HOT</span>
+                                </div>
+                                <div class="btn-icon-group">
+                                    <button class="btn-icon btn-add-cart" data-toggle="modal" data-target="#addCartModal"><i class="icon-shopping-cart"></i></button>
+                                </div>
+                                <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick View</a>
+                            </figure>
+                            <div class="product-details">
+                                <div class="category-wrap">
+                                    <div class="category-list">
+                                        <a href="category.html" class="product-category">category</a>
+                                    </div>
+                                </div>
+                                <h3 class="product-title">
+                                    <a href="product.html">Product Short Name</a>
+                                </h3>
+                                <div class="ratings-container">
+                                    <div class="product-ratings">
+                                        <span class="ratings" style="width:100%"></span><!-- End .ratings -->
+                                        <span class="tooltiptext tooltip-top"></span>
+                                    </div><!-- End .product-ratings -->
+                                </div><!-- End .product-container -->
+                                <div class="price-box">
+                                    <span class="old-price">$59.00</span>
+                                    <span class="product-price">$49.00</span>
+                                </div><!-- End .price-box -->
+                            </div><!-- End .product-details -->
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2">
+                        <div class="product-default inner-quickview inner-icon">
+                            <figure>
+                                <a href="product.html">
+                                    <img src="assets/images/products/product-7.jpg">
+                                </a>
+                                <div class="label-group">
+                                    <span class="product-label label-sale">-40%</span>
+                                </div>
+                                <div class="btn-icon-group">
+                                    <button class="btn-icon btn-add-cart" data-toggle="modal" data-target="#addCartModal"><i class="icon-shopping-cart"></i></button>
+                                </div>
+                                <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick View</a>
+                            </figure>
+                            <div class="product-details">
+                                <div class="category-wrap">
+                                    <div class="category-list">
+                                        <a href="category.html" class="product-category">category</a>
+                                    </div>
+                                </div>
+                                <h3 class="product-title">
+                                    <a href="product.html">Product Short Name</a>
+                                </h3>
+                                <div class="ratings-container">
+                                    <div class="product-ratings">
+                                        <span class="ratings" style="width:100%"></span><!-- End .ratings -->
+                                        <span class="tooltiptext tooltip-top"></span>
+                                    </div><!-- End .product-ratings -->
+                                </div><!-- End .product-container -->
+                                <div class="price-box">
+                                    <span class="old-price">$59.00</span>
+                                    <span class="product-price">$49.00</span>
+                                </div><!-- End .price-box -->
+                            </div><!-- End .product-details -->
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2">
+                        <div class="product-default inner-quickview inner-icon">
+                            <figure>
+                                <a href="product.html">
+                                    <img src="assets/images/products/product-8.jpg">
+                                </a>
+                                <div class="label-group">
+                                    <span class="product-label label-sale">-10%</span>
+                                    <span class="product-label label-hot">HOT</span>
+                                </div>
+                                <div class="btn-icon-group">
+                                    <button class="btn-icon btn-add-cart" data-toggle="modal" data-target="#addCartModal"><i class="icon-shopping-cart"></i></button>
+                                </div>
+                                <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick View</a>
+                            </figure>
+                            <div class="product-details">
+                                <div class="category-wrap">
+                                    <div class="category-list">
+                                        <a href="category.html" class="product-category">category</a>
+                                    </div>
+                                </div>
+                                <h3 class="product-title">
+                                    <a href="product.html">Product Short Name</a>
+                                </h3>
+                                <div class="ratings-container">
+                                    <div class="product-ratings">
+                                        <span class="ratings" style="width:100%"></span><!-- End .ratings -->
+                                        <span class="tooltiptext tooltip-top"></span>
+                                    </div><!-- End .product-ratings -->
+                                </div><!-- End .product-container -->
+                                <div class="price-box">
+                                    <span class="old-price">$59.00</span>
+                                    <span class="product-price">$49.00</span>
+                                </div><!-- End .price-box -->
+                            </div><!-- End .product-details -->
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-3 col-xl-2">
+                        <div class="product-default inner-quickview inner-icon">
+                            <figure>
+                                <a href="product.html">
+                                    <img src="assets/images/products/product-9.jpg">
+                                </a>
+                                <div class="btn-icon-group">
+                                    <button class="btn-icon btn-add-cart" data-toggle="modal" data-target="#addCartModal"><i class="icon-shopping-cart"></i></button>
+                                </div>
+                                <a href="ajax/product-quick-view.html" class="btn-quickview" title="Quick View">Quick View</a>
+                            </figure>
+                            <div class="product-details">
+                                <div class="category-wrap">
+                                    <div class="category-list">
+                                        <a href="category.html" class="product-category">category</a>
+                                    </div>
+                                </div>
+                                <h3 class="product-title">
+                                    <a href="product.html">Product Short Name</a>
+                                </h3>
+                                <div class="ratings-container">
+                                    <div class="product-ratings">
+                                        <span class="ratings" style="width:100%"></span><!-- End .ratings -->
+                                        <span class="tooltiptext tooltip-top"></span>
+                                    </div><!-- End .product-ratings -->
+                                </div><!-- End .product-container -->
+                                <div class="price-box">
+                                    <span class="old-price">$59.00</span>
+                                    <span class="product-price">$49.00</span>
+                                </div><!-- End .price-box -->
+                            </div><!-- End .product-details -->
+                        </div>
+                    </div>
+                </div>
+                
+                <hr class="mt-3 mb-6">
+
+                <div class="row feature-boxes-container pt-2">
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="feature-box feature-box-simple text-center">
+                            <i class="icon-earphones-alt"></i>
+
+                            <div class="feature-box-content">
+                                <h3 class="text-uppercase">Customer Support</h3>
+                                <h5>Need Assistence?</h5>
+
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec vestibulum magna, et dapib.</p>
+                            </div><!-- End .feature-box-content -->
+                        </div><!-- End .feature-box -->
+                    </div><!-- End .col-lg-3 -->
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="feature-box feature-box-simple text-center">
+                            <i class="icon-credit-card"></i>
+
+                            <div class="feature-box-content">
+                                <h3 class="text-uppercase">Secured Payment</h3>
+                                <h5>Safe & Fast</h5>
+
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec vestibulum magna, et dapibus lacus. Lorem ipsum dolor sit amet.</p>
+                            </div><!-- End .feature-box-content -->
+                        </div><!-- End .feature-box -->
+                    </div><!-- End .col-lg-3 -->
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="feature-box feature-box-simple text-center">
+                            <i class="icon-action-undo"></i>
+
+                            <div class="feature-box-content">
+                                <h3 class="text-uppercase">Free Returns</h3>
+                                <h5>Easy & Free</h5>
+
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec vestibulum magna, et dapib.</p>
+                            </div><!-- End .feature-box-content -->
+                        </div><!-- End .feature-box -->
+                    </div><!-- End .col-lg-3 -->
+
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="feature-box feature-box-simple text-center">
+                            <i class="icon-shipping"></i>
+
+                            <div class="feature-box-content">
+                                <h3 class="text-uppercase">Free Shipping</h3>
+                                <h5>Orders Over $99</h5>
+
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec vestibulum magna, et dapib.</p>
+                            </div><!-- End .feature-box-content -->
+                        </div><!-- End .feature-box -->
+                    </div><!-- End .col-lg-3 -->
+                </div><!-- End .row .feature-boxes-container-->
+            </section>
     <!-- block  service-->
     <div class="container ">
         <div class="block-service-opt1">
@@ -26,3313 +662,24 @@
     <!-- block  service-->
 
 
-    <div class="container">
-        <div class="row">
-
-            <div class="col-md-9">
-
-                <!-- block tab products -->
-                <div class="block-tab-products-opt1">
-
-                    <div class="block-title">
-                        <ul class="nav" role="tablist">
-                            <li role="presentation" class="active">
-                                <a href="#tabproduct1"  role="tab" data-toggle="tab">best SELLERS </a>
-                            </li>
-                            <li role="presentation">
-                                <a href="#tabproduct2" role="tab" data-toggle="tab">ON SALE</a>
-                            </li>
-                            <li role="presentation">
-                                <a href="#tabproduct3"  role="tab" data-toggle="tab">NEW PRODUCTS</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="block-content tab-content">
-
-                        <!-- tab 1 -->
-                        <div role="tabpanel" class="tab-pane active fade in " id="tabproduct1">
-                            <div class="owl-carousel"
-                                 data-nav="true"
-                                 data-dots="false"
-                                 data-margin="30"
-                                 data-responsive='{
-                                        "0":{"items":1},
-                                        "480":{"items":2},
-                                        "480":{"items":2},
-                                        "768":{"items":3},
-                                        "992":{"items":3}
-                                    }'>
-
-                                <div class="product-item  product-item-opt-1 ">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/sellers1.jpg"></a>
-                                            <div class="product-item-actions">
-                                                <a class="btn btn-wishlist" href="#"><span>wishlist</span></a>
-                                                <a class="btn btn-compare" href="#"><span>compare</span></a>
-                                                <a class="btn btn-quickview" href="#"><span>quickview</span></a>
-                                            </div>
-                                            <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
-                                            <span class="product-item-label label-price">30% <span>off</span></span>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                    <span class="old-price">$52.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div title="80%" class="rating-result">
-                                                                    <span style="width:80%">
-                                                                        <span><span>80</span>% of <span>100</span></span>
-                                                                    </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-item  product-item-opt-1 ">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/sellers2.jpg"></a>
-                                            <div class="product-item-actions">
-                                                <a class="btn btn-wishlist" href="#"><span>wishlist</span></a>
-                                                <a class="btn btn-compare" href="#"><span>compare</span></a>
-                                                <a class="btn btn-quickview" href="#"><span>quickview</span></a>
-                                            </div>
-                                            <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
-                                            <span class="product-item-label label-new">New</span>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div title="80%" class="rating-result">
-                                                                    <span style="width:80%">
-                                                                        <span><span>80</span>% of <span>100</span></span>
-                                                                    </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-item  product-item-opt-1 ">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/sellers3.jpg"></a>
-                                            <div class="product-item-actions">
-                                                <a class="btn btn-wishlist" href="#"><span>wishlist</span></a>
-                                                <a class="btn btn-compare" href="#"><span>compare</span></a>
-                                                <a class="btn btn-quickview" href="#"><span>quickview</span></a>
-                                            </div>
-                                            <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div title="80%" class="rating-result">
-                                                                    <span style="width:80%">
-                                                                        <span><span>80</span>% of <span>100</span></span>
-                                                                    </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-item  product-item-opt-1 ">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/sellers2.jpg"></a>
-                                            <div class="product-item-actions">
-                                                <a class="btn btn-wishlist" href="#"><span>wishlist</span></a>
-                                                <a class="btn btn-compare" href="#"><span>compare</span></a>
-                                                <a class="btn btn-quickview" href="#"><span>quickview</span></a>
-                                            </div>
-                                            <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div title="80%" class="rating-result">
-                                                                    <span style="width:80%">
-                                                                        <span><span>80</span>% of <span>100</span></span>
-                                                                    </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-item  product-item-opt-1 ">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/sellers3.jpg"></a>
-                                            <div class="product-item-actions">
-                                                <a class="btn btn-wishlist" href="#"><span>wishlist</span></a>
-                                                <a class="btn btn-compare" href="#"><span>compare</span></a>
-                                                <a class="btn btn-quickview" href="#"><span>quickview</span></a>
-                                            </div>
-                                            <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div title="80%" class="rating-result">
-                                                                    <span style="width:80%">
-                                                                        <span><span>80</span>% of <span>100</span></span>
-                                                                    </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div><!-- tab 1 -->
-
-                        <!-- tab 2 -->
-                        <div role="tabpanel" class="tab-pane fade" id="tabproduct2">
-                            <div class="owl-carousel"
-                                 data-nav="true"
-                                 data-dots="false"
-                                 data-margin="30"
-                                 data-responsive='{
-                                        "0":{"items":1},
-                                        "480":{"items":2},
-                                        "480":{"items":2},
-                                        "768":{"items":3},
-                                        "992":{"items":3}
-                                    }'>
-
-                                <div class="product-item  product-item-opt-1 ">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/sellers1.jpg"></a>
-                                            <div class="product-item-actions">
-                                                <a class="btn btn-wishlist" href="#"><span>wishlist</span></a>
-                                                <a class="btn btn-compare" href="#"><span>compare</span></a>
-                                                <a class="btn btn-quickview" href="#"><span>quickview</span></a>
-                                            </div>
-                                            <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                    <span class="old-price">$52.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div title="80%" class="rating-result">
-                                                                    <span style="width:80%">
-                                                                        <span><span>80</span>% of <span>100</span></span>
-                                                                    </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-item  product-item-opt-1 ">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/sellers2.jpg"></a>
-                                            <div class="product-item-actions">
-                                                <a class="btn btn-wishlist" href="#"><span>wishlist</span></a>
-                                                <a class="btn btn-compare" href="#"><span>compare</span></a>
-                                                <a class="btn btn-quickview" href="#"><span>quickview</span></a>
-                                            </div>
-                                            <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div title="80%" class="rating-result">
-                                                                    <span style="width:80%">
-                                                                        <span><span>80</span>% of <span>100</span></span>
-                                                                    </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-item  product-item-opt-1 ">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/sellers3.jpg"></a>
-                                            <div class="product-item-actions">
-                                                <a class="btn btn-wishlist" href="#"><span>wishlist</span></a>
-                                                <a class="btn btn-compare" href="#"><span>compare</span></a>
-                                                <a class="btn btn-quickview" href="#"><span>quickview</span></a>
-                                            </div>
-                                            <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div title="80%" class="rating-result">
-                                                                    <span style="width:80%">
-                                                                        <span><span>80</span>% of <span>100</span></span>
-                                                                    </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-item  product-item-opt-1 ">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/sellers2.jpg"></a>
-                                            <div class="product-item-actions">
-                                                <a class="btn btn-wishlist" href="#"><span>wishlist</span></a>
-                                                <a class="btn btn-compare" href="#"><span>compare</span></a>
-                                                <a class="btn btn-quickview" href="#"><span>quickview</span></a>
-                                            </div>
-                                            <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div title="80%" class="rating-result">
-                                                                    <span style="width:80%">
-                                                                        <span><span>80</span>% of <span>100</span></span>
-                                                                    </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-item  product-item-opt-1 ">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/sellers3.jpg"></a>
-                                            <div class="product-item-actions">
-                                                <a class="btn btn-wishlist" href="#"><span>wishlist</span></a>
-                                                <a class="btn btn-compare" href="#"><span>compare</span></a>
-                                                <a class="btn btn-quickview" href="#"><span>quickview</span></a>
-                                            </div>
-                                            <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div title="80%" class="rating-result">
-                                                                    <span style="width:80%">
-                                                                        <span><span>80</span>% of <span>100</span></span>
-                                                                    </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div><!-- tab 2 -->
-
-                        <!-- tab 3-->
-                        <div role="tabpanel" class="tab-pane fade" id="tabproduct3">
-                            <div class="owl-carousel"
-                                 data-nav="true"
-                                 data-dots="false"
-                                 data-margin="30"
-                                 data-responsive='{
-                                        "0":{"items":1},
-                                        "480":{"items":2},
-                                        "480":{"items":2},
-                                        "768":{"items":3},
-                                        "992":{"items":3}
-                                    }'>
-
-                                <div class="product-item  product-item-opt-1 ">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/sellers1.jpg"></a>
-                                            <div class="product-item-actions">
-                                                <a class="btn btn-wishlist" href="#"><span>wishlist</span></a>
-                                                <a class="btn btn-compare" href="#"><span>compare</span></a>
-                                                <a class="btn btn-quickview" href="#"><span>quickview</span></a>
-                                            </div>
-                                            <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                    <span class="old-price">$52.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div title="80%" class="rating-result">
-                                                                    <span style="width:80%">
-                                                                        <span><span>80</span>% of <span>100</span></span>
-                                                                    </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-item  product-item-opt-1 ">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/sellers2.jpg"></a>
-                                            <div class="product-item-actions">
-                                                <a class="btn btn-wishlist" href="#"><span>wishlist</span></a>
-                                                <a class="btn btn-compare" href="#"><span>compare</span></a>
-                                                <a class="btn btn-quickview" href="#"><span>quickview</span></a>
-                                            </div>
-                                            <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div title="80%" class="rating-result">
-                                                                    <span style="width:80%">
-                                                                        <span><span>80</span>% of <span>100</span></span>
-                                                                    </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-item  product-item-opt-1 ">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/sellers3.jpg"></a>
-                                            <div class="product-item-actions">
-                                                <a class="btn btn-wishlist" href="#"><span>wishlist</span></a>
-                                                <a class="btn btn-compare" href="#"><span>compare</span></a>
-                                                <a class="btn btn-quickview" href="#"><span>quickview</span></a>
-                                            </div>
-                                            <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div title="80%" class="rating-result">
-                                                                    <span style="width:80%">
-                                                                        <span><span>80</span>% of <span>100</span></span>
-                                                                    </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-item  product-item-opt-1 ">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/sellers2.jpg"></a>
-                                            <div class="product-item-actions">
-                                                <a class="btn btn-wishlist" href="#"><span>wishlist</span></a>
-                                                <a class="btn btn-compare" href="#"><span>compare</span></a>
-                                                <a class="btn btn-quickview" href="#"><span>quickview</span></a>
-                                            </div>
-                                            <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div title="80%" class="rating-result">
-                                                                    <span style="width:80%">
-                                                                        <span><span>80</span>% of <span>100</span></span>
-                                                                    </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-item  product-item-opt-1 ">
-                                    <div class="product-item-info">
-                                        <div class="product-item-photo">
-                                            <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/sellers3.jpg"></a>
-                                            <div class="product-item-actions">
-                                                <a class="btn btn-wishlist" href="#"><span>wishlist</span></a>
-                                                <a class="btn btn-compare" href="#"><span>compare</span></a>
-                                                <a class="btn btn-quickview" href="#"><span>quickview</span></a>
-                                            </div>
-                                            <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
-                                        </div>
-                                        <div class="product-item-detail">
-                                            <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                            <div class="clearfix">
-                                                <div class="product-item-price">
-                                                    <span class="price">$45.00</span>
-                                                </div>
-                                                <div class="product-reviews-summary">
-                                                    <div class="rating-summary">
-                                                        <div title="80%" class="rating-result">
-                                                                    <span style="width:80%">
-                                                                        <span><span>80</span>% of <span>100</span></span>
-                                                                    </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div><!-- tab 3-->
-
-                    </div>
-
-                </div><!-- block tab products -->
-
-            </div>
-
-            <div class="col-md-3">
-
-                <!-- block deals  of -->
-                <div class="block-deals-of block-deals-of-opt1">
-                    <div class="block-title ">
-                        <span class="icon"></span>
-                        <div class="heading-title">latest deals</div>
-                    </div>
-                    <div class="block-content">
-
-                        <div class="owl-carousel"
-                             data-nav="true"
-                             data-dots="false"
-                             data-margin="30"
-                             data-responsive='{
-                                    "0":{"items":1},
-                                    "480":{"items":2},
-                                    "768":{"items":3},
-                                    "992":{"items":1},
-                                    "1200":{"items":1}
-                                    }'>
-
-                            <div class="product-item  product-item-opt-1 ">
-                                <div class="deals-of-countdown">
-
-                                    <div class="count-down-time" data-countdown="2016/12/25"></div>
-                                </div>
-                                <div class="product-item-info">
-                                    <div class="product-item-photo">
-                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/deals-of1.jpg" ></a>
-                                        <div class="product-item-actions">
-                                            <a class="btn btn-wishlist" href="#"><span>wishlist</span></a>
-                                            <a class="btn btn-compare" href="#"><span>compare</span></a>
-                                            <a class="btn btn-quickview" href="#"><span>quickview</span></a>
-                                        </div>
-                                        <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
-                                    </div>
-                                    <div class="product-item-detail">
-                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                        <div class="clearfix">
-                                            <div class="product-item-price">
-                                                <span class="price">$108.00</span>
-                                                <span class="old-price">(-20%)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-item  product-item-opt-1 ">
-                                <div class="deals-of-countdown">
-
-                                    <div class="count-down-time" data-countdown="2016/11/25"></div>
-                                </div>
-                                <div class="product-item-info">
-                                    <div class="product-item-photo">
-                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/deals-of2.jpg" ></a>
-                                        <div class="product-item-actions">
-                                            <a class="btn btn-wishlist" href="#"><span>wishlist</span></a>
-                                            <a class="btn btn-compare" href="#"><span>compare</span></a>
-                                            <a class="btn btn-quickview" href="#"><span>quickview</span></a>
-                                        </div>
-                                        <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
-                                    </div>
-                                    <div class="product-item-detail">
-                                        <strong class="product-item-name"><a href="#">Sale Couple of Smartphones</a></strong>
-                                        <div class="clearfix">
-                                            <div class="product-item-price">
-                                                <span class="price">$45.00</span>
-                                                <span class="old-price">(-20%)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-item  product-item-opt-1 ">
-                                <div class="deals-of-countdown">
-
-                                    <div class="count-down-time" data-countdown="2016/12/30"></div>
-                                </div>
-                                <div class="product-item-info">
-                                    <div class="product-item-photo">
-                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/deals-of3.jpg" ></a>
-                                        <div class="product-item-actions">
-                                            <a class="btn btn-wishlist" href="#"><span>wishlist</span></a>
-                                            <a class="btn btn-compare" href="#"><span>compare</span></a>
-                                            <a class="btn btn-quickview" href="#"><span>quickview</span></a>
-                                        </div>
-                                        <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
-                                    </div>
-                                    <div class="product-item-detail">
-                                        <strong class="product-item-name"><a href="#">Sale Couple of Smartphones</a></strong>
-                                        <div class="clearfix">
-                                            <div class="product-item-price">
-                                                <span class="price">$45.00</span>
-                                                <span class="old-price">(-20%)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div><!-- block deals  of -->
-
-            </div>
-
-        </div>
-    </div>
+  
 
     <div class="clearfix" style="background-color: #eeeeee;margin-bottom: 40px; padding-top:30px;">
 
-        <!-- block -floor -products / floor 1 :Fashion-->
+       
 
-    @foreach($blockfloors as $blockfloor)
-
-        <div class="block-floor-products block-floor-products-opt1 floor-products1" id="floor0-1">
-            <div class="container">
-                <div class="block-title">
-                    <span class="title"> <div class="{{ $blockfloor->icon }}"></div> Fashion</span>
-                    <div class="links dropdown">
-                        <button class="dropdown-toggle"  type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-bars" aria-hidden="true"></i>
-                        </button>
-                        <div class="dropdown-menu" >
-                            <ul>
-                                @foreach($categories as $category)
-
-                                    @if($blockfloor->category_one == $category->id )
-
-                                        <?php $i = 1  ?>
-
-                                    @else
-                                        <?php $i = 0  ?>
-                                    @endif
-                                    @if($i == 1)
-
-                                        <li role="presentation" class="active"><a href="#floor1-1"  role="tab" data-toggle="tab"> {{ $blockfloor->category_one == $category->id ? $category->title:''}} </a></li>
-
-                                            @break
-
-                                    @endif
-                                @endforeach
-                                @foreach($categories as $category)
-
-                                    @if($blockfloor->category_two == $category->id )
-
-                                        <?php $i = 1  ?>
-
-                                    @else
-                                        <?php $i = 0  ?>
-                                    @endif
-                                    @if($i == 1)
-
-                                        <li role="presentation"><a href="#floor1-2"  role="tab" data-toggle="tab"> {{ $blockfloor->category_two == $category->id ? $category->title:''}} </a></li>
-
-                                        @break
-
-                                    @endif
-                                @endforeach
-                                @foreach($categories as $category)
-
-                                    @if($blockfloor->category_three == $category->id )
-
-                                        <?php $i = 1  ?>
-
-                                    @else
-                                        <?php $i = 0  ?>
-                                    @endif
-                                    @if($i == 1)
-
-                                        <li role="presentation"><a href="#floor1-3"  role="tab" data-toggle="tab"> {{ $blockfloor->category_three == $category->id ? $category->title:''}} </a></li>
-
-                                        @break
-
-                                    @endif
-                                @endforeach
-                                @foreach($categories as $category)
-
-                                    @if($blockfloor->category_four == $category->id )
-
-                                        <?php $i = 1  ?>
-
-                                    @else
-                                        <?php $i = 0  ?>
-                                    @endif
-                                    @if($i == 1)
-
-                                        <li role="presentation"><a href="#floor1-4"  role="tab" data-toggle="tab"> {{ $blockfloor->category_four == $category->id ? $category->title:''}} </a></li>
-
-                                        @break
-
-                                    @endif
-                                @endforeach
-                                @foreach($categories as $category)
-
-                                    @if($blockfloor->category_five == $category->id )
-
-                                        <?php $i = 1  ?>
-
-                                    @else
-                                        <?php $i = 0  ?>
-                                    @endif
-                                    @if($i == 1)
-
-                                        <li role="presentation"><a href="#floor1-5"  role="tab" data-toggle="tab"> {{ $blockfloor->category_five == $category->id ? $category->title:''}} </a></li>
-
-                                        @break
-
-                                    @endif
-                                @endforeach
-                                @foreach($categories as $category)
-
-                                    @if($blockfloor->category_six == $category->id )
-
-                                        <?php $i = 1  ?>
-
-                                    @else
-                                        <?php $i = 0  ?>
-                                    @endif
-                                    @if($i == 1)
-
-                                        <li role="presentation"><a href="#floor1-6"  role="tab" data-toggle="tab"> {{ $blockfloor->category_six == $category->id ? $category->title:''}} </a></li>
-
-                                        @break
-
-                                    @endif
-                                @endforeach
-                                @foreach($categories as $category)
-
-                                    @if($blockfloor->category_seven == $category->id )
-
-                                        <?php $i = 1  ?>
-
-                                    @else
-                                        <?php $i = 0  ?>
-                                    @endif
-                                    @if($i == 1)
-
-                                        <li role="presentation"><a href="#floor1-3"  role="tab" data-toggle="tab"> {{ $blockfloor->category_seven == $category->id ? $category->title:''}} </a></li>
-
-                                        @break
-
-                                    @endif
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="actions">
-                        <a href="#" class="action action-up"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
-                        <a href="#floor0-2" class="action action-down"><i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-
-                <!-- Banner -->
-                <div class="block-banner-floor">
-
-                    <div class="col-sm-6">
-                        <a href="#" class="box-img"><img src="{{ asset('storage/images/block_floor_products/'.$blockfloor->banner_1) }}" alt="banner"></a>
-                    </div>
-                    <div class="col-sm-6">
-                        <a href="#" class="box-img"><img src="{{ asset('storage/images/block_floor_products/'.$blockfloor->banner_2) }}" alt="banner"></a>
-                    </div>
-
-                </div><!-- Banner -->
-
-                <div class="block-content">
-
-                    <div class="col-banner">
-                        <span class="label-featured"><img src="{{ asset('frontend/images/icon/index1/label-featured.png') }}" alt="label-featured"></span>
-                        <a href="#" class="box-img"><img src="{{ asset('storage/images/block_floor_products/'.$blockfloor->featured_banner) }}" alt="baner-floor"></a>
-                    </div>
-
-                    <div class="col-products tab-content">
-
-                        <!-- tab 1 -->
-
-
-
-                        <div class="tab-pane active in  fade " id="floor1-1" role="tabpanel">
-                            <div class="owl-carousel"
-                                 data-nav="true"
-                                 data-dots="false"
-                                 data-margin="0"
-                                 data-responsive='{
-                                        "0":{"items":1},
-                                        "420":{"items":2},
-                                        "600":{"items":3},
-                                        "768":{"items":3},
-                                        "992":{"items":3},
-                                        "1200":{"items":4}
-                                    }'>
-
-
-                                @foreach($categoryProducts as $categoryProduct)
-
-                                    @if($categoryProduct->category->id == $blockfloor->category_one)
-
-                                        @foreach($products as $product)
-                                            @if($categoryProduct->product->id == $product->id)
-                                                <?php $product_image = \App\Models\ColourImageProductSize::where('product_id',$product->id)->first(); ?>
-                                                <div class=" product-item  product-item-opt-1 ">
-                                                    <div class="product-item-info">
-                                                        <div class="product-item-photo">
-
-                                                                    <a class="product-item-img" href="{{route('single_product',$product)}}"><img alt="product name" src="{{ asset('storage/images/productImages/'.$product_image->image) }}"></a>
-
-                                                            <div class="product-item-actions">
-                                                                <a class="btn btn-quickview" href="#"><span>quickview</span></a>
-                                                            </div>
-                                                            <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
-                                                            @php
-
-                                                                $customer = \App\Models\CustomerUser::where('user_id',auth()->user())->first();
-
-                                                                if(!is_null($customer)){
-
-                                                                    $customer = $customer->id;
-
-                                                                }
-
-                                                                $product_deal = \App\Models\Deal::where('product_id',$product->id)
-                                                                ->where('status',1)
-                                                                ->where('deal_for','customer')
-                                                                ->where('specific_deal_for',$customer)
-                                                                ->first();
-
-                                                            @endphp
-
-                                                            @if(!empty($product_deal))
-
-                                                                @php $prod_deal = str_replace('_',' ',$product_deal->deal) @endphp
-                                                                <span class="product-item-label"> {{ ucwords($prod_deal) }}</span>
-
-                                                            @endif
-
-                                                            @php
-
-                                                                $product_offer = \App\Models\Offer::where('product_id',$product->id)
-                                                                ->where('status',1)
-                                                                ->where('deal_for','customer')
-                                                                ->where('specific_deal_for',$customer)
-                                                                ->first();
-
-                                                            @endphp
-
-                                                            @if(!empty($product_offer))
-
-                                                                <span class="product-item-label"> {{ $product_offer->offer }}</span>
-
-                                                            @endif
-
-                                                            @php
-
-                                                                $product_general_discount = \App\Models\GeneralDiscount::where('product_id',$product->id)
-                                                                ->where('status',1)
-                                                                ->where('deal_for','customer')
-                                                                ->where('specific_deal_for',$customer)
-                                                                ->first();
-
-                                                            @endphp
-
-                                                            @if(!empty($product_general_discount))
-
-                                                                <span class="product-item-label label-price"> {{ $product_general_discount->discount }}%<span>off</span></span>
-
-                                                            @endif
-
-                                                            @php
-
-                                                                $category_general_discount = \App\Models\GeneralDiscount::where('category_id',$categoryProduct->category->id)
-                                                                ->where('status',1)
-                                                                ->where('deal_for','customer')
-                                                                ->where('specific_deal_for',$customer)
-                                                                ->first();
-
-                                                            @endphp
-
-                                                            @if(!empty($category_general_discount))
-
-                                                                @if(empty($product_deal) && empty($product_offer) && empty($product_general_discount))
-
-                                                                    <span class="product-item-label"> {{ $category_general_discount->general_discount }} Discount</span>
-
-                                                                @endif
-
-                                                            @endif
-
-                                                        </div>
-
-                                                        <div class="product-item-detail">
-                                                            <strong class="product-item-name"><a href="#"> {{ $product->name }} </a></strong>
-                                                            <div class="clearfix">
-                                                                <div class="product-item-price">
-                                                                    <span class="price">{{ $product->price }}.00</span>
-{{--                                                                    <span class="old-price">$52.00</span>--}}
-                                                                </div>
-                                                                <div class="product-reviews-summary">
-                                                                    <div class="rating-summary">
-                                                                        <div title="80%" class="rating-result">
-                                                                                    <span style="width:80%">
-                                                                                        <span><span>80</span>% of <span>100</span></span>
-                                                                                    </span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            @endif
-                                        @endforeach
-                                    @endif
-                                @endforeach
-                            </div>
-                        </div>
-
-
-                        <!-- tab 2-->
-                        <div class="tab-pane  fade" id="floor1-2" role="tabpanel">
-                            <div class="owl-carousel"
-                                 data-nav="true"
-                                 data-dots="false"
-                                 data-margin="0"
-                                 data-responsive='{
-                                        "0":{"items":1},
-                                        "420":{"items":2},
-                                        "600":{"items":3},
-                                        "768":{"items":3},
-                                        "992":{"items":3},
-                                        "1200":{"items":4}
-                                    }'>
-                                @foreach($categoryProducts as $categoryProduct)
-
-                                    @if($categoryProduct->category->id == $blockfloor->category_two)
-
-                                        @foreach($products as $product)
-                                            @if($categoryProduct->product->id == $product->id)
-                                                <?php $product_image = \App\Models\ColourImageProductSize::where('product_id',$product->id)->first(); ?>
-                                                <div class=" product-item  product-item-opt-1 ">
-                                                    <div class="product-item-info">
-                                                        <div class="product-item-photo">
-                                                            <a class="product-item-img" href="{{route('single_product',$product)}}"><img alt="product name" src="{{ asset('storage/images/productImages/'.$product_image->image) }}"></a>
-
-                                                            <div class="product-item-actions">
-                                                                <a class="btn btn-quickview" href="#"><span>quickview</span></a>
-                                                            </div>
-                                                            <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
-                                                            @php
-
-                                                                $customer = \App\Models\CustomerUser::where('user_id',auth()->user())->first();
-
-                                                                if(!is_null($customer)){
-
-                                                                    $customer = $customer->id;
-
-                                                                }
-
-                                                                $product_deal = \App\Models\Deal::where('product_id',$product->id)
-                                                                ->where('status',1)
-                                                                ->where('deal_for','customer')
-                                                                ->where('specific_deal_for',$customer)
-                                                                ->first();
-
-                                                            @endphp
-
-                                                            @if(!empty($product_deal))
-
-                                                                @php $prod_deal = str_replace('_',' ',$product_deal->deal) @endphp
-                                                                <span class="product-item-label"> {{ ucwords($prod_deal) }}</span>
-
-                                                            @endif
-
-                                                            @php
-
-                                                                $product_offer = \App\Models\Offer::where('product_id',$product->id)
-                                                                ->where('status',1)
-                                                                ->where('deal_for','customer')
-                                                                ->where('specific_deal_for',$customer)
-                                                                ->first();
-
-                                                            @endphp
-
-                                                            @if(!empty($product_offer))
-
-                                                                <span class="product-item-label"> {{ $product_offer->offer }}</span>
-
-                                                            @endif
-
-                                                            @php
-
-                                                                $product_general_discount = \App\Models\GeneralDiscount::where('product_id',$product->id)
-                                                                ->where('status',1)
-                                                                ->where('deal_for','customer')
-                                                                ->where('specific_deal_for',$customer)
-                                                                ->first();
-
-                                                            @endphp
-
-                                                            @if(!empty($product_general_discount))
-
-                                                                <span class="product-item-label label-price"> {{ $product_general_discount->discount }}%<span>off</span></span>
-
-                                                            @endif
-
-                                                            @php
-
-                                                                $category_general_discount = \App\Models\GeneralDiscount::where('category_id',$categoryProduct->category->id)
-                                                                ->where('status',1)
-                                                                ->where('deal_for','customer')
-                                                                ->where('specific_deal_for',$customer)
-                                                                ->first();
-
-                                                            @endphp
-
-                                                            @if(!empty($category_general_discount))
-
-                                                                @if(empty($product_deal) && empty($product_offer) && empty($product_general_discount))
-
-                                                                    <span class="product-item-label"> {{ $category_general_discount->general_discount }} Discount</span>
-
-                                                                @endif
-
-                                                            @endif
-                                                        </div>
-
-                                                        <div class="product-item-detail">
-                                                            <strong class="product-item-name"><a href="#"> {{ $product->name }} </a></strong>
-                                                            <div class="clearfix">
-                                                                <div class="product-item-price">
-                                                                    <span class="price">{{ $product->price }}.00</span>
-{{--                                                                    <span class="old-price">$52.00</span>--}}
-                                                                </div>
-                                                                <div class="product-reviews-summary">
-                                                                    <div class="rating-summary">
-                                                                        <div title="80%" class="rating-result">
-                                                                                    <span style="width:80%">
-                                                                                        <span><span>80</span>% of <span>100</span></span>
-                                                                                    </span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            @endif
-                                        @endforeach
-                                    @endif
-                                @endforeach
-                            </div>
-                        </div>
-
-                        <!-- tab 3 -->
-                        <div class="tab-pane  fade" id="floor1-3" role="tabpanel">
-                            <div class="owl-carousel"
-                                 data-nav="true"
-                                 data-dots="false"
-                                 data-margin="0"
-                                 data-responsive='{
-                                        "0":{"items":1},
-                                        "420":{"items":2},
-                                        "600":{"items":3},
-                                        "768":{"items":3},
-                                        "992":{"items":3},
-                                        "1200":{"items":4}
-                                    }'>
-                                @foreach($categoryProducts as $categoryProduct)
-
-                                    @if($categoryProduct->category->id == $blockfloor->category_three)
-
-                                        @foreach($products as $product)
-                                            @if($categoryProduct->product->id == $product->id)
-                                                <?php $product_image = \App\Models\ColourImageProductSize::where('product_id',$product->id)->first(); ?>
-                                                <div class=" product-item  product-item-opt-1 ">
-                                                    <div class="product-item-info">
-                                                        <div class="product-item-photo">
-
-                                                            <a class="product-item-img" href="{{route('single_product',$product)}}"><img alt="product name" src="{{ asset('storage/images/productImages/'.$product_image->image) }}"></a>
-
-                                                            <div class="product-item-actions">
-                                                                <a class="btn btn-quickview" href="#"><span>quickview</span></a>
-                                                            </div>
-                                                            <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
-                                                            @php
-
-                                                                $customer = \App\Models\CustomerUser::where('user_id',auth()->user())->first();
-
-                                                                if(!is_null($customer)){
-
-                                                                    $customer = $customer->id;
-
-                                                                }
-
-                                                                $product_deal = \App\Models\Deal::where('product_id',$product->id)
-                                                                ->where('status',1)
-                                                                ->where('deal_for','customer')
-                                                                ->where('specific_deal_for',$customer)
-                                                                ->first();
-
-                                                            @endphp
-
-                                                            @if(!empty($product_deal))
-
-                                                                @php $prod_deal = str_replace('_',' ',$product_deal->deal) @endphp
-                                                                <span class="product-item-label"> {{ ucwords($prod_deal) }}</span>
-
-                                                            @endif
-
-                                                            @php
-
-                                                                $product_offer = \App\Models\Offer::where('product_id',$product->id)
-                                                                ->where('status',1)
-                                                                ->where('deal_for','customer')
-                                                                ->where('specific_deal_for',$customer)
-                                                                ->first();
-
-                                                            @endphp
-
-                                                            @if(!empty($product_offer))
-
-                                                                <span class="product-item-label"> {{ $product_offer->offer }}</span>
-
-                                                            @endif
-
-                                                            @php
-
-                                                                $product_general_discount = \App\Models\GeneralDiscount::where('product_id',$product->id)
-                                                                ->where('status',1)
-                                                                ->where('deal_for','customer')
-                                                                ->where('specific_deal_for',$customer)
-                                                                ->first();
-
-                                                            @endphp
-
-                                                            @if(!empty($product_general_discount))
-
-                                                                <span class="product-item-label label-price"> {{ $product_general_discount->discount }}%<span>off</span></span>
-
-                                                            @endif
-
-                                                            @php
-
-                                                                $category_general_discount = \App\Models\GeneralDiscount::where('category_id',$categoryProduct->category->id)
-                                                                ->where('status',1)
-                                                                ->where('deal_for','customer')
-                                                                ->where('specific_deal_for',$customer)
-                                                                ->first();
-
-                                                            @endphp
-
-                                                            @if(!empty($category_general_discount))
-
-                                                                @if(empty($product_deal) && empty($product_offer) && empty($product_general_discount))
-
-                                                                    <span class="product-item-label"> {{ $category_general_discount->general_discount }} Discount</span>
-
-                                                                @endif
-
-                                                            @endif
-                                                        </div>
-
-                                                        <div class="product-item-detail">
-                                                            <strong class="product-item-name"><a href="#"> {{ $product->name }} </a></strong>
-                                                            <div class="clearfix">
-                                                                <div class="product-item-price">
-                                                                    <span class="price">{{ $product->price }}.00</span>
-{{--                                                                    <span class="old-price">$52.00</span>--}}
-                                                                </div>
-                                                                <div class="product-reviews-summary">
-                                                                    <div class="rating-summary">
-                                                                        <div title="80%" class="rating-result">
-                                                                                    <span style="width:80%">
-                                                                                        <span><span>80</span>% of <span>100</span></span>
-                                                                                    </span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            @endif
-                                        @endforeach
-                                    @endif
-                                @endforeach
-                            </div>
-                        </div>
-
-                        <!-- tab 4 -->
-                        <div class="tab-pane  fade" id="floor1-4" role="tabpanel">
-                            <div class="owl-carousel"
-                                 data-nav="true"
-                                 data-dots="false"
-                                 data-margin="0"
-                                 data-responsive='{
-                                        "0":{"items":1},
-                                        "420":{"items":2},
-                                        "600":{"items":3},
-                                        "768":{"items":3},
-                                        "992":{"items":3},
-                                        "1200":{"items":4}
-                                    }'>
-                                @foreach($categoryProducts as $categoryProduct)
-
-                                    @if($categoryProduct->category->id == $blockfloor->category_four)
-
-                                        @foreach($products as $product)
-                                            @if($categoryProduct->product->id == $product->id)
-                                                <?php $product_image = \App\Models\ColourImageProductSize::where('product_id',$product->id)->first(); ?>
-                                                <div class=" product-item  product-item-opt-1 ">
-                                                    <div class="product-item-info">
-                                                        <div class="product-item-photo">
-
-                                                            <a class="product-item-img" href="{{route('single_product',$product)}}"><img alt="product name" src="{{ asset('storage/images/productImages/'.$product_image->image) }}"></a>
-
-                                                            <div class="product-item-actions">
-                                                                <a class="btn btn-quickview" href="#"><span>quickview</span></a>
-                                                            </div>
-                                                            <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
-                                                            @php
-
-                                                                $customer = \App\Models\CustomerUser::where('user_id',auth()->user())->first();
-
-                                                                if(!is_null($customer)){
-
-                                                                    $customer = $customer->id;
-
-                                                                }
-
-                                                                $product_deal = \App\Models\Deal::where('product_id',$product->id)
-                                                                ->where('status',1)
-                                                                ->where('deal_for','customer')
-                                                                ->where('specific_deal_for',$customer)
-                                                                ->first();
-
-                                                            @endphp
-
-                                                            @if(!empty($product_deal))
-
-                                                                @php $prod_deal = str_replace('_',' ',$product_deal->deal) @endphp
-                                                                <span class="product-item-label"> {{ ucwords($prod_deal) }}</span>
-
-                                                            @endif
-
-                                                            @php
-
-                                                                $product_offer = \App\Models\Offer::where('product_id',$product->id)
-                                                                ->where('status',1)
-                                                                ->where('deal_for','customer')
-                                                                ->where('specific_deal_for',$customer)
-                                                                ->first();
-
-                                                            @endphp
-
-                                                            @if(!empty($product_offer))
-
-                                                                <span class="product-item-label"> {{ $product_offer->offer }}</span>
-
-                                                            @endif
-
-                                                            @php
-
-                                                                $product_general_discount = \App\Models\GeneralDiscount::where('product_id',$product->id)
-                                                                ->where('status',1)
-                                                                ->where('deal_for','customer')
-                                                                ->where('specific_deal_for',$customer)
-                                                                ->first();
-
-                                                            @endphp
-
-                                                            @if(!empty($product_general_discount))
-
-                                                                <span class="product-item-label label-price"> {{ $product_general_discount->discount }}%<span>off</span></span>
-
-                                                            @endif
-
-                                                            @php
-
-                                                                $category_general_discount = \App\Models\GeneralDiscount::where('category_id',$categoryProduct->category->id)
-                                                                ->where('status',1)
-                                                                ->where('deal_for','customer')
-                                                                ->where('specific_deal_for',$customer)
-                                                                ->first();
-
-                                                            @endphp
-
-                                                            @if(!empty($category_general_discount))
-
-                                                                @if(empty($product_deal) && empty($product_offer) && empty($product_general_discount))
-
-                                                                    <span class="product-item-label"> {{ $category_general_discount->general_discount }} Discount</span>
-
-                                                                @endif
-
-                                                            @endif
-                                                        </div>
-
-                                                        <div class="product-item-detail">
-                                                            <strong class="product-item-name"><a href="#"> {{ $product->name }} </a></strong>
-                                                            <div class="clearfix">
-                                                                <div class="product-item-price">
-                                                                    <span class="price">{{ $product->price }}.00</span>
-{{--                                                                    <span class="old-price">$52.00</span>--}}
-                                                                </div>
-                                                                <div class="product-reviews-summary">
-                                                                    <div class="rating-summary">
-                                                                        <div title="80%" class="rating-result">
-                                                                                    <span style="width:80%">
-                                                                                        <span><span>80</span>% of <span>100</span></span>
-                                                                                    </span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            @endif
-                                        @endforeach
-                                    @endif
-                                @endforeach
-                            </div>
-                        </div>
-
-                        <!-- tab 5 -->
-                        <div class="tab-pane fade " id="floor1-5" role="tabpanel">
-                            <div class="owl-carousel"
-                                 data-nav="true"
-                                 data-dots="false"
-                                 data-margin="0"
-                                 data-responsive='{
-                                        "0":{"items":1},
-                                        "420":{"items":2},
-                                        "600":{"items":3},
-                                        "768":{"items":3},
-                                        "992":{"items":3},
-                                        "1200":{"items":4}
-                                    }'>
-                                @foreach($categoryProducts as $categoryProduct)
-
-                                    @if($categoryProduct->category->id == $blockfloor->category_five)
-
-                                        @foreach($products as $product)
-                                            @if($categoryProduct->product->id == $product->id)
-                                                <?php $product_image = \App\Models\ColourImageProductSize::where('product_id',$product->id)->first(); ?>
-                                                <div class=" product-item  product-item-opt-1 ">
-                                                    <div class="product-item-info">
-                                                        <div class="product-item-photo">
-
-                                                            <a class="product-item-img" href="{{route('single_product',$product)}}"><img alt="product name" src="{{ asset('storage/images/productImages/'.$product_image->image) }}"></a>
-
-                                                            <div class="product-item-actions">
-                                                                <a class="btn btn-quickview" href="#"><span>quickview</span></a>
-                                                            </div>
-                                                            <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
-                                                            @php
-
-                                                                $customer = \App\Models\CustomerUser::where('user_id',auth()->user())->first();
-
-                                                                if(!is_null($customer)){
-
-                                                                    $customer = $customer->id;
-
-                                                                }
-
-                                                                $product_deal = \App\Models\Deal::where('product_id',$product->id)
-                                                                ->where('status',1)
-                                                                ->where('deal_for','customer')
-                                                                ->where('specific_deal_for',$customer)
-                                                                ->first();
-
-                                                            @endphp
-
-                                                            @if(!empty($product_deal))
-
-                                                                @php $prod_deal = str_replace('_',' ',$product_deal->deal) @endphp
-                                                                <span class="product-item-label"> {{ ucwords($prod_deal) }}</span>
-
-                                                            @endif
-
-                                                            @php
-
-                                                                $product_offer = \App\Models\Offer::where('product_id',$product->id)
-                                                                ->where('status',1)
-                                                                ->where('deal_for','customer')
-                                                                ->where('specific_deal_for',$customer)
-                                                                ->first();
-
-                                                            @endphp
-
-                                                            @if(!empty($product_offer))
-
-                                                                <span class="product-item-label"> {{ $product_offer->offer }}</span>
-
-                                                            @endif
-
-                                                            @php
-
-                                                                $product_general_discount = \App\Models\GeneralDiscount::where('product_id',$product->id)
-                                                                ->where('status',1)
-                                                                ->where('deal_for','customer')
-                                                                ->where('specific_deal_for',$customer)
-                                                                ->first();
-
-                                                            @endphp
-
-                                                            @if(!empty($product_general_discount))
-
-                                                                <span class="product-item-label label-price"> {{ $product_general_discount->discount }}%<span>off</span></span>
-
-                                                            @endif
-
-                                                            @php
-
-                                                                $category_general_discount = \App\Models\GeneralDiscount::where('category_id',$categoryProduct->category->id)
-                                                                ->where('status',1)
-                                                                ->where('deal_for','customer')
-                                                                ->where('specific_deal_for',$customer)
-                                                                ->first();
-
-                                                            @endphp
-
-                                                            @if(!empty($category_general_discount))
-
-                                                                @if(empty($product_deal) && empty($product_offer) && empty($product_general_discount))
-
-                                                                    <span class="product-item-label"> {{ $category_general_discount->general_discount }} Discount</span>
-
-                                                                @endif
-
-                                                            @endif
-                                                        </div>
-
-                                                        <div class="product-item-detail">
-                                                            <strong class="product-item-name"><a href="#"> {{ $product->name }} </a></strong>
-                                                            <div class="clearfix">
-                                                                <div class="product-item-price">
-                                                                    <span class="price">{{ $product->price }}.00</span>
-{{--                                                                    <span class="old-price">$52.00</span>--}}
-                                                                </div>
-                                                                <div class="product-reviews-summary">
-                                                                    <div class="rating-summary">
-                                                                        <div title="80%" class="rating-result">
-                                                                                    <span style="width:80%">
-                                                                                        <span><span>80</span>% of <span>100</span></span>
-                                                                                    </span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            @endif
-                                        @endforeach
-                                    @endif
-                                @endforeach
-                            </div>
-                        </div>
-
-                        <!-- tab 6 -->
-                        <div class="tab-pane  fade" id="floor1-6" role="tabpanel">
-                            <div class="owl-carousel"
-                                 data-nav="true"
-                                 data-dots="false"
-                                 data-margin="0"
-                                 data-responsive='{
-                                        "0":{"items":1},
-                                        "420":{"items":2},
-                                        "600":{"items":3},
-                                        "768":{"items":3},
-                                        "992":{"items":3},
-                                        "1200":{"items":4}
-                                    }'>
-                                @foreach($categoryProducts as $categoryProduct)
-
-                                    @if($categoryProduct->category->id == $blockfloor->category_six)
-
-                                        @foreach($products as $product)
-                                            @if($categoryProduct->product->id == $product->id)
-                                                <?php $product_image = \App\Models\ColourImageProductSize::where('product_id',$product->id)->first(); ?>
-                                                <div class=" product-item  product-item-opt-1 ">
-                                                    <div class="product-item-info">
-                                                        <div class="product-item-photo">
-
-                                                            <a class="product-item-img" href="{{route('single_product',$product)}}"><img alt="product name" src="{{ asset('storage/images/productImages/'.$product_image->image) }}"></a>
-
-                                                            <div class="product-item-actions">
-                                                                <a class="btn btn-quickview" href="#"><span>quickview</span></a>
-                                                            </div>
-                                                            <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
-                                                            @php
-
-                                                                $customer = \App\Models\CustomerUser::where('user_id',auth()->user())->first();
-
-                                                                if(!is_null($customer)){
-
-                                                                    $customer = $customer->id;
-
-                                                                }
-
-                                                                $product_deal = \App\Models\Deal::where('product_id',$product->id)
-                                                                ->where('status',1)
-                                                                ->where('deal_for','customer')
-                                                                ->where('specific_deal_for',$customer)
-                                                                ->first();
-
-                                                            @endphp
-
-                                                            @if(!empty($product_deal))
-
-                                                                @php $prod_deal = str_replace('_',' ',$product_deal->deal) @endphp
-                                                                <span class="product-item-label"> {{ ucwords($prod_deal) }}</span>
-
-                                                            @endif
-
-                                                            @php
-
-                                                                $product_offer = \App\Models\Offer::where('product_id',$product->id)
-                                                                ->where('status',1)
-                                                                ->where('deal_for','customer')
-                                                                ->where('specific_deal_for',$customer)
-                                                                ->first();
-
-                                                            @endphp
-
-                                                            @if(!empty($product_offer))
-
-                                                                <span class="product-item-label"> {{ $product_offer->offer }}</span>
-
-                                                            @endif
-
-                                                            @php
-
-                                                                $product_general_discount = \App\Models\GeneralDiscount::where('product_id',$product->id)
-                                                                ->where('status',1)
-                                                                ->where('deal_for','customer')
-                                                                ->where('specific_deal_for',$customer)
-                                                                ->first();
-
-                                                            @endphp
-
-                                                            @if(!empty($product_general_discount))
-
-                                                                <span class="product-item-label label-price"> {{ $product_general_discount->discount }}%<span>off</span></span>
-
-                                                            @endif
-
-                                                            @php
-
-                                                                $category_general_discount = \App\Models\GeneralDiscount::where('category_id',$categoryProduct->category->id)
-                                                                ->where('status',1)
-                                                                ->where('deal_for','customer')
-                                                                ->where('specific_deal_for',$customer)
-                                                                ->first();
-
-                                                            @endphp
-
-                                                            @if(!empty($category_general_discount))
-
-                                                                @if(empty($product_deal) && empty($product_offer) && empty($product_general_discount))
-
-                                                                    <span class="product-item-label"> {{ $category_general_discount->general_discount }} Discount</span>
-
-                                                                @endif
-
-                                                            @endif
-                                                        </div>
-
-                                                        <div class="product-item-detail">
-                                                            <strong class="product-item-name"><a href="#"> {{ $product->name }} </a></strong>
-                                                            <div class="clearfix">
-                                                                <div class="product-item-price">
-                                                                    <span class="price">{{ $product->price }}.00</span>
-{{--                                                                    <span class="old-price">$52.00</span>--}}
-                                                                </div>
-                                                                <div class="product-reviews-summary">
-                                                                    <div class="rating-summary">
-                                                                        <div title="80%" class="rating-result">
-                                                                                    <span style="width:80%">
-                                                                                        <span><span>80</span>% of <span>100</span></span>
-                                                                                    </span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            @endif
-                                        @endforeach
-                                    @endif
-                                @endforeach
-                            </div>
-                        </div>
-
-                        <!-- tab 7 -->
-                        <div class="tab-pane  fade" id="floor1-7" role="tabpanel">
-                            <div class="owl-carousel"
-                                 data-nav="true"
-                                 data-dots="false"
-                                 data-margin="0"
-                                 data-responsive='{
-                                        "0":{"items":1},
-                                        "420":{"items":2},
-                                        "600":{"items":3},
-                                        "768":{"items":3},
-                                        "992":{"items":3},
-                                        "1200":{"items":4}
-                                    }'>
-                                @foreach($categoryProducts as $categoryProduct)
-
-                                    @if($categoryProduct->category->id == $blockfloor->category_seven)
-
-                                        @foreach($products as $product)
-                                            @if($categoryProduct->product->id == $product->id)
-                                                <?php $product_image = \App\Models\ColourImageProductSize::where('product_id',$product->id)->first(); ?>
-                                                <div class=" product-item  product-item-opt-1 ">
-                                                    <div class="product-item-info">
-                                                        <div class="product-item-photo">
-
-                                                            <a class="product-item-img" href="{{route('single_product',$product)}}"><img alt="product name" src="{{ asset('storage/images/productImages/'.$product_image->image) }}"></a>
-
-                                                            <div class="product-item-actions">
-                                                                <a class="btn btn-quickview" href="#"><span>quickview</span></a>
-                                                            </div>
-                                                            <button type="button" class="btn btn-cart"><span>Add to Cart</span></button>
-                                                            @php
-
-                                                                $customer = \App\Models\CustomerUser::where('user_id',auth()->user())->first();
-
-                                                                if(!is_null($customer)){
-
-                                                                    $customer = $customer->id;
-
-                                                                }
-
-                                                                $product_deal = \App\Models\Deal::where('product_id',$product->id)
-                                                                ->where('status',1)
-                                                                ->where('deal_for','customer')
-                                                                ->where('specific_deal_for',$customer)
-                                                                ->first();
-
-                                                            @endphp
-
-                                                            @if(!empty($product_deal))
-
-                                                                @php $prod_deal = str_replace('_',' ',$product_deal->deal) @endphp
-                                                                <span class="product-item-label"> {{ ucwords($prod_deal) }}</span>
-
-                                                            @endif
-
-                                                            @php
-
-                                                                $product_offer = \App\Models\Offer::where('product_id',$product->id)
-                                                                ->where('status',1)
-                                                                ->where('deal_for','customer')
-                                                                ->where('specific_deal_for',$customer)
-                                                                ->first();
-
-                                                            @endphp
-
-                                                            @if(!empty($product_offer))
-
-                                                                <span class="product-item-label"> {{ $product_offer->offer }}</span>
-
-                                                            @endif
-
-                                                            @php
-
-                                                                $product_general_discount = \App\Models\GeneralDiscount::where('product_id',$product->id)
-                                                                ->where('status',1)
-                                                                ->where('deal_for','customer')
-                                                                ->where('specific_deal_for',$customer)
-                                                                ->first();
-
-                                                            @endphp
-
-                                                            @if(!empty($product_general_discount))
-
-                                                                <span class="product-item-label label-price"> {{ $product_general_discount->discount }}%<span>off</span></span>
-
-                                                            @endif
-
-                                                            @php
-
-                                                                $category_general_discount = \App\Models\GeneralDiscount::where('category_id',$categoryProduct->category->id)
-                                                                ->where('status',1)
-                                                                ->where('deal_for','customer')
-                                                                ->where('specific_deal_for',$customer)
-                                                                ->first();
-
-                                                            @endphp
-
-                                                            @if(!empty($category_general_discount))
-
-                                                                @if(empty($product_deal) && empty($product_offer) && empty($product_general_discount))
-
-                                                                    <span class="product-item-label"> {{ $category_general_discount->general_discount }} Discount</span>
-
-                                                                @endif
-
-                                                            @endif
-                                                        </div>
-
-                                                        <div class="product-item-detail">
-                                                            <strong class="product-item-name"><a href="#"> {{ $product->name }} </a></strong>
-                                                            <div class="clearfix">
-                                                                <div class="product-item-price">
-                                                                    <span class="price">{{ $product->price }}.00</span>
-{{--                                                                    <span class="old-price">$52.00</span>--}}
-                                                                </div>
-                                                                <div class="product-reviews-summary">
-                                                                    <div class="rating-summary">
-                                                                        <div title="80%" class="rating-result">
-                                                                                    <span style="width:80%">
-                                                                                        <span><span>80</span>% of <span>100</span></span>
-                                                                                    </span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            @endif
-                                        @endforeach
-                                    @endif
-                                @endforeach
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-        </div><!-- block -floor -products / floor :Fashion-->
-
-        @section('page_css')
-
-            <style>
-                .floor-products1.block-floor-products-opt1 .block-title .links li.active > a {
-                    background-color: {{ $blockfloor->colourCode }}
-                }
-            </style>
-        @endsection
-
-    @endforeach
 
         <!-- Banner -->
-        <div class="block-banner-opt1 effect-banner3">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <a href="#" class="box-img"><img src="images/media/index1/banner7-1.jpg" alt="banner"></a>
-                    </div>
-                    <div class="col-sm-6">
-                        <a href="#" class="box-img"><img src="images/media/index1/banner7-2.jpg" alt="banner"></a>
-                    </div>
-                </div>
-            </div>
-        </div><!-- Banner -->
+        
+       
 
     </div>
 
     <!-- block  showcase-->
-    <div class="block-showcase block-showcase-opt1 block-brand-tabs">
-        <div class="container">
-
-            <div class="block-title">
-                <span class="title">brand showcase</span>
-            </div>
-
-            <div class="block-content" >
-
-                <ul class="nav-brand owl-carousel"
-                    data-nav="true"
-                    data-loop="true"
-                    data-dots="false"
-                    data-margin="1"
-                    data-responsive='{
-                            "0":{"items":3},
-                            "380":{"items":4},
-                            "480":{"items":5},
-                            "640":{"items":7},
-                            "992":{"items":8}
-                        }'>
-                    <li  class="active" data-tab="brand1-1">
-                        <img src="images/media/index1/brand-nav1.png" alt="img">
-                    </li>
-                    <li   data-tab="brand1-2">
-                        <img src="images/media/index1/brand-nav2.png" alt="img">
-                    </li>
-                    <li   data-tab="brand1-3">
-                        <img src="images/media/index1/brand-nav3.png" alt="img">
-                    </li>
-                    <li   data-tab="brand1-4">
-                        <img src="images/media/index1/brand-nav4.png" alt="img">
-                    </li>
-                    <li  data-tab="brand1-5">
-                        <img src="images/media/index1/brand-nav5.png" alt="img">
-                    </li>
-                    <li   data-tab="brand1-6">
-                        <img src="images/media/index1/brand-nav6.png" alt="img">
-                    </li>
-                    <li   data-tab="brand1-7">
-                        <img src="images/media/index1/brand-nav7.png" alt="img">
-                    </li>
-                    <li   data-tab="brand1-8">
-                        <img src="images/media/index1/brand-nav8.png" alt="img">
-                    </li>
-                    <li data-tab="brand1-9">
-                        <img src="images/media/index1/brand-nav1.png" alt="img">
-                    </li>
-                </ul>
-                <div class="tab-content">
-
-                    <div class="tab-pane active  " role="tabpanel" id="brand1-1">
-                        <div class="row">
-                            <div class="col-md-4">
-
-                                <div class="col-title">
-                                    <img src="images/media/index1/logo-showcase.jpg" alt="logo" class="logo-showcase">
-                                    <div class="des">
-                                        Whatever the occasion, complete your outfit with one of Hermes Fashion's stylish women's bags. Discover our spring collection.
-                                    </div>
-                                    <div class="actions">
-                                        <a href="#" class="btn btn-default">shop this brand <i aria-hidden="true" class="fa fa-caret-right"></i></a>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="col-md-8">
-
-                                <div class="col-product">
-                                    <div class="owl-carousel"
-                                         data-nav="true"
-                                         data-dots="false"
-                                         data-margin="0"
-                                         data-responsive='{
-                                                "0":{"items":1},
-                                                "380":{"items":1},
-                                                "480":{"items":1},
-                                                "640":{"items":2},
-                                                "992":{"items":2}
-                                            }'>
-                                        <div class="item">
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase1.jpg" ></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase2.jpg" ></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase3.jpg" ></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                                <span class="old-price">$52.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase4.jpg"></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase3.jpg" ></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                                <span class="old-price">$52.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase4.jpg"></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane " role="tabpanel" id="brand1-2">
-                        <div class="row">
-                            <div class="col-md-4">
-
-                                <div class="col-title">
-                                    <img src="images/media/index1/logo-showcase.jpg" alt="logo" class="logo-showcase">
-                                    <div class="des">
-                                        Whatever the occasion, complete your outfit with one of Hermes Fashion's stylish women's bags. Discover our spring collection.
-                                    </div>
-                                    <div class="actions">
-                                        <a href="#" class="btn btn-default">shop this brand <i aria-hidden="true" class="fa fa-caret-right"></i></a>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="col-md-8">
-
-                                <div class="col-product">
-                                    <div class="owl-carousel"
-                                         data-nav="true"
-                                         data-dots="false"
-                                         data-margin="0"
-                                         data-responsive='{
-                                                "0":{"items":1},
-                                                "380":{"items":1},
-                                                "480":{"items":1},
-                                                "640":{"items":2},
-                                                "992":{"items":2}
-                                            }'>
-                                        <div class="item">
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase1.jpg" ></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase2.jpg" ></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase3.jpg" ></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                                <span class="old-price">$52.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase4.jpg"></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane  " role="tabpanel" id="brand1-3">
-                        <div class="row">
-                            <div class="col-md-4">
-
-                                <div class="col-title">
-                                    <img src="images/media/index1/logo-showcase.jpg" alt="logo" class="logo-showcase">
-                                    <div class="des">
-                                        Whatever the occasion, complete your outfit with one of Hermes Fashion's stylish women's bags. Discover our spring collection.
-                                    </div>
-                                    <div class="actions">
-                                        <a href="#" class="btn btn-default">shop this brand <i aria-hidden="true" class="fa fa-caret-right"></i></a>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="col-md-8">
-
-                                <div class="col-product">
-                                    <div class="owl-carousel"
-                                         data-nav="true"
-                                         data-dots="false"
-                                         data-margin="0"
-                                         data-responsive='{
-                                                "0":{"items":1},
-                                                "380":{"items":1},
-                                                "480":{"items":1},
-                                                "640":{"items":2},
-                                                "992":{"items":2}
-                                            }'>
-                                        <div class="item">
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase1.jpg" ></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase2.jpg" ></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase3.jpg" ></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                                <span class="old-price">$52.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase4.jpg"></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane  " role="tabpanel" id="brand1-4">
-                        <div class="row">
-                            <div class="col-md-4">
-
-                                <div class="col-title">
-                                    <img src="images/media/index1/logo-showcase.jpg" alt="logo" class="logo-showcase">
-                                    <div class="des">
-                                        Whatever the occasion, complete your outfit with one of Hermes Fashion's stylish women's bags. Discover our spring collection.
-                                    </div>
-                                    <div class="actions">
-                                        <a href="#" class="btn btn-default">shop this brand <i aria-hidden="true" class="fa fa-caret-right"></i></a>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="col-md-8">
-
-                                <div class="col-product">
-                                    <div class="owl-carousel"
-                                         data-nav="true"
-                                         data-dots="false"
-                                         data-margin="0"
-                                         data-responsive='{
-                                                "0":{"items":1},
-                                                "380":{"items":1},
-                                                "480":{"items":1},
-                                                "640":{"items":2},
-                                                "992":{"items":2}
-                                            }'>
-                                        <div class="item">
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase1.jpg" ></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase2.jpg" ></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase3.jpg" ></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                                <span class="old-price">$52.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase4.jpg"></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane  " role="tabpanel" id="brand1-5">
-                        <div class="row">
-                            <div class="col-md-4">
-
-                                <div class="col-title">
-                                    <img src="images/media/index1/logo-showcase.jpg" alt="logo" class="logo-showcase">
-                                    <div class="des">
-                                        Whatever the occasion, complete your outfit with one of Hermes Fashion's stylish women's bags. Discover our spring collection.
-                                    </div>
-                                    <div class="actions">
-                                        <a href="#" class="btn btn-default">shop this brand <i aria-hidden="true" class="fa fa-caret-right"></i></a>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="col-md-8">
-
-                                <div class="col-product">
-                                    <div class="owl-carousel"
-                                         data-nav="true"
-                                         data-dots="false"
-                                         data-margin="0"
-                                         data-responsive='{
-                                                "0":{"items":1},
-                                                "380":{"items":1},
-                                                "480":{"items":1},
-                                                "640":{"items":2},
-                                                "992":{"items":2}
-                                            }'>
-                                        <div class="item">
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase1.jpg" ></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase2.jpg" ></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase3.jpg" ></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                                <span class="old-price">$52.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase4.jpg"></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane  " role="tabpanel" id="brand1-6">
-                        <div class="row">
-                            <div class="col-md-4">
-
-                                <div class="col-title">
-                                    <img src="images/media/index1/logo-showcase.jpg" alt="logo" class="logo-showcase">
-                                    <div class="des">
-                                        Whatever the occasion, complete your outfit with one of Hermes Fashion's stylish women's bags. Discover our spring collection.
-                                    </div>
-                                    <div class="actions">
-                                        <a href="#" class="btn btn-default">shop this brand <i aria-hidden="true" class="fa fa-caret-right"></i></a>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="col-md-8">
-
-                                <div class="col-product">
-                                    <div class="owl-carousel"
-                                         data-nav="true"
-                                         data-dots="false"
-                                         data-margin="0"
-                                         data-responsive='{
-                                                "0":{"items":1},
-                                                "380":{"items":1},
-                                                "480":{"items":1},
-                                                "640":{"items":2},
-                                                "992":{"items":2}
-                                            }'>
-                                        <div class="item">
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase1.jpg" ></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase2.jpg" ></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase3.jpg" ></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                                <span class="old-price">$52.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase4.jpg"></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane  " role="tabpanel" id="brand1-7">
-                        <div class="row">
-                            <div class="col-md-4">
-
-                                <div class="col-title">
-                                    <img src="images/media/index1/logo-showcase.jpg" alt="logo" class="logo-showcase">
-                                    <div class="des">
-                                        Whatever the occasion, complete your outfit with one of Hermes Fashion's stylish women's bags. Discover our spring collection.
-                                    </div>
-                                    <div class="actions">
-                                        <a href="#" class="btn btn-default">shop this brand <i aria-hidden="true" class="fa fa-caret-right"></i></a>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="col-md-8">
-
-                                <div class="col-product">
-                                    <div class="owl-carousel"
-                                         data-nav="true"
-                                         data-dots="false"
-                                         data-margin="0"
-                                         data-responsive='{
-                                                "0":{"items":1},
-                                                "380":{"items":1},
-                                                "480":{"items":1},
-                                                "640":{"items":2},
-                                                "992":{"items":2}
-                                            }'>
-                                        <div class="item">
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase1.jpg" ></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase2.jpg" ></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase3.jpg" ></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                                <span class="old-price">$52.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase4.jpg"></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane  " role="tabpanel" id="brand1-8">
-                        <div class="row">
-                            <div class="col-md-4">
-
-                                <div class="col-title">
-                                    <img src="images/media/index1/logo-showcase.jpg" alt="logo" class="logo-showcase">
-                                    <div class="des">
-                                        Whatever the occasion, complete your outfit with one of Hermes Fashion's stylish women's bags. Discover our spring collection.
-                                    </div>
-                                    <div class="actions">
-                                        <a href="#" class="btn btn-default">shop this brand <i aria-hidden="true" class="fa fa-caret-right"></i></a>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="col-md-8">
-
-                                <div class="col-product">
-                                    <div class="owl-carousel"
-                                         data-nav="true"
-                                         data-dots="false"
-                                         data-margin="0"
-                                         data-responsive='{
-                                                "0":{"items":1},
-                                                "380":{"items":1},
-                                                "480":{"items":1},
-                                                "640":{"items":2},
-                                                "992":{"items":2}
-                                            }'>
-                                        <div class="item">
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase1.jpg" ></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase2.jpg" ></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase3.jpg" ></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                                <span class="old-price">$52.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase4.jpg"></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane  " role="tabpanel" id="brand1-9">
-                        <div class="row">
-                            <div class="col-md-4">
-
-                                <div class="col-title">
-                                    <img src="images/media/index1/logo-showcase.jpg" alt="logo" class="logo-showcase">
-                                    <div class="des">
-                                        Whatever the occasion, complete your outfit with one of Hermes Fashion's stylish women's bags. Discover our spring collection.
-                                    </div>
-                                    <div class="actions">
-                                        <a href="#" class="btn btn-default">shop this brand <i aria-hidden="true" class="fa fa-caret-right"></i></a>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="col-md-8">
-
-                                <div class="col-product">
-                                    <div class="owl-carousel"
-                                         data-nav="true"
-                                         data-dots="false"
-                                         data-margin="0"
-                                         data-responsive='{
-                                                "0":{"items":1},
-                                                "380":{"items":1},
-                                                "480":{"items":1},
-                                                "640":{"items":2},
-                                                "992":{"items":2}
-                                            }'>
-                                        <div class="item">
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase1.jpg" ></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase2.jpg" ></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="item">
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase3.jpg" ></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                                <span class="old-price">$52.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-item  product-item-opt-1 ">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="images/media/index1/showcase4.jpg"></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Maecenas consequat mauris</a></strong>
-                                                        <div class="clearfix">
-                                                            <div class="product-item-price">
-                                                                <span class="price">$45.00</span>
-                                                            </div>
-                                                            <div class="product-reviews-summary">
-                                                                <div class="rating-summary">
-                                                                    <div title="80%" class="rating-result">
-                                                                                <span style="width:80%">
-                                                                                    <span><span>80</span>% of <span>100</span></span>
-                                                                                </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-    </div><!-- block  showcase-->
+    
 
     <!-- block  hot categories-->
-    <div class="block-hot-categories-opt1">
-        <div class="container">
-
-            <div class="block-title ">
-                <span class="title">Hot categories</span>
-            </div>
-
-            <div class="block-content">
-                <div class="row">
-                    <div class="col-md-3 col-sm-6">
-                        <div class="item">
-
-                            <div class="description" style="background-image: url(images/media/index1/hot-categories1.png)">
-                                <div class="title"><span>Electronics</span></div>
-                                <a href="#" class="btn">shop now</a>
-                            </div>
-                            <ul>
-                                <li><a href="#">Batteries & Chargers</a></li>
-                                <li><a href="#">Headphone, Headset</a></li>
-                                <li><a href="#">Home Audio</a></li>
-                                <li><a href="#">Mp3 Player Accessories</a></li>
-                            </ul>
-                        </div>
-                        <div class="item">
-                            <div class="description" style="background-image: url(images/media/index1/hot-categories2.png)">
-                                <div class="title"><span>Jewelry &  <br>Watches</span></div>
-                                <a href="#" class="btn">shop now</a>
-                            </div>
-                            <ul>
-                                <li><a href="#">Men Watches</a></li>
-                                <li><a href="#">Wedding Rings</a></li>
-                                <li><a href="#">Earring</a></li>
-                                <li><a href="#">Necklaces</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="item">
-                            <div class="description" style="background-image: url(images/media/index1/hot-categories3.png)">
-                                <div class="title"><span>Sport &  <br>Outdoors</span></div>
-                                <a href="#" class="btn">shop now</a>
-                            </div>
-                            <ul>
-                                <li><a href="#">Golf Supplies</a></li>
-                                <li><a href="#">Outdoor & Traveling Supplies</a></li>
-                                <li><a href="#">Camping & Hiking</a></li>
-                                <li><a href="#">Fishing</a></li>
-                            </ul>
-                        </div>
-                        <div class="item">
-                            <div class="description" style="background-image: url(images/media/index1/hot-categories4.png)">
-                                <div class="title"><span>Digital</span></div>
-                                <a href="#" class="btn">shop now</a>
-                            </div>
-                            <ul>
-                                <li><a href="#">Accessories for iPhone</a></li>
-                                <li><a href="#">Accessories for iPad</a></li>
-                                <li><a href="#">Accessories for Tablet PC</a></li>
-                                <li><a href="#">Tablet PC</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="item">
-                            <div class="description" style="background-image: url(images/media/index1/hot-categories5.png)">
-                                <div class="title"><span>Fashion</span></div>
-                                <a href="#" class="btn">shop now</a>
-                            </div>
-                            <ul>
-                                <li><a href="#">Batteries & Chargers</a></li>
-                                <li><a href="#">Headphone, Headset</a></li>
-                                <li><a href="#">Home Audio</a></li>
-                                <li><a href="#">Mp3 Player Accessories</a></li>
-                            </ul>
-                        </div>
-                        <div class="item">
-                            <div class="description" style="background-image: url(images/media/index1/hot-categories6.png)">
-                                <div class="title"><span>Furniture</span></div>
-                                <a href="#" class="btn">shop now</a>
-                            </div>
-                            <ul>
-                                <li><a href="#">Batteries & Chargers </a></li>
-                                <li><a href="#">Headphone, Headset</a></li>
-                                <li><a href="#">Home Audio</a></li>
-                                <li><a href="#">Mp3 Player Accessories</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="item">
-                            <div class="description" style="background-image: url(images/media/index1/hot-categories7.png)">
-                                <div class="title"><span>Health & <br>Beauty</span></div>
-                                <a href="#" class="btn">shop now</a>
-                            </div>
-                            <ul>
-                                <li><a href="#">Bath & Body</a></li>
-                                <li><a href="#">Shaving & Hair Removal</a></li>
-                                <li><a href="#">Fragrances</a></li>
-                                <li><a href="#">Salon & Spa Equipment</a></li>
-                            </ul>
-                        </div>
-                        <div class="item">
-                            <div class="description" style="background-image: url(images/media/index1/hot-categories8.png)">
-                                <div class="title"><span>Toys &   <br>Hobbies</span></div>
-                                <a href="#" class="btn">shop now</a>
-                            </div>
-                            <ul>
-                                <li><a href="#">Walkera</a></li>
-                                <li><a href="#">Fpv System & Parts</a></li>
-                                <li><a href="#">RC Cars & Parts</a></li>
-                                <li><a href="#">Helicopters & Part</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div><!--block  hot categories-->
+    
 @endsection
 
 @section('page_css')

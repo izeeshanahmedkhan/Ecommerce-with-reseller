@@ -37,12 +37,29 @@ class LiabilityController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MainRequest $request)
+    // public function store(MainRequest $request)
+    // {
+    //     //
+    //     $liability = new Liability();
+    //     $liability->fill($request->all())->save();
+    //     return redirect()->back();
+    // }
+
+       public function store(Request $request)
     {
         //
-        $liability = new Liability();
-        $liability->fill($request->all())->save();
-        return redirect()->back();
+       $liability = new Liability;
+
+     
+       $liability->serialnumber = $request->serialnumber;
+      $liability->category_id = $request->category_id;
+      $liability->description = $request->description;
+       $liability->debit = $request->debit;
+      $liability->credit = $request->credit;
+      $liability->date = $request->date;
+
+       $liability->save();
+       return back();
     }
 
     /**

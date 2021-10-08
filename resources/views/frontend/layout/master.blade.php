@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,716 +12,743 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Style CSS -->
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-    <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/style.css')}}">
-    @yield('page_css')
+    
 
+<link rel="icon" type="image/x-icon" href="{{asset('assets/images/icons/favicon.ico')}}">
+
+
+
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
+
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="{{asset('assets/css/style.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/vendor/fontawesome-free/css/all.min.css')}}">
+
+<style>
+  
+
+/* Navbar links */
+
+
+/* Page content */
+
+
+/* The sticky class is added to the navbar with JS when it reaches its scroll position */
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + .content {
+  padding-top: 60px;
+}
+</style>
 </head>
+
+
 <body class="cms-index-index index-opt-1 catalog-category-view catalog-product-view catalog-view_op1 page-order page-contact">
 
-<div class="wrapper">
 
-    <!-- HEADER -->
-    <header class="site-header header-opt-1 cate-show">
+<div class="page-wrapper">
 
-        <!-- header-top -->
-        @include('frontend.layout.partials.top_header')
-        <!-- header-top -->
+    <!-- HEADER --><header class="header header-transparent"id="navbar">
+            <div class="header-middle">
+                <div class="container">
+                    <div class="header-left">
+                        <a href="index-2.html" class="logo">
+                            <img src="assets/images/logo.png" alt="Porto Logo">
+                        </a>
 
-        <!-- header-content -->
-        @include('frontend.layout.partials.header_content')
-        <!-- header-content -->
+                        <nav class="main-nav font2" >
+                            <ul class="menu">
 
-        <!-- header-nav -->
-        <div class="header-nav mid-header">
-            <div class="container">
+                   <li>
 
-                <div class="box-header-nav">
+<a href="#" class="submenu" data-toggle="dropdown"> <b class="caret caret-right"></b>CATEGORIES</a>
+ 
+<ul class="submenu">
+ 
+@php 
+ $categories = App\Models\Category::where('parent_id','0')->get();
+ @endphp
+ @foreach($categories as $cat)
+<li><a href="/"style="padding-left:10px;">
+    {{$cat->title}}
+    </a>
+@php
+$parent = App\Models\Category::where('parent_id',$cat->id)->get();
+@endphp
 
-                    <!-- btn categori mobile -->
-                    <span data-action="toggle-nav-cat" class="nav-toggle-menu nav-toggle-cat"><span>Categories</span></span>
 
-                    <!-- btn menu mobile -->
-                    <span data-action="toggle-nav" class="nav-toggle-menu"><span>Menu</span></span>
 
-                    <!--categori  -->
-                    <div class="block-nav-categori">
+@if($parent!=null)
 
-                        <div class="block-title">
-                            <span>Categories</span>
-                        </div>
 
-                        <div class="block-content">
-                            <div class="clearfix"><span data-action="close-cat" class="close-cate"><span>Categories</span></span></div>
-                            <ul class="ui-categori">
-                                <li class="parent">
-                                    <a href="#">
-                                        <span class="icon"><img src="{{asset('frontend/images/icon/index1/nav-cat1.png')}}" alt="nav-cat"></span>
-                                        Electronics
-                                    </a>
-                                    <span class="toggle-submenu"></span>
-                                    <div class="submenu" style="background-image: url({{asset('frontend/images/media/index1/bgmenu.jpg')}});">
-                                        <ul class="categori-list clearfix">
-                                            <li class="col-sm-3">
-                                                <strong class="title"><a href="#">Smartphone</a></strong>
-                                                <ul>
-                                                    <li><a href="#">Skirts    </a></li>
-                                                    <li><a href="#">Jackets</a></li>
-                                                    <li><a href="#">Jumpusuits</a></li>
-                                                    <li><a href="#">Scarvest</a></li>
-                                                    <li><a href="#">T-Shirts</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="col-sm-3">
-                                                <strong class="title"><a href="#">TElevision</a></strong>
-                                                <ul>
-                                                    <li><a href="#">Skirts    </a></li>
-                                                    <li><a href="#">Jackets</a></li>
-                                                    <li><a href="#">Jumpusuits</a></li>
-                                                    <li><a href="#">Scarvest</a></li>
-                                                    <li><a href="#">T-Shirts</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="col-sm-3">
-                                                <strong class="title"><a href="#">Camera</a></strong>
-                                                <ul>
-                                                    <li><a href="#">Skirts    </a></li>
-                                                    <li><a href="#">Jackets</a></li>
-                                                    <li><a href="#">Jumpusuits</a></li>
-                                                    <li><a href="#">Scarvest</a></li>
-                                                    <li><a href="#">T-Shirts</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                        <ul class="categori-list clearfix">
-                                            <li class="col-sm-3">
-                                                <strong class="title"><a href="#">Smartphone</a></strong>
-                                                <ul>
-                                                    <li><a href="#">Skirts    </a></li>
-                                                    <li><a href="#">Jackets</a></li>
-                                                    <li><a href="#">Jumpusuits</a></li>
-                                                    <li><a href="#">Scarvest</a></li>
-                                                    <li><a href="#">T-Shirts</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="col-sm-3">
-                                                <strong class="title"><a href="#">TElevision</a></strong>
-                                                <ul>
-                                                    <li><a href="#">Skirts    </a></li>
-                                                    <li><a href="#">Jackets</a></li>
-                                                    <li><a href="#">Jumpusuits</a></li>
-                                                    <li><a href="#">Scarvest</a></li>
-                                                    <li><a href="#">T-Shirts</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="col-sm-3">
-                                                <strong class="title"><a href="#">Camera</a></strong>
-                                                <ul>
-                                                    <li><a href="#">Skirts    </a></li>
-                                                    <li><a href="#">Jackets</a></li>
-                                                    <li><a href="#">Jumpusuits</a></li>
-                                                    <li><a href="#">Scarvest</a></li>
-                                                    <li><a href="#">T-Shirts</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </div>
+<ul class="submenu">
+ 
+ @foreach($parent as $par)
+<li><a href="/"style="padding-left:10px;">
+    {{$par->title}}
+</a>
+
+
+@php
+$parent2 = App\Models\Category::where('parent_id',$par->id)->get();
+@endphp
+
+
+@if($parent!=null)
+
+
+<ul class="submenu">
+ 
+ @foreach($parent2 as $par2)
+<li><a href="/"style="padding-left:10px;">
+    {{$par2->title}}
+</a>
+
+
+</li>
+
+ @endforeach
+ 
+</ul>
+
+@endif
+
+
+</li>
+
+ @endforeach
+ 
+</ul>
+
+@endif
+
+
+
+</li>
+@endforeach
+ 
+
+ 
+
+ 
+
+ 
+</ul>
+ 
+</li>
+                                <li>
+                                    <a href="/">Home</a>
                                 </li>
-                                <li class="parent">
-                                    <a href="#">
-                                        <span class="icon"><img src="{{asset('frontend/images/icon/index1/nav-cat2.png')}}" alt="nav-cat"></span>
-                                        Sports & Outdoors
-                                    </a>
-                                    <span class="toggle-submenu"></span>
-                                    <div class="submenu">
-                                        <div class="categori-img">
-                                            <a href="#"><img src=" {{asset('frontend/images/media/index1/categori-img1.jpg')}}" alt="categori-img"></a>
+                                <li>
+                                    <a href="{{ url('category') }}">Categories</a>
+                                    <div class="megamenu megamenu-fixed-width megamenu-3cols">
+                                        <div class="row">
+
+                                              @php
+
+                    $Parent_categories =  DB::table('categories')
+                    ->where('parent_id',0)
+                    ->get();
+                  
+
+                @endphp
+               
+              
+                 <div class="col-lg-3">
+                     @foreach($Parent_categories as $parent_category)
+                                                
+               <!--   <a href="cat/{{$parent_category->id}}"> -->
+                               
+                                
+                                 <ul class="submenu">
+
+                                                    <li><a href="{{route('cat1', ['id' => $parent_category->id])}}">{{ $parent_category->title }}</a>
+                                                        @php
+                                $first_child_categories =  DB::table('categories')
+                                ->where('parent_id',$parent_category->id)
+                                ->get()
+                            @endphp
+
+                            @if(count($first_child_categories) != false)
+                             @foreach($first_child_categories as $first_child_category)
+                                                        <ul class="submenu">
+        <li><a href="{{route('cat.sub',$first_child_category->id)}}">{{ $first_child_category->title }}</a>
+
+
+            <!-- <a href="{{route('cat2', ['id' => $first_child_category->id])}}">{{ $first_child_category->title }}</a> -->
+
+
+
+<ul>
+                                                    @php
+                                                        $second_child_categories =  DB::table('categories')
+                                                        ->where('parent_id',$first_child_category->id)
+                                                        ->get()
+                                                    @endphp
+
+                                                    @foreach($second_child_categories as $second_child_category)
+
+<li style="padding-left:10px"><a href="{{route('cat3', ['id' => $second_child_category->id])}}"> {{ $second_child_category->title }} </a></li>
+
+                                                    @endforeach
+                                                </ul>
+
+
+
+
+
+                                                         </li>
+
+
+
+                                                        </ul>
+
+                                                        @endforeach
+                                                        @endif
+
+
+
+
+                                                    </li>
+                                                   
+                                                </ul>
+                          
+                            
+
+
+                             
+                            
+                
+               
+
+
+
+
+                                            
+                                            
+                                            
+                                          @endforeach 
                                         </div>
-                                        <ul class="categori-list">
-                                            <li class="col-sm-3">
-                                                <strong class="title"><a href="#">Smartphone</a></strong>
-                                                <ul>
-                                                    <li><a href="#">Skirts    </a></li>
-                                                    <li><a href="#">Jackets</a></li>
-                                                    <li><a href="#">Jumpusuits</a></li>
-                                                    <li><a href="#">Scarvest</a></li>
-                                                    <li><a href="#">T-Shirts</a></li>
+                                         
+</div>
+                                    </div><!-- End .megamenu -->
+                                </li>
+                                <li>
+                                    <a href="product.html">Products</a>
+                                    <div class="megamenu megamenu-fixed-width">
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <a href="#" class="nolink">Variations 1</a>
+                                                <ul class="submenu">
+                                                    <li><a href="product.html">Horizontal Thumbs</a></li>
+                                                    <li><a href="product-full-width.html">Vertical Thumbnails</a></li>
+                                                    <li><a href="product.html">Inner Zoom</a></li>
+                                                    <li><a href="product-addcart-sticky.html">Addtocart Sticky</a></li>
+                                                    <li><a href="product-sidebar-left.html">Accordion Tabs</a></li>
                                                 </ul>
-                                            </li>
-                                            <li class="col-sm-3">
-                                                <strong class="title"><a href="#">TElevision</a></strong>
-                                                <ul>
-                                                    <li><a href="#">Skirts    </a></li>
-                                                    <li><a href="#">Jackets</a></li>
-                                                    <li><a href="#">Jumpusuits</a></li>
-                                                    <li><a href="#">Scarvest</a></li>
-                                                    <li><a href="#">T-Shirts</a></li>
+                                            </div><!-- End .col-lg-4 -->
+                                            <div class="col-lg-3">
+                                                <a href="#" class="nolink">Variations 2</a>
+                                                <ul class="submenu">
+                                                    <li><a href="product-sticky-tab.html">Sticky Tabs</a></li>
+                                                    <li><a href="product-simple.html">Simple Product</a></li>
+                                                    <li><a href="product-sidebar-left.html">With Left Sidebar</a></li>
                                                 </ul>
-                                            </li>
-                                            <li class="col-sm-3">
-                                                <strong class="title"><a href="#">Camera</a></strong>
-                                                <ul>
-                                                    <li><a href="#">Skirts    </a></li>
-                                                    <li><a href="#">Jackets</a></li>
-                                                    <li><a href="#">Jumpusuits</a></li>
-                                                    <li><a href="#">Scarvest</a></li>
-                                                    <li><a href="#">T-Shirts</a></li>
+                                            </div><!-- End .col-lg-4 -->
+                                            <div class="col-lg-3">
+                                                <a href="#" class="nolink">Product Layout Types</a>
+                                                <ul class="submenu">
+                                                    <li><a href="product.html">Default Layout</a></li>
+                                                    <li><a href="product-extended-layout.html">Extended Layout</a></li>
+                                                    <li><a href="product-full-width.html">Full Width Layout</a></li>
+                                                    <li><a href="product-grid-layout.html">Grid Images Layout</a></li>
+                                                    <li><a href="product-sticky-both.html">Sticky Both Side Info</a></li>
+                                                    <li><a href="product-sticky-info.html">Sticky Right Side Info</a></li>
                                                 </ul>
-                                            </li>
-                                            <li class="col-sm-3">
-                                                <strong class="title"><a href="#">washing machine</a></strong>
-                                                <ul>
-                                                    <li><a href="#">Skirts    </a></li>
-                                                    <li><a href="#">Jackets</a></li>
-                                                    <li><a href="#">Jumpusuits</a></li>
-                                                    <li><a href="#">Scarvest</a></li>
-                                                    <li><a href="#">T-Shirts</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li class="parent">
-                                    <a href="#">
-                                        <span class="icon"><img src=" {{asset('frontend/images/icon/index1/nav-cat3.png')}}" alt="nav-cat"></span>
-                                        Smartphone & Tablets
-                                    </a>
-                                    <span class="toggle-submenu"></span>
-                                    <div class="submenu">
-                                        <strong class="subtitle"><span>special products</span></strong>
-                                        <div class="owl-carousel"
-                                             data-nav="true"
-                                             data-dots="false"
-                                             data-margin="30"
-                                             data-autoplayTimeout="300"
-                                             data-autoplay="true"
-                                             data-loop="true"
-                                             data-responsive='{
-                                                "0":{"items":1},
-                                                "380":{"items":1},
-                                                "480":{"items":1},
-                                                "600":{"items":1},
-                                                "992":{"items":4}
-                                                }'>
+                                            </div><!-- End .col-lg-4 -->
 
-                                            <div class="product-item product-item-opt-1">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src="{{asset('frontend/images/media/index1/product-menu1.jpg ')}}"></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Asus Ispiron 20</a></strong>
-                                                        <div class="product-item-price">
-                                                            <span class="price">$45.00</span>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-item product-item-opt-1">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src=" {{asset('frontend/images/media/index1/product-menu2.jpg')}}"></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Electronics Ispiron 20 </a></strong>
-                                                        <div class="product-item-price">
-                                                            <span class="price">$45.00</span>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-item product-item-opt-1">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src=" {{asset('frontend/images/media/index1/product-menu3.jpg')}}"></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Samsung Ispiron 20 </a></strong>
-                                                        <div class="product-item-price">
-                                                            <span class="price">$45.00</span>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-item product-item-opt-1">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src=" {{asset('frontend/images/media/index1/product-menu4.jpg')}}"></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Electronics Ispiron 20 </a></strong>
-                                                        <div class="product-item-price">
-                                                            <span class="price">$45.00</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="product-item product-item-opt-1">
-                                                <div class="product-item-info">
-                                                    <div class="product-item-photo">
-                                                        <a class="product-item-img" href="#"><img alt="product name" src=" {{asset('frontend/images/media/index1/product-menu4.jpg')}}"></a>
-                                                    </div>
-                                                    <div class="product-item-detail">
-                                                        <strong class="product-item-name"><a href="#">Samsung Ispiron 20 </a></strong>
-                                                        <div class="product-item-price">
-                                                            <span class="price">$45.00</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
+                                            <div class="col-lg-3 p-0">
+                                                <img src="assets/images/menu-bg.png" alt="Menu banner" class="product-promo">
+                                            </div><!-- End .col-lg-4 -->
+                                        </div><!-- End .row -->
+                                    </div><!-- End .megamenu -->
                                 </li>
                                 <li>
-                                    <a href="#">
-                                        <span class="icon"><img src="{{asset('frontend/images/icon/index1/nav-cat4.png ')}}" alt="nav-cat"></span>
-                                        Health & Beauty
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span class="icon"><img src="{{asset('frontend/images/icon/index1/nav-cat5.png ')}}" alt="nav-cat"></span>
-                                        Bags, Shoes & Accessories
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span class="icon"><img src=" {{asset('frontend/images/icon/index1/nav-cat6.png')}}" alt="nav-cat"></span>
-                                        Toys & Hobbies
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span class="icon"><img src="{{asset('frontend/images/icon/index1/nav-cat7.png ')}}" alt="nav-cat"></span>
-                                        Computers & Networking
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span class="icon"><img src="{{asset('frontend/images/icon/index1/nav-cat8.png ')}}" alt="nav-cat"></span>
-                                        Laptops & Accessories
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span class="icon"><img src=" {{asset('frontend/images/icon/index1/nav-cat9.png')}}" alt="nav-cat"></span>
-                                        Jewelry & Watches
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <span class="icon"><img src="{{asset('frontend/images/icon/index1/nav-cat10.png ')}}" alt="nav-cat"></span>
-                                        Flashlights & Lamps
-                                    </a>
-                                </li>
-                                <li class="cat-link-orther">
-                                    <a href="#">
-                                        <span class="icon"><img src="{{asset('frontend/images/icon/index1/nav-cat10.png ')}}" alt="nav-cat"></span>
-                                        Flashlights & Lamps
-                                    </a>
-                                </li>
-                                <li class="cat-link-orther">
-                                    <a href="#">
-                                        <span class="icon"><img src=" {{asset('frontend/images/icon/index1/nav-cat9.png')}}" alt="nav-cat"></span>
-                                        Cameras & Photo
-                                    </a>
-                                </li>
-                                <li class="cat-link-orther">
-                                    <a href="#">
-                                        <span class="icon"><img src="{{asset('frontend/images/icon/index1/nav-cat10.png ')}}" alt="nav-cat"></span>
-                                        Flashlights & Lamps
-                                    </a>
-                                </li>
-                                <li class="cat-link-orther">
-                                    <a href="#">
-                                        <span class="icon"><img src=" {{asset('frontend/images/icon/index1/nav-cat9.png')}}" alt="nav-cat"></span>
-                                        Cameras & Photo
-                                    </a>
-                                </li>
-
-                            </ul>
-
-                            <div class="view-all-categori">
-                                <a  class="open-cate btn-view-all">All Categories</a>
-                            </div>
-
-                        </div>
-
-                    </div><!--categori  -->
-
-                    <!-- menu -->
-                    <div class="block-nav-menu">
-                        <div class="clearfix"><span data-action="close-nav" class="close-nav"><span>close</span></span></div>
-
-                        <ul class="ui-menu">
-                            <li class="parent parent-megamenu active">
-                                <a >Home</a>
-                                <span class="toggle-submenu"></span>
-                                <div class="megamenu drop-menu">
+                                    <a href="#">Pages</a>
                                     <ul>
-                                        <li class="col-md-3">
-                                            <strong class="title"><a ><span>Home </span></a></strong>
-                                            <ul class="list-submenu">
-                                                <li><a href="home1.html">Home page 1</a></li>
-                                                <li><a href="home2.html">Home page 2</a></li>
-                                                <li><a href="home3.html">Home page 3</a></li>
-                                                <li><a href="home4.html">Home page 4</a></li>
-                                                <li><a href="home5.html">Home page 5</a></li>
-                                                <li><a href="home6.html">Home page 6</a></li>
-                                                <li><a href="home7.html">Home page 7</a></li>
+                                        <!-- <li><a href="cart.html">Shopping Cart</a></li>
+                                        <li><a href="#">Checkout</a>
+                                            <ul>
+                                                <li><a href="checkout-shipping.html">Checkout Shipping</a></li>
+                                                <li><a href="checkout-shipping-2.html">Checkout Shipping 2</a></li>
+                                                <li><a href="checkout-review.html">Checkout Review</a></li>
+
+
                                             </ul>
                                         </li>
-                                        <li class="col-md-3">
-                                            <strong class="title"><a ><span>Home </span></a></strong>
-                                            <ul class="list-submenu">
-                                                <li><a href="home8.html">Home page 8</a></li>
-                                                <li><a href="home9.html">Home page 9</a></li>
-                                                <li><a href="home10.html">Home page 10</a></li>
-                                                <li><a href="home11.html">Home page 11</a></li>
-                                                <li><a href="home12.html">Home page 12</a></li>
-                                                <li><a href="home13.html">Home page 13</a></li>
-                                                <li><a href="home14.html">Home page 14</a></li>
+
+
+
+
+
+<li><a href="#">Dashboard</a>
+                                            <ul>
+                                                <li><a href="dashboard.html">Dashboard</a></li>
+                                                <li><a href="my-account.html">My Account</a></li>
                                             </ul>
                                         </li>
-                                        <li class="col-md-3">
-                                            <strong class="title"><a ><span>Page </span></a></strong>
-                                            <ul class="list-submenu">
-                                                <li><a href="Login.html">Login</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+                                        <li><a href="#">Dashboard</a>
+                                            <ul>
+                                                <li><a href="dashboard.html">Dashboard</a></li>
+                                                <li><a href="my-account.html">My Account</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="about.html">About Us</a></li>
+                                        <li><a href="#">Blog</a>
+                                            <ul>
+                                                <li><a href="blog.html">Blog</a></li>
+                                                <li><a href="single.html">Blog Post</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="contact.html">Contact Us</a></li>
+                                        <li><a href="#" class="login-link">Login</a></li>
+                                        <li><a href="forgot-password.html">Forgot Password</a></li> -->
+
+                                        <li><a href="#">Dashboard</a>
+                                            <ul>
+         <li><a href="{{route('dasboardcustomer')}}">Dashboard</a></li>
+                                                <li><a href="my-account.html">My Account</a></li>
+                                            </ul>
+                                        </li>
+
+                                         <li><a href="Login.html">Login</a></li>
                                                 <li><a href="{{ route('about') }}">About</a></li>
                                                 <li><a href="{{ route('contact') }}">Contact</a></li>
-                                                <li><a href="Blog.html">Blog</a></li>
+                                                <li><a href="{{url('blog')}}">Blog</a></li>
                                                 <li><a href="Blog_Post.html">Blog Post</a></li>
                                                 <li><a href="{{ route('checkout') }}">Checkout</a></li>
                                                 <li><a href="{{ route('order') }}">Order</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="col-md-3">
-                                            <strong class="title"><a ><span>Page </span></a></strong>
-                                            <ul class="list-submenu">
-                                                <li><a href="{{ route('category') }}">Category 1</a></li>
-                                                <li><a href="Category2.html">Category 2</a></li>
-                                                <li><a href="#">Product 1</a></li>
-                                                <li><a href="Product2.html">Product 2</a></li>
-                                                <li><a href="Product3.html">Product 3</a></li>
-                                                <li><a href="WishList.html">WishList </a></li>
-                                                <li><a href="Compare.html">Compare</a></li>
-                                            </ul>
-                                        </li>
                                     </ul>
-                                </div>
-                            </li>
-                            <li><a href="#">Sports</a></li>
-                            <li class="parent parent-submenu">
-                                <a > Fashion  </a>
-                                <span class="toggle-submenu"></span>
-                                <div class="submenu drop-menu">
-                                    <ul >
-                                        <li><a href="#">Shoes</a></li>
-                                        <li><a href="#">Clothing</a></li>
-                                        <li><a href="#">Accessories</a></li>
-                                        <li><a href="#">Sunglasses</a></li>
-                                    </ul>
-                                </div>
-                            </li>
+                                </li>
 
-                            <li class="parent parent-megamenu">
-                                <a >Electronics  <span class="label-menu">New</span></a>
-                                <span class="toggle-submenu"></span>
-                                <div class="megamenu drop-menu">
+                                <li>
+                                    <a href="#">My Accounts</a>
                                     <ul>
-                                        <li class="col-md-3">
-                                            <div class="img-categori">
-                                                <a href="#"><img alt="img" src="images/media/index1/img-categori1.jpg"></a>
-                                            </div>
-                                            <strong class="title"><a href="#"><span>Women's </span></a></strong>
-                                            <ul class="list-submenu">
-                                                <li><a href="#">Shoes</a></li>
-                                                <li><a href="#">Clothing</a></li>
-                                                <li><a href="#">Accessories</a></li>
-                                                <li><a href="#">Sunglasses</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="col-md-3">
+                                      
+   <li><a href="#">Wishlist</a></li>
+                        <li><a href="#">Checkout</a></li>
+                        <li><a href="#">Compare</a></li>
 
-                                            <div class="img-categori">
-                                                <a href="#"><img  alt="img"  src="images/media/index1/img-categori2.jpg"></a>
-                                            </div>
-                                            <strong class="title"><a href="#"><span>Women's </span></a></strong>
-                                            <ul class="list-submenu">
-                                                <li><a href="#">Shoes</a></li>
-                                                <li><a href="#">Clothing</a></li>
-                                                <li><a href="#">Accessories</a></li>
-                                                <li><a href="#">Sunglasses</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="col-md-3">
+                        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
 
-                                            <div class="img-categori">
-                                                <a href="#"><img alt="img"  src="images/media/index1/img-categori3.jpg"></a>
-                                            </div>
-                                            <strong class="title"><a href="#"> <span>Kid's</span></a></strong>
-                                            <ul class="list-submenu">
-                                                <li><a href="#">Shoes</a></li>
-                                                <li><a href="#">Clothing</a></li>
-                                                <li><a href="#">Accessories</a></li>
-                                                <li><a href="#">Sunglasses</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="col-md-3">
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
 
-                                            <div class="img-categori">
-                                                <a href="#"><img alt="img"  src="images/media/index1/img-categori4.jpg"></a>
-                                            </div>
-                                            <strong class="title"><a href="#"><span>Trending</span> </a></strong>
-                                            <ul class="list-submenu">
-                                                <li><a href="#">Shoes</a></li>
-                                                <li><a href="#">Clothing</a></li>
-                                                <li><a href="#">Accessories</a></li>
-                                                <li><a href="#">Sunglasses</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
+                            @php
+
+                                $role = Auth::user()->roles->first();
+
+                                $permissions = \Spatie\Permission\Models\Permission::all();
+
+                                foreach($permissions as $permission){
+
+                                     $item =   DB::table('role_has_permissions')
+                                            ->where('permission_id',$permission->id)
+                                            ->where('role_id',$role->id)
+                                            ->first();
+
+                                     if(!empty($item)){
+
+                                         break;
+                                     }
+                                }
+
+                                if(!empty($item)){
+
+                            @endphp
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }}</a>
+                                </li>
+
+                            @php
+
+                                }
+                                else if($role->name == "reseller"){
+
+                            @endphp
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('reseller.dashboard') }}">{{ __('Dashboard') }}</a>
+                            </li>
+
+                            @php
+
+                                }
+                                else if($role->name == "salecenter"){
+
+                            @endphp
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('salecenter.dashboard') }}">{{ __('Dashboard') }}</a>
+                            </li>
+
+                            @php
+
+                                }
+                                else if($role->name == "rider"){
+
+                            @endphp
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('rider.dashboard') }}">{{ __('Dashboard') }}</a>
+                            </li>
+
+                            @php
+
+                                }
+                                else if($role->name == "customer"){
+
+                            @endphp
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('customer.dashboard') }}">{{ __('My Profile') }}</a>
+                            </li>
+
+                            @php
+
+                                }
+
+                            @endphp
+
+
+                            <li>
+                                <div>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
                                 </div>
                             </li>
-                            <li class="parent parent-megamenu">
-                                <a >Digital </a>
-                                <span class="toggle-submenu"></span>
-                                <div class="megamenu drop-menu">
-                                    <ul>
-                                        <li class="col-md-3">
 
-                                            <strong class="title"><a href="#"><span>Women's </span></a></strong>
-                                            <ul class="list-submenu">
-                                                <li><a href="#">Shoes</a></li>
-                                                <li><a href="#">Clothing</a></li>
-                                                <li><a href="#">Accessories</a></li>
-                                                <li><a href="#">Sunglasses</a></li>
-                                            </ul>
+                        @endguest
+                                                                                    </ul>
+                                </li>
+                                <li><a href="https://1.envato.market/DdLk5" target="_blank">Buy Porto!</a></li>
+                            </ul>
+                        </nav>
+                    </div><!-- End .header-left -->
 
-                                            <strong class="title"><a href="#"><span>Women's </span></a></strong>
-                                            <ul class="list-submenu">
-                                                <li><a href="#">Shoes</a></li>
-                                                <li><a href="#">Clothing</a></li>
-                                                <li><a href="#">Accessories</a></li>
-                                                <li><a href="#">Sunglasses</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="col-md-3">
-                                            <strong class="title"><a href="#"><span>Women's </span></a></strong>
-                                            <ul class="list-submenu">
-                                                <li><a href="#">Shoes</a></li>
-                                                <li><a href="#">Clothing</a></li>
-                                                <li><a href="#">Accessories</a></li>
-                                                <li><a href="#">Sunglasses</a></li>
-                                            </ul>
+                    <div class="header-right">
+                        <button class="mobile-menu-toggler" type="button">
+                            <i class="icon-menu"></i>
+                        </button>
 
-                                            <strong class="title"><a href="#"><span>Women's </span></a></strong>
-                                            <ul class="list-submenu">
-                                                <li><a href="#">Shoes</a></li>
-                                                <li><a href="#">Clothing</a></li>
-                                                <li><a href="#">Accessories</a></li>
-                                                <li><a href="#">Sunglasses</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="col-md-3">
+                        <a href="{{ route('login') }}" class="header-icon"><i class="icon-user-2"></i> </a>
 
-                                            <strong class="title"><a href="#"> <span>Kid's</span></a></strong>
-                                            <ul class="list-submenu">
-                                                <li><a href="#">Shoes</a></li>
-                                                <li><a href="#">Clothing</a></li>
-                                                <li><a href="#">Accessories</a></li>
-                                                <li><a href="#">Sunglasses</a></li>
-                                            </ul>
 
-                                            <strong class="title"><a href="#"><span>Women's </span></a></strong>
-                                            <ul class="list-submenu">
-                                                <li><a href="#">Shoes</a></li>
-                                                <li><a href="#">Clothing</a></li>
-                                                <li><a href="#">Accessories</a></li>
-                                                <li><a href="#">Sunglasses</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="col-md-3">
-                                            <div class="img-categori">
-                                                <a href="#"><img alt="img" src="images/media/index1/img-categori5.jpg"></a>
-                                            </div>
 
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li><a href="#"> Furniture </a></li>
-                            <li><a href="#"> Jewelry  </a></li>
-                            <li><a href="#">Blog</a></li>
-                        </ul>
+@if($user_id = Auth::user())
+ 
+@php $user_id = Auth::user()->id; @endphp
 
-                    </div><!-- menu -->
+ @php  $wishlist =  App\Models\wishlist::where('user_id',$user_id)
+                    ->get();
 
-                    <!-- mini cart -->
-                    <div class="block-minicart dropdown ">
+    $count = App\Models\wishlist::where('user_id',$user_id)->count();
+                    @endphp
 
-                        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                            <span class="cart-icon"></span>
-                        </a>
+ 
 
-                        <div class="dropdown-menu">
-                            <form>
-                                <div  class="minicart-content-wrapper" >
-                                    <div class="subtitle">
-                                        You have 6 item(s) in your cart
-                                    </div>
-                                    <div class="minicart-items-wrapper">
-                                        <ol class="minicart-items">
-                                            <li class="product-item">
-                                                <a class="product-item-photo" href="#" title="The Name Product">
-                                                    <img class="product-image-photo" src="images/media/index1/minicart.jpg" alt="The Name Product">
-                                                </a>
-                                                <div class="product-item-details">
-                                                    <strong class="product-item-name">
-                                                        <a href="#">Donec Ac Tempus</a>
-                                                    </strong>
-                                                    <div class="product-item-price">
-                                                        <span class="price">61,19 €</span>
-                                                    </div>
-                                                    <div class="product-item-qty">
-                                                        <span class="label">Qty: </span ><span class="number">1</span>
-                                                    </div>
-                                                    <div class="product-item-actions">
-                                                        <a class="action delete" href="#" title="Remove item">
-                                                            <span>Remove</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="product-item">
-                                                <a class="product-item-photo" href="#" title="The Name Product">
-                                                    <img class="product-image-photo" src="images/media/index1/minicart2.jpg" alt="The Name Product">
-                                                </a>
-                                                <div class="product-item-details">
-                                                    <strong class="product-item-name">
-                                                        <a href="#">Donec Ac Tempus</a>
-                                                    </strong>
-                                                    <div class="product-item-price">
-                                                        <span class="price">61,19 €</span>
-                                                    </div>
-                                                    <div class="product-item-qty">
-                                                        <span class="label">Qty: </span ><span class="number">1</span>
-                                                    </div>
-                                                    <div class="product-item-actions">
-                                                        <a class="action delete" href="#" title="Remove item">
-                                                            <span>Remove</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ol>
-                                    </div>
-                                    <div class="subtotal">
-                                        <span class="label">Total</span>
-                                        <span class="price">$630</span>
-                                    </div>
-                                    <div class="actions">
-                                        <!-- <a class="btn btn-viewcart" href="">
-                                                <span>Shopping bag</span>
-                                            </a> -->
-                                        <button class="btn btn-checkout" type="button" title="Check Out">
-                                            <span>Checkout</span>
-                                        </button>
-                                    </div>
-                                </div>
+ <div class="dropdown cart-dropdown">
+                          
+                        
+
+                                  <a href="#" class="dropdown-toggle dropdown-arrow" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+                                <i class="icon-wishlist-2"></i>
+                                <span class="cart-count badge-circle">{{$count}}</span>
+                             
+                            </a>
+
+
+                            <div class="dropdown-menu" >
+                                <div class="dropdownmenu-wrapper">
+                                    <div class="dropdown-cart-header">
+                                        <span>{{$count}} Items</span>
+
+                                        <a href="{{url('viewcart')}}" class="float-right">Your Wishlist</a>
+
+                                    </div><!-- End .dropdown-cart-header -->
+@foreach($wishlist as $wish) 
+                 <div class="dropdown-cart-products">
+                                     
+                                       
+                    <div class="product">
+                      <div class="product-details">
+             <h4 class="product-title">
+                  <a href="{{route('single_product',$wish->product_name)}}">{{$wish->product_name}}</a>
+                </h4>
+
+               <!--  <span class="cart-product-info">
+             <span class="cart-product-qty"></span>
+                                                    70
+                                                </span> -->
+                        </div><!-- End .product-details -->
+
+                    <figure class="product-image-container">
+                 <a href="product.html" class="product-image">
+           <img src="assets/images/products/cart/product-2.jpg" alt="product" width="80" height="80">
+                     </a>
+                     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+                 <a href="{{ route('deletewishlist',$wish->id) }}" class="btn-remove icon-cancel" title="Remove Product"id="deleteCompany" data-id="{{ $wish->id }}"></a>
+
+                 <script>
+                     $(document).ready(function () {
+
+ $("body").on("click","#deleteCompany",function(e){
+
+    if(!confirm("Do you really want to do this?")) {
+       return false;
+     }
+
+    e.preventDefault();
+    var id = $(this).data("id");
+    // var id = $(this).attr('data-id');
+    var token = $("meta[name='csrf-token']").attr("content");
+    var url = e.target;
+
+    $.ajax(
+        {
+          url: url.href, //or you can use url: "company/"+id,
+          type: 'DELETE',
+          data: {
+            _token: token,
+                id: id
+        },
+        success: function (response){
+
+            $("#success").html(response.message)
+
+            Swal.fire(
+              'Remind!',
+              'Company deleted successfully!',
+              'success'
+            )
+        }
+     });
+      return false;
+   });
+    
+
+});
+                 </script>
+
+
+                        </figure>
+                                        </div><!-- End .product -->
+                                       
+                </div><!-- End .cart-product -->
+
+                @endforeach
+
+            
+
+    <!-- <div class="dropdown-cart-action">
+                     <a href="{{url('checkoutshipping')}}" class="btn btn-primary btn-block">Checkout</a>
+                        </div><!- End .dropdown-cart-total --> 
+                                </div><!-- End .dropdownmenu-wrapper -->
+                            </div><!-- End .dropdown-menu -->
+                        </div><!-- End .dropdown -->
+@endif
+
+
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <div class="header-search header-search-popup header-search-category d-none d-sm-block">
+                            <a href="#" class="search-toggle" role="button"><i class="icon-magnifier"></i></a>
+                            <form action="#" method="get">
+                                <div class="header-search-wrapper">
+                                    <input type="search" class="form-control" name="q" id="q" placeholder="I'm searching for..." required="">
+                                    <div class="select-custom">
+                                        <select id="cat" name="cat">
+                                            <option value="">All Categories</option>
+                                            <option value="4">Fashion</option>
+                                            <option value="12">- Women</option>
+                                            <option value="13">- Men</option>
+                                            <option value="66">- Jewellery</option>
+                                            <option value="67">- Kids Fashion</option>
+                                            <option value="5">Electronics</option>
+                                            <option value="21">- Smart TVs</option>
+                                            <option value="22">- Cameras</option>
+                                            <option value="63">- Games</option>
+                                            <option value="7">Home &amp; Garden</option>
+                                            <option value="11">Motors</option>
+                                            <option value="31">- Cars and Trucks</option>
+                                            <option value="32">- Motorcycles &amp; Powersports</option>
+                                            <option value="33">- Parts &amp; Accessories</option>
+                                            <option value="34">- Boats</option>
+                                            <option value="57">- Auto Tools &amp; Supplies</option>
+                                        </select>
+                                    </div><!-- End .select-custom -->
+                                    <button class="btn bg-dark icon-search-3" type="submit"></button>
+                                </div><!-- End .header-search-wrapper -->
                             </form>
                         </div>
 
-                    </div>
+                        <div class="dropdown cart-dropdown">
+                            <a href="#" class="dropdown-toggle dropdown-arrow" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+                                <i class="icon-shopping-cart"></i>
+                                <span class="cart-count badge-circle">{{\Cart::getContent()->count()}}</span>
+                             
+                            </a>
 
-                    <!-- search -->
-                    <div class="block-search">
-                        <div class="block-title">
-                            <span>Search</span>
-                        </div>
-                        <div class="block-content">
-                            <div class="form-search">
-                                <form>
-                                    <div class="box-group">
-                                        <input type="text" class="form-control" placeholder="i'm Searching for...">
-                                        <button class="btn btn-search" type="button"><span>search</span></button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div><!-- search -->
+                            <div class="dropdown-menu" >
+                                <div class="dropdownmenu-wrapper">
+                                    <div class="dropdown-cart-header">
+                                        <span>2 Items</span>
 
-                    <!--setting  -->
-                    <div class="dropdown setting">
-                        <a data-toggle="dropdown" role="button" href="#" class="dropdown-toggle "><span>Settings</span> <i aria-hidden="true" class="fa fa-user"></i></a>
-                        <div class="dropdown-menu  ">
-                            <div class="switcher  switcher-language">
-                                <strong class="title">Select language</strong>
-                                <ul class="switcher-options ">
-                                    <li class="switcher-option">
-                                        <a href="#">
-                                            <img class="switcher-flag" alt="flag" src="images/flags/flag_french.png">
-                                        </a>
-                                    </li>
-                                    <li class="switcher-option">
-                                        <a href="#">
-                                            <img class="switcher-flag" alt="flag" src="images/flags/flag_germany.png">
-                                        </a>
-                                    </li>
-                                    <li class="switcher-option">
-                                        <a href="#">
-                                            <img class="switcher-flag" alt="flag" src="images/flags/flag_english.png">
-                                        </a>
-                                    </li>
-                                    <li class="switcher-option switcher-active">
-                                        <a href="#">
-                                            <img class="switcher-flag" alt="flag" src="images/flags/flag_spain.png">
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="switcher  switcher-currency">
-                                <strong class="title">SELECT CURRENCIES</strong>
-                                <ul class="switcher-options ">
-                                    <li class="switcher-option">
-                                        <a href="#">
-                                            <i class="fa fa-usd" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                    <li class="switcher-option switcher-active">
-                                        <a href="#">
-                                            <i class="fa fa-eur" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                    <li class="switcher-option">
-                                        <a href="#">
-                                            <i class="fa fa-gbp" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
+                                        <a href="{{url('viewcart')}}" class="float-right">View Cart</a>
+                                    </div><!-- End .dropdown-cart-header -->
 
-                                </ul>
-                            </div>
-                            <ul class="account">
-                                <li><a href="#">Wishlist</a></li>
-                                <li><a href="#">My Account</a></li>
-                                <li><a href="#">Checkout</a></li>
-                                <li><a href="#">Compare</a></li>
-                                <li><a href="#">Login/Register</a></li>
-                            </ul>
-                        </div>
-                    </div><!--setting  -->
+                                    <div class="dropdown-cart-products">
+                                     
+                                         @foreach(Cart::getContent() as $item)
+                                        <div class="product">
+                                            <div class="product-details">
+                                                <h4 class="product-title">
+                                                    <a href="product.html">{{$item->name}}</a>
+                                                </h4>
 
-                </div>
-            </div>
-        </div><!-- header-nav -->
+                                                <span class="cart-product-info">
+                                                    <span class="cart-product-qty">1</span>
+                                                    x $35.00
+                                                </span>
+                                            </div><!-- End .product-details -->
+
+                                            <figure class="product-image-container">
+                                                <a href="product.html" class="product-image">
+                                                    <img src="assets/images/products/cart/product-2.jpg" alt="product" width="80" height="80">
+                                                </a>
+                                                <a href="#" class="btn-remove icon-cancel" title="Remove Product"></a>
+                                            </figure>
+                                        </div><!-- End .product -->
+                                        @endforeach
+                                    </div><!-- End .cart-product -->
+
+                                    <div class="dropdown-cart-total">
+                                        <span>Total</span>
+
+                                        <span class="cart-total-price float-right">$134.00</span>
+                                    </div><!-- End .dropdown-cart-total -->
+
+                                    <div class="dropdown-cart-action">
+                                        <a href="{{url('checkoutshipping')}}" class="btn btn-primary btn-block">Checkout</a>
+                                    </div><!-- End .dropdown-cart-total -->
+                                </div><!-- End .dropdownmenu-wrapper -->
+                            </div><!-- End .dropdown-menu -->
+                        </div><!-- End .dropdown -->
+                    </div><!-- End .header-right -->
+                </div><!-- End .container -->
+            </div><!-- End .header-middle -->
+        </header><!-- End .header -->
+    </br></br> </br></br></br>
 
 
 
-    </header><!-- end HEADER -->
+<script>
+    // When the user scrolls the page, execute myFunction
+window.onscroll = function() {myFunction()};
+
+// Get the navbar
+var navbar = document.getElementById("navbar");
+
+// Get the offset position of the navbar
+var sticky = navbar.offsetTop;
+
+// Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+function myFunction() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky")
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
+</script>
+  
+
+        <!-- header-top -->
+       {{-- @include('frontend.layout.partials.top_header') --}}
+        <!-- header-top -->
+
+        <!-- header-content -->
+      {{--  @include('frontend.layout.partials.header_content') --}}
+        <!-- header-content -->
+
+        <!-- header-nav -->
+        
 
     <!-- MAIN -->
     <main class="site-main">
@@ -727,7 +756,7 @@
         <!--  Popup Newsletter-->
 {{--        <div class="modal fade popup-newsletter" id="popup-newsletter" tabindex="-1" role="dialog" >--}}
 {{--            <div class="modal-dialog" role="document">--}}
-{{--                <div class="modal-content" style="background-image: url(images/media/index1/Popup.jpg);">--}}
+{{--                <div class="modal-content" style="background-image: url(images/media/ind/Popup.jpg);">--}}
 {{--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>--}}
 {{--                    <div class="block-newletter">--}}
 {{--                        <div class="block-title">signup for our newsletter & promotions</div>--}}
@@ -763,7 +792,7 @@
     </main><!-- end MAIN -->
 
     <!-- FOOTER -->
-    <footer class="site-footer footer-opt-1">
+    <!-- <footer class="site-footer footer-opt-1">
 
         <div class="container">
             <div class="footer-column">
@@ -1081,7 +1110,110 @@
 
         </div>
 
-    </footer><!-- end FOOTER -->
+    </footer> --><!-- end FOOTER -->
+
+    <footer class="footer">
+            <div class="footer-top">
+                <div class="container top-border d-flex align-items-center justify-content-between flex-wrap">
+                    <div class="footer-left widget-newsletter d-md-flex align-items-center">
+                        <div class="widget-newsletter-info">
+                            <h5 class="widget-newsletter-title text-uppercase m-b-1">subscribe newsletter</h5>
+                            <p class="widget-newsletter-content mb-0">Get all the latest information on Events, Sales and Offers.</p>
+                        </div>
+                        <form action="#">
+                            <div class="footer-submit-wrapper d-flex">
+                                <input type="email" class="form-control" placeholder="Email address..." size="40" required>
+                                <button type="submit" class="btn btn-dark btn-sm">Subscribe</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="footer-right">
+                        <div class="social-icons">
+                            <a href="#" class="social-icon social-facebook icon-facebook" target="_blank"></a>
+                            <a href="#" class="social-icon social-twitter icon-twitter" target="_blank"></a>
+                            <a href="#" class="social-icon social-instagram icon-instagram" target="_blank"></a>
+                        </div><!-- End .social-icons -->
+                    </div>
+                </div>
+            </div>
+            <div class="footer-middle">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 col-xl-4">
+                            <div class="widget">
+                                <h4 class="widget-title">Contact Info</h4>
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="contact-widget">
+                                            <h4 class="widget-title">ADDRESS</h4>
+                                            <a href="#">1234 Street Name, City, England</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="contact-widget email">
+                                            <h4 class="widget-title">EMAIL</h4>
+                                            <a href="mailto:mail@example.com">mail@example.com</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="contact-widget">
+                                            <h4 class="widget-title">PHONE</h4>
+                                            <a href="#">Toll Free (123) 456-7890</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="contact-widget">
+                                            <h4 class="widget-title">WORKING DAYS/HOURS</h4>
+                                            <a href="#">Mon - Sun / 9:00 AM - 8:00 PM</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-3 col-xl-4">
+                            <div class="widget">
+                                <h4 class="widget-title">My Account</h4>
+                                <ul class="links link-parts row">
+                                    <div class="link-part col-xl-4">
+                                        <li><a href="about.html">About Us</a></li>
+                                        <li><a href="contact.html">Contact Us</a></li>
+                                        <li><a href="my-account.html">My Account</a></li>
+                                    </div>
+                                    <div class="link-part col-xl-8">
+                                        <li><a href="#">Orders History</a></li>
+                                        <li><a href="#">Advanced Search</a></li>
+                                    </div>
+                                </ul>
+                            </div><!-- End .widget -->
+                        </div>
+                        <div class="col-sm-6 col-lg-3 col-xl-4">
+                            <div class="widget">
+                                <h4 class="widget-title">Main Features</h4>
+                                <ul class="links link-parts row">
+                                    <div class="link-part col-xl-6">
+                                        <li><a href="#">Super Fast WordPress Theme</a></li>
+                                        <li><a href="#">1st Fully working Ajax Theme</a></li>
+                                        <li><a href="#">33 Unique Shop Layouts</a></li>
+                                    </div>
+                                    <div class="link-part col-xl-6">
+                                        <li><a href="#">Powerful Admin Panel</a></li>
+                                        <li><a href="#">Mobile &amp; Retina Optimized</a></li>
+                                    </div>
+                                </ul>
+                            </div><!-- End .widget -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="container top-border d-flex align-items-center justify-content-between flex-wrap">
+                    <p class="footer-copyright mb-0 py-3 pr-3">Porto eCommerce. &copy;  2020.  All Rights Reserved</p>
+                    <img class="py-3" src="assets/images/payments.png" alt="payment image">
+                </div>
+            </div>
+        </footer>
 
     <!--back-to-top  -->
     <a href="#" class="back-to-top">
@@ -1162,6 +1294,16 @@
     }
     @endif
 </script>
+
+<!-- Plugins JS File -->
+    <script src="{{asset('assets/js/jquery.min.js')}}"></script>
+    <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
+      <script src="{{asset('assets/js/plugins.min.js')}}"></script>
+
+
+    <!-- Main JS File -->
+    <script src="{{asset('assets/js/main.min.js')}}"></script>
+  
 
 
 </body>

@@ -22,10 +22,17 @@
                                     </span>
                                 @enderror
                             </div>
+
+                            @php
+
+  $batchii = App\Models\Batch::all()->last();
+       $batchii->id+1;
+
+                            @endphp
                             <div class="form-group">
                                 <label>Batch Number</label>
 
-                                <input type="text" name="number" class="form-control @error('number') is-invalid @enderror" placeholder="Enter New Batch Number" value="{{ old('number', \Illuminate\Support\Str::random(10) )}}" aria-label="number">
+                                <input type="text" name="number" class="form-control @error('number') is-invalid @enderror" placeholder="Enter New Batch Number" value=" {{$batchii->id+1}}" aria-label="number">
                                 @error('number')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -95,7 +102,7 @@
                             <div class="form-group">
                                 <label>Supplier</label>
 
-                                <input type="string" name="vendor" class="form-control @error('vendor') is-invalid @enderror" placeholder="Enter New Vendor Name" value="{{ old('vendor') }}" aria-label="vendor">
+                                <input type="string" name="vendor" class="form-control @error('vendor') is-invalid @enderror" placeholder="Enter Supplier Name" value="{{ old('vendor') }}" aria-label="vendor">
                                 @error('vendor')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

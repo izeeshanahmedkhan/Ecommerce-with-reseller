@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\HomeSetting;
 use App\Models\BlockFloorProducts;
 use App\Models\Category;
+use App\Models\menubanner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -18,6 +19,112 @@ class HomeSettingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+public function menubanner()
+    {
+       
+
+        return view('admin.menubanner.create');
+    }
+
+    public function menubannerindex()
+    {
+    $menubanner = menubanner::all();
+    return view('admin.menubanner.index',['menubanner'=>$menubanner]);
+
+    }
+
+
+
+
+
+
+
+public function saviya(request $request)
+      {
+        $validatedData = $request->validate([
+         'banner_1' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+
+        ]);
+
+        $banner_2 = $request->file('banner_1');
+                $banner_2_name = $banner_2->getClientOriginalName();
+                $path = $banner_2->move(public_path('/images/banner2'), $banner_2_name);
+
+                echo "saved";
+                // move(public_path('/images/banner2'), $banner_2_name);
+
+
+        // $save = new Photo;
+          $menubanner = new menubanner;
+
+          $menubanner->key = $request->key;
+          $menubanner->value = $banner_2_name;
+          $menubanner->status = $request->status; 
+          $menubanner->save();
+
+          echo "success";
+
+
+        // $save->name = $name;
+        // $save->path = $path;
+
+        // $save->save();
+
+        // return back()->with('status', 'Image Has been uploaded');
+        // echo "image succesfully saved";
+    }
+
+
+
+public function saviyaupdate(request $request)
+      {
+        $validatedData = $request->validate([
+         'banner_1' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+
+        ]);
+
+        // $banner_2 = $request->file('banner_1');
+        //         $banner_2_name = $banner_2->getClientOriginalName();
+        //         $path = $banner_2->move(public_path('/images/banner2'), $banner_2_name);
+
+        //         echo "saved";
+                // move(public_path('/images/banner2'), $banner_2_name);
+
+
+        // $save = new Photo;
+
+        $menubanner = menubanner::find($request->id);
+         
+          $banner_2 = $request->file('banner_1');
+          $banner_2_name = $banner_2->getClientOriginalName();
+
+          $menubanner->key = $request->key;
+          $menubanner->value = $banner_2_name;
+          $menubanner->status = $request->status; 
+          $menubanner->save();
+
+          echo "edit success";
+
+
+        // $save->name = $name;
+        // $save->path = $path;
+
+        // $save->save();
+
+        // return back()->with('status', 'Image Has been uploaded');
+        // echo "image succesfully saved";
+    }
+
+     public function menubanneredit($id)
+    {
+        $idofmenubanner = $id;
+    // $menubanner = menubanner::find($id);
+         return view('admin.menubanner.edit',['id'=>$idofmenubanner]);
+   
+
+    }
 
     public function logo_index()
     {

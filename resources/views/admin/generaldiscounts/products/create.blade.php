@@ -29,12 +29,12 @@
                                                     continue;
                                                 }
                                             @endphp
-                                            @php $general_product = \App\Models\GeneralDiscount::where('product_id',$product->id)->first();
-                                                if(!empty($general_product)){
-                                                    continue;
-                                                }
-                                            @endphp
-                                            <option {{ old('product_id') == $product->id ? 'selected':'' }} value="{{ $product->id }}"> {{ $product->name }} </option>
+    @php $general_product = \App\Models\GeneralDiscount::where('product_id',$product->id)->first();
+    if(!empty($general_product)){
+              continue;
+                              }
+            @endphp
+    <option {{ old('product_id') == $product->id ? 'selected':'' }} value="{{ $product->id }}"> {{ $product->name }} </option>
                                         @endforeach
                                     </select>
                                     @error('product_id')

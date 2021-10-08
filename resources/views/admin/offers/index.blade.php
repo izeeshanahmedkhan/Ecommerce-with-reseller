@@ -336,6 +336,8 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Offer</th>
+                                    <th>Product</th>
+                                    <th>Product_Size</th>
                                     <th>Code</th>
                                     <th>Minimum Amount</th>
                                     <th>Discount</th>
@@ -354,6 +356,17 @@
                                     <tr>
                                         <td>{{$voucher_code->id}}</td>
                                         <td>{{$voucher_code->offer}}</td>
+
+<td>
+ @php
+  
+  $product = App\Models\Product::where('id',$voucher_code->product_id)->first();
+
+ @endphp
+    {{ $product->name}}</td>
+<td>{{$voucher_code->size_id}}</td>
+
+
                                         <td>{{$voucher_code->code}}</td>
                                         <td>{{$voucher_code->min_amount}}</td>
                                         <td>{{$voucher_code->discount}}</td>
@@ -451,6 +464,8 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Offer</th>
+                                    <th>Product</th>
+                                    <th>Product_Size</th>
                                     <th>Code</th>
                                     <th>Minimum Amount</th>
                                     <th>Discount</th>

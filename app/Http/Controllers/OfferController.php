@@ -28,9 +28,7 @@ class OfferController extends Controller
 
     public function buy_1_get_1_offer_create(){
 
-        $products = Product::where('status',1)
-            ->where('stock_availability',1)
-            ->get();
+        $products = Product::where('status',1)->get();
 
         return view('admin.offers.buy_1_get_1_offers.create',['products'=>$products]);
 
@@ -38,9 +36,7 @@ class OfferController extends Controller
 
     public function free_delivery_create(){
 
-        $products = Product::where('status',1)
-            ->where('stock_availability',1)
-            ->get();
+        $products = Product::where('status',1)->get();
 
         return view('admin.offers.free_deliveries.create',['products'=>$products]);
 
@@ -151,6 +147,8 @@ class OfferController extends Controller
 
         $offer->offer = 'Voucher Code';
         $offer->code = $request->get('code');
+        $offer->product_id = $request->get('product');
+        $offer->size_id = $request->get('productsize');
         $offer->min_amount = $request->get('minimum_amount');
         $offer->discount = $request->get('discount');
         $offer->no_of_times = $request->get('no_of_times');

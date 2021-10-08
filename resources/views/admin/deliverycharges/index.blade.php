@@ -19,6 +19,13 @@
                                         class="nav-icon font-weight-bold"></i>Add New Delivery Charge</a>
                                 <br> <br>
                             </div>
+
+
+                         <div style="float:right; margin-right: 1%;">
+                            <a href="{{route('deliverychargesindex_pdf')}}" class="btn btn-raised btn-raised-primary m-1" style="color: white;"><i
+                                    class="nav-icon font-weight-bold"></i>Export PDF</a>
+                            <br> <br>
+                        </div>
                         @endif
                         <div class="table-responsive">
                             <table class="display table table-striped table-bordered" id="zero_configuration_table" style="width:100%">

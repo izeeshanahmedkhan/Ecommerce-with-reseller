@@ -1,5 +1,56 @@
 @extends('admin.layouts.master')
 @section('content')
+
+<style>
+    
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu>a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+
+.dropdown-submenu:hover>a:after {
+    border-left-color: #fff;
+}
+
+.dropdown-submenu.pull-left {
+    float: none;
+}
+
+.dropdown-submenu.pull-left>.dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}
+</style>
     <input type="hidden" value="{{$activePage = 'categoryCreate', $title = 'Create Category - Nafia Garments'}}">
     <div class="main-content">
         <div class="breadcrumb">
@@ -13,16 +64,42 @@
                         <form class="forms-sample" method="POST" action="{{ route('category.store') }}" enctype="multipart/form-data">
                             @csrf()
                             <div class="row">
-                                <div class="col-md-3 form-group mb-3">
+
+
+<div class="col-md-6 form-group mb-3">
+                                    <label for="selectCategory">Select Gender</label>
+                                    <select class="form-control" id="selectCategory" name="gender"required>
+                                        <option selected disabled> Select Gender </option>
+                                      
+                                            <option>men</option>
+
+                                            <option>women</option>
+                                      
+                                    </select>
+                                </div>
+
+<div class="col-md-6 form-group mb-3">
+
+    
+
+
+
+</div>
+
+
+
+
+                                <div class="col-md-6 form-group mb-3">
                                     <label for="selectCategory">Select Parent category</label>
                                     <select class="form-control" id="selectCategory" name="parent_id">
                                         <option selected disabled> Select Category </option>
                                         @foreach($categories as $category)
-                                            <option value="{{ $category->id }}">{{ $category->title  }}</option>
+                                            <option value="{{ $category->id }}">{{ $category->title  }}(<b>{{ $category->gender  }}</b>)</option>
+
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-md-3 form-group mb-3">
+                                <div class="col-md-6 form-group mb-3">
                                     <label>New Category</label>
                                     <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" placeholder="Enter New Category" value="{{ old('title') }}" aria-label="title">
                                     @error('title')
@@ -31,7 +108,7 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="col-md-3 form-group mb-3">
+                                <div class="col-md-6 form-group mb-3">
                                     <label>Icon Class (Font Awesome)</label>
                                     <input type="text" name="icon" class="form-control @error('icon') is-invalid @enderror" placeholder="Enter New Icon" value="{{ old('icon') }}" aria-label="icon">
                                     @error('icon')
@@ -40,7 +117,7 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="col-md-3 form-group mb-3">
+                                <div class="col-md-6 form-group mb-3">
                                     <label for="image">Image</label>
                                     <input type="file"  name="image" class="form-control form-control @error('image') is-invalid @enderror" id="image" value="{{ old('image') }}" autocomplete="image" autofocus/>
                                     @error('image')

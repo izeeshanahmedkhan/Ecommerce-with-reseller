@@ -2,87 +2,93 @@
 @section('content')
 
     <!-- MAIN -->
-    <main class="site-main">
 
-        <div class="columns container">
-            <!-- Block  Breadcrumb-->
 
-            <ol class="breadcrumb no-hide">
-                <li><a href="#">Home    </a></li>
-                <li class="active">Contact</li>
-            </ol><!-- Block  Breadcrumb-->
+<main class="main">
+            <nav aria-label="breadcrumb" class="breadcrumb-nav">
+                <div class="container">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+                    </ol>
+                </div><!-- End .container -->
+            </nav>
 
-            <h2 class="page-heading">
-                <span class="page-heading-title2">Contact Us</span>
-            </h2>
+            <div class="page-header">
+                <div class="container">
+                    <h1>Contact Us</h1>
+                </div><!-- End .container -->
+            </div><!-- End .page-header -->
 
-            <div class="page-content" id="contact">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <h3 class="page-subheading">CONTACT FORM</h3>
-                        <form class="forms-sample" method="POST" action="{{ route('contactus.store') }}">
-                            @csrf()
-                        <div class="contact-form-box">
-                            <div class="form-selector">
-                                <label>Name</label>
-                                <input type="text" name="name" class="form-control input-sm @error('name') is-invalid @enderror" id="name" placeholder="Enter Name" value="{{ old('name') }}">
-                                    @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <div class="form-selector">
-                                <label>Email address</label>
-                                <input type="text" id="email" class="form-control input-sm @error('email') is-invalid @enderror" name="email" placeholder="Enter Email" value="{{ old('email') }}">
-                                @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <div class="form-selector">
-                                <label>Contact</label>
-                                <input type="text" id="contactno" class="form-control input-sm @error('contact') is-invalid @enderror" name="contact" placeholder="Enter Contact" value="{{ old('contact') }}">
-                                @error('contact')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <div class="form-selector">
-                                <label>Message</label>
-                                <textarea id="message" rows="10" class="form-control input-sm @error('message') is-invalid @enderror" name="message" placeholder="Enter Message" value="{{ old('message') }}"></textarea>
-                                @error('message')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <div class="form-selector">
-                                <button type="submit" class="btn" id="btn-send-contact">Send</button>
-                            </div>
-                        </div>
+            <div class="container">
+                <div id="map"></div><!-- End #map -->
+
+                <div class="row row-sparse">
+                    <div class="col-md-8">
+                        <h2 class="light-title">Write <strong>Us</strong></h2>
+
+                        <form action="#">
+                            <div class="form-group required-field">
+                                <label for="contact-name">Name</label>
+                                <input type="text" class="form-control" id="contact-name" name="contact-name" required>
+                            </div><!-- End .form-group -->
+
+                            <div class="form-group required-field">
+                                <label for="contact-email">Email</label>
+                                <input type="email" class="form-control" id="contact-email" name="contact-email" required>
+                            </div><!-- End .form-group -->
+
+                            <div class="form-group">
+                                <label for="contact-phone">Phone Number</label>
+                                <input type="tel" class="form-control" id="contact-phone" name="contact-phone">
+                            </div><!-- End .form-group -->
+
+                            <div class="form-group required-field">
+                                <label for="contact-message">What’s on your mind?</label>
+                                <textarea cols="30" rows="1" id="contact-message" class="form-control" name="contact-message" required></textarea>
+                            </div><!-- End .form-group -->
+
+                            <div class="form-footer">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div><!-- End .form-footer -->
                         </form>
-                    </div>
-                    <div id="contact_form_map" class="col-xs-12 col-sm-6">
-                        <h3 class="page-subheading">Information</h3>
-                        <br>
-                        <ul class="store_info">
-                            @php $address= \App\Models\HomeSetting::where('key', 'address')->where('status', '1')->first(); @endphp
-                            <li><i class="fa fa-home"></i><span>{{$address->value}}</span></li>
-                            @php $phone= \App\Models\HomeSetting::where('key', 'phone')->where('status', '1')->first(); @endphp
-                            <li><i class="fa fa-phone"></i><span>{{$phone->value}}</span></li>
-                            @php $email= \App\Models\HomeSetting::where('key', 'email')->where('status', '1')->first(); @endphp
-                            <li><i class="fa fa-envelope"></i>Email: <span><a href="mailto:%73%75%70%70%6f%72%74@%6b%75%74%65%74%68%65%6d%65.%63%6f%6d">{{$email->value}}</a></span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    </div><!-- End .col-md-8 -->
 
+                    <div class="col-md-4">
+                        <h2 class="light-title">Contact <strong>Details</strong></h2>
 
-    </main><!-- end MAIN -->
+                        <div class="contact-info">
+                            <div>
+                                <i class="icon-phone"></i>
+                                  @php $phone= \App\Models\HomeSetting::where('key', 'phone')->where('status', '1')->first(); @endphp
+                                <p><a href="tel:">{{$phone->value}}</a></p>
+                              
+                            </div>
+                            <div>
+                                <i class="icon-mobile"></i>
+                                  @php $address= \App\Models\HomeSetting::where('key', 'address')->where('status', '1')->first(); @endphp
+                                <p><a href="tel:">{{$address->value}}</a></p>
+                                
+                            </div>
+                            <div>
+                                <i class="icon-mail-alt"></i>
+                                 @php $email= \App\Models\HomeSetting::where('key', 'email')->where('status', '1')->first(); @endphp
+                                <p><a href="mailto:#">{{$email->value}}</a></p>
+                              
+                            </div>
+                            <div>
+                                <i class="icon-skype"></i>
+                                <p>porto_skype</p>
+                                <p>porto_template</p>
+                            </div>
+                        </div><!-- End .contact-info -->
+                    </div><!-- End .col-md-4 -->
+                </div><!-- End .row -->
+            </div><!-- End .container -->
+
+            <div class="mb-8"></div><!-- margin -->
+        </main><!-- End .main -->
 
 @endsection
 

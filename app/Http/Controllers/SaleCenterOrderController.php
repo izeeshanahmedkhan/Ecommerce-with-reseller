@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\SaleCenter;
-use App\Models\SaleCenterOrder;
+use App\Models\SaleCenterOrder; 
+use App\Models\ProductForSaleCenter;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -204,7 +205,20 @@ class SaleCenterOrderController extends Controller
      */
     public function update(Request $request, SaleCenterOrder $order)
     {
+
+        // echo $order;
         SaleCenterOrder::where('id',$order->id)->update(['status'=>$request->get('status')]);
+
+if($request->get('status')==4)
+{
+     
+
+       $productquantity_in_productforsalecenters = ProductForSaleCenter::where('product_id',$order->product_id)->where('salecenter_id',$order->salecenter_id)->first()->sold;
+
+  ProductForSaleCenter::where('product_id',$order->product_id)->where('salecenter_id',$order->salecenter_id)->update(['sold'=>$order->quantity+$productquantity_in_productforsalecenters]);
+}
+
+
 
         Session::flash('message','Status Updated Successfully');
         Session::flash('alert-type','success');

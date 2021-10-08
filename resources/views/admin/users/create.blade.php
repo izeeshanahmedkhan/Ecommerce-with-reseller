@@ -25,8 +25,8 @@
                                 </div>
 
                                 <div class="col-md-6 form-group mb-3">
-                                    <label for="exampleInputEmail2">Email address</label>
-                                    <input type="email"  name="email" class="form-control form-control-rounded @error('email') is-invalid @enderror" id="exampleInputEmail2" type="email" placeholder="Enter email" value="{{ old('email') }}" autocomplete="email" autofocus/>
+                                    <label for="exampleInputEmail2">User ID</label>
+                                    <input type="email"  name="email" class="form-control form-control-rounded @error('email') is-invalid @enderror" id="exampleInputEmail2" type="email" placeholder="@zeeroown.pk" value="{{ old('email') }}" autocomplete="email" autofocus/>
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -50,7 +50,7 @@
                                 </div>
 
                                 <div class="col-md-6 form-group mb-3">
-                                    <label for="role">Select Role</label>
+                                    <label for="role"> Role</label>
                                     <select class="form-control form-control-rounded @error('role') is-invalid @enderror" id="role" name="role">
                                         @foreach($roles as $role)
                                             <option value="{{ $role->id }}">{{ $role->name }}</option>

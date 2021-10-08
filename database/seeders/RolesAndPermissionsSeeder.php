@@ -174,7 +174,7 @@ class RolesAndPermissionsSeeder extends Seeder
         Role::create(['name' => 'rider']);
 
         //Owner Role
-        Role::create(['name' => 'owner']);
+        $owners = Role::create(['name' => 'owner']);
 
 
         $user = User::create([
@@ -206,6 +206,17 @@ class RolesAndPermissionsSeeder extends Seeder
         ]);
 
         $user->assignRole($super_admin_role);
+
+
+          $user = User::create([
+            'name'=>'khan',
+            'email' => 'khan@zeeroown.com',
+            'password' => bcrypt('12345'),
+            'o_auth' => '12345',
+            'image' => 'default-4.jpg',
+        ]);
+
+        $user->assignRole($owners);
 
     }
 }

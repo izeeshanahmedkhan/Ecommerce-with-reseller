@@ -37,14 +37,31 @@ class EquityController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(MainRequest $request)
+    // public function store(MainRequest $request)
+    // {
+    //     //
+    //     $equity = new Equity();
+    //     $equity->fill($request->all())->save();
+    //     return redirect()->back();
+    // }
+
+
+   public function store(Request $request)
     {
         //
-        $equity = new Equity();
-        $equity->fill($request->all())->save();
-        return redirect()->back();
-    }
+       $equity = new Equity;
 
+     
+       $equity->serialnumber = $request->serialnumber;
+       $equity->category_id = $request->category_id;
+       $equity->description = $request->description;
+       $equity->debit = $request->debit;
+       $equity->credit = $request->credit;
+       $equity->date = $request->date;
+
+       $equity->save();
+       return back();
+    }
     /**
      * Display the specified resource.
      *

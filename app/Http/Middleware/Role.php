@@ -22,10 +22,13 @@ class Role
 
             if(Auth::user()->getRoleNames()->first() == $r){
 
+             
+
                 return $next($request);
             }
         }
 
         return redirect('/home');
+       
     }
 }

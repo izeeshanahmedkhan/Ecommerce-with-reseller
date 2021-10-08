@@ -1,11 +1,54 @@
 @extends('admin.layouts.master')
 @section('content')
+
+  
+
     <input type="hidden" value="{{$activePage = 'productIndex', $title = 'Products- Nafia Garments'}}">
     <div class="main-content">
         <div class="row mb-4">
             <div class="col-md-12">
                 <h4>View All Products</h4>
             </div>
+             <form method="post" action="{{route('selectfield')}}" enctype="multipart/form-data">
+                            @csrf
+
+                        <div class="">
+                                <label><strong>Select Field :</strong></label><br/>
+                                <select class="selectpicker" multiple data-live-search="true" name="cat[]">
+
+                             <option value="name">name</option>
+                            <option value="product_sku_code">product_sku_code</option>
+                                  <option value="description">description</option>
+                                  <option value="price">price</option>
+                                  <option value="owner">owner</option>
+                                  <option value="vendor">vendor</option>
+                                   <option value="video_link">Video_Link</option>
+                                <option value="product_weight">product_weight</option>
+                                 <option value="vendor">vendor</option>
+                                  <option value="purchase_cost">Purchase_Cost</option>
+                                   <option value="purchase_discount">Purchase_Discount</option>
+                                    <option value="purchase_discount_percentage">Purchase_Discount_Percentage</option>
+                                     <option value="labour_cost">Labour_Cost</option>
+                                      <option value="transportation_cost">Transportation_Cost</option>
+                                 <option value="list_price_for_salesman">List_Price_For_Salesmen</option>
+                                  <option value="commission_amount">Commission_Amount</option>
+
+                                   <option value="commission">Commission</option>
+
+                                                                 </select>
+                            </div>
+
+                            <div class="" style="margin-top: 10px;">
+                                <button type="submit" class="btn btn-success">Filter</button>
+                            </div>
+                        </form>
+
+                        <!-- Initialize the plugin: -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('select').selectpicker();
+    });
+</script>
         </div>
         <!-- end of row-->
         <div class="row mb-4">
@@ -17,9 +60,32 @@
                         <div style="float:right; margin-right: 1%;">
                             <a href="{{route('product.create')}}" class="btn btn-raised btn-raised-primary m-1" style="color: white;"><i
                                     class="nav-icon font-weight-bold"></i>Add New Product</a>
+
+
                             <br> <br>
                         </div>
+
+
                         @endif
+
+                         <div style="float:right; margin-right: 1%;">
+                            <a href="{{route('productindex_pdf')}}" class="btn btn-raised btn-raised-primary m-1" style="color: white;"><i
+                                    class="nav-icon font-weight-bold"></i>Export PDF</a>
+                            <br> <br>
+                        </div>
+
+                      <!--    <div style="float:right; margin-right: 1%;">
+                            <a href="{{route('product_salecenter.index')}}" class="btn btn-raised btn-raised-primary m-1" style="color: white;"><i
+                                    class="nav-icon font-weight-bold"></i>View All Products For Sale Centers</a>
+                            <br> <br>
+                        </div> -->
+
+                       <!--  <div style="float:right; margin-right: 1%;">
+                            <a href="{{ route('product_owner.index') }}" class="btn btn-raised btn-raised-primary m-1" style="color: white;"><i
+                                    class="nav-icon font-weight-bold"></i>View All Products For Owners</a>
+                            <br> <br>
+                        </div> -->
+    
 
                         <div class="table-responsive">
                             <table class="display table table-striped table-bordered" id="zero_configuration_table" style="width:100%">
@@ -30,6 +96,21 @@
                                     <th>Quantity</th>
                                     <th>Price</th>
                                     <th>Stock Availability</th>
+                                    <th>SKU Code</th>
+                                    <th>Description</th>
+                                    <th>Owner</th>
+                                    <th>Vendor</th>
+                                    <th>Video Link</th>
+                                <th>Product Weight</th>
+                                <th>QR Code</th>
+                                <th>Purchase Cost</th>
+                                <th>Purchase Discount</th>
+                    <th>Purchase Discount Percentage</th>
+                      <th>Labour Cost</th>
+                        <th>Transportation Cost</th>
+                          <th>List Price For Salesman</th>
+                            <th>Commission Amount</th>
+                              <th>Commission</th>
                                     <th>Status</th>
                                     <th>Created At</th>
                                     <th>Action</th>
@@ -43,6 +124,27 @@
                                         <td>{{ $product->quantity }}</td>
                                         <td>{{ $product->price }}</td>
                                         <td>{{ $product->stock_availability == 1 ? 'Available':'Out of Stock' }}</td>
+
+
+ <td>{{ $product->product_sku_code}}</td>
+ <td>{{ $product->description}}</td>
+ <td>{{ $product->owner}}</td>
+ <td>{{ $product->vendor}}</td>
+ <td>{{ $product->video_link}}</td>
+ <td>{{ $product->product_weight}}</td>
+ <td>{{ $product->qr_code}}</td>
+ <td>{{ $product->purchase_cost}}</td>
+ <td>{{ $product->purchase_discount}}</td>
+  <td>{{ $product->purchase_discount_percentage}}</td>
+   <td>{{ $product->labour_cost}}</td>
+     <td>{{ $product->transportation_cost}}</td>
+       <td>{{ $product->list_price_for_salesman}}</td>
+         <td>{{ $product->commission_amount}}</td>
+           <td>{{ $product->commission}}</td>
+
+
+
+
                                         <td>{{ $product->status == 1 ? 'Active':'InActive'}}</td>
                                         <td>{{ $product->created_at->diffForHumans() }}</td>
                                         <td>
@@ -82,11 +184,26 @@
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <th>#</th>
+                                   <th>#</th>
                                     <th>Name</th>
                                     <th>Quantity</th>
                                     <th>Price</th>
                                     <th>Stock Availability</th>
+                                    <th>SKU Code</th>
+                                    <th>Description</th>
+                                    <th>Owner</th>
+                                    <th>Vendor</th>
+                                    <th>Video Link</th>
+                                <th>Product Weight</th>
+                                <th>QR Code</th>
+                                <th>Purchase Cost</th>
+                                <th>Purchase Discount</th>
+                    <th>Purchase Discount Percentage</th>
+                      <th>Labour Cost</th>
+                        <th>Transportation Cost</th>
+                          <th>List Price For Salesman</th>
+                            <th>Commission Amount</th>
+                              <th>Commission</th>
                                     <th>Status</th>
                                     <th>Created At</th>
                                     <th>Action</th>

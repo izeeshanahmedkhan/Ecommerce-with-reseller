@@ -36,12 +36,30 @@ class IncomeController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MainRequest $request)
+    // public function store(MainRequest $request)
+    // {
+    //     //
+    //     $income = new Income();
+    //     $income->fill($request->all())->save();
+    //     return redirect()->back();
+    // }
+
+
+   public function store(Request $request)
     {
         //
-        $income = new Income();
-        $income->fill($request->all())->save();
-        return redirect()->back();
+       $income = new Income;
+
+     
+    $income->serialnumber = $request->serialnumber;
+    $income->category_id = $request->category_id;
+    $income->description = $request->description;
+    $income->debit = $request->debit;
+    $income->credit = $request->credit;
+    $income->date = $request->date;
+
+       $income->save();
+       return back();
     }
 
     /**

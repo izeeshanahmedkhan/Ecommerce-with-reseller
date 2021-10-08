@@ -24,6 +24,47 @@
                                     @enderror
                                 </div>
 
+
+@php 
+$product = App\Models\Product::all();
+@endphp
+                            <div class="col-md-6 form-group mb-3">
+
+                                    <label for="product">Product</label>
+                                  <select class="form-control @error('product') is-invalid @enderror" id="product" name="product">
+                     <option selected disabled> Select Deal For </option>
+                     @foreach($product as $pro)
+                     <option value="{{$pro->id}}"> {{$pro->name}}</option>
+                @endforeach
+                                     
+                                    </select>
+                                    @error('product')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                <div class="col-md-6 form-group mb-3">
+                                    <label for="productsize">Product Size</label>
+                                       <select class="form-control @error('productsize') is-invalid @enderror" id="productsize" name="productsize">
+                     <option selected disabled> Select Size  </option>
+                     @php $size = App\Models\Size::all(); @endphp
+                     @foreach($size as $s)
+                     <option value="{{$s->id}}">{{$s->sizeName}}</option>
+                     @endforeach
+                     
+             
+                                     
+                                    </select>
+                                    @error('productsize')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+
                                 <div class="col-md-6 form-group mb-3">
                                     <label for="selectMinimumAmount">Create Minimum Amount</label>
                                     <input type="text" id="selectMinimumAmount" name="minimum_amount" class="form-control @error('minimum_amount') is-invalid @enderror" placeholder="Enter New Minimum Code" value="{{ old('minimum_amount') }}" aria-label="minimum_amount">

@@ -77,6 +77,102 @@
 
 
                                 <div class="col-md-6 form-group mb-3">
+                                    <label for="supplierCnicFront">CNIC Front Image</label>
+                                    <input id="file-input" type="file" multiple  name="cnic_front" class="form-control form-control @error('cnic_front') is-invalid @enderror" id="supplierCnicFront" value="{{ old('cnic_front') }}" autocomplete="cnic_front" autofocus/>
+                                    @error('cnic_front')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 form-group mb-3">
+                                <div id="preview"></div>
+                            </div>
+                                <script>
+                                    function previewImages() {
+
+  var preview = document.querySelector('#preview');
+  
+  if (this.files) {
+    [].forEach.call(this.files, readAndPreview);
+  }
+
+  function readAndPreview(file) {
+
+    // Make sure `file.name` matches our extensions criteria
+    if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+      return alert(file.name + " is not an image");
+    } // else...
+    
+    var reader = new FileReader();
+    
+    reader.addEventListener("load", function() {
+      var image = new Image();
+      image.height = 100;
+      image.title  = file.name;
+      image.src    = this.result;
+      preview.appendChild(image);
+    });
+    
+    reader.readAsDataURL(file);
+    
+  }
+
+}
+
+document.querySelector('#file-input').addEventListener("change", previewImages);
+                                </script>
+
+
+                                <div class="col-md-6 form-group mb-3">
+                                    <label for="supplierCnicBack">CNIC Back Image</label>
+                                    <input  id="file-inputt" type="file" multiple  name="cnic_back" class="form-control form-control @error('cnic_back') is-invalid @enderror" id="supplierCnicBack" value="{{ old('cnic_back') }}" autocomplete="cnic_back" autofocus/>
+                                    @error('cnic_back')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                 <div class="col-md-6 form-group mb-3">
+                                <div id="preview2"></div>
+                            </div>
+                                <script>
+                                    function previewImages() {
+
+  var preview = document.querySelector('#preview2');
+  
+  if (this.files) {
+    [].forEach.call(this.files, readAndPreview);
+  }
+
+  function readAndPreview(file) {
+
+    // Make sure `file.name` matches our extensions criteria
+    if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+      return alert(file.name + " is not an image");
+    } // else...
+    
+    var reader = new FileReader();
+    
+    reader.addEventListener("load", function() {
+      var image = new Image();
+      image.height = 100;
+      image.title  = file.name;
+      image.src    = this.result;
+      preview.appendChild(image);
+    });
+    
+    reader.readAsDataURL(file);
+    
+  }
+
+}
+
+document.querySelector('#file-inputt').addEventListener("change", previewImages);
+                                </script>
+
+
+                                <div class="col-md-6 form-group mb-3">
                                     <label for="supplierCNICNO">CNIC Number</label>
                                     <input type="text"  name="cnic_no" class="form-control form-control @error('cnic_no') is-invalid @enderror" id="supplierCNICNO" placeholder="Enter CNIC Number" value="{{ old('cnic_no') }}" autocomplete="cnic_no" autofocus/>
                                     @error('cnic_no')
@@ -86,25 +182,6 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-md-6 form-group mb-3">
-                                    <label for="supplierCnicFront">CNIC Front Image</label>
-                                    <input type="file"  name="cnic_front" class="form-control form-control @error('cnic_front') is-invalid @enderror" id="supplierCnicFront" value="{{ old('cnic_front') }}" autocomplete="cnic_front" autofocus/>
-                                    @error('cnic_front')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-
-                                <div class="col-md-6 form-group mb-3">
-                                    <label for="supplierCnicBack">CNIC Back Image</label>
-                                    <input type="file"  name="cnic_back" class="form-control form-control @error('cnic_back') is-invalid @enderror" id="supplierCnicBack" value="{{ old('cnic_back') }}" autocomplete="cnic_back" autofocus/>
-                                    @error('cnic_back')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
 
                                 <div class="col-md-6 form-group mb-3">
                                     <label for="supplierMessagingServiceNo">Messaging Service Number</label>

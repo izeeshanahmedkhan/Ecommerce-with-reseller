@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rider;
+use App\Models\riderproductorder;
 use App\Models\User;
 use App\Models\RiderUser;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use PDF;
 
 class RiderController extends Controller
 {
@@ -17,6 +19,12 @@ class RiderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+
+     
+
+
     public function index()
     {
         $riders =  Rider::all();
@@ -24,6 +32,18 @@ class RiderController extends Controller
         return view('admin.riders.index',['riders'=>$riders]);
     }
 
+
+ public function index_pdf()
+    {
+        // $riders =  Rider::all();
+
+        // return view('admin.riders.index',['riders'=>$riders]);
+    $riders =  Rider::all();
+          
+    $pdf = PDF::loadView('admin.riders.index_pdf',['riders'=>$riders])->setOptions(['defaultFont' => 'sans-serif'])->setPaper('A2', 'landscape');
+    
+        return $pdf->download('allriders.pdf');
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -50,6 +70,7 @@ class RiderController extends Controller
             'area'=> ['required', 'string', 'max:255'],
             'contact'=> ['required','numeric', 'digits:11'],
             'cnic_no'=> 'required|string|max:255',
+             'riderimage' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'cnic_front' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'cnic_back'  => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'messaging_service_no'=> 'nullable|string|max:255',
@@ -88,17 +109,31 @@ class RiderController extends Controller
             $rider->money_transfer_service = $request->get('money_transfer_service');
             $rider->status = $request->get('status');
 
+            // for image 1
+            $riderr = $request->file('riderimage');
+            $rider_image = $riderr->getClientOriginalName();
+     $riderr->storeAs('/images/riderImages',$rider_image);
+
+            $rider->rider_image =  $rider_image;
+          // end for image 1
+
+
+ // for image 2
             $cnic_front_image = $request->file('cnic_front');
             $cnic_front_image_name = $cnic_front_image->getClientOriginalName();
             $cnic_front_image->storeAs('/images/riderImages',$cnic_front_image_name);
 
             $rider->cnic_front = $cnic_front_image_name;
+// end for image 2      
 
+// for image 3
             $cnic_back_image = $request->file('cnic_back');
             $cnic_back_image_name = $cnic_back_image->getClientOriginalName();
             $cnic_back_image->storeAs('/images/riderImages',$cnic_back_image_name);
 
             $rider->cnic_back = $cnic_back_image_name;
+
+            // end for image 3
 
             $rider->save();
 
@@ -289,4 +324,91 @@ class RiderController extends Controller
         Session::flash('alert-type','success');
         return redirect()->route('rider.index');
     }
+
+
+    public function selectfield(request $req)
+{
+  
+    echo $len = sizeof($req->cat);
+
+  
+      if ($len == 1)
+{
+   $products = Rider::all($req->cat[0]);
+   // return view ('admin.products.newindex',['products'=>$products],['pro1'=>$req->cat[0]],['pro2'=>$req->cat[1]]);
+   $len =1;
+   $pro1=$req->cat[0];
+  
+
+   return view('admin.riders.newindex', compact('pro1','products','len'));
+} 
+
+
+elseif ($len == 2)
+{
+   $products = Rider::all($req->cat[0], $req->cat[1]);
+   // return view ('admin.products.newindex',['products'=>$products],['pro1'=>$req->cat[0]],['pro2'=>$req->cat[1]]);
+   $len =2;
+   $pro1=$req->cat[0];
+   $pro2=$req->cat[1];
+
+   return view('admin.riders.newindex', compact('pro1','pro2','products','len'));
+}
+
+else if($len == 3 )
+{
+
+   $products = Rider::all($req->cat[0], $req->cat[1],$req->cat[2]);
+   $len =3;
+   $pro1=$req->cat[0];
+   $pro2=$req->cat[1];
+   $pro3=$req->cat[2];
+
+   return view('admin.riders.newindex', compact('pro1','pro2','products','len','pro3'));
+
+}
+
+elseif($len == 4)
+{
+   $products = Rider::all($req->cat[0], $req->cat[1],$req->cat[2],$req->cat[3]);
+
+   $len =4;
+   $pro1=$req->cat[0];
+   $pro2=$req->cat[1];
+   $pro3=$req->cat[2];
+   $pro4=$req->cat[3];
+
+   return view('admin.riders.newindex', compact('pro1','pro2','products','len','pro3','pro4'));
+}
+
+elseif($len == 5)
+{
+   $products = Rider::all($req->cat[0], $req->cat[1],$req->cat[2],$req->cat[3],$req->cat[4]);
+
+   $len =5;
+   $pro1=$req->cat[0];
+   $pro2=$req->cat[1];
+   $pro3=$req->cat[2];
+   $pro4=$req->cat[3];
+   $pro5=$req->cat[4];
+
+   return view('admin.riders.newindex', compact('pro1','pro2','products','len','pro3','pro4','pro5'));
+}
+
+elseif($len == 6)
+{
+   $products = Rider::all($req->cat[0], $req->cat[1],$req->cat[2],$req->cat[3],$req->cat[4],$req->cat[5]);
+    $len =6;
+   $pro1=$req->cat[0];
+   $pro2=$req->cat[1];
+   $pro3=$req->cat[2];
+   $pro4=$req->cat[3];
+   $pro5=$req->cat[4];
+   $pro6=$req->cat[5];
+
+   return view('admin.riders.newindex', compact('pro1','pro2','products','len','pro3','pro4','pro5','pro6'));
+}
+
+
+}
 }

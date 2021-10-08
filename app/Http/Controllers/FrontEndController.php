@@ -9,6 +9,8 @@ use App\Models\Colour;
 use App\Models\ColourImageProductSize;
 use App\Models\Deal;
 use App\Models\FrontEnd;
+use App\Models\productorderdetail;
+use App\Models\wishlist;
 use App\Models\HomeSetting;
 use App\Models\BlockFloorProducts;
 use App\Models\Product;
@@ -73,9 +75,24 @@ class FrontEndController extends Controller
 
         $categories = Category::where('parent_id','!=',0)->get();
 
-        return view('frontend.index',['products'=>$products,'services'=>$services,'blockfloors'=>$blockfloors,'categoryProducts'=>$categoryProducts,'ColoursImagesProductsSizes'=>$ColoursImagesProductsSizes,'categories'=>$categories]);
+
+         $u = Auth::user(); 
+
+        return view('frontend.index',['products'=>$products,'useriya' => $u,'services'=>$services,'blockfloors'=>$blockfloors,'categoryProducts'=>$categoryProducts,'ColoursImagesProductsSizes'=>$ColoursImagesProductsSizes,'categories'=>$categories]);
     }
 
+  public function delete_wishlist($id){
+
+        $wishlistitem = wishlist::find($id);
+      $wishlistitem->delete();
+     
+     // return response()->json([
+     //    'message' => 'Data deleted successfully!'
+     //  ]);
+      return back();
+
+
+    }
     public function about(){
 
         $about = DB::table('abouts')->first();
@@ -113,6 +130,24 @@ class FrontEndController extends Controller
 
     }
 
+
+    public function customer_dashboard(){
+        
+
+        return view('frontend.dashboard');
+
+    }
+
+    public function customer_orderhistory()
+    {
+        $user_id = Auth::user()->id;
+
+       $orderhistoryy = productorderdetail::where('user_id',$user_id)->get();
+
+        return view('frontend.orderhistory',['orderhistory'=>$orderhistoryy]);
+
+    }
+
     public function contact(){
 
         return view('frontend.contact');
@@ -125,9 +160,13 @@ class FrontEndController extends Controller
 
     }
 
-    public function single_product(Product $product){
-
+    public function single_product(Product $product)
+    {
+ 
+       
         return view('frontend.singleproduct',['product'=>$product]);
+
+      
 
     }
 

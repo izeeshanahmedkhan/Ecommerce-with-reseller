@@ -43,9 +43,7 @@ class GeneralDiscountController extends Controller
 
     public function product_discount_create(){
 
-        $products = Product::where('status',1)
-            ->where('stock_availability',1)
-            ->get();
+        $products = Product::where('status',1)->get();
 
         return view('admin.generaldiscounts.products.create',['products'=>$products]);
 

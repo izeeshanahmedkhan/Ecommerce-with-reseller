@@ -1,5 +1,7 @@
 @extends('admin.layouts.master')
 @section('content')
+
+
     <input type="hidden" value="{{$activePage = 'saleCenterIndex', $title = 'Create Sale Center - Nafia Garments'}}">
     <div class="main-content">
         <div class="breadcrumb">
@@ -75,30 +77,61 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-md-6 form-group mb-3">
-                                    <label for="saleCenterCNICNO">CNIC Number</label>
-                                    <input type="text"  name="cnic_no" class="form-control form-control @error('cnic_no') is-invalid @enderror" id="saleCenterCNICNO" placeholder="Enter CNIC Number" value="{{ old('cnic_no') }}" autocomplete="cnic_no" autofocus/>
-                                    @error('cnic_no')
+                              <div class="col-md-6 form-group mb-3">
+                                   <div class="row">
+                                    <div class="col-6">
+
+                                    <label for="saleCenterCnicBack">CNIC Back Image</label>
+                                    <input type="file"  name="cnic_back" class="form-control form-control @error('cnic_back') is-invalid @enderror" id="saleCenterCnicBack" value="{{ old('cnic_back') }}" autocomplete="cnic_back" autofocus/>
+                                    @error('cnic_back')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
 
+
+
+ <div class="col-6">
+
+                                <img id="bl" src="#" alt="your image" />
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
                                 <div class="col-md-6 form-group mb-3">
+                                    <div class="row">
+                                        <div class="col-6">
                                     <label for="saleCenterCnicFront">CNIC Front Image</label>
-                                    <input type="file"  name="cnic_front" class="form-control form-control @error('cnic_front') is-invalid @enderror" id="saleCenterCnicFront" value="{{ old('cnic_front') }}" autocomplete="cnic_front" autofocus/>
+
+
+    
+                                    <input type="file"  name="cnic_front" onchange="readURL(this);"  class="form-control form-control @error('cnic_front') is-invalid @enderror" id="saleCenterCnicFront" value="{{ old('cnic_front') }}" autocomplete="cnic_front" autofocus/>
                                     @error('cnic_front')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
+
                                 </div>
 
-                                <div class="col-md-6 form-group mb-3">
-                                    <label for="saleCenterCnicBack">CNIC Back Image</label>
-                                    <input type="file"  name="cnic_back" class="form-control form-control @error('cnic_back') is-invalid @enderror" id="saleCenterCnicBack" value="{{ old('cnic_back') }}" autocomplete="cnic_back" autofocus/>
-                                    @error('cnic_back')
+
+                                     <div class="col-6">
+                                    <label for="saleCenterCnicFront">CNIC Image Preview</label></br>
+                                    <img id="bl" src="#" alt="your image" />
+                                   
+
+                                </div>
+                            </div>
+                                </div>
+
+                             <div class="col-md-6 form-group mb-3">
+                                    <label for="saleCenterCNICNO">CNIC Number</label>
+                                    <input type="text"  name="cnic_no" class="form-control form-control @error('cnic_no') is-invalid @enderror" id="saleCenterCNICNO" placeholder="Enter CNIC Number" value="{{ old('cnic_no') }}" autocomplete="cnic_no" autofocus/>
+                                    @error('cnic_no')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -289,6 +322,42 @@
             </div>
         </div><!-- end of main-content -->
     </div>
+
+
+
+  <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+<meta charset=utf-8 />
+
+
+          
+
+
+    <script >
+        
+        function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#bl')
+                    .attr('src', e.target.result)
+                    .width(150)
+                    .height(200);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+ 
+
+</script> 
+
+
+</script>
+    </script>
 @endsection
 
 

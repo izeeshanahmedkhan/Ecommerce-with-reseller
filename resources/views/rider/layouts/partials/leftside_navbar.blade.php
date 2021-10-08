@@ -6,6 +6,22 @@
                 <div class="triangle"></div>
             </li>
 
+              <li class="nav-item {{$activePage == 'riderorderIndex' ? 'active' : ''}} "><a class="nav-item-hold" href="{{route('riderorderindex')}}"><i class="nav-icon fab fa-first-order"></i><span class="nav-text">Pick To Orders</span></a>
+                <div class="triangle"></div>
+            </li>
+
+             <li class="nav-item {{$activePage == 'riderorderIndex' ? 'active' : ''}} "><a class="nav-item-hold" href="{{route('riderorderindex2')}}"><i class="nav-icon fab fa-first-order"></i><span class="nav-text">Delivery Orders</span></a>
+                <div class="triangle"></div>
+            </li>
+
+             <li class="nav-item {{$activePage == 'saleCenterIndex' ? 'active' : ''}} 
+            {{$activePage == 'saleCenterCreate' ? 'active' : ''}}"
+            data-item="picks"><a class="nav-item-hold" href="#">
+                   <i class="nav-icon fa fa-user-friends"></i>
+                    <span class="nav-text">My Deliveries</span></a>
+                <div class=""></div>
+            </li>
+
 {{--            <li class="nav-item {{$activePage == 'userIndex' ? 'active' : ''}} {{$activePage == 'userCreate' ? 'active' : ''}} {{$activePage == 'roleIndex' ? 'active' : ''}}" data-item="users">--}}
 {{--                <a class="nav-item-hold" href="">--}}
 {{--                    <i class="nav-icon i-Administrator"></i>--}}
@@ -30,6 +46,16 @@
 {{--            <li class="nav-item {{$activePage == 'roleIndex' ? 'active' : ''}}"><a href="{{route('role.index')}}"><i class="nav-icon i-Add-User"></i><span class="item-name">View All Roles</span></a></li>--}}
 
 {{--        </ul>--}}
+
+
+ <ul class="childNav" data-parent="picks">
+         
+            <li class="nav-item {{$activePage == 'saleCenterIndex' ? 'active' : ''}}"><a href="todaypick"><i class="nav-icon fa fa-bars"></i><span class="item-name">Today Deliveries</span></a></li>
+         
+                
+                <li class="nav-item {{$activePage == 'saleCenterCreate' ? 'active' : ''}}"><a href="{{route('pick')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Datewise Deliveries</span></a></li>
+            
+        </ul>
 
     </div>
     <div class="sidebar-overlay"></div>

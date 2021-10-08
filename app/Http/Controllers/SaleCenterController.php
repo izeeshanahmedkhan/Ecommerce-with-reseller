@@ -297,4 +297,97 @@ class SaleCenterController extends Controller
         Session::flash('alert-type','success');
         return redirect()->route('saleCenter.index');
     }
+
+
+
+
+
+public function selectfield(request $req)
+{
+  
+    echo $len = sizeof($req->cat);
+
+  
+      if ($len == 1)
+{
+   $products = SaleCenter::all($req->cat[0]);
+   // return view ('admin.products.newindex',['products'=>$products],['pro1'=>$req->cat[0]],['pro2'=>$req->cat[1]]);
+   $len =1;
+   $pro1=$req->cat[0];
+  
+
+   return view('admin.salecenters.newindex', compact('pro1','products','len'));
+} 
+
+
+elseif ($len == 2)
+{
+   $products = SaleCenter::all($req->cat[0], $req->cat[1]);
+   // return view ('admin.products.newindex',['products'=>$products],['pro1'=>$req->cat[0]],['pro2'=>$req->cat[1]]);
+   $len =2;
+   $pro1=$req->cat[0];
+   $pro2=$req->cat[1];
+
+   return view('admin.salecenters.newindex', compact('pro1','pro2','products','len'));
+}
+
+else if($len == 3 )
+{
+
+   $products = SaleCenter::all($req->cat[0], $req->cat[1],$req->cat[2]);
+   $len =3;
+   $pro1=$req->cat[0];
+   $pro2=$req->cat[1];
+   $pro3=$req->cat[2];
+
+   return view('admin.salecenters.newindex', compact('pro1','pro2','products','len','pro3'));
+
+}
+
+elseif($len == 4)
+{
+   $products = SaleCenter::all($req->cat[0], $req->cat[1],$req->cat[2],$req->cat[3]);
+
+   $len =4;
+   $pro1=$req->cat[0];
+   $pro2=$req->cat[1];
+   $pro3=$req->cat[2];
+   $pro4=$req->cat[3];
+
+   return view('admin.salecenters.newindex', compact('pro1','pro2','products','len','pro3','pro4'));
+}
+
+elseif($len == 5)
+{
+   $products = SaleCenter::all($req->cat[0], $req->cat[1],$req->cat[2],$req->cat[3],$req->cat[4]);
+
+   $len =5;
+   $pro1=$req->cat[0];
+   $pro2=$req->cat[1];
+   $pro3=$req->cat[2];
+   $pro4=$req->cat[3];
+   $pro5=$req->cat[4];
+
+   return view('admin.salecenters.newindex', compact('pro1','pro2','products','len','pro3','pro4','pro5'));
+}
+
+elseif($len == 6)
+{
+   $products = SaleCenter::all($req->cat[0], $req->cat[1],$req->cat[2],$req->cat[3],$req->cat[4],$req->cat[5]);
+    $len =6;
+   $pro1=$req->cat[0];
+   $pro2=$req->cat[1];
+   $pro3=$req->cat[2];
+   $pro4=$req->cat[3];
+   $pro5=$req->cat[4];
+   $pro6=$req->cat[5];
+
+   return view('admin.salecenters.newindex', compact('pro1','pro2','products','len','pro3','pro4','pro5','pro6'));
+}
+
+
+}
+
+
+
 }

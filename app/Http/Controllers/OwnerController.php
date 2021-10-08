@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use PDF;
 
 class OwnerController extends Controller
 {
@@ -21,6 +22,18 @@ class OwnerController extends Controller
         $owners = Owner::all();
 
         return view('admin.owners.index',['owners'=>$owners]);
+    }
+
+ public function index_pdf()
+    {
+        // $riders =  Rider::all();
+
+        // return view('admin.riders.index',['riders'=>$riders]);
+   $owners = Owner::all();
+          
+    $pdf = PDF::loadView('admin.owners.index_pdf',['owners'=>$owners])->setOptions(['defaultFont' => 'sans-serif'])->setPaper('A4', 'landscape');
+    
+        return $pdf->download('All_Owners.pdf');
     }
 
     /**

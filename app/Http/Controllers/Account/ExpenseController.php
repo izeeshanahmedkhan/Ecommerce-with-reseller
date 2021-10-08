@@ -36,12 +36,30 @@ class ExpenseController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(MainRequest $request)
+    // public function store(MainRequest $request)
+    // {
+    //     //
+    //     $expense = new Expense();
+    //     $expense->fill($request->all())->save();
+    //     return redirect()->back();
+    // }
+
+    
+   public function store(Request $request)
     {
         //
-        $expense = new Expense();
-        $expense->fill($request->all())->save();
-        return redirect()->back();
+       $expense = new Expense;
+
+     
+    $expense->serialnumber = $request->serialnumber;
+    $expense->category_id = $request->category_id;
+     $expense->description = $request->description;
+     $expense->debit = $request->debit;
+     $expense->credit = $request->credit;
+    $expense->date = $request->date;
+
+        $expense->save();
+       return back();
     }
 
     /**
