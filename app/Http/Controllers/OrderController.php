@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\User;
 use App\Models\Courier;
 use App\Models\courierorder;
 use App\Models\Offer;
@@ -21,6 +22,8 @@ use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+use Notification;
+use App\Notifications\OffersNotification;
 use PDF;
 
 class OrderController extends Controller
@@ -218,6 +221,8 @@ elseif($len == 6)
     public function salecenter_order(request $req)
     { 
         // echo $req->productidi;
+        $user = User::all();
+        $offerData = "You have New Order";
        $salecenterorder = new SaleCenterOrder;
        $salecenterorder->salecenter_id = $req->salecenterid;
        $salecenterorder->order_number = $req->orderid;
@@ -228,6 +233,8 @@ elseif($len == 6)
        $salecenterorder->status = "1";
 
        $salecenterorder->save();
+        Notification::send($user, new OffersNotification($offerData));
+
        Session::flash('flash_message', 'Sale Center Assigned Successfully !');
     Session::flash('flash_type', 'alert-success');
        return redirect ('/orderdetails');

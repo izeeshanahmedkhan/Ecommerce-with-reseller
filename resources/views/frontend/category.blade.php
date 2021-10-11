@@ -107,6 +107,8 @@
                     $product = App\Models\Product::where('id',$cat->product_id)->first();
                      @endphp
                        
+
+                      
                         
                             
             <div class="col-6 col-sm-4 col-md-3 col-xl-5col">

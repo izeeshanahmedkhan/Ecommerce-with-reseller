@@ -9,9 +9,7 @@
             <!-- Block  Breadcrumb-->
 @if(Auth::user()!=null)
             <ol class="breadcrumb no-hide">
-                <li><a href="#">{{$user_id = Auth::user()->id}}   </a></li>
-                <li><a href="#">Electronics    </a></li>
-                <li class="active">Machine Pro</li>
+              
             </ol><!-- Block  Breadcrumb-->
 @endif
 
@@ -34,29 +32,13 @@
                                                     @else
                                                         <?php $image_cips_first =  \App\Models\ColourImageProductSize::where('product_id',$product->id)->where('colour_id',$colour->id)->first() ?>
                                                 @endif
-                                                    <div class="image_preview_container images-large">
-
-                                                        <img id="img_zoom" data-zoom-image="{{ asset('storage/images/productImages/'.$image_cips_first->image) }}" src="{{ asset('storage/images/productImages/'.$image_cips_first->image) }}" alt="">
-
-                                                        <button class="btn-zoom open_qv"><span>zoom</span></button>
-
-                                                    </div>
+                                              
                                                 @if(!empty($single_colour))
                                                         <?php $image_cips =  \App\Models\ColourImageProductSize::where('product_id',$product->id)->where('colour_id',$single_colour->id)->get() ?>
                                                     @else
                                                         <?php $image_cips =  \App\Models\ColourImageProductSize::where('product_id',$product->id)->where('colour_id',$colour->id)->get() ?>
                                                 @endif
-                                                    <div class="product_preview images-small">
-                                                        <div class="owl-carousel thumbnails_carousel" id="thumbnails"  data-nav="true" data-dots="false" data-margin="10" data-responsive='{"0":{"items":3},"480":{"items":4},"600":{"items":5},"768":{"items":3}}'>
-                                                            @foreach($image_cips as $image)
-                                                                <a href="#" data-image="{{ asset('storage/images/productImages/'.$image->image) }}" data-zoom-image="{{ asset('storage/images/productImages/'.$image->image) }}">
-
-                                                                    <img src="{{ asset('storage/images/productImages/'.$image->image) }}" data-large-image="{{ asset('storage/images/productImages/'.$image->image) }}" alt="">
-
-                                                                </a>
-                                                            @endforeach
-                                                        </div><!--/ .owl-carousel-->
-                                                    </div><!--/ .product_preview-->
+                                                 .product_preview-->
                                                 <?php $c_code = $colour->colourCode ?>
                                             @endif
                                             @break
@@ -66,309 +48,12 @@
                             </div><!-- image product -->
                         </div>
 
-                        <div class="col-sm-6 col-md-6 col-lg-6">
-
-                            <div class="product-info-main">
-
-                                <h1 class="page-title">
-                                    {{ $product->name }}
-                                </h1>
-                                <div class="product-reviews-summary">
-                                    <div class="rating-summary">
-                                        <div class="rating-result" title="70%">
-                                                <span style="width:70%">
-                                                    <span><span>70</span>% of <span>100</span></span>
-                                                </span>
-                                        </div>
-                                    </div>
-                                    <div class="reviews-actions">
-                                        <a href="#" class="action view">Based  on 3 ratings</a>
-                                        <a href="#" class="action add"><img alt="img" src="{{ asset('frontend/images/icon/write.png') }}">&#160;&#160;write a review</a>
-                                    </div>
-                                </div>
-
-                                <div class="product-info-price">
-                                    <div class="price-box">
-                                        <span class="price">$38.95   </span>
-                                        <span class="old-price">$52.00</span>
-                                        <span class="label-sale">-30%</span>
-                                    </div>
-                                </div>
-                                <div class="product-code">
-                                    Item Code: {{ $product->sku_code }}
-                                </div>
-                                <div class="product-info-stock">
-                                    <div class="stock available">
-                                        <span class="label">Availability: </span> {{ $product->stock_availability == 1 ? 'In Stock':'Out Of Stock' }}
-                                    </div>
-                                </div>
-                                <div class="product-condition">
-                                    Condition: New
-                                </div>
-{{--                                <div class="product-overview">--}}
-{{--                                    <div class="overview-content">--}}
-{{--                                        {!! $product->description !!}--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-
-                                <?php $colour_cips =  \App\Models\ColourImageProductSize::where('product_id',$product->id)->get() ?>
-
-                                <div class="product-add-form">
-                                    <p>Available Options:</p>
-                                    <form action="{{ route('cart') }}" method="post">
-                                        @csrf
-                                        <div class="product-options-wrapper">
-                                            <div class="swatch-opt">
-                                                <div class="swatch-attribute color" >
-                                                    <span class="swatch-attribute-label">Color:</span>
-                                                    <div class="swatch-attribute-options clearfix">
-                                                        <?php $c_code = null ?>
-                                                        <?php $first_colour = 0 ?>
-                                                        <?php $first_row = 0 ?>
-                                                        @foreach($colour_cips as $c)
-                                                            <?php $colours = \App\Models\Colour::where('id',$c->colour_id)->get()?>
-                                                            @foreach($colours as $colour)
-                                                                @if($c_code !== $colour->colourCode)
-                                                                        @if(!empty($single_colour))
-                                                                            <a href="{{route('single_colour',['colour' => $colour->id, 'product'=>$product->id])}}" class="swatch-option color {{ $single_colour->id ==  $colour->id ? 'selected':''}}" style="background-color: {{ $colour->colourCode }} ;"></a>
-                                                                        @endif
-                                                                        @if($first_row == 1 && empty($single_colour))
-                                                                            <a href="{{route('single_colour',['colour' => $colour->id, 'product'=>$product->id])}}" class="swatch-option color" style="background-color: {{ $colour->colourCode }} ;"></a>
-                                                                            <?php $first_row = 1 ?>
-                                                                        @endif
-                                                                        @if($first_row == 0 && empty($single_colour))
-                                                                            <a href="{{route('single_colour',['colour' => $colour->id, 'product'=>$product->id])}}" class="swatch-option color selected" style="background-color: {{ $colour->colourCode }} ;"></a>
-                                                                            <?php $first_row = 1 ?>
-                                                                        @endif
-                                                                        @if(!empty($single_colour))
-                                                                            <input type="hidden" name="colour" value="{{ $single_colour->id }}">
-                                                                        @else
-                                                                            @if($first_colour == 0)
-                                                                                <input type="hidden" name="colour" value="{{ $colour->id }}">
-                                                                                <?php $first_colour = 1 ?>
-                                                                            @endif
-                                                                        @endif
-                                                                        <?php $c_code = $colour->colourCode ?>
-                                                                @endif
-                                                            @endforeach
-                                                        @endforeach
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-qty">
-                                                <label class="label">Qty: </label>
-                                                <div class="control">
-                                                    <input type="text" class="form-control input-qty @error('quantity') is-invalid @enderror" value='1' id="quantity" name="quantity"  maxlength="12"  minlength="1">
-                                                    <button class="btn-number  qtyminus" data-type="minus" data-field="quantity"><span>-</span></button>
-                                                    <button class="btn-number  qtyplus" data-type="plus" data-field="quantity"><span>+</span></button>
-                                                </div>
-                                                @error('quantity')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-
-                                            <?php $colour_cips =  \App\Models\ColourImageProductSize::where('product_id',$product->id)->get() ?>
-
-              <div class="form-configurable">
-                      <label for="forSize" class="label">Size: </label>
-                     <div class="control">
-                     <select  id="forSize" class="form-control attribute-select" name="size">
-                  <?php $s_id = null ?>
-                 <?php $c_code = null ?>
-                                                            @foreach($colour_cips as $c)
-                                                                <?php $colours = \App\Models\Colour::where('id',$c->colour_id)->get()?>
-                                                                @foreach($colours as $colour)
-                                                                        @if($c_code !== $colour->colourCode)
-                                                                            @if(!empty($single_colour))
-                                                                                <?php $size_cips =  \App\Models\ColourImageProductSize::where('product_id',$product->id)->where('colour_id',$single_colour->id)->get() ?>
-                                                                            @else
-                                                                                <?php $size_cips =  \App\Models\ColourImageProductSize::where('product_id',$product->id)->where('colour_id',$colour->id)->get() ?>
-                                                                            @endif
-                                                                                @foreach($size_cips as $s)
-                                                                                    <?php $sizes = \App\Models\Size::where('id',$s->size_id)->get()?>
-                                                                                    @foreach($sizes as $size)
-                                                                                        @if($s_id !== $size->sizeName)
-                                                                                            <option value="{{ $size->id }}">{{ $size->sizeName }}</option>
-                                                                                            <?php $s_id = $size->sizeName ?>
-                                                                                        @endif
-                                                                                    @endforeach
-                                                                                @endforeach
-                                                                            <?php $c_code = $colour->colourCode ?>
-                                                                        @endif
-                                                                    @break
-                                                                @endforeach
-                                                                @break
-                                                            @endforeach
-                                                    </select>
-                                                </div>
-                                                <a href="#" class="size-chart">Size chart</a>
-                                            </div>
-                                        </div>
-
-                                        <input type="hidden" name="product" value="{{ $product->id }}">
-
-                                        <div class="product-options-bottom clearfix">
-
-                                            <div class="actions">
-                                                <button type="submit" title="Add to Cart" class="action btn-cart">
-                                                    <span></span>
-                                                </button>
-                                            </div>
-
-                                        </div>
-
-                                    </form>
-                                </div>
-                                <div class="product-addto-links-second">
-                                    <a href="#" class="action action-print">Print</a>
-                                    <a href="#" class="action action-friend">Send to a friend</a>
-                                </div>
-                                <div class="share">
-                                    <img src="{{ asset('frontend/images/media/index1/share.png') }}" alt="share">
-                                </div>
-                            </div><!-- detail- product -->
-
-                        </div><!-- Main detail -->
 
                     </div>
 
                     <!-- product tab info -->
 
-                    <div class="product-info-detailed ">
-
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-pills" role="tablist">
-                            <li role="presentation" class="active"><a href="#description"  role="tab" data-toggle="tab">Description</a></li>
-                           <li role="presentation"><a href="#reviews"  role="tab" data-toggle="tab">reviews</a></li>
-                        </ul>
-
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="description">
-                                <div class="block-title">Description</div>
-                                <div class="block-content">
-                                    {!! $product->description !!}
-                                </div>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="reviews">
-                                <div class="block-title">reviews</div>
-                                <div class="block-content">
-                                    @if(Auth::check())
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="well well-sm">
-
-                                                    <div class="row" id="post-review-box">
-                                                        <div class="col-md-12">
-                                                            <form accept-charset="UTF-8" action="{{ route('rating') }}" method="post">
-                                                                @csrf
-                                                                <input id="ratings-hidden" name="rating" type="hidden">
-                                                                <input type="hidden" name="product" value="{{$product->id}}">
-                                                                <textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="Enter your review here..." rows="1"></textarea>
-
-                                                                <div class="text-right">
-                                                                    <div class="stars starrr" data-rating="0"></div>
-                                                                        <input class="btn btn-danger" type="reset" value="Reset" />
-                                                                    <button class="btn btn-success" type="submit">Save</button>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @else
-                                        <a class="btn btn-success" href="{{ route('login') }}">{{ __('Login Here') }}</a>
-                                    @endif
-                                        <br> <br>
-                                        @php $reviews =  \App\Models\Review::where('product_id',$product->id)->get() @endphp
-                                        @php $count = 0 @endphp
-                    <div class="card">
-                  <div class="card-body">
-                  @foreach($reviews as $review)
-                 @php $user = \App\Models\User::where('id',$review->user_id)->first() @endphp
-
-              @if(!empty($user))
-                <div class="row">
-                  <div class="col-md-1">
-                 <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
-                </div>
-        <div class="col-md-11">
-                      <p style="float: left;">
-           <a class="float-left"><strong>{{ $user->name }}</strong></a>
-             @for($i=0;$i<$review->rating;$i++)
-            <span class="float-right"><i class="fa fa-star" style="color: #ff9900"></i></span>
-             @endfor
-        </p>
-    <p class="text-secondary" style="float: right;">{{ $review->created_at->diffForHumans() }}</p>
-
-            <div class="clearfix"></div>
-             <p> {{ $review->comment }} </p>
-            @if(Auth::check())
-           @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('review reply'))
-         <p>
-         <a class="float-right btn btn-outline-primary ml-2" id="show_reply{{$count}}"> <i class="fa fa-reply"></i> Reply</a>
-        </p>
-         @endif
-     @endif
-    </div>
- </div>
-  @endif
-
-
-        <div class="card card-inner" style="display: none" id="show{{$count}}">
-     <div class="card-body">
-    <div class="row">
- <div class="col-md-1"></div>
-     <div class="col-md-6">
-     <form accept-charset="UTF-8" action="{{ route('reply') }}" method="post">
-     @csrf
- <input type="hidden" name="review" value="{{$review->id}}">
-<textarea class="form-control animated" cols="50" name="reply" placeholder="Enter your reply here..." rows="1"></textarea>
-
-    <div class="text-right" style="margin-top: 10px; margin-bottom: 10px">
-     <input class="btn btn-danger btn-sm" type="reset" value="Reset" />
-    <button class="btn btn-primary btn-sm" type="submit">Submit</button>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-      @php $count++ @endphp
-    @php $replies = \App\Models\ReviewReply::where('id',$review->id)->get() @endphp
-      @foreach($replies as $reply)
-     @php $user = \App\Models\User::where('id',$reply->user_id)->first() @endphp
- @if(!empty($user))
-            <div class="card card-inner">
-            <div class="card-body">
-        <div class="row">
-         <div class="col-md-1">
-           <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
-    </div>
-  <div class="col-md-11">
-   <div style="overflow: hidden;">
-     <p style="float: left;"><a href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong> {{ $user->name }}</strong></a></p>
-          <p style="float: right;" class="text-secondary">{{ $reply->created_at->diffForHumans() }}</p>
-         </div>
-                    <p>{{ $reply->reply }}</p>
-            </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        @endif
-                                                    @endforeach
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                
                     <!-- product tab info -->
 
                     <!-- block-related product -->
@@ -606,9 +291,9 @@ if(isset($discount))
 @endphp
 
 @if(isset($discounted_value))
-     <input class=" form-control" type="text" name="discount"value="{{$discounted_value}}">
+     <input class=" form-control" type="hidden" name="discount"value="{{$discounted_value}}">
 @else 
-  <input class=" form-control" type="text" name="discount"value="{{$product->price}}">
+  <input class=" form-control" type="hidden" name="discount"value="{{$product->price}}">
 @endif
 
                                         </div><!-- End .product-single-qty -->

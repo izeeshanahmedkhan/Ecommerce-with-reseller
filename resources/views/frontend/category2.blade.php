@@ -3,6 +3,9 @@
 @section('content')
 
     <!-- MAIN -->
+
+    
+
    <main class="main">
             <nav aria-label="breadcrumb" class="breadcrumb-nav mb-md-4">
                 <div class="container">
@@ -105,6 +108,12 @@
                                 </div><!-- End .layout-modes -->
                             </div><!-- End .toolbox-right -->
                         </nav>
+
+
+
+
+
+
                  <div class="row">
                           
                        
@@ -136,7 +145,7 @@
                                        >
                                     
                                         <h2 class="product-title">
-                                            <a href="product.html">{{$cat->name}}</a>
+                                            <a href="{{route('single_product',$cat)}}">{{$cat->name}}</a>
                                         </h2>
                                    
                                         <div class="ratings-container">

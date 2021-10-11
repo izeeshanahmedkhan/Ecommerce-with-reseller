@@ -141,6 +141,7 @@ class ProductController extends Controller
             $product->commission_amount = $request->get('commission_amount');
             $product->commission = $request->get('commission');
               $product->qr_code = $request->qr;
+                $product->supplier = '0';
 
             $product->save();
 

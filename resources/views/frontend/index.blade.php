@@ -19,7 +19,7 @@
 
                     @foreach( $category as $cat) 
                     <div class="product-category">
-                        <a href="{{route('cat1', ['id' => $cat->id])}}">
+                        <a href="{{url('category')}}">
 
                             <figure>
                                 <img src="assets/images/categories/category-1.jpg">

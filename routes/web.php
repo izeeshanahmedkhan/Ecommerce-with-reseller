@@ -9,6 +9,7 @@ use App\Http\Controllers\Account\EquityController;
 use App\Http\Controllers\Account\ExpenseController;
 use App\Http\Controllers\Account\IncomeController;
 use App\Http\Controllers\Account\LiabilityController;
+use App\Http\Controllers\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,8 @@ use App\Http\Controllers\Account\LiabilityController;
 //});
 
 Auth::routes();
+
+
 
 Route::post('/single/{product}/product',[App\Http\Controllers\FrontEndController::class, 'single_product'])->name('single_product');
 
@@ -932,6 +935,7 @@ Route::post('admin\supplier\details',[App\Http\Controllers\SupplierController::c
 // filter table for supplier tables
 Route::post('admin\reseller\details',[App\Http\Controllers\ResellerController::class, 'selectfield'])->name('selectfield_reseller');
 
+Route::get('/send-notification', [NotificationController::class, 'sendOfferNotification']);
 
 
 

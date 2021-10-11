@@ -65,9 +65,14 @@
                         <nav class="main-nav font2" >
                             <ul class="menu">
 
-                   <li>
+                  
+                                <li>
+                                    <a href="/">Home</a>
+                                </li>
+                                <li>
+                                   <li>
 
-<a href="#" class="submenu" data-toggle="dropdown"> <b class="caret caret-right"></b>CATEGORIES</a>
+<a href="{{url('category')}}" class="submenu"> <b class="caret caret-right"></b>CATEGORIES</a>
  
 <ul class="submenu">
  
@@ -75,7 +80,7 @@
  $categories = App\Models\Category::where('parent_id','0')->get();
  @endphp
  @foreach($categories as $cat)
-<li><a href="/"style="padding-left:10px;">
+<li><a href="" style="padding-left:10px;"data-toggle="dropdown">
     {{$cat->title}}
     </a>
 @php
@@ -90,7 +95,7 @@ $parent = App\Models\Category::where('parent_id',$cat->id)->get();
 <ul class="submenu">
  
  @foreach($parent as $par)
-<li><a href="/"style="padding-left:10px;">
+<li><a href="{{route('cat.sub',$par->id)}}"style="padding-left:10px;">
     {{$par->title}}
 </a>
 
@@ -106,7 +111,7 @@ $parent2 = App\Models\Category::where('parent_id',$par->id)->get();
 <ul class="submenu">
  
  @foreach($parent2 as $par2)
-<li><a href="/"style="padding-left:10px;">
+<li><a href="{{route('cat3', ['id' => $par2->id])}}"style="padding-left:10px;">
     {{$par2->title}}
 </a>
 
@@ -142,103 +147,6 @@ $parent2 = App\Models\Category::where('parent_id',$par->id)->get();
 </ul>
  
 </li>
-                                <li>
-                                    <a href="/">Home</a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('category') }}">Categories</a>
-                                    <div class="megamenu megamenu-fixed-width megamenu-3cols">
-                                        <div class="row">
-
-                                              @php
-
-                    $Parent_categories =  DB::table('categories')
-                    ->where('parent_id',0)
-                    ->get();
-                  
-
-                @endphp
-               
-              
-                 <div class="col-lg-3">
-                     @foreach($Parent_categories as $parent_category)
-                                                
-               <!--   <a href="cat/{{$parent_category->id}}"> -->
-                               
-                                
-                                 <ul class="submenu">
-
-                                                    <li><a href="{{route('cat1', ['id' => $parent_category->id])}}">{{ $parent_category->title }}</a>
-                                                        @php
-                                $first_child_categories =  DB::table('categories')
-                                ->where('parent_id',$parent_category->id)
-                                ->get()
-                            @endphp
-
-                            @if(count($first_child_categories) != false)
-                             @foreach($first_child_categories as $first_child_category)
-                                                        <ul class="submenu">
-        <li><a href="{{route('cat.sub',$first_child_category->id)}}">{{ $first_child_category->title }}</a>
-
-
-            <!-- <a href="{{route('cat2', ['id' => $first_child_category->id])}}">{{ $first_child_category->title }}</a> -->
-
-
-
-<ul>
-                                                    @php
-                                                        $second_child_categories =  DB::table('categories')
-                                                        ->where('parent_id',$first_child_category->id)
-                                                        ->get()
-                                                    @endphp
-
-                                                    @foreach($second_child_categories as $second_child_category)
-
-<li style="padding-left:10px"><a href="{{route('cat3', ['id' => $second_child_category->id])}}"> {{ $second_child_category->title }} </a></li>
-
-                                                    @endforeach
-                                                </ul>
-
-
-
-
-
-                                                         </li>
-
-
-
-                                                        </ul>
-
-                                                        @endforeach
-                                                        @endif
-
-
-
-
-                                                    </li>
-                                                   
-                                                </ul>
-                          
-                            
-
-
-                             
-                            
-                
-               
-
-
-
-
-                                            
-                                            
-                                            
-                                          @endforeach 
-                                        </div>
-                                         
-</div>
-                                    </div><!-- End .megamenu -->
-                                </li>
                                 <li>
                                     <a href="product.html">Products</a>
                                     <div class="megamenu megamenu-fixed-width">
