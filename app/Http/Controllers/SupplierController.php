@@ -33,6 +33,81 @@ class SupplierController extends Controller
     
         return $pdf->download('allsuppliers.pdf');
     }
+
+    public function index_pdf1($pro1)
+    {
+        // $riders =  Rider::all();
+
+        // return view('admin.riders.index',['riders'=>$riders]);
+   $products =  Supplier::all($pro1);
+          
+    $pdf = PDF::loadView('admin.suppliers.index_pdf1',['products'=>$products,'pro1'=>$pro1])->setOptions(['defaultFont' => 'sans-serif'])->setPaper('A4', 'landscape');
+    
+        return $pdf->download('supplier_fields.pdf');
+    }
+
+      public function index_pdf2($pro1,$pro2)
+    {
+        // $riders =  Rider::all();
+
+        // return view('admin.riders.index',['riders'=>$riders]);
+   $products =  Supplier::all($pro1,$pro2);
+          
+    $pdf = PDF::loadView('admin.suppliers.index_pdf2',['products'=>$products,'pro1'=>$pro1,'pro2'=>$pro2])->setOptions(['defaultFont' => 'sans-serif'])->setPaper('A4', 'landscape');
+    
+        return $pdf->download('supplier_field.pdf');
+    }
+
+
+      public function index_pdf3($pro1,$pro2,$pro3)
+    {
+        // $riders =  Rider::all();
+
+        // return view('admin.riders.index',['riders'=>$riders]);
+   $products =  Supplier::all($pro1,$pro2,$pro3);
+          
+    $pdf = PDF::loadView('admin.suppliers.index_pdf3',['products'=>$products,'pro1'=>$pro1,'pro2'=>$pro2,'pro3'=>$pro3])->setOptions(['defaultFont' => 'sans-serif'])->setPaper('A4', 'landscape');
+    
+        return $pdf->download('supplier_field.pdf');
+    }
+
+        public function index_pdf4($pro1,$pro2,$pro3,$pro4)
+    {
+        // $riders =  Rider::all();
+
+        // return view('admin.riders.index',['riders'=>$riders]);
+   $products =  Supplier::all($pro1,$pro2,$pro3,$pro4);
+          
+    $pdf = PDF::loadView('admin.suppliers.index_pdf4',['products'=>$products,'pro1'=>$pro1,'pro2'=>$pro2,'pro3'=>$pro3,'pro4'=>$pro4])->setOptions(['defaultFont' => 'sans-serif'])->setPaper('A4', 'landscape');
+    
+        return $pdf->download('supplier_field.pdf');
+    }
+
+
+        public function index_pdf5($pro1,$pro2,$pro3,$pro4,$pro5)
+    {
+        // $riders =  Rider::all();
+
+        // return view('admin.riders.index',['riders'=>$riders]);
+   $products =  Supplier::all($pro1,$pro2,$pro3,$pro4,$pro5);
+          
+    $pdf = PDF::loadView('admin.suppliers.index_pdf5',['products'=>$products,'pro1'=>$pro1,'pro2'=>$pro2,'pro3'=>$pro3,'pro3'=>$pro4,'pro5'=>$pro5])->setOptions(['defaultFont' => 'sans-serif'])->setPaper('A4', 'landscape');
+    
+        return $pdf->download('supplier_field.pdf');
+    }
+
+
+         public function index_pdf6($pro1,$pro2,$pro3,$pro4,$pro5,$pro6)
+    {
+        // $riders =  Rider::all();
+
+        // return view('admin.riders.index',['riders'=>$riders]);
+   $products =  Supplier::all($pro1,$pro2,$pro3,$pro4,$pro5,$pro6);
+          
+    $pdf = PDF::loadView('admin.suppliers.index_pdf6',['products'=>$products,'pro1'=>$pro1,'pro2'=>$pro2,'pro3'=>$pro3,'pro4'=>$pro4,'pro5'=>$pro5,'pro6'=>$pro6])->setOptions(['defaultFont' => 'sans-serif'])->setPaper('A4', 'landscape');
+    
+        return $pdf->download('supplier_field.pdf');
+    }
     /**
      * Show the form for creating a new resource.
      *

@@ -185,6 +185,65 @@ elseif($len == 6)
         return $pdf->download('allorders.pdf');
     }
    
+
+     public function index2_pdf1($pro1)
+    {
+       $products = orderdetail::all($pro1);
+          
+    $pdf = PDF::loadView('admin.orders.index2_pdf1',['products'=>$products,'pro1'=>$pro1])->setOptions(['defaultFont' => 'sans-serif'])->setPaper('A4', 'landscape');
+    
+        return $pdf->download('orderfields.pdf');
+    }
+
+
+
+      public function index2_pdf2($pro1,$pro2)
+    {
+       $products = orderdetail::all($pro1,$pro2);
+          
+    $pdf = PDF::loadView('admin.orders.index2_pdf2',['products'=>$products,'pro1'=>$pro1,'pro2'=>$pro2])->setOptions(['defaultFont' => 'sans-serif'])->setPaper('A4', 'landscape');
+    
+        return $pdf->download('orderfields.pdf');
+    }
+   
+      public function index2_pdf3($pro1,$pro2,$pro3)
+    {
+       $products = orderdetail::all($pro1,$pro2,$pro3);
+          
+    $pdf = PDF::loadView('admin.orders.index2_pdf3',['products'=>$products,'pro1'=>$pro1,'pro2'=>$pro2,'pro3'=>$pro3])->setOptions(['defaultFont' => 'sans-serif'])->setPaper('A4', 'landscape');
+    
+        return $pdf->download('orderfields.pdf');
+    }
+
+        public function index2_pdf4($pro1,$pro2,$pro3,$pro4)
+    {
+       $products = orderdetail::all($pro1,$pro2,$pro3,$pro4);
+          
+    $pdf = PDF::loadView('admin.orders.index2_pdf4',['products'=>$products,'pro1'=>$pro1,'pro2'=>$pro2,'pro3'=>$pro3,'pro4'=>$pro4])->setOptions(['defaultFont' => 'sans-serif'])->setPaper('A4', 'landscape');
+    
+        return $pdf->download('orderfields.pdf');
+    }
+
+
+          public function index2_pdf5($pro1,$pro2,$pro3,$pro4,$pro5)
+    {
+       $products = orderdetail::all($pro1,$pro2,$pro3,$pro4,$pro5);
+          
+    $pdf = PDF::loadView('admin.orders.index2_pdf5',['products'=>$products,'pro1'=>$pro1,'pro2'=>$pro2,'pro3'=>$pro3,'pro4'=>$pro4,'pro5'=>$pro5])->setOptions(['defaultFont' => 'sans-serif'])->setPaper('A3', 'landscape');
+    
+        return $pdf->download('orderfields.pdf');
+    }
+
+            public function index2_pdf6($pro1,$pro2,$pro3,$pro4,$pro5,$pro6)
+    {
+       $products = orderdetail::all($pro1,$pro2,$pro3,$pro4,$pro5,$pro6);
+          
+    $pdf = PDF::loadView('admin.orders.index2_pdf6',['products'=>$products,'pro1'=>$pro1,'pro2'=>$pro2,'pro3'=>$pro3,'pro4'=>$pro4,'pro5'=>$pro5,'pro6'=>$pro6])->setOptions(['defaultFont' => 'sans-serif'])->setPaper('A2', 'landscape');
+    
+        return $pdf->download('orderfields.pdf');
+    }
+   
+   
    
 
      public function orderproduct_details($id)

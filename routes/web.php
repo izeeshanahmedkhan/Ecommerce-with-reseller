@@ -109,6 +109,19 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
 
      Route::get('/admin/product/pdf',[App\Http\Controllers\ProductController::class, 'index_pdf'])->name('productindex_pdf');
 
+// if user select one field in product table 
+ Route::get('/admin/product/pdf/{pro1}/',[App\Http\Controllers\ProductController::class, 'index_pdf1'])->name('productindex_pdf1');
+ // if user select two field in product table 
+ Route::get('/admin/product/pdf2/{pro1}/{pro2}',[App\Http\Controllers\ProductController::class, 'index_pdf2'])->name('productindex_pdf2');
+ // if user select three field in product table 
+ Route::get('/admin/product/pdf3/{pro1}/{pro2}/{pro3}',[App\Http\Controllers\ProductController::class, 'index_pdf3'])->name('productindex_pdf3');
+  // if user select four field in product table 
+ Route::get('/admin/product/pdf4/{pro1}/{pro2}/{pro3}/{pro4}',[App\Http\Controllers\ProductController::class, 'index_pdf4'])->name('productindex_pdf4');
+ // if user select five field in product table 
+ Route::get('/admin/product/pdf5/{pro1}/{pro2}/{pro3}/{pro4}/{pro5}',[App\Http\Controllers\ProductController::class, 'index_pdf5'])->name('productindex_pdf5');
+  Route::get('/admin/product/pdf6/{pro1}/{pro2}/{pro3}/{pro4}/{pro5}/{pro6}',[App\Http\Controllers\ProductController::class, 'index_pdf6'])->name('productindex_pdf6');
+
+
 
     Route::post('/admin/product/store',[App\Http\Controllers\ProductController::class, 'store'])->name('product.store');
     Route::get('/admin/product/{product}/edit',[App\Http\Controllers\ProductController::class, 'edit'])->name('product.edit')->middleware('permission:edit products');
@@ -162,6 +175,11 @@ Route::get('/admin/salecenter/product/delete/{id}',[App\Http\Controllers\Product
 
       Route::get('/admin/salecenter/pdf',[App\Http\Controllers\SaleCenterController::class, 'index_pdf'])->name('salecenterindex_pdf')->middleware('permission:show sale centers');
 
+      // Route::get('/admin/salecenter/pdf1',[App\Http\Controllers\SaleCenterController::class, 'index_pdf1'])->name('salecenterindex_pdf1')->middleware('permission:show sale centers');
+
+
+
+
 
     Route::get('/admin/salecenter/create',[App\Http\Controllers\SaleCenterController::class, 'create'])->name('saleCenter.create')->middleware('permission:create sale centers');
     Route::post('/admin/salecenter/store',[App\Http\Controllers\SaleCenterController::class, 'store'])->name('saleCenter.store');
@@ -174,6 +192,20 @@ Route::get('/admin/salecenter/product/delete/{id}',[App\Http\Controllers\Product
     Route::get('/admin/rider',[App\Http\Controllers\RiderController::class, 'index'])->name('rider.index')->middleware('permission:show riders');
 
     Route::get('/admin/rider/pdf',[App\Http\Controllers\RiderController::class, 'index_pdf'])->name('riderindex_pdf')->middleware('permission:show riders');
+//select 1 field of rider table 
+      Route::get('/admin/rider/pdf1/{pro1}',[App\Http\Controllers\RiderController::class, 'index_pdf1'])->name('riderindex_pdf1')->middleware('permission:show riders');
+//select 2 field of rider table 
+      Route::get('/admin/rider/pdf2/{pro1}/{pro2}',[App\Http\Controllers\RiderController::class, 'index_pdf2'])->name('riderindex_pdf2')->middleware('permission:show riders');
+ //select 3 field of rider table 
+      Route::get('/admin/rider/pdf3/{pro1}/{pro2}/{pro3}',[App\Http\Controllers\RiderController::class, 'index_pdf3'])->name('riderindex_pdf3')->middleware('permission:show riders');
+ //select 4 field of rider table 
+      Route::get('/admin/rider/pdf4/{pro1}/{pro2}/{pro3}/{pro4}',[App\Http\Controllers\RiderController::class, 'index_pdf4'])->name('riderindex_pdf4')->middleware('permission:show riders');
+ //select 5 field of rider table 
+      Route::get('/admin/rider/pdf5/{pro1}/{pro2}/{pro3}/{pro4}/{pro5}',[App\Http\Controllers\RiderController::class, 'index_pdf5'])->name('riderindex_pdf5')->middleware('permission:show riders');
+ //select 6 field of rider table 
+      Route::get('/admin/rider/pdf6/{pro1}/{pro2}/{pro3}/{pro4}/{pro5}/{pro6}',[App\Http\Controllers\RiderController::class, 'index_pdf6'])->name('riderindex_pdf6')->middleware('permission:show riders');
+
+
     Route::get('/admin/rider/create',[App\Http\Controllers\RiderController::class, 'create'])->name('rider.create')->middleware('permission:create riders');
     Route::post('/admin/rider/store',[App\Http\Controllers\RiderController::class, 'store'])->name('rider.store');
     Route::get('/admin/rider/{rider}/edit',[App\Http\Controllers\RiderController::class, 'edit'])->name('rider.edit')->middleware('permission:edit riders');
@@ -219,6 +251,20 @@ Route::post('/admin/riderwallet/store/{id}',[App\Http\Controllers\RiderOrderCont
     Route::get('/admin/supplier/create',[App\Http\Controllers\SupplierController::class, 'create'])->name('supplier.create')->middleware('permission:create suppliers');
 
     Route::get('/admin/supplier/pdf',[App\Http\Controllers\SupplierController::class, 'index_pdf'])->name('supplierindex_pdf');
+
+    //select 1 field on supplier 
+        Route::get('/admin/supplier/pdf1/{pro1}',[App\Http\Controllers\SupplierController::class, 'index_pdf1'])->name('supplierindex_pdf1');
+          //select 2 field on supplier 
+        Route::get('/admin/supplier/pdf2/{pro1}/{pro2}',[App\Http\Controllers\SupplierController::class, 'index_pdf2'])->name('supplierindex_pdf2');
+             //select 3 field on supplier 
+        Route::get('/admin/supplier/pdf3/{pro1}/{pro2}/{pro3}',[App\Http\Controllers\SupplierController::class, 'index_pdf3'])->name('supplierindex_pdf3');
+             //select 4 field on supplier 
+        Route::get('/admin/supplier/pdf4/{pro1}/{pro2}/{pro3}/{pro4}',[App\Http\Controllers\SupplierController::class, 'index_pdf4'])->name('supplierindex_pdf4');
+               //select 5 field on supplier 
+        Route::get('/admin/supplier/pdf5/{pro1}/{pro2}/{pro3}/{pro4}/{pro5}',[App\Http\Controllers\SupplierController::class, 'index_pdf5'])->name('supplierindex_pdf5');
+               //select 6 field on supplier 
+        Route::get('/admin/supplier/pdf6/{pro1}/{pro2}/{pro3}/{pro4}/{pro5}/{pro6}',[App\Http\Controllers\SupplierController::class, 'index_pdf6'])->name('supplierindex_pdf6');
+
 
     Route::post('/admin/supplier/store',[App\Http\Controllers\SupplierController::class, 'store'])->name('supplier.store');
     Route::get('/admin/supplier/{supplier}/edit',[App\Http\Controllers\SupplierController::class, 'edit'])->name('supplier.edit')->middleware('permission:edit suppliers');
@@ -543,6 +589,22 @@ Route::get('/admin/deal/show/{id}/',[App\Http\Controllers\DealController::class,
 Route::get('orderdetails',[App\Http\Controllers\OrderController::class, 'index2'])->name('orderdetails');
 
 Route::get('orderdetails/pdf',[App\Http\Controllers\OrderController::class, 'index2_pdf'])->name('orderdetails_pdf');
+
+//select 1 field in order table 
+Route::get('orderdetails/pdf1/{pro1}',[App\Http\Controllers\OrderController::class, 'index2_pdf1'])->name('orderdetails_pdf1');
+//select 2 field in order table 
+Route::get('orderdetails/pdf2/{pro1}/{pro2}',[App\Http\Controllers\OrderController::class, 'index2_pdf2'])->name('orderdetails_pdf2');
+//select 3 field in order table 
+Route::get('orderdetails/pdf3/{pro1}/{pro2}/{pro3}',[App\Http\Controllers\OrderController::class, 'index2_pdf3'])->name('orderdetails_pdf3');
+//select 4 field in order table 
+Route::get('orderdetails/pdf4/{pro1}/{pro2}/{pro3}/{pro4}',[App\Http\Controllers\OrderController::class, 'index2_pdf4'])->name('orderdetails_pdf4');
+//select 5 field in order table 
+Route::get('orderdetails/pdf5/{pro1}/{pro2}/{pro3}/{pro4}/{pro5}',[App\Http\Controllers\OrderController::class, 'index2_pdf5'])->name('orderdetails_pdf5');
+//select 6 field in order table 
+Route::get('orderdetails/pdf6/{pro1}/{pro2}/{pro3}/{pro4}/{pro5}/{pro6}',[App\Http\Controllers\OrderController::class, 'index2_pdf6'])->name('orderdetails_pdf6');
+
+
+
 
 
 Route::get('orderproductdetails/{id}',[App\Http\Controllers\OrderController::class, 'orderproduct_details']);
