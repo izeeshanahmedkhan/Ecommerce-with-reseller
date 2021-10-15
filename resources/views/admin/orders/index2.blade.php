@@ -81,6 +81,23 @@
                                     class="nav-icon font-weight-bold"></i>Export PDF</a>
                             <br> <br>
                         </div>
+
+
+
+
+
+
+<div style="float:right; margin-right: 1%;">
+                            <a href="{{route('advancepayment_index')}}" class="btn btn-raised btn-raised-success m-1" style="color: white;"><i
+                                    class="nav-icon font-weight-bold"></i>Advance Payment</a>
+                            <br> <br>
+                        </div>
+
+
+
+
+
+
                         <div class="table-responsive">
                             <table class="display table table-striped table-bordered" id="zero_configuration_table" style="width:100%">
                                 <thead>

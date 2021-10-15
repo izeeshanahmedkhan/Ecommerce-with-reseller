@@ -376,6 +376,18 @@ Route::post('/admin/riderwallet/store/{id}',[App\Http\Controllers\RiderOrderCont
     Route::get('/admin/reseller/create',[App\Http\Controllers\ResellerController::class, 'create'])->name('reseller.create');
 
  Route::get('/admin/reseller/pdf',[App\Http\Controllers\ResellerController::class, 'index_pdf'])->name('resellerindex_pdf');
+ //select 1 field in reseller table 
+ Route::get('/admin/reseller/pdf1/{pro1}',[App\Http\Controllers\ResellerController::class, 'index_pdf1'])->name('resellerindex_pdf1');
+  //select 2 field in reseller table 
+ Route::get('/admin/reseller/pdf2/{pro1}/{pro2}',[App\Http\Controllers\ResellerController::class, 'index_pdf2'])->name('resellerindex_pdf2');
+ //select 3 field in reseller table 
+ Route::get('/admin/reseller/pdf3/{pro1}/{pro2}/{pro3}',[App\Http\Controllers\ResellerController::class, 'index_pdf3'])->name('resellerindex_pdf3');
+  //select 4 field in reseller table 
+ Route::get('/admin/reseller/pdf4/{pro1}/{pro2}/{pro3}/{pro4}',[App\Http\Controllers\ResellerController::class, 'index_pdf4'])->name('resellerindex_pdf4');
+   //select 5 field in reseller table 
+ Route::get('/admin/reseller/pdf5/{pro1}/{pro2}/{pro3}/{pro4}/{pro5}',[App\Http\Controllers\ResellerController::class, 'index_pdf5'])->name('resellerindex_pdf5');
+  //select 6 field in reseller table 
+ Route::get('/admin/reseller/pdf6/{pro1}/{pro2}/{pro3}/{pro4}/{pro5}/{pro6}',[App\Http\Controllers\ResellerController::class, 'index_pdf6'])->name('resellerindex_pdf6');
 
     Route::post('/admin/reseller/store',[App\Http\Controllers\ResellerController::class, 'store'])->name('reseller.store');
     Route::get('/admin/reseller/{reseller}/edit',[App\Http\Controllers\ResellerController::class, 'edit'])->name('reseller.edit');
@@ -455,6 +467,12 @@ Route::get('/admin/deal/show/{id}/',[App\Http\Controllers\DealController::class,
 //offers   //Buy One Get One Free
 
     Route::get('/admin/buyonegetone/create',[App\Http\Controllers\OfferController::class, 'buy_1_get_1_offer_create'])->name('buy_1_get_1_offer.create');
+    //buy 1 get 1 pdf 
+    Route::get('/admin/buyonegetone/pdf',[App\Http\Controllers\OfferController::class, 'buy_1_get_1_offer_pdf'])->name('buy_1_get_1_offer_pdf');
+
+
+
+
     Route::post('/admin/buyonegetone/store',[App\Http\Controllers\OfferController::class, 'buy_1_get_1_offer_store'])->name('buy_1_get_1_offer.store');
     Route::get('/admin/buyonegetone/{buyonegetone}/edit',[App\Http\Controllers\OfferController::class, 'buy_1_get_1_offer_edit'])->name('buy_1_get_1_offer.edit');
     Route::put('/admin/buyonegetone/{buyonegetone}/update',[App\Http\Controllers\OfferController::class, 'buy_1_get_1_offer_update'])->name('buy_1_get_1_offer.update');
@@ -642,6 +660,9 @@ Route::get('assignrider2/{id}/{name}',[App\Http\Controllers\OrderController::cla
 Route::get('assignrider3/{id}/{name}',[App\Http\Controllers\OrderController::class, 'assign_rider3'])->name('assignrider3');
 
 Route::get('notavaialble/{pro_id}/{pro_order_id}/{pro_weight},/{pro_totalprice}',[App\Http\Controllers\OrderController::class, 'not_available'])->name('notavailable');
+
+
+Route::get('not/recieved/{riderorderrr}',[App\Http\Controllers\OrderController::class, 'not_recieved'])->name('notrecieve');
 
 
 Route::post('riderorder2',[App\Http\Controllers\OrderController::class, 'rider_order2'])->name('riderorder2');
@@ -999,7 +1020,18 @@ Route::post('admin\reseller\details',[App\Http\Controllers\ResellerController::c
 
 Route::get('/send-notification', [NotificationController::class, 'sendOfferNotification']);
 
+Route::get('/admin/order/advance-payment',[App\Http\Controllers\OrderController::class, 'advancepayment_confirmation'])->name('advancepayment_confirmation');
+
+Route::post('admin/order/advance-payment/post',[App\Http\Controllers\OrderController::class, 'advancepayment_post'])->name('advancepayment_post');
+
+Route::get('/admin/order/advance-payment/index',[App\Http\Controllers\OrderController::class, 'advancepayment_index'])->name('advancepayment_index');
 
 
+Route::get('/admin/order/advance-payment/edit/{id}',[App\Http\Controllers\OrderController::class, 'advancepayment_edit'])->name('advancepayment_edit');
 
+
+Route::get('/admin/order/advance-payment/delete/{id}',[App\Http\Controllers\OrderController::class, 'advancepayment_delete'])->name('advancepayment_delete');
+
+
+Route::post('admin/order/advance-payment/update/{id}',[App\Http\Controllers\OrderController::class, 'advancepayment_update'])->name('advancepayment_update');
 

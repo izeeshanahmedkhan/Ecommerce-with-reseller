@@ -17,6 +17,7 @@ use App\Models\ResellerCart;
 use App\Models\orderdetail;
 use App\Models\productorderdetail;
 use App\Models\riderproductorder;
+use App\Models\advancepayment;
 use App\Notifications\OrderProcessed;
 use Illuminate\Http\Request;
 use Auth;
@@ -66,7 +67,18 @@ Session::flash('alert-class', 'alert-success');
 
 
 }
-  
+  public function not_recieved($riderorderrr)
+  {
+    $update = riderproductorder::where('id',$riderorderrr)->first();
+    $update->status = "1";
+    $update->save();
+
+
+Session::flash('message', 'Update Successfully !');
+Session::flash('alert-class', 'alert-success');
+ return back();
+
+  }
 
 
 
@@ -774,4 +786,94 @@ Session::flash('flash_type', 'alert-success');
         return back();
 
     }
+
+
+
+    public function advancepayment_confirmation()
+    {
+
+      return view('admin.orders.advance_payment');
+    }
+
+
+public function advancepayment_post(request $req)
+    {
+
+ $advance = new advancepayment;
+
+ $advance->order_id = $req->orderid;
+ $advance->payment_recieved = $req->paymentrecieved;
+ $advance->transaction_id = $req->transaction;
+ $advance->bank_details = $req->bankdetails;
+ $advance->amount = $req->amount;
+ $advance->transaction_date = $req->date;
+
+ $advance->save();
+
+    Session::flash('message','Advance Payment Inserted Successfully ');
+    Session::flash('alert-type','success');
+    return redirect('admin/order/advance-payment/index');
+    
+    
+    }
+
+
+public function advancepayment_index(request $req)
+    {
+
+$advance = advancepayment::all();
+
+return view('admin.orders.index_advance_payment',['advance'=>$advance]);
+    
+    
+    }
+
+    public function advancepayment_delete($id)
+    {
+
+$advance = advancepayment::where('id',$id)->first()->delete();
+
+ Session::flash('message','Advance Payment Deleted Successfully ');
+    Session::flash('alert-type','success');
+    return redirect('admin/order/advance-payment/index');
+    
+    
+    
+    }
+
+public function advancepayment_edit($id)
+    {
+
+$advance = advancepayment::where('id',$id)->first();
+
+return view('admin.orders.edit_advance_payment',['advance'=>$advance]);
+    
+    
+    }
+
+
+
+public function advancepayment_update(request $req,$id)
+    {
+
+  $advance = advancepayment::where('id',$id)->first();
+
+ $advance->order_id = $req->orderid;
+ $advance->payment_recieved = $req->paymentrecieved;
+ $advance->transaction_id = $req->transaction;
+ $advance->bank_details = $req->bankdetails;
+ $advance->amount = $req->amount;
+ $advance->transaction_date = $req->date;
+
+ $advance->save();
+
+    Session::flash('message','Advance Payment updated Successfully ');
+    Session::flash('alert-type','success');
+    return redirect('admin/order/advance-payment/index');
+    
+    
+    }
+
+
+
 }

@@ -30,6 +30,14 @@
                             <br> <br>
                         </div>
 
+
+                          <div style="float:right; margin-right: 1%;">
+                            <a href=" {{route('resellerindex_pdf1',['pro1'=>$pro1])}}" class="btn btn-raised btn-raised-primary m-1" style="color: white;"><i
+                                    class="nav-icon font-weight-bold"></i>Export PDF</a>
+                            <br> <br>
+                        </div>
+
+
    
                       
                         <div class="table-responsive">
@@ -109,6 +117,12 @@
                         <div style="float:right; margin-right: 1%;">
                             <a href="{{url('admin/reseller')}}" class="btn btn-raised btn-raised-primary m-1" style="color: white;"><i
                                     class="nav-icon font-weight-bold"></i>View All Details</a>
+                            <br> <br>
+                        </div>
+
+                        <div style="float:right; margin-right: 1%;">
+                            <a href=" {{route('resellerindex_pdf2',['pro1'=>$pro1,'pro2'=>$pro2])}}" class="btn btn-raised btn-raised-primary m-1" style="color: white;"><i
+                                    class="nav-icon font-weight-bold"></i>Export PDF</a>
                             <br> <br>
                         </div>
 
@@ -202,6 +216,14 @@
                                     class="nav-icon font-weight-bold"></i>View All Details</a>
                             <br> <br>
                         </div>
+
+
+                        <div style="float:right; margin-right: 1%;">
+                            <a href=" {{route('resellerindex_pdf3',['pro1'=>$pro1,'pro2'=>$pro2,'pro3'=>$pro3])}}" class="btn btn-raised btn-raised-primary m-1" style="color: white;"><i
+                                    class="nav-icon font-weight-bold"></i>Export PDF</a>
+                            <br> <br>
+                        </div>
+
  <div class="table-responsive">
                             <table class="display table table-striped table-bordered" id="zero_configuration_table" style="width:100%">
                                 <thead>
@@ -287,6 +309,12 @@
                         <div style="float:right; margin-right: 1%;">
                             <a href="{{url('admin/reseller')}}" class="btn btn-raised btn-raised-primary m-1" style="color: white;"><i
                                     class="nav-icon font-weight-bold"></i>View All Details</a>
+                            <br> <br>
+                        </div>
+
+                         <div style="float:right; margin-right: 1%;">
+                            <a href=" {{route('resellerindex_pdf4',['pro1'=>$pro1,'pro2'=>$pro2,'pro3'=>$pro3,'pro4'=>$pro4])}}" class="btn btn-raised btn-raised-primary m-1" style="color: white;"><i
+                                    class="nav-icon font-weight-bold"></i>Export PDF</a>
                             <br> <br>
                         </div>
 
@@ -383,6 +411,19 @@
                                     class="nav-icon font-weight-bold"></i>View All Details</a>
                             <br> <br>
                         </div>
+
+
+ <div style="float:right; margin-right: 1%;">
+                            <a href=" {{route('resellerindex_pdf5',['pro1'=>$pro1,'pro2'=>$pro2,'pro3'=>$pro3,'pro4'=>$pro4,'pro5'=>$pro5])}}" class="btn btn-raised btn-raised-primary m-1" style="color: white;"><i
+                                    class="nav-icon font-weight-bold"></i>Export PDF</a>
+                            <br> <br>
+                        </div>
+
+
+
+
+
+
 <div class="table-responsive">
                             <table class="display table table-striped table-bordered" id="zero_configuration_table" style="width:100%">
                                 <thead>
@@ -476,6 +517,14 @@
                                     class="nav-icon font-weight-bold"></i>View All Details</a>
                             <br> <br>
                         </div>
+
+
+ <div style="float:right; margin-right: 1%;">
+                            <a href=" {{route('resellerindex_pdf6',['pro1'=>$pro1,'pro2'=>$pro2,'pro3'=>$pro3,'pro4'=>$pro4,'pro5'=>$pro5,'pro6'=>$pro6])}}" class="btn btn-raised btn-raised-primary m-1" style="color: white;"><i
+                                    class="nav-icon font-weight-bold"></i>Export PDF</a>
+                            <br> <br>
+                        </div>
+
 <div class="table-responsive">
                             <table class="display table table-striped table-bordered" id="zero_configuration_table" style="width:100%">
                                 <thead>

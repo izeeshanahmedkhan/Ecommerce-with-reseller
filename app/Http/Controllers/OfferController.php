@@ -7,6 +7,7 @@ use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use PDF;
 
 class OfferController extends Controller
 {
@@ -33,6 +34,20 @@ class OfferController extends Controller
         return view('admin.offers.buy_1_get_1_offers.create',['products'=>$products]);
 
     }
+
+    public function buy_1_get_1_offer_pdf(){
+
+        // $products = Product::where('status',1)->get();
+
+        // return view('admin.offers.buy_1_get_1_offers.create',['products'=>$products]);
+       $offer = Offer::all();
+        $pdf = PDF::loadView('admin.offers.offers_pdf',['offer'=> $offer])->setOptions(['defaultFont' => 'sans-serif'])->setPaper('A2', 'landscape');
+    
+        return $pdf->download('All_offers.pdf');
+
+    }
+
+   
 
     public function free_delivery_create(){
 

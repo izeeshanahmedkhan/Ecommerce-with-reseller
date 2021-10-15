@@ -6,6 +6,12 @@
             <div class="col-md-12">
                 <h4>View All Offers</h4>
             </div>
+
+             <div style="float:right; margin-right: 50%; ">
+                            <a href="{{route('buy_1_get_1_offer_pdf')}}" class="btn btn-raised btn-raised-primary m-1" style="color: white;"><i
+                                    class="nav-icon font-weight-bold"></i>Export PDF</a>
+                            <br> <br>
+                        </div>
         </div>
         <!-- end of row-->
         <div class="row mb-4">
@@ -19,6 +25,11 @@
                                     class="nav-icon font-weight-bold"></i>Add New Buy 1 Get 1 Offer</a>
                             <br> <br>
                         </div>
+
+                       
+
+
+
                         @endif
 
                         <div class="table-responsive">

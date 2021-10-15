@@ -372,11 +372,7 @@
 
                     </tr>
                       @endforeach
-                  
-                            
-                                   
-
-                                </tbody>
+                          </tbody>
                                 <tfoot>
                                 <tr>
                                    <th>#</th>

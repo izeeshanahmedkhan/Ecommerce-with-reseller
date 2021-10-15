@@ -37,6 +37,74 @@ class ResellerController extends Controller
     
         return $pdf->download('all_suppliers.pdf');
     }
+
+
+
+     public function index_pdf1($pro1)
+    {
+
+      $products =  Reseller::all($pro1);
+          
+    $pdf = PDF::loadView('admin.resellers.index_pdf1',['products'=> $products,'pro1'=>$pro1])->setOptions(['defaultFont' => 'sans-serif'])->setPaper('A4', 'landscape');
+    
+        return $pdf->download('Reseller_Fields.pdf');
+    }
+
+     public function index_pdf2($pro1,$pro2)
+    {
+
+      $products =  Reseller::all($pro1,$pro2);
+          
+    $pdf = PDF::loadView('admin.resellers.index_pdf2',['products'=> $products,'pro1'=>$pro1,'pro2'=>$pro2])->setOptions(['defaultFont' => 'sans-serif'])->setPaper('A4', 'landscape');
+    
+        return $pdf->download('Reseller_Fields.pdf');
+    }
+
+
+     public function index_pdf3($pro1,$pro2,$pro3)
+    {
+
+      $products =  Reseller::all($pro1,$pro2,$pro3);
+          
+    $pdf = PDF::loadView('admin.resellers.index_pdf3',['products'=> $products,'pro1'=>$pro1,'pro2'=>$pro2,'pro3'=>$pro3])->setOptions(['defaultFont' => 'sans-serif'])->setPaper('A4', 'landscape');
+    
+        return $pdf->download('Reseller_Fields.pdf');
+    }
+
+       public function index_pdf4($pro1,$pro2,$pro3,$pro4)
+    {
+
+      $products =  Reseller::all($pro1,$pro2,$pro3,$pro4);
+          
+    $pdf = PDF::loadView('admin.resellers.index_pdf4',['products'=> $products,'pro1'=>$pro1,'pro2'=>$pro2,'pro3'=>$pro3,'pro4'=>$pro4])->setOptions(['defaultFont' => 'sans-serif'])->setPaper('A4', 'landscape');
+    
+        return $pdf->download('Reseller_Fields.pdf');
+    }
+
+      public function index_pdf5($pro1,$pro2,$pro3,$pro4,$pro5)
+    {
+
+      $products =  Reseller::all($pro1,$pro2,$pro3,$pro4,$pro5);
+          
+    $pdf = PDF::loadView('admin.resellers.index_pdf5',['products'=> $products,'pro1'=>$pro1,'pro2'=>$pro2,'pro3'=>$pro3,'pro4'=>$pro4,'pro5'=>$pro5])->setOptions(['defaultFont' => 'sans-serif'])->setPaper('A4', 'landscape');
+    
+        return $pdf->download('Reseller_Fields.pdf');
+    }
+
+       public function index_pdf6($pro1,$pro2,$pro3,$pro4,$pro5,$pro6)
+    {
+
+      $products =  Reseller::all($pro1,$pro2,$pro3,$pro4,$pro5,$pro6);
+          
+    $pdf = PDF::loadView('admin.resellers.index_pdf6',['products'=> $products,'pro1'=>$pro1,'pro2'=>$pro2,'pro3'=>$pro3,'pro4'=>$pro4,'pro5'=>$pro5,'pro6'=>$pro6])->setOptions(['defaultFont' => 'sans-serif'])->setPaper('A4', 'landscape');
+    
+        return $pdf->download('Reseller_Fields.pdf');
+    }
+
+
+
+
+
     /**
      * Show the form for creating a new resource.
      *
