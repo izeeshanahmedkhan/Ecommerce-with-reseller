@@ -6,6 +6,7 @@ use App\Models\productorderdetail;
 use App\Models\Offer;
 use App\Models\ResellerUser;
 use App\Models\DeliveryCharges;
+use App\Models\resellerwallet;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\DB;
@@ -91,6 +92,7 @@ return view('frontend.thankyouorder',['order_num'=> $ordernumber]);
        $order = new orderdetail;
        
        $order->user_id = $req->userid;
+       $order->order_from = $req->userrole;
        $order->name = $req->naam;
        $order->address = $req->address;
        $order->city = $req->city;
@@ -109,6 +111,7 @@ return view('frontend.thankyouorder',['order_num'=> $ordernumber]);
      $delivery = $deliverycharges->delivery_charge;
 
        $order->deliverycharges =$delivery;
+
        if($req->advancepayment!=null)
        {
         $order->advancepayment = $req->advancepayment;
@@ -132,7 +135,10 @@ return view('frontend.thankyouorder',['order_num'=> $ordernumber]);
 
     $order->amount_to_be_charged_to_customer = $req->amountcharge;
 
-    $order->resellerprofit = $req->resellerprofit;
+
+          $order->resellerprofit = $req->resellerprofit;
+       
+
     
   $order->advance_payment_from_commission_balance =$req->advancecommission;
 
@@ -144,6 +150,8 @@ return view('frontend.thankyouorder',['order_num'=> $ordernumber]);
        // return view('checkoutreview');
       $ordernumberdetail = orderdetail::all()->last();
       $ordernumberid = $ordernumberdetail->id;
+
+     
 
        $cartCollection = Cart::getContent();
       $userId = auth()->user()->id; // or any string represents user identifier
@@ -219,6 +227,22 @@ return view('frontend.thankyouorder',['order_num'=> $ordernumber]);
         ->where('id',$id_order)
         ->update(['deliverycharges' => $totaldeliverycharges]);
 
+         if($req->resellerprofit!=null)
+      {
+        $resellerwallet = new resellerwallet;
+        $resellerwallet->reseller_id = $req->userid;
+        $resellerwallet->order_id = $ordernumberid;
+        $resellerwallet->total_amount = $total;
+        $resellerwallet->total_delivery_charges = $totaldeliverycharges;
+        $resellerwallet->reseller_commission_payable = $req->resellerprofit;
+        $resellerwallet->reseller_commission_recieved = "0";
+
+        $resellerwallet->save();
+
+
+
+      }
+
 
       $userId = auth()->user()->id; // or any string represents user identifier
      Cart::session($userId)->clear();
@@ -240,6 +264,7 @@ return view('frontend.thankyouorder',['order_num'=> $ordernumber]);
 
        $order = new orderdetail;
        $order->user_id = $userid;
+       // $order->order_from = $req->userrole;
        $order->name = $req->name;
        $order->address = $req->address;
        $order->city = $req->city;
@@ -325,4 +350,9 @@ return view('frontend.thankyouorder',['order_num'=> $ordernumber]);
 
 
     }
+
+   
+
+    
+       
 }

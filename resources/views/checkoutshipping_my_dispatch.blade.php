@@ -199,8 +199,14 @@
 									
 
 
-@php $user_id = Auth::user()->id; @endphp
+@php $user_id = Auth::user()->id;
+     $user_role = Auth::user()->name;
+@endphp
 										<input type="hidden" name="userid"value={{$user_id}}>
+
+
+										<input type="text" name="userrole"value={{$user_role}}>
+
 
 										<div class="form-group-custom-control">
 								<div class="custom-control custom-checkbox">

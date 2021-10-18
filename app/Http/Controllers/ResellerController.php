@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Catalogue;
 use App\Models\ResellerUser;
 use App\Models\CatalogueProduct;
+use App\Models\resellerwallet;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -537,6 +539,46 @@ elseif($len == 6)
 
    return view('admin.resellers.newindex', compact('pro1','pro2','products','len','pro3','pro4','pro5','pro6'));
 }
+
+
+}
+public function reseller_account()
+{
+    $reseller = reseller::all();
+    return view ('admin.resellers.choosereseller' , compact('reseller'));
+}
+
+public function selectreseller(request $req)
+{
+
+   $reseller_id = ResellerUser::where('reseller_id', $req->reseller)->first()->user_id;
+   $resellerwallet = resellerwallet::where('reseller_id',$reseller_id)->get();
+    return view ('admin.resellers.resellerwallet' , compact('resellerwallet'));
+}
+
+
+public function resellerwalletupdate($id)
+{
+
+    $wallet = resellerwallet::where('id',$id)->first();
+ return view ('admin.resellers.resellerwallet_update' , compact('wallet'));
+
+}
+
+public function resellerwalletedit_post(request $req,$id)
+{
+   $reseller_wallet_update = resellerwallet::where('id',$id)->first();
+
+   $reseller_wallet_update->reseller_commission_recieved = $req->recieve;
+
+   $reseller_wallet_update->save();
+
+
+          Session::flash('message','Wallet Updated Successfully ');
+        Session::flash('alert-type','success');
+
+  return back();
+
 
 
 }

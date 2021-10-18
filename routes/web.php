@@ -268,6 +268,15 @@ Route::post('/admin/riderwallet/store/{id}',[App\Http\Controllers\RiderOrderCont
 
     Route::post('/admin/supplier/store',[App\Http\Controllers\SupplierController::class, 'store'])->name('supplier.store');
     Route::get('/admin/supplier/{supplier}/edit',[App\Http\Controllers\SupplierController::class, 'edit'])->name('supplier.edit')->middleware('permission:edit suppliers');
+
+
+
+
+
+
+
+
+
     Route::put('/admin/supplier/{supplier}/update',[App\Http\Controllers\SupplierController::class, 'update'])->name('supplier.update');
     Route::delete('/admin/supplier/{supplier}/delete',[App\Http\Controllers\SupplierController::class, 'destroy'])->name('supplier.destroy')->middleware('permission:delete suppliers');
 
@@ -372,6 +381,7 @@ Route::post('/admin/riderwallet/store/{id}',[App\Http\Controllers\RiderOrderCont
 
     Route::get('/admin/reseller',[App\Http\Controllers\ResellerController::class, 'index'])->name('reseller.index');
 
+Route::get('/admin/reseller/account',[App\Http\Controllers\ResellerController::class, 'reseller_account'])->name('reselleraccount');
 
     Route::get('/admin/reseller/create',[App\Http\Controllers\ResellerController::class, 'create'])->name('reseller.create');
 
@@ -1034,4 +1044,11 @@ Route::get('/admin/order/advance-payment/delete/{id}',[App\Http\Controllers\Orde
 
 
 Route::post('admin/order/advance-payment/update/{id}',[App\Http\Controllers\OrderController::class, 'advancepayment_update'])->name('advancepayment_update');
+
+
+Route::post('/admin/select-reseller/',[App\Http\Controllers\ResellerController::class, 'selectreseller'])->name('selectreseller');
+
+Route::get('/admin/reseller-wallet-update/{id}',[App\Http\Controllers\ResellerController::class, 'resellerwalletupdate'])->name('resellerwalletupdate');
+
+Route::post('/admin/reseller-wallet-update/{id}',[App\Http\Controllers\ResellerController::class, 'resellerwalletedit_post'])->name('resellerwalletedit_post');
 

@@ -386,6 +386,8 @@
                 @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('create suppliers'))
                 <li class="nav-item {{$activePage == 'saleCenterCreate' ? 'active' : ''}}"><a href="{{route('supplier.create')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Add Suppliers</span></a></li>
             @endif
+            
+        
         </ul>
 
 
@@ -415,6 +417,14 @@
                 <li class="nav-item {{$activePage == 'resellerCreate' ? 'active' : ''}}"><a href="{{route('reseller.create')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name">Add Reseller</span></a></li>
             @endif
         </ul>
+
+         <ul class="childNav" data-parent="res">
+            @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show resellers'))
+            <li class="nav-item {{$activePage == 'resellerIndex' ? 'active' : ''}}"><a href="{{route('reselleraccount')}}"><i class="nav-icon fa fa-bars"></i><span class="item-name"> Resellers Accounts</span></a></li>
+            @endif
+             
+        </ul>
+
 
 
 
