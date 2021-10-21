@@ -675,6 +675,10 @@ Route::get('notavaialble/{pro_id}/{pro_order_id}/{pro_weight},/{pro_totalprice}'
 Route::get('not/recieved/{riderorderrr}',[App\Http\Controllers\OrderController::class, 'not_recieved'])->name('notrecieve');
 
 
+Route::get('confirm/packing/{id}',[App\Http\Controllers\OrderController::class, 'confirm_packing'])->name('confirmpacking');
+
+
+
 Route::post('riderorder2',[App\Http\Controllers\OrderController::class, 'rider_order2'])->name('riderorder2');
 
 Route::post('riderorder3',[App\Http\Controllers\OrderController::class, 'rider_order3'])->name('riderorder3');

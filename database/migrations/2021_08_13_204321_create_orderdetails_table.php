@@ -17,7 +17,7 @@ class CreateOrderdetailsTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('order_id');
-            $table->string('prder_from');
+            $table->string('order_from');
             $table->string('name');
             $table->string('address');
             $table->string('city');

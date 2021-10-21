@@ -257,11 +257,16 @@
                                                 </li>
                                             </ul> -->
     <select class="input form-control" id="inlineFormCustomSelectPref"name="color">
+        
     <option selected>Choose Color...</option>
-    <option value="1" style="background-color: #0188cc;">Blue</option>
-    <option value="2"style="background-color: #ab6e6e;">Red</option>
-    <option value="3"style="background-color: #ddb577;">Orange</option>
-       <option value="3"style="background-color: #6085a5;">Grey</option>
+
+     @foreach($image_cips as $image)
+     @php
+               $colourrr = App\Models\Colour::where('id',$image->colour_id)->first();
+               @endphp
+    <option value="{{ $colourrr->id }}" style="background-color:;">{{$colourrr->colourCode }} </option>
+
+       @endforeach
   </select>
 
   <hr class="divider">
@@ -302,12 +307,21 @@ if(isset($discount))
  <div class="product-single-filter">
          <label>Size:</label>
        <select class="input form-control @error('size') is-invalid @enderror" name="size" id="size"placeholder="Select Size">
-              @php $sizes = App\Models\Size::all(); @endphp
-                                        @foreach ($sizes as $size)
-                                            <option value="{{$size->id}}">
-                                                {{$size->sizeName}}
+              @php $sizes = App\Models\Size::all();
+
+               @endphp
+
+               @foreach($image_cips as $image)
+
+               @php
+               $image_size = App\Models\Size::where('id',$image->size_id)->first();
+               @endphp
+                                       
+                                            <option value="{{$image->size_id}}">
+                                                {{$image_size->sizeName}}
                                             </option>
-                                        @endforeach
+                                      
+                @endforeach
                                     </select>
                                 </div>
 

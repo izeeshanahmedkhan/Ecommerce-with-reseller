@@ -80,6 +80,19 @@ Session::flash('alert-class', 'alert-success');
 
   }
 
+    public function confirm_packing($id)
+  {
+    $update = productorderdetail::where('id',$id)->first();
+    $update->packing_status = "1";
+    $update->save();
+
+
+Session::flash('message', 'Sorting & Packing Successfully Checked !');
+Session::flash('alert-class', 'alert-success');
+ return back();
+
+  }
+
 
 
 

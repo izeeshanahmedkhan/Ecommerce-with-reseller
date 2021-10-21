@@ -277,20 +277,36 @@
                                    @if($statusss == 4)  <!-- when rider2 confirms -->
                                    @php $two = 2 @endphp
 <div class="row">
-  <div class="col-6">
+  
 
 
 
                      @if(!$statussss) 
 
-                  <h6> <b>Recieved By Admin</b></h6>
-                      <a href="{{route('notrecieve', $riderorderrr)}}" class="btn btn-raised btn-raised-primary m-1" style="color: white">Not Recieved</a>
-  </div>
+                  
+   @if($productorder->packing_status == 1) <!-- //yewala -->
 
   <div class="col-6">
+
+   <p> <b>Recieved By Admin</b><p>
          <a href="{{route('assignrider3',['id'=>$productorder->product_id,'name'=>$productorder->order_id])}}" class="btn btn-raised btn-raised-primary m-1" style="color: white">Deliver By Rider</a>
 
                                <a href="{{route('courier_rider',['id'=>$productorder->product_id,'name'=>$productorder->order_id])}}" class="btn btn-raised btn-raised-success m-1" style="color: white">Deliver By Courier</a>
+                             </div>
+
+    @else
+
+<div class="col-6">
+  <p> <b>Recieved By Admin</b><p>
+                      <a href="{{route('notrecieve', $riderorderrr)}}" class="btn btn-raised btn-raised-primary m-1" style="color: white">Not Recieved</a>
+</div>
+     <div class="col-6">
+
+    <a href="{{route('confirmpacking', $productorder->id)}}" class="btn btn-raised btn-raised-success m-1" style="color: white">Confirm Packing</a>
+
+  </div>
+
+    @endif  <!-- yewala end -->
 
                                @endif
   </div>

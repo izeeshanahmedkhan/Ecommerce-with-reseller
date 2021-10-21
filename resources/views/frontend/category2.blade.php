@@ -116,18 +116,47 @@
 
                  <div class="row">
                           
-                       
+                     
 
 
 
 
  @foreach($catagories  as $cat)
+
+   @php
+                                        
+ $productimages = App\Models\ColourImageProductSize::where('product_id',$cat->id)->get();
+                                         
+  @endphp
+
+
                             <div class="col-6 col-sm-4 col-md-3 col-xl-5col">
+
+
                                 <div class="product-default inner-quickview inner-icon">
                                     <figure>
-                                        <a href="{{route('single_product',$cat)}}">
-                                            <img src="{{asset('assets/images/products/product-1.jpg')}}">
-                                        </a>
+
+                                          
+
+                                           
+
+
+
+
+@forelse ($productimages as $image)
+       <a href="{{route('single_product',$cat)}}">
+       
+     <img src="{{asset('storage/images/productImages/'.$image->image)}}" style="height:170px; width:auto; max-width:340px;
+">
+      </a>
+
+    @break
+@empty
+    {{-- If for some reason the business has no images, you can put here some kind of placeholder image, using 3rd party services or maybe your own generic image --}}
+    
+@endforelse
+
+                                    
                                         <div class="label-group">
                                             <span class="product-label label-sale">-20%</span>
                                         </div>
@@ -154,15 +183,18 @@
                                                 <span class="tooltiptext tooltip-top"></span>
                                             </div><!-- End .product-ratings -->
                                         </div><!-- End .product-container -->
+
+                                     
                                         <div class="price-box">
                                            
                                                <span class="old-price">${{$cat->price}}</span>
-                                         
-                                           
+                                      
                                           
                                             <span class="product-price">${{$cat->price}}</span>
                                         </div><!-- End .price-box -->
                                     </div><!-- End .product-details -->
+
+
                                 </div>
                             </div>
 @endforeach

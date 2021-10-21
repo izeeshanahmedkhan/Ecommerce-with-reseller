@@ -10,6 +10,7 @@ use App\Models\resellerwallet;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class CheckoutController extends Controller
 {
@@ -121,6 +122,9 @@ return view('frontend.thankyouorder',['order_num'=> $ordernumber]);
 
         if($img3!= null)
         {
+           $validator = Validator::make($req->all(), [
+          'img1' => 'mimes:jpeg,bmp,png,gif,svg,pdf',
+                                                         ]);
          $image3 = $img3->getClientOriginalName();
         $img3->storeAs('/images/transferslips',$image3);
         $order->advancepayment_transfer_slip = $image3;
