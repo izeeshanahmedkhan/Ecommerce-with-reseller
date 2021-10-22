@@ -3,7 +3,7 @@
 @section('content')
 
     <!-- MAIN -->
-    <h1>sddddddddddd</h1>
+ 
    <main class="main">
             <nav aria-label="breadcrumb" class="breadcrumb-nav mb-md-4">
                 <div class="container">
@@ -102,9 +102,17 @@
 @php 
 
 $catiya = json_decode($categories, true);
+
 @endphp
 
+
 @foreach($catiya as $cat)
+
+   @php
+                                        
+  $productimages = App\Models\ColourImageProductSize::where('product_id',$cat['id'])->get();
+                                         
+  @endphp
 
  @if (!empty($cat))
 
@@ -125,11 +133,21 @@ $catiya = json_decode($categories, true);
 <div class="col-6 col-sm-4 col-md-3 col-xl-5col">
                                 <div class="product-default inner-quickview inner-icon">
                                     <figure>
-                                        <a href="">
-                                            <img src="{{asset('assets/images/products/product-1.jpg')}}">
-                                        </a>
+
+                                       @forelse ($productimages as $image)
+       <a href="{{route('single_product',$cat['name'])}}">
+       
+     <img src="{{asset('storage/images/productImages/'.$image->image)}}" style="height:170px; width:auto; max-width:340px;
+">
+      </a>
+
+    @break
+@empty
+    {{-- If for some reason the business has no images, you can put here some kind of placeholder image, using 3rd party services or maybe your own generic image --}}
+    
+@endforelse
                                         <div class="label-group">
-                                            <span class="product-label label-sale">-20%</span>
+                                            <span class="product-label label-sale">-22342</span>
                                         </div>
                                         <div class="btn-icon-group">
                                             <button class="btn-icon btn-add-cart" data-toggle="modal" data-target="#addCartModal"><i class="icon-shopping-cart"></i></button>
@@ -162,10 +180,10 @@ $catiya = json_decode($categories, true);
                                            
                                           
                                             <span class="product-price">{{$pro['price']}}</span>
-                                             <form action="{{route('single_product',$pro)}}" method="get">
+                                             <!-- <form action="{{route('single_product',$pro)}}" method="get">
                                       @csrf
                                                 <button> ORDER NOW </button>
-                                            </form>
+                                            </form> -->
 
 
                                         </div><!-- End .price-box -->
@@ -177,9 +195,18 @@ $catiya = json_decode($categories, true);
                            <div class="col-6 col-sm-4 col-md-3 col-xl-5col">
                                 <div class="product-default inner-quickview inner-icon">
                                     <figure>
-                                        <a href="">
-                                            <img src="{{asset('assets/images/products/product-1.jpg')}}">
-                                        </a>
+          @forelse ($productimages as $image)
+       <a href="{{route('single_product',$cat['name'])}}">
+       
+     <img src="{{asset('storage/images/productImages/'.$image->image)}}" style="height:170px; width:auto; max-width:340px;
+">
+      </a>
+
+    @break
+@empty
+    {{-- If for some reason the business has no images, you can put here some kind of placeholder image, using 3rd party services or maybe your own generic image --}}
+    
+@endforelse
                                         <div class="label-group">
                                             <span class="product-label label-sale">-20%</span>
                                         </div>
@@ -215,10 +242,10 @@ $catiya = json_decode($categories, true);
                                           
                                             <span class="product-price">{{$cat['price']}}</span>
                                         </div>
-                                         <form action="{{route('single_product',$cat['name'])}}" method="post">
+                                        <!--  <form action="{{route('single_product',$cat['name'])}}" method="post">
                                       @csrf
                                                 <button> ORDER NOW </button>
-                                            </form><!-- End 
+                                            </form> --><!-- End 
                                         .price-box -->
                                     </div><!-- End .product-details -->
                                 </div>

@@ -245,27 +245,11 @@
                         </nav>
                     </div><!-- End .main-content -->
 
-                    <div class="sidebar-overlay"></div>
+                     <div class="sidebar-overlay"></div>
                     <div class="sidebar-toggle"><i class="fas fa-sliders-h"></i></div>
                     <aside class="sidebar-shop col-lg-3 order-lg-first mobile-sidebar">
                         <div class="sidebar-wrapper">
-                            <div class="widget">
-                                <h3 class="widget-title">
-                                    <a data-toggle="collapse" href="#widget-body-2" role="button" aria-expanded="true" aria-controls="widget-body-2">Categories</a>
-                                </h3>
-
-                                <div class="collapse show" id="widget-body-2">
-                                    <div class="widget-body">
-                                        <ul class="cat-list">
-                                            <li><a href="#">Accessories</a></li>
-                                            <li><a href="#">Watch Fashion</a></li>
-                                            <li><a href="#">Tees, Knits &amp; Polos</a></li>
-                                            <li><a href="#">Pants &amp; Denim</a></li>
-                                        </ul>
-                                    </div><!-- End .widget-body -->
-                                </div><!-- End .collapse -->
-                            </div><!-- End .widget -->
-
+                            
                               <div class="widget">
                                 <h3 class="widget-title">
                                     <a data-toggle="collapse" href="#widget-body-3" role="button" aria-expanded="true" aria-controls="widget-body-3">Price</a>
@@ -273,22 +257,24 @@
 
                                 <div class="collapse show" id="widget-body-3">
                                     <div class="widget-body">
-                                        <form action="">
-                                            <div class="price-slider-wrapper">
-                                                <div id="price-slider"></div><!-- End #price-slider -->
-                                            </div><!-- End .price-slider-wrapper -->
+                            <form action="{{route('pricefilter_all')}}"method="post">
+                                            @csrf
+                                          
+         <div class="price-slider-wrapper">
+         <div id="price-slider"></div><!-- End #price-slider -->
+             </div><!-- End .price-slider-wrapper -->
 
-                                            <div class="filter-price-action d-flex align-items-center justify-content-between flex-wrap">
+         <div class="filter-price-action d-flex align-items-center justify-content-between flex-wrap">
 
 
-                                                <div class="form-group required-field">
-                                <label for="contact-email">Price To</label>
-                                <input type="number" class="form-control" id="contact-email" name="contact-email" required>
+     <div class="form-group required-field">
+                    <label for="contact-email">Price To</label>
+                                <input type="number" class="form-control"min="0" id="contact-email" name="start" required>
                             </div><!-- End .form-group -->
 
                             <div class="form-group required-field">
                                 <label for="contact-email">Price From</label>
-                                <input type="number" class="form-control" id="contact-email" name="contact-email" required>
+                                <input type="number" class="form-control" id="contact-email" name="end"min="0" required>
                             </div><!-- End .form-group -->
 
                                               <button class="btn btn-primary float-right">FILTER</button><!-- End .filter-price-text -->
@@ -298,7 +284,7 @@
                                 </div><!-- End .collapse -->
                             </div><!-- End .widget -->
 
-                            <div class="widget">
+                           <!--  <div class="widget">
                                 <h3 class="widget-title">
                                     <a data-toggle="collapse" href="#widget-body-4" role="button" aria-expanded="true" aria-controls="widget-body-4">Size</a>
                                 </h3>
@@ -306,16 +292,65 @@
                                 <div class="collapse show" id="widget-body-4">
                                     <div class="widget-body">
                                         <ul class="cat-list">
-                                            <li><a href="#">Small</a></li>
-                                            <li><a href="#">Medium</a></li>
-                                            <li><a href="#">Large</a></li>
-                                            <li><a href="#">Extra Large</a></li>
-                                        </ul>
-                                    </div><!-- End .widget-body -->
-                                </div><!-- End .collapse -->
-                            </div><!-- End .widget -->
+                                    
+ <li>
+    <form action="{{route('sizefilter_all')}}"
+    method ="post">
+    @csrf
+     <input type="hidden" name="sizeid" value="1">
+    <button class="btn btn-success ">Small</button>
+</form>
+</li>
 
-                            
+ <li>
+    <form action="{{route('sizefilter_all')}}"method ="post">
+        @csrf
+     <input type="hidden" name="sizeid" value="2">
+    <button class="btn btn-success ">Medium</button>
+</form>
+</li>
+
+ <li>
+    <form action="{{route('sizefilter_all')}}"method ="post">
+        @csrf
+     <input type="hidden" name="sizeid" value="3">
+    <button class="btn btn-success ">Large</button>
+</form>
+</li>
+
+ <li>
+    <form action="{{route('sizefilter_all')}}"method ="post">
+        @csrf
+     <input type="hidden" name="sizeid" value="4">
+    <button class="btn btn-success ">Extra Large</button>
+</form>
+</li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                              
+                            </div>
+
+ -->
+                          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
 
                             <div class="widget">
                                 <h3 class="widget-title">
@@ -325,26 +360,47 @@
                                 <div class="collapse show" id="widget-body-6">
                                     <div class="widget-body">
                                         <ul class="config-swatch-list">
-                                            <li class="active">
-                                                <a href="#" style="background-color: #1645f3;"></a>
-                                                <span>Blue</span>
+                        <li class="active">
+                          <a href="#" style="background-color: #1645f3;"></a>
+                           <form action="{{route('sizefilter',1)}}"method ="post">
+        @csrf
+
+        <input type="hidden" name="colorid" value="1">
+                          <button>Blue</button>
+                      </form>
                                             </li>
                                             <li>
                                                 <a href="#" style="background-color: #f11010;"></a>
-                                                <span>Red</span>
+                                                  <form action="{{route('colorfilter',1)}}"method ="post">
+        @csrf
+
+        <input type="hidden" name="colorid" value="2">
+                          <button>Red</button>
+                      </form>
+                                            </li>
+                                <li>
+                     <a href="#" style="background-color: #fe8504;"></a>
+                                                 <form action="{{route('colorfilter',1)}}"method ="post">
+        @csrf
+
+        <input type="hidden" name="colorid" value="3">
+                          <button>Orange</button>
+                      </form>
                                             </li>
                                             <li>
-                                                <a href="#" style="background-color: #fe8504;"></a>
-                                                <span>Orange</span>
-                                            </li>
-                                            <li>
-                                                <a href="#" style="background-color: #2da819;"></a>
-                                                <span>Green</span>
+             <a href="#" style="background-color: #2da819;"></a>
+                                                  <form action="{{route('colorfilter',1)}}"method ="post">
+        @csrf
+
+        <input type="hidden" name="colorid" value="4">
+                          <button>Green</button>
+                      </form>
                                             </li>
                                         </ul>
-                                    </div><!-- End .widget-body -->
-                                </div><!-- End .collapse -->
-                            </div><!-- End .widget -->
+                                    </div>
+                                </div>
+                            </div> -->
+                            <!-- End .widget -->
                         </div><!-- End .sidebar-wrapper -->
                     </aside><!-- End .col-lg-3 -->
                 </div><!-- End .row -->

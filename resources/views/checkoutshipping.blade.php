@@ -197,15 +197,15 @@
 										<input type="hidden" name="userid"value={{$user_id}}>
 
 										<div class="form-group-custom-control">
-								<div class="custom-control custom-checkbox">
+								<!-- <div class="custom-control custom-checkbox">
 									<input type="checkbox" class="custom-control-input" id="change-bill-address" value="1">
 									<label class="custom-control-label" for="change-bill-address">My billing and shipping address are the same</label>
-								</div><!-- End .custom-checkbox -->
+								</div> --><!-- End .custom-checkbox -->
 							</div><!-- End .form-group -->
 
 									
 
-									<button class="btn btn-primary float-right">CHECK-OUT</button>
+								<button class="btn btn-primary btn-block float-right">CHECK-OUT</button>
 
 									<!-- <div class="form-group">
 										<label>Country</label>
@@ -217,84 +217,78 @@
 												<option value="Germany">Germany</option>
 											</select>
 										</div> -->
-									<
+									
 
 									
 								</form>
 							</li>
 
-							<li>
-								<div class="checkout-step-shipping">
-									<h2 class="step-title">Shipping Methods</h2>
-
-									<table class="table table-step-shipping">
-										<tbody>
-											<tr>
-												<td><input type="radio" name="shipping-method" value="flat"></td>
-												<td><strong>$20.00</strong></td>
-												<td>Fixed</td>
-												<td>Flat Rate</td>
-											</tr>
-
-											<tr>
-												<td><input type="radio" name="shipping-method" value="best"></td>
-												<td><strong>$15.00</strong></td>
-												<td>Table Rate</td>
-												<td>Best Way</td>
-											</tr>
-										</tbody>
-									</table>
-								</div><!-- End .checkout-step-shipping -->
-							</li>
+						
 						</ul>
 					</div><!-- End .col-lg-8 -->
+@php
+ $cartCollection = Cart::getContent();
+  $userId = auth()->user()->id; // or any string represents user identifier
+   $u = Cart::session($userId)->getContent();
 
+@endphp
 					<div class="col-lg-4">
 						<div class="order-summary">
 							<h3>Summary</h3>
 
 							<h4>
-								<a data-toggle="collapse" href="#order-cart-section" class="collapsed" role="button" aria-expanded="false" aria-controls="order-cart-section">2 products in Cart</a>
+								<a data-toggle="collapse" href="#order-cart-section" class="collapsed" role="button" aria-expanded="false" aria-controls="order-cart-section">{{\Cart::getContent()->count()}}  products in Cart</a>
 							</h4>
 
 							<div class="collapse" id="order-cart-section">
 								<table class="table table-mini-cart">
 									<tbody>
+											@foreach($u as $item)
+
+@php
+                                        
+ $productimages = App\Models\ColourImageProductSize::where('product_id',$item->id)->get();
+                                         
+ @endphp
 										<tr>
 											<td class="product-col">
-												<figure class="product-image-container">
-	<a href="product.html" class="product-image">
-														<img src="assets/images/products/product-1.jpg" alt="product">
-													</a>
+			<figure class="product-image-container">
+	                  
+
+
+@forelse ($productimages as $image)
+       <a href="">
+       
+     <img src="{{asset('storage/images/productImages/'.$image->image)}}">
+      </a>
+
+    @break
+@empty
+    {{-- If for some reason the business has no images, you can put here some kind of placeholder image, using 3rd party services or maybe your own generic image --}}
+    
+@endforelse
+
+
+
+
+
+
+
+
+
 												</figure>
 												<div>
-													<h2 class="product-title">
-														<a href="product.html">Running Sneakers</a>
-													</h2>
+								<h2 class="product-title">
+									<a href="product.html">{{ $item->name}}</a>
+								</h2>
 
-													<span class="product-qty">Qty: 4</span>
+													<span class="product-qty">Qty: {{$item->quantity}}</span>
 												</div>
 											</td>
-											<td class="price-col">$17.90</td>
+											<td class="price-col">{{$item->price}}</td>
 										</tr>
 
-										<tr>
-											<td class="product-col">
-												<figure class="product-image-container">
-													<a href="product.html" class="product-image">
-														<img src="assets/images/products/product-2.jpg" alt="product">
-													</a>
-												</figure>
-												<div>
-													<h2 class="product-title">
-														<a href="product.html">Men's Apt</a>
-													</h2>
-
-													<span class="product-qty">Qty: 4</span>
-												</div>
-											</td>
-											<td class="price-col">$7.90</td>
-										</tr>
+									@endforeach
 									</tbody>	
 								</table>
 							</div><!-- End #order-cart-section -->
@@ -302,15 +296,10 @@
 					</div><!-- End .col-lg-4 -->
 				</div><!-- End .row -->
 
-				<div class="row row-sparse">
-					<div class="col-lg-8">
-						<div class="checkout-steps-action">
-							<a href="{{url('checkoutreview')}}" class="btn btn-primary float-right">CHECK-OUT</a>
-						</div>
-					</div><!-- End .col-lg-8 -->
-				</div><!-- End .row -->
+			<!--  -->
 			</div><!-- End .container -->
 
 			<div class="mb-6"></div><!-- margin -->
 		</main><!-- End .main -->
 @endsection
+

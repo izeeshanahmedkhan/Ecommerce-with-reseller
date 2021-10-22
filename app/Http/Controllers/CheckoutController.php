@@ -186,9 +186,9 @@ return view('frontend.thankyouorder',['order_num'=> $ordernumber]);
       	
       	$productdetail->total_price = ($product->price)*($product->quantity);
 
-        $productdetail->size = "1"; 
+        $productdetail->size = $product->size; 
         // $product->size;
-        $productdetail->color = "1"; 
+        $productdetail->color =$product->color; 
         // $product->color;
         $productdetail->user_id = $req->userid;
 

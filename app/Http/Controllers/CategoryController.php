@@ -18,6 +18,21 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+ 
+
+
+   public function all_products_search(request $req)
+{
+
+$products = Product::where('name', 'LIKE', '%'.$req->search.'%')->get();
+
+ return view ('frontend.category2',['catagories'=> $products]);
+
+
+}
+
+
+ 
 public function selectfield(request $req)
 {
   
@@ -103,6 +118,39 @@ elseif($len == 6)
 
 
 }
+
+
+public function category_all_products_price(request $req)
+{
+
+            $start =  $req->start;
+            $end     = $req->end;
+
+  $products= Product::where('price','>=',$start)->where('price','<=',$end)->get();
+
+     return view ('frontend.category2',['catagories'=> $products]);
+
+
+}
+public function category_all_products_size(request $req)
+{
+
+    $size=ColourImageProductSize::where('size_id',$req->sizeid)->get();
+
+    foreach ($size as $s )
+     {
+
+        $dd[] = Product::where('id',$s->product_id)->first();
+     }
+      echo $categories_json = json_encode($dd);
+     // echo $dd[];
+    // return view ('frontend.category2',['catagories'=> $categories_json]);
+
+
+   // $dd[] = Product::where('id',$di->product_id)->first();
+
+}
+    
 
  public function category_products_sub($id)
     {
@@ -193,7 +241,7 @@ $dd[] = Product::where('id',$di->product_id)->where('price','>=',$start)->where(
             $start =  $req->start;
             $end     = $req->end;
 
-            
+           
 
 $dd[] = Product::where('id',$i->product_id)->where('price','>=',$start)->where('price','<=',$end)->first();
               }

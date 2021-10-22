@@ -949,10 +949,23 @@ Route::get('customer-dispatch2/{id}',[App\Http\Controllers\CheckoutController::c
 
 
 //filteration
+
+//main page k liye
+Route::post('category/all/pricerange',[App\Http\Controllers\CategoryController::class, 'category_all_products_price'])->name('pricefilter_all');
+
+
 Route::post('category/pricerange/{id}',[App\Http\Controllers\CategoryController::class, 'category_products_sub_price'])->name('pricefilter');
 
 
+
+
+ // main page size filter
+
+Route::post('category/size/all',[App\Http\Controllers\CategoryController::class, 'category_all_products_size'])->name('sizefilter_all');
+
 Route::post('category/size/{id}',[App\Http\Controllers\CategoryController::class, 'category_products_sub_size'])->name('sizefilter');
+
+
 
 Route::post('category/color/{id}',[App\Http\Controllers\CategoryController::class, 'category_products_sub_color'])->name('colorfilter');
 
@@ -1056,3 +1069,8 @@ Route::get('/admin/reseller-wallet-update/{id}',[App\Http\Controllers\ResellerCo
 
 Route::post('/admin/reseller-wallet-update/{id}',[App\Http\Controllers\ResellerController::class, 'resellerwalletedit_post'])->name('resellerwalletedit_post');
 
+
+
+// all products search
+
+Route::post('/all-products-result',[App\Http\Controllers\CategoryController::class, 'all_products_search'])->name('all_products_search');

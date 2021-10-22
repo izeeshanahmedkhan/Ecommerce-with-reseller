@@ -204,6 +204,16 @@ Session::flash('alert-class', 'alert-success');
         Cart::session($userId)->update($product->id, array( 
   'supplier' =>  $req->supp, // new item price, price can also be a string format like so: '98.67'
 ));
+
+
+  Cart::session($userId)->update($product->id, array( 
+   'color' => $req->color, // new item price, price can also be a string format like so: '98.67'
+));
+
+  Cart::session($userId)->update($product->id, array( 
+    'size' => $req->size, // new item price, price can also be a string format like so: '98.67'
+));
+    
     
 
            $userIdi = auth()->user()->id;

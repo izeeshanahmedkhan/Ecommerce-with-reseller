@@ -537,30 +537,11 @@ $parent2 = App\Models\Category::where('parent_id',$par->id)->get();
 
                         <div class="header-search header-search-popup header-search-category d-none d-sm-block">
                             <a href="#" class="search-toggle" role="button"><i class="icon-magnifier"></i></a>
-                            <form action="#" method="get">
+                            <form action="{{route('all_products_search')}}" method="post">
+                                @csrf
                                 <div class="header-search-wrapper">
-                                    <input type="search" class="form-control" name="q" id="q" placeholder="I'm searching for..." required="">
-                                    <div class="select-custom">
-                                        <select id="cat" name="cat">
-                                            <option value="">All Categories</option>
-                                            <option value="4">Fashion</option>
-                                            <option value="12">- Women</option>
-                                            <option value="13">- Men</option>
-                                            <option value="66">- Jewellery</option>
-                                            <option value="67">- Kids Fashion</option>
-                                            <option value="5">Electronics</option>
-                                            <option value="21">- Smart TVs</option>
-                                            <option value="22">- Cameras</option>
-                                            <option value="63">- Games</option>
-                                            <option value="7">Home &amp; Garden</option>
-                                            <option value="11">Motors</option>
-                                            <option value="31">- Cars and Trucks</option>
-                                            <option value="32">- Motorcycles &amp; Powersports</option>
-                                            <option value="33">- Parts &amp; Accessories</option>
-                                            <option value="34">- Boats</option>
-                                            <option value="57">- Auto Tools &amp; Supplies</option>
-                                        </select>
-                                    </div><!-- End .select-custom -->
+                                    <input type="search" class="form-control" name="search" id="q" placeholder="I'm searching for..." required="">
+                                 
                                     <button class="btn bg-dark icon-search-3" type="submit"></button>
                                 </div><!-- End .header-search-wrapper -->
                             </form>
@@ -573,10 +554,32 @@ $parent2 = App\Models\Category::where('parent_id',$par->id)->get();
                              
                             </a>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                             <div class="dropdown-menu" >
                                 <div class="dropdownmenu-wrapper">
                                     <div class="dropdown-cart-header">
-                                        <span>2 Items</span>
+                                        <span>{{\Cart::getContent()->count()}} Items</span>
 
                                         <a href="{{url('viewcart')}}" class="float-right">View Cart</a>
                                     </div><!-- End .dropdown-cart-header -->
@@ -597,9 +600,27 @@ $parent2 = App\Models\Category::where('parent_id',$par->id)->get();
                                             </div><!-- End .product-details -->
 
                                             <figure class="product-image-container">
-                                                <a href="product.html" class="product-image">
-                                                    <img src="assets/images/products/cart/product-2.jpg" alt="product" width="80" height="80">
-                                                </a>
+
+
+  @php
+                                        
+ $productimages = App\Models\ColourImageProductSize::where('product_id',$item->id)->get();
+                                         
+ @endphp
+
+@forelse ($productimages as $image)
+         <a href="">
+       
+     <img src="{{asset('storage/images/productImages/'.$image->image)}} "style ="width: 100px;">
+      </a>
+
+@break
+
+@empty
+    {{-- If for some reason the business has no images, you can put here some kind of placeholder image, using 3rd party services or maybe your own generic image --}}
+    
+@endforelse
+
                                                 <a href="#" class="btn-remove icon-cancel" title="Remove Product"></a>
                                             </figure>
                                         </div><!-- End .product -->

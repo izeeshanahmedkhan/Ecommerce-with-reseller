@@ -51,14 +51,37 @@ Session::put('oldcart', $subTotal);
 								</thead>
 			
 								<tbody>
+		
+
 		@foreach($items as $item)
+
+@php
+                                        
+ $productimages = App\Models\ColourImageProductSize::where('product_id',$item->id)->get();
+                                         
+ @endphp
+
 		<tr class="product-row">
 	<td class="product-col">
 											
 		<figure class="product-image-container">
-	<a href="product.html" class="product-image">
-		<img src="assets/images/products/product-1.jpg" alt="product">
+
+@forelse ($productimages as $image)
+     
+
+<a href="" class="product-image">
+		<img src="{{asset('storage/images/productImages/'.$image->image)}}" alt="product">
    </a>
+    @break
+@empty
+    {{-- If for some reason the business has no images, you can put here some kind of placeholder image, using 3rd party services or maybe your own generic image --}}
+    
+@endforelse
+
+
+
+
+	
 	  </figure>
 	<h2 class="product-title">
 	<a href="product.html">{{$item->name}}</a>
@@ -117,6 +140,13 @@ Session::put('oldcart', $subTotal);
 								</tfoot>
 							</table>
 						</div><!-- End .cart-table-container -->
+
+				<!-- 		@php
+
+       $cartCollection = Cart::getContent();
+      $userId = auth()->user()->id; // or any string represents user identifier
+     echo $u = Cart::session($userId)->getContent();
+						@endphp -->
 
 						<div class="cart-discount">
 							<h4>Apply Discount Code</h4>
