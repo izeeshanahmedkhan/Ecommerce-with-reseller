@@ -8,6 +8,9 @@
             </div>
         </div>
         <!-- end of row-->
+
+{{\Spatie\Permission\Models\Permission::all()}}
+
         <div class="row mb-4">
             <div class="col-md-12 mb-4">
                 <div class="card text-left">
@@ -20,6 +23,8 @@
                             <br> <br>
                         </div>
                         @endif
+
+
 
                         <div class="table-responsive">
                             <table class="display table table-striped table-bordered" id="zero_configuration_table" style="width:100%">

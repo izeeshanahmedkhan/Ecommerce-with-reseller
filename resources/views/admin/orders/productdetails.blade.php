@@ -288,7 +288,7 @@
 
   <div class="col-6">
 
-   <p> <b>Recieved By Admin</b><p>
+   <p> <b>Recieved By Admin/store</b><p>
          <a href="{{route('assignrider3',['id'=>$productorder->product_id,'name'=>$productorder->order_id])}}" class="btn btn-raised btn-raised-primary m-1" style="color: white">Deliver By Rider</a>
 
                                <a href="{{route('courier_rider',['id'=>$productorder->product_id,'name'=>$productorder->order_id])}}" class="btn btn-raised btn-raised-success m-1" style="color: white">Deliver By Courier</a>
@@ -297,7 +297,7 @@
     @else
 
 <div class="col-6">
-  <p> <b>Recieved By Admin</b><p>
+  <p> <b>Recieved By Store</b><p>
                       <a href="{{route('notrecieve', $riderorderrr)}}" class="btn btn-raised btn-raised-primary m-1" style="color: white">Not Recieved</a>
 </div>
      <div class="col-6">
@@ -333,12 +333,20 @@
 
                                                @php $one = 0 ; @endphp
                                                
+@if($productorder->confirm_order== "" || $productorder->confirm_order==0)
 
-
-        <a href="{{route('courier_rider',['id'=>$productorder->product_id,'name'=>$productorder->order_id])}}" class="btn btn-raised btn-raised-success m-1" style="color: white">Confirm Process</a>
+        <a href="{{route('courier_rider',['id'=>$productorder->product_id,'name'=>$productorder->order_id,'name2'=>$productorder->id])}}" class="btn btn-raised btn-raised-success m-1" style="color: white">Confirm Process</a>
 
 
 <a href="{{route('notavailable',['pro_id'=>$productorder->id,'pro_order_id'=>$productorder->order_id,'pro_weight'=> $productorder->product_weight,'pro_totalprice'=>$productorder->total_price])}}" class="btn btn-raised btn-raised-primary m-1" style="color: white">Not Available</a>
+@elseif($productorder->confirm_order==1)
+
+ <a href="{{route('assignrider2',['id'=>$productorder->product_id,'name'=>$productorder->order_id])}}" class="btn btn-raised btn-raised-success m-1" style="color: white">Pick By Rider</a>
+
+
+<a href="{{route('notavailable',['pro_id'=>$productorder->id,'pro_order_id'=>$productorder->order_id,'pro_weight'=> $productorder->product_weight,'pro_totalprice'=>$productorder->total_price])}}" class="btn btn-raised btn-raised-primary m-1" style="color: white">Pick By Courier</a>
+
+@endif
 
                                               @endif<!--  module 2 rider end -->
 

@@ -108,18 +108,18 @@ $catiya = json_decode($categories, true);
 
 @foreach($catiya as $cat)
 
-   @php
-                                        
-  $productimages = App\Models\ColourImageProductSize::where('product_id',$cat['id'])->get();
-                                         
-  @endphp
-
+   
  @if (!empty($cat))
 
  @php
  if(isset($pro))
  {
  $pro = App\Models\Product::where('id',$cat['product_id'])->first();
+
+                                        
+  $productimages = App\Models\ColourImageProductSize::where('product_id',$cat['id'])->get();
+                                         
+
  }
  @endphp
 
@@ -192,6 +192,10 @@ $catiya = json_decode($categories, true);
                             </div>
 
                             @else 
+
+                            @php
+                             $productimages = App\Models\ColourImageProductSize::where('product_id',$cat['id'])->get();
+                            @endphp
                            <div class="col-6 col-sm-4 col-md-3 col-xl-5col">
                                 <div class="product-default inner-quickview inner-icon">
                                     <figure>

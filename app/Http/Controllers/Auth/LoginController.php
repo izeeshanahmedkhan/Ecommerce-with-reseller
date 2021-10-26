@@ -75,6 +75,10 @@ class LoginController extends Controller
             return route('owner.dashboard',$u);
         }
 
+   else if($role->name == "admin4"){
+
+                 return route('admin.dashboard');
+            }
         else if($role->name == "customer"){
 
              return '/home';

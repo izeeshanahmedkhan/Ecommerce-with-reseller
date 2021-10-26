@@ -23,6 +23,8 @@ class CreateProductorderdetailsTable extends Migration
             $table->string('size');
             $table->string('color');
             $table->string('total_price');
+            $table->integer('confirm_order');
+            $table->integer('confirm_packing');
             $table->timestamps();
         });
     }

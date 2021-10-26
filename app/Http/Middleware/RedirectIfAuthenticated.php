@@ -66,6 +66,11 @@ class RedirectIfAuthenticated
                 return route('owner.dashboard',);
             }
 
+               else if($role->name == "admin4"){
+
+                 return route('admin.dashboard');
+            }
+
             else if($role->name == "customer"){
 
                 return '/home';

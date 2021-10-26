@@ -110,17 +110,39 @@ $catiya = json_decode($categories, true);
  $pro = App\Models\Product::where('id',$cat['product_id'])->first();
  @endphp
 
+  @php
+                                        
+  $productimages = App\Models\ColourImageProductSize::where('product_id',$cat['product_id'])->get();
+                                         
+  @endphp
 
 
 
+@php
+$str = $pro['name'];
+
+
+$name = str_replace(' ', '-', $str);
+
+
+@endphp
 
 
 <div class="col-6 col-sm-4 col-md-3 col-xl-5col">
                                 <div class="product-default inner-quickview inner-icon">
                                     <figure>
-                                        <a href="">
-                                            <img src="{{asset('assets/images/products/product-1.jpg')}}">
-                                        </a>
+                                                                     @forelse ($productimages as $image)
+       <a href="{{route('single_product',$name)}}">
+       
+     <img src="{{asset('storage/images/productImages/'.$image->image)}}" style="height:170px; width:auto; max-width:340px;
+">
+      </a>
+
+    @break
+@empty
+    {{-- If for some reason the business has no images, you can put here some kind of placeholder image, using 3rd party services or maybe your own generic image --}}
+    
+@endforelse
                                         <div class="label-group">
                                             <span class="product-label label-sale">-20%</span>
                                         </div>
@@ -155,10 +177,10 @@ $catiya = json_decode($categories, true);
                                          
                                       
                                             <span class="product-price">{{$pro['price']}}</span>
-                                            <form action="{{route('single_product',Str::slug($pro['name']))}}" method="post">
+                                        <!--     <form action="{{route('single_product',Str::slug($pro['name']))}}" method="post">
                                       @csrf
                                                 <button> ORDER NOW </button>
-                                            </form>
+                                            </form> -->
                                         </div><!-- End .price-box -->
                                     </div><!-- End .product-details -->
                                 </div>

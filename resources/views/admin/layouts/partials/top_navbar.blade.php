@@ -100,7 +100,7 @@
             </div>
             <!-- Notification dropdown -->
             <div class="dropdown-menu dropdown-menu-right notification-dropdown rtl-ps-none" aria-labelledby="dropdownNotification" data-perfect-scrollbar data-suppress-scroll-x="true">
-                @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show customers'))
+              
 
                 @foreach($contactus as $contactus)
                 <form class="forms-sample" method="POST" action="{{ route('contactus.status',$contactus->id) }}" name="notification">
@@ -122,8 +122,8 @@
                 </div>
                 </form>
                 @endforeach
-                @endif
-                @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('show customers'))
+         
+           
                     @foreach($orders as $order)
                         <form class="forms-sample" method="POST" action="{{ route('order.status',$order->id) }}" name="notification2">
                             @csrf()
@@ -145,7 +145,7 @@
                             </div>
                         </form>
                     @endforeach
-                @endif
+      
             </div>
         </div>
         <!-- Notificaiton End -->

@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-6">
   
-  <div class="card" style="width:442px">
+  <div class="card" style="width:292px">
     <img class="card-img-top" src="{{ asset('storage/images/CR/two.jpg') }}" alt="Card image" style="width:100%">
     <div class="card-body">
      
@@ -22,7 +22,7 @@
 
 <div class="col-6">
   
-  <div class="card" style="width:550px">
+  <div class="card" style="width:356px">
     <img class="card-img-top" src="{{ asset('storage/images/CR/one.png') }}" alt="Card image" style="width:100%">
     <div class="card-body">
      

@@ -266,6 +266,69 @@
                                                 </div>
                                             </td>
                                         </tr>
+
+
+
+    <tr>
+                                            <td>Customer Service</td>
+                                            <td>
+                                                <div class="row">
+                                                    @foreach(\Spatie\Permission\Models\Permission::where('name','LIKE','%confirm pick%')->get() as $permission)
+                                                        <div class="form-check form-check-inline col-md-2" style="margin-left:10px;">
+                                                            <input type="checkbox" name="permissions[]" class="form-check-input @error('permissions') is-invalid @enderror" value="{{ $permission->id }}" aria-label="permissions">
+                                                            <span class="badge badge-primary"style="font-size:small;"> {{ $permission->name }} </span>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </td>
+                                        </tr>
+
+
+    <tr>
+                                            <td>Store</td>
+                                            <td>
+                                                <div class="row">
+                                                    @foreach(\Spatie\Permission\Models\Permission::where('name','LIKE','%store%')->get() as $permission)
+                                                        <div class="form-check form-check-inline col-md-2" style="margin-left:10px;">
+                                                            <input type="checkbox" name="permissions[]" class="form-check-input @error('permissions') is-invalid @enderror" value="{{ $permission->id }}" aria-label="permissions">
+                                                            <span class="badge badge-primary"style="font-size:small;"> {{ $permission->name }} </span>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </td>
+                                        </tr>
+
+<tr>
+                                            <td>Sorting & Packing</td>
+                                            <td>
+                                                <div class="row">
+                                                    @foreach(\Spatie\Permission\Models\Permission::where('name','LIKE','%confirm packing%')->get() as $permission)
+                                                        <div class="form-check form-check-inline col-md-2" style="margin-left:10px;">
+                                                            <input type="checkbox" name="permissions[]" class="form-check-input @error('permissions') is-invalid @enderror" value="{{ $permission->id }}" aria-label="permissions">
+                                                            <span class="badge badge-primary"style="font-size:small;"> {{ $permission->name }} </span>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </td>
+                                        </tr>
+
+
+
+    <tr>
+                                            <td>Labelling And Dispatching</td>
+                                            <td>
+                                                <div class="row">
+                                                    @foreach(\Spatie\Permission\Models\Permission::where('name','LIKE','%labelling & dispatching%')->get() as $permission)
+                                                        <div class="form-check form-check-inline col-md-2" style="margin-left:10px;">
+                                                            <input type="checkbox" name="permissions[]" class="form-check-input @error('permissions') is-invalid @enderror" value="{{ $permission->id }}" aria-label="permissions">
+                                                            <span class="badge badge-primary"style="font-size:small;"> {{ $permission->name }} </span>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        
                                     </tbody>
                                     <tfoot>
                                     <tr>

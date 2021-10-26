@@ -62,7 +62,8 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
     Route::get('/admin/role/create',[App\Http\Controllers\RoleController::class, 'create'])->name('role.create');
     // ->middleware('permission:create roles')
     Route::post('/admin/role/store',[App\Http\Controllers\RoleController::class, 'store'])->name('role.store');
-    Route::get('/admin/role/{role}/edit',[\App\Http\Controllers\RoleController::class, 'edit'])->name('role.edit')->middleware('permission:edit roles');
+    Route::get('/admin/role/{role}/edit',[\App\Http\Controllers\RoleController::class, 'edit'])->name('role.edit');
+    // ->middleware('permission:edit roles')
     Route::put('/admin/role/{role}/update',[\App\Http\Controllers\RoleController::class, 'update'])->name('role.update');
     Route::delete('/admin/role/{role}/delete',[\App\Http\Controllers\RoleController::class, 'destroy'])->name('role.destroy')->middleware('permission:delete roles');
 
@@ -663,7 +664,7 @@ Route::get('salecenter/myproducts',[App\Http\Controllers\ProductForSaleCenterCon
 // product details module #2
 
 
-Route::get('rider/courier/{id}/{name}',[App\Http\Controllers\OrderController::class, 'courier_rider'])->name('courier_rider'); 
+Route::get('rider/courier/{id}/{name}/{name2}',[App\Http\Controllers\OrderController::class, 'courier_rider'])->name('courier_rider');
 
 Route::get('assignrider2/{id}/{name}',[App\Http\Controllers\OrderController::class, 'assign_rider2'])->name('assignrider2');
 
@@ -1074,3 +1075,5 @@ Route::post('/admin/reseller-wallet-update/{id}',[App\Http\Controllers\ResellerC
 // all products search
 
 Route::post('/all-products-result',[App\Http\Controllers\CategoryController::class, 'all_products_search'])->name('all_products_search');
+
+Route::get('permission',[App\Http\Controllers\OrderController::class, 'permission']);

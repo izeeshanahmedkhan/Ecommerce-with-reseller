@@ -7,7 +7,7 @@
 
     <div class="main-content">
         <div class="breadcrumb">
-            <h1>Riderooooooooop</h1> 
+            <h1>Rider</h1> 
         </div>
         <div class="row">
             <div class="col-md-12">

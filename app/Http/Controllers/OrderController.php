@@ -25,6 +25,8 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use Notification;
 use App\Notifications\OffersNotification;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use PDF;
 
 class OrderController extends Controller
@@ -37,10 +39,27 @@ class OrderController extends Controller
 
 
 
-    public function courier_rider($id,$name)
+    public function courier_rider($id,$name,$name2)
 {
+     if(auth()->user()->hasPermissionTo('confirm pick') )
+      {
+        echo $name2;
+        $productorderdetail = productorderdetail::where('id',$name2)->first();
+        $productorderdetail->confirm_order = "1";
+        $productorderdetail->save();
+
+Session::flash('message', 'Order Confirm Successfully !');
+Session::flash('alert-class', 'alert-success');
+        return back();
+
+        // return view('admin.orders.courier_rider', compact('id','name'));
+      }
+      else
+      {
+        return view('nopermission');
+      }
     
-return view('admin.orders.courier_rider', compact('id','name'));
+
 }
 
 
@@ -68,8 +87,10 @@ Session::flash('alert-class', 'alert-success');
 
 }
   public function not_recieved($riderorderrr)
-  {
-    $update = riderproductorder::where('id',$riderorderrr)->first();
+  { 
+    if( auth()->user()->hasPermissionTo('store'))
+    {
+        $update = riderproductorder::where('id',$riderorderrr)->first();
     $update->status = "1";
     $update->save();
 
@@ -77,11 +98,22 @@ Session::flash('alert-class', 'alert-success');
 Session::flash('message', 'Update Successfully !');
 Session::flash('alert-class', 'alert-success');
  return back();
+    }
+
+    else 
+    {
+      return view ('nopermission');
+    }
+  
 
   }
 
     public function confirm_packing($id)
   {
+
+ if( auth()->user()->hasPermissionTo('confirm packing'))
+     {
+
     $update = productorderdetail::where('id',$id)->first();
     $update->packing_status = "1";
     $update->save();
@@ -90,6 +122,12 @@ Session::flash('alert-class', 'alert-success');
 Session::flash('message', 'Sorting & Packing Successfully Checked !');
 Session::flash('alert-class', 'alert-success');
  return back();
+     }
+ else 
+ {
+  return view('nopermission');
+ }
+
 
   }
 
@@ -425,15 +463,33 @@ Session::flash('flash_type', 'alert-success');
 
  public function assign_rider2($id,$name)
     { 
+      if(auth()->user()->hasPermissionTo('confirm pick') && auth()->user()->hasPermissionTo('store'))
+    {
+      return view('admin.orders.assignrider2', compact(['id', 'name']));
+    }
+    else
+    {
+
+         return view('nopermission');
+
+    }
         
-    return view('admin.orders.assignrider2', compact(['id', 'name']));
+    
     }
 
 
  public function assign_rider3($id,$name)
     { 
         
-    return view('admin.orders.assignrider3', compact(['id', 'name']));
+    if(auth()->user()->hasPermissionTo('labelling & dispatching'))
+    {
+        return view('admin.orders.assignrider3', compact(['id', 'name']));
+    }
+    else
+    {
+      return view('nopermission');
+    }
+  
     }
 
 
@@ -444,7 +500,10 @@ Session::flash('flash_type', 'alert-success');
 public function rider_order2(request $req)
     {
 
-       $riderproductorder = new riderproductorder;
+    if(auth()->user()->hasPermissionTo('confirm pick') && auth()->user()->hasPermissionTo('store'))
+
+    {
+         $riderproductorder = new riderproductorder;
        $riderproductorder->rider_id = $req->riderid;
        $riderproductorder->product_name = $req->productname;
        $riderproductorder->description = $req->description;
@@ -459,6 +518,12 @@ public function rider_order2(request $req)
         Session::flash('flash_message', 'Rider Assigned Successfully !');
         Session::flash('flash_type', 'alert-success');
        return redirect ('/orderdetails');
+    }
+    
+    else 
+    {
+      return view('nopermission');
+    }
 
 
         
@@ -466,8 +531,9 @@ public function rider_order2(request $req)
 
     public function rider_order3(request $req)
     {
-
-       $riderproductorder = new riderordercustomer;
+if(auth()->user()->hasPermissionTo('labelling & dispatching') ) 
+{
+   $riderproductorder = new riderordercustomer;
        $riderproductorder->rider_id = $req->riderid;
        $riderproductorder->product_name = $req->productname;
        $riderproductorder->description = $req->description;
@@ -483,6 +549,13 @@ public function rider_order2(request $req)
         Session::flash('flash_type', 'alert-success');
        return redirect ('/orderdetails');
 
+}
+
+else
+{
+  return view('nopermission');
+}
+      
 
         
     }
@@ -492,15 +565,26 @@ public function edit_assign_rider2_view($id,$name,$name2)
 
     // $order_riders = riderproductorder::where('id', $name3)->first();
     // echo $order_riders;
+      if( auth()->user()->hasPermissionTo('store'))
+      {
+         return view('admin.orders.editrider2', compact(['id', 'name','name2']));
+      }
 
- return view('admin.orders.editrider2', compact(['id', 'name','name2']));
+      else 
+      {
+        return view('nopermission');
+      }
+
+
     }
 
 
     public function edit_assign_rider2(request $req)
     {
-     
-     $order_riders = riderproductorder::where('id', $req->editriderid)->first();
+
+          if( auth()->user()->hasPermissionTo('store') )
+      {
+          $order_riders = riderproductorder::where('id', $req->editriderid)->first();
      
         $order_riders->rider_id = $req->riderid;
         $order_riders->description = $req->description;
@@ -508,10 +592,16 @@ public function edit_assign_rider2_view($id,$name,$name2)
 
         $order_riders->save();
 
-Session::flash('flash_message', 'Rider Reassigned Successfully !');
-Session::flash('flash_type', 'alert-success');
+        Session::flash('flash_message', 'Rider Reassigned Successfully !');
+        Session::flash('flash_type', 'alert-success');
 
         return redirect ('/orderdetails');
+      }
+     else 
+     {
+      return view('nopermission');
+     }
+   
     }
 
 
@@ -887,6 +977,12 @@ public function advancepayment_update(request $req,$id)
     
     }
 
+public function permission()
+    {
+
+      $permission = Permission::create(['name' => 'labelling & dispatching']);
+      echo"success";
+    }
 
 
 }
