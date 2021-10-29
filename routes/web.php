@@ -664,7 +664,7 @@ Route::get('salecenter/myproducts',[App\Http\Controllers\ProductForSaleCenterCon
 // product details module #2
 
 
-Route::get('rider/courier/{id}/{name}/{name2}',[App\Http\Controllers\OrderController::class, 'courier_rider'])->name('courier_rider');
+// 
 
 Route::get('assignrider2/{id}/{name}',[App\Http\Controllers\OrderController::class, 'assign_rider2'])->name('assignrider2');
 
@@ -676,7 +676,6 @@ Route::get('notavaialble/{pro_id}/{pro_order_id}/{pro_weight},/{pro_totalprice}'
 Route::get('not/recieved/{riderorderrr}',[App\Http\Controllers\OrderController::class, 'not_recieved'])->name('notrecieve');
 
 
-Route::get('confirm/packing/{id}',[App\Http\Controllers\OrderController::class, 'confirm_packing'])->name('confirmpacking');
 
 
 
@@ -844,6 +843,7 @@ Route::get('/category',[App\Http\Controllers\FrontEndController::class, 'categor
 Route::get('/contact',[App\Http\Controllers\FrontEndController::class, 'contact'])->name('contact');
 //Route::get('/order',[App\Http\Controllers\FrontEndController::class, 'order'])->name('order');
 Route::get('/single/{product}/product',[App\Http\Controllers\FrontEndController::class, 'single_product'])->name('single_product');
+
 Route::get('/single/{colour}/colour/{product}/product',[App\Http\Controllers\FrontEndController::class, 'single_colour'])->name('single_colour');
 
 
@@ -1077,3 +1077,10 @@ Route::post('/admin/reseller-wallet-update/{id}',[App\Http\Controllers\ResellerC
 Route::post('/all-products-result',[App\Http\Controllers\CategoryController::class, 'all_products_search'])->name('all_products_search');
 
 Route::get('permission',[App\Http\Controllers\OrderController::class, 'permission']);
+
+
+
+
+Route::get('confirm/packing/{id}',[App\Http\Controllers\OrderController::class, 'confirm_packing'])->name('confirmpacking');
+
+Route::get('confirmm/order/{id}/{name}/{name2}',[App\Http\Controllers\OrderController::class, 'courier_rider'])->name('courier_rider');

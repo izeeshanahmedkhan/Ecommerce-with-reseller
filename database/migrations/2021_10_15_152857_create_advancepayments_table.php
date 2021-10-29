@@ -21,6 +21,7 @@ class CreateAdvancepaymentsTable extends Migration
             $table->string('bank_details');
             $table->float('amount');
             $table->text('transaction_date');
+            $table->integer('status');
             $table->timestamps();
         });
     }

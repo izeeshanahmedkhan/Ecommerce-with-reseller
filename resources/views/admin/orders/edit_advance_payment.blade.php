@@ -76,8 +76,22 @@
                                          <input class="form-control" id="date" name="date" value="{{$advance->date}}" type="date"/>
                           </div>
                                                       </br>
+
+                                                        <div class="form-group-custom-control">
+                                
+                        <label for="deal_for">Status </label>
+                                    <select class="form-control @error('far') is-invalid @enderror" id="status" name="status">
+                                       
+                                  
+                                    
+                 <option value="1">Approved </option>
+                 <option value="0">Disapproved </option>
+                                     
+                                        
+                                    </select>       <!-- End .custom-checkbox -->
+                            </div><!-- End .form-group -->
                    
-                         
+                            </br>
                          
                            
                               

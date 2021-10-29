@@ -162,7 +162,7 @@
 	<div class="col-4">
 									<div class="form-group required-field">
 										<label>Advance Payment </label>
-										<input type="text" class="form-control" name="advancepayment"required>
+										<input type="text" class="form-control" name="advancepayment">
 									</div>
 								</div>
 
@@ -181,7 +181,7 @@
 <div class="col-md-4 form-group mb-3">
                                     	<div class="form-group required-field">
 										<label>Cash Of Delivery Amount </label>
-										<input type="text" class="form-control" name="cashdelivery"required>
+										<input type="text" class="form-control" name="cashdelivery">
 									</div>
 
 

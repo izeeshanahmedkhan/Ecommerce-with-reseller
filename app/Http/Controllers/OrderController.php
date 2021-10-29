@@ -17,7 +17,8 @@ use App\Models\ResellerCart;
 use App\Models\orderdetail;
 use App\Models\productorderdetail;
 use App\Models\riderproductorder;
-use App\Models\advancepayment;
+use App\Models\advancepayment; 
+use App\Models\ColourImageProductSize;
 use App\Notifications\OrderProcessed;
 use Illuminate\Http\Request;
 use Auth;
@@ -41,10 +42,18 @@ class OrderController extends Controller
 
     public function courier_rider($id,$name,$name2)
 {
+ 
+
      if(auth()->user()->hasPermissionTo('confirm pick') )
       {
-        echo $name2;
         $productorderdetail = productorderdetail::where('id',$name2)->first();
+        $product_detail = ColourImageProductSize::where('product_id',$productorderdetail->product_id)->where('colour_id',$productorderdetail->color)->where('size_id',$productorderdetail->size)->first();
+
+        $totalquantity =  $product_detail->quantity;
+        $product_detail->quantity = $totalquantity-$productorderdetail->product_quantity;
+        $product_detail->save();
+
+        // $productorderdetail = productorderdetail::where('id',$name2)->first();
         $productorderdetail->confirm_order = "1";
         $productorderdetail->save();
 
@@ -320,15 +329,9 @@ elseif($len == 6)
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+  
 
-
-
-     */
-
+   
 
 
     // ==============================ORDER PROCESSING=========================
@@ -967,6 +970,7 @@ public function advancepayment_update(request $req,$id)
  $advance->bank_details = $req->bankdetails;
  $advance->amount = $req->amount;
  $advance->transaction_date = $req->date;
+ $advance->status = $req->status;
 
  $advance->save();
 

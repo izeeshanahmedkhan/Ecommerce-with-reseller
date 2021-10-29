@@ -5,6 +5,7 @@ use App\Models\orderdetail;
 use App\Models\productorderdetail;
 use App\Models\Offer;
 use App\Models\ResellerUser;
+use App\Models\advancepayment;
 use App\Models\DeliveryCharges;
 use App\Models\resellerwallet;
 use Illuminate\Http\Request;
@@ -128,6 +129,8 @@ return view('frontend.thankyouorder',['order_num'=> $ordernumber]);
          $image3 = $img3->getClientOriginalName();
         $img3->storeAs('/images/transferslips',$image3);
         $order->advancepayment_transfer_slip = $image3;
+
+
         }
        
        if($req->cashdelivery!=null)
@@ -224,9 +227,21 @@ return view('frontend.thankyouorder',['order_num'=> $ordernumber]);
   $or_id = orderdetail::where('id',$ordernumberid)->first();
   $id_order = $or_id->id;
 
+if($img3!= null)
+ {
 
+ $advance = new advancepayment;
 
+ $advance->order_id =  $id_order;
+ $advance->payment_recieved = "0";
+ $advance->transaction_id = "0";
+ $advance->bank_details = "0";
+ $advance->amount =$req->advancepayment;
+$advance->status = "0";
 
+ $advance->save();
+
+}
         DB::table('orderdetails')
         ->where('id',$id_order)
         ->update(['deliverycharges' => $totaldeliverycharges]);

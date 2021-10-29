@@ -260,17 +260,19 @@
                        @endphp 
 
           @if($statussss == 4)
-        <h5> <b>Recieved By Customer</b></h5>
+    <span class="badge badge-success" style="font-size:15px;"><b>Recieved By Customer</b></span>
          @elseif($statussss == 1)
-        <h5> <b>Recieved By Admin</b></h5>
-        <h5> <b>Admin Assigned Rider(pending)</b> </h5>
+         
+          <span class="badge badge-secondary" style="font-size:15px;"><b>Recieved By Admin</b></span>
+        <span class="badge badge-warning" style="font-size:15px;"><b>Admin Assigned Rider(pending)</b></span>
 
         @elseif($statussss == 2)
-        <h5> <b>Recieved By Admin</b></h5>
+       <span class="badge badge-secondary" style="font-size:15px;"><b>Recieved By Admin</b></span>
+
         <h5> <b>Admin Assigned Rider(process)</b> </h5>
 
         @elseif($statussss == 3)
-        <h5> <b>Recieved By Admin</b></h5>
+      <span class="badge badge-success" style="font-size:15px;"><b>Recieved By Admin</b></span>
         <h5> <b>Admin Assigned Rider(Ready To Dispatch)</b> </h5>
         @endif
 
@@ -291,7 +293,7 @@
    <p> <b>Recieved By Admin/store</b><p>
          <a href="{{route('assignrider3',['id'=>$productorder->product_id,'name'=>$productorder->order_id])}}" class="btn btn-raised btn-raised-primary m-1" style="color: white">Deliver By Rider</a>
 
-                               <a href="{{route('courier_rider',['id'=>$productorder->product_id,'name'=>$productorder->order_id])}}" class="btn btn-raised btn-raised-success m-1" style="color: white">Deliver By Courier</a>
+                               <a href="" class="btn btn-raised btn-raised-success m-1" style="color: white">Deliver By Courier</a>
                              </div>
 
     @else
@@ -332,10 +334,30 @@
 
 
                                                @php $one = 0 ; @endphp
-                                               
-@if($productorder->confirm_order== "" || $productorder->confirm_order==0)
 
-        <a href="{{route('courier_rider',['id'=>$productorder->product_id,'name'=>$productorder->order_id,'name2'=>$productorder->id])}}" class="btn btn-raised btn-raised-success m-1" style="color: white">Confirm Process</a>
+
+
+
+@php
+$advancepayment = \App\Models\advancepayment::where('order_id',$productorder->order_id)->first();
+@endphp
+
+
+
+<!-- advancepayment start -->
+@if(isset($advancepayment)) 
+<!-- ye wala -->
+ @if($advancepayment->status==0)
+  <span class="badge badge-warning" style="font-size:15px;"><b>Advance Payment Not Approved By Accountant</b></span>
+
+
+@elseif($advancepayment->status==1)
+
+           <!-- confirm order start -->                                   
+@if($productorder->confirm_order== "" || $productorder->confirm_order==0)  
+
+
+        <a href="{{route('courier_rider',['id'=> $productorder->product_id,'name'=>$productorder->order_id,'name2'=>$productorder->id])}}" class="btn btn-raised btn-raised-success m-1" style="color: white">Confirm Process </a>
 
 
 <a href="{{route('notavailable',['pro_id'=>$productorder->id,'pro_order_id'=>$productorder->order_id,'pro_weight'=> $productorder->product_weight,'pro_totalprice'=>$productorder->total_price])}}" class="btn btn-raised btn-raised-primary m-1" style="color: white">Not Available</a>
@@ -347,6 +369,34 @@
 <a href="{{route('notavailable',['pro_id'=>$productorder->id,'pro_order_id'=>$productorder->order_id,'pro_weight'=> $productorder->product_weight,'pro_totalprice'=>$productorder->total_price])}}" class="btn btn-raised btn-raised-primary m-1" style="color: white">Pick By Courier</a>
 
 @endif
+<!-- confirm order end -->
+
+
+@endif
+<!-- ye wala end -->
+@else
+
+
+            <!-- confirm order start -->                                   
+@if($productorder->confirm_order== "" || $productorder->confirm_order==0)  
+
+
+        <a href="{{route('courier_rider',['id'=> $productorder->product_id,'name'=>$productorder->order_id,'name2'=>$productorder->id])}}" class="btn btn-raised btn-raised-success m-1" style="color: white">Confirm Process{{$productorder->id}}</a>
+
+
+<a href="{{route('notavailable',['pro_id'=>$productorder->id,'pro_order_id'=>$productorder->order_id,'pro_weight'=> $productorder->product_weight,'pro_totalprice'=>$productorder->total_price])}}" class="btn btn-raised btn-raised-primary m-1" style="color: white">Not Available</a>
+@elseif($productorder->confirm_order==1)
+
+ <a href="{{route('assignrider2',['id'=>$productorder->product_id,'name'=>$productorder->order_id])}}" class="btn btn-raised btn-raised-success m-1" style="color: white">Pick By Rider</a>
+
+
+<a href="{{route('notavailable',['pro_id'=>$productorder->id,'pro_order_id'=>$productorder->order_id,'pro_weight'=> $productorder->product_weight,'pro_totalprice'=>$productorder->total_price])}}" class="btn btn-raised btn-raised-primary m-1" style="color: white">Pick By Courier</a>
+
+@endif
+<!-- confirm order end -->
+
+@endif
+<!-- advancepayment end -->
 
                                               @endif<!--  module 2 rider end -->
 

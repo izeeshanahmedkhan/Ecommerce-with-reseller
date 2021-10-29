@@ -218,7 +218,7 @@
                     <div class="triangle"></div>
                 </li>
         @endif
-<!-- 
+
        
                 <li class="nav-item {{$activePage == 'customerIndex' ? 'active' : ''}}"><a class="nav-item-hold" href="{{route('customer.index')}}">
                         <i class="nav-icon fas fa-users"></i><span class="nav-text">customers</span></a>
@@ -262,7 +262,7 @@
                     <div class="triangle"></div>
                 </li>
           
- -->
+
 
 @if(auth()->user()->hasRole('super-admin'))
 

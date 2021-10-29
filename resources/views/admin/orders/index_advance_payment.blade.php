@@ -45,6 +45,7 @@
                                     <th>Bank Details</th>
                                      <th>Amount</th>
                                        <th>Transaction Date</th>
+                                       <th>Status</th>
 
                                     <th>Created At</th>
                                     <th>Action</th>
@@ -61,6 +62,7 @@
                                         <td>{{$advancepayment->transaction_id}}</td>
                                         <td>{{$advancepayment->bank_details}}</td>
                                          <td>{{$advancepayment->amount}}</td>
+                                        
                                           <td>{{$advancepayment->transaction_date}}</td>
                                        
 
@@ -68,7 +70,11 @@
 
     
          
-                                        
+                                         @if($advancepayment->status == 1)
+                                          <td>Approved</td>
+                                          @else
+                                        <td>Disapproved</td>
+                                        @endif
                                     
                                         <td>{{$advancepayment->created_at->diffForHumans()}}</td>
                                         <td>
@@ -92,6 +98,7 @@
                                     <th>Bank Details</th>
                                      <th>Amount</th>
                                        <th>Transaction Date</th>
+                                        <th>Status</th>
 
                                     <th>Created At</th>
                                     <th>Action</th>
