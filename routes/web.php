@@ -127,7 +127,17 @@ Route::group(['middleware' => ['auth','checkStatus']], function (){
     Route::post('/admin/product/store',[App\Http\Controllers\ProductController::class, 'store'])->name('product.store');
     Route::get('/admin/product/{product}/edit',[App\Http\Controllers\ProductController::class, 'edit'])->name('product.edit')->middleware('permission:edit products');
     Route::put('/admin/product/{product}/update',[App\Http\Controllers\ProductController::class, 'update'])->name('product.update');
+
+
     Route::delete('/admin/product/{product}/delete',[App\Http\Controllers\ProductController::class, 'destroy'])->name('product.destroy')->middleware('permission:delete products');
+
+
+
+Route::get('/admin/view/product/{id}',[App\Http\Controllers\ProductController::class, 'view_product_details'])->name('viewproduct');
+
+
+
+
     Route::put('/admin/product/{product}/status',[App\Http\Controllers\ProductController::class, 'status'])->name('product.status')->middleware('permission:Products status');
 
 // admin product assign to sale center
@@ -459,6 +469,12 @@ Route::get('/admin/reseller/account',[App\Http\Controllers\ResellerController::c
     Route::post('/admin/deal/{deal}/update',[App\Http\Controllers\DealController::class, 'update'])->name('deal.update');
 
 Route::get('/admin/deal/show/{id}/',[App\Http\Controllers\DealController::class, 'show1'])->name('dealshow');
+
+
+Route::get('/admin/deal-edit/{id}/',[App\Http\Controllers\DealController::class, 'edit_deall'])->name('deal-edit');
+
+
+Route::post('/admin/deal-update/{id}/',[App\Http\Controllers\DealController::class, 'update_deall'])->name('deal-update');
 
     Route::delete('/admin/deal/{deal}/delete',[App\Http\Controllers\DealController::class, 'destroy'])->name('deal.destroy');
     // ->middleware('permission:delete deals')

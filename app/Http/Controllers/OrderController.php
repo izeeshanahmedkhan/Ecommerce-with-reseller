@@ -50,8 +50,26 @@ class OrderController extends Controller
         $product_detail = ColourImageProductSize::where('product_id',$productorderdetail->product_id)->where('colour_id',$productorderdetail->color)->where('size_id',$productorderdetail->size)->first();
 
         $totalquantity =  $product_detail->quantity;
-        $product_detail->quantity = $totalquantity-$productorderdetail->product_quantity;
+
+        if($totalquantity > $productorderdetail->product_quantity)
+        {
+         $product_detail->quantity = $totalquantity-$productorderdetail->product_quantity;
         $product_detail->save();
+        }
+        elseif(($totalquantity == $productorderdetail->product_quantity))
+        {
+             $product_detail->quantity = $totalquantity-$productorderdetail->product_quantity;
+        $product_detail->save();
+        }
+
+         elseif(($totalquantity < $productorderdetail->product_quantity))
+        {
+          
+          Session::flash('message', 'You donot have stock of this product');
+         Session::flash('alert-class', 'alert-warning');
+        return back();
+        }
+      
 
         // $productorderdetail = productorderdetail::where('id',$name2)->first();
         $productorderdetail->confirm_order = "1";

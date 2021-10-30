@@ -187,6 +187,18 @@ $parent2 = App\Models\Category::where('parent_id',$par->id)->get();
                                         </div><!-- End .row -->
                                     </div><!-- End .megamenu -->
                                 </li>
+
+
+
+
+
+ <li>
+                                    <a href="/">Deals & Discount</a>
+                                </li>
+
+
+
+
                                 <li>
                                     <a href="#">Pages</a>
                                     <ul>

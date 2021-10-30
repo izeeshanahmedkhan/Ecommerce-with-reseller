@@ -274,7 +274,7 @@
 <div class="product-action">
   <div class="product-single-filter">
   <label>Quantity:</label>
-<input class=" form-control" type="number" name="quantity"max="10"min="1">
+<input class=" form-control" type="number" name="quantity"max="99"min="1">
                                             <!-- <input class=" form-control" type="text" name="userid"> -->
      <input class=" form-control" type="hidden" name="productid"value="{{$product->id}}">
 

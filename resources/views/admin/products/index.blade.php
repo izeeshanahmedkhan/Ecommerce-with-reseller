@@ -1,7 +1,13 @@
 @extends('admin.layouts.master')
 @section('content')
 
-  
+  <style>
+    .thead th { position: sticky; top: 0; }
+  </style>
+
+
+
+
 
     <input type="hidden" value="{{$activePage = 'productIndex', $title = 'Products- Nafia Garments'}}">
     <div class="main-content">
@@ -88,8 +94,8 @@
     
 
                         <div class="table-responsive">
-                            <table class="display table table-striped table-bordered" id="zero_configuration_table" style="width:100%">
-                                <thead>
+                            <table class="display table table-striped table-bordered " id="zero_configuration_table" style="width:100%">
+                                <thead class="">
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
@@ -160,6 +166,13 @@
                                                         class="nav-icon i-Close-Window font-weight-bold"></i></button>
                                             </form>
                                             @endif
+
+   <a href="{{route('viewproduct',  $product->id)}}" class="btn btn-raised btn-raised-success m-1" style="color: white"><i
+                                                        class="far fa-eye font-weight-bold"></i></a>
+
+
+
+
                                             @if(auth()->user()->hasRole('super-admin') || auth()->user()->hasPermissionTo('Products status'))
                                                 @if($product->status == 0)
                                                     <form method="POST" action="{{route('product.status',$product)}}">
@@ -177,6 +190,8 @@
                                                     </form>
                                                 @endif
                                             @endif
+
+
                                         </td>
 
                                     </tr>

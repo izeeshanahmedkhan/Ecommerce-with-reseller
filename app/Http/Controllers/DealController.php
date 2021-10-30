@@ -360,6 +360,31 @@ return back();
     return view('admin.deals.show1',['deal'=> $dealsizecolor]);
     }
 
+
+  public function edit_deall($id)
+    {
+
+         $dealsizecolor = dealsizecolor::where('id',$id)
+            ->first();
+    return view('admin.deals.edit_deal_view_CS',['deal'=>  $dealsizecolor]);
+    }
+
+     public function update_deall(request $req , $id)
+    {
+
+
+         $dealsizecolor = dealsizecolor::where('id',$id)
+            ->first();
+             $dealsizecolor->size_id = $req->size;
+             $dealsizecolor->color_id = $req->color;
+               $dealsizecolor->save();
+
+              Session::flash('message','Updated Successfully');
+              Session::flash('alert-type','success');
+
+          return back(); 
+    // return view('admin.deals.edit_deal_view_CS',['deal'=>  $dealsizecolor]);
+    }
     /**
      * Update the specified resource in storage.
      *

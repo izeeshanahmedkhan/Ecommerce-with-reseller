@@ -43,6 +43,24 @@ class ProductController extends Controller
         return $pdf->download('All_Products.pdf');
     }
 
+
+
+
+
+
+public function view_product_details($id)
+    {
+
+      $product_details = ColourImageProductSize::where('product_id',$id)->get();
+
+       return view('admin.products.productdetails',['products'=>$product_details]);
+    }
+
+
+
+
+
+
     public function index_pdf1($pro1)
     {
         // $riders =  Rider::all();

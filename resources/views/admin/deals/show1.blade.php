@@ -40,7 +40,11 @@
             <td>{{$dealsizecolor->size_id}}</td>
         <td>{{$dealsizecolor->color_id}}</td>
 
-        <td></td>
+        <td>
+             <a href="{{route('deal-edit',$dealsizecolor->id)}}" class="btn btn-raised btn-raised-primary m-1" style="color: white"><i
+                                                    class="nav-icon i-Pen-2 font-weight-bold"></i></a>
+
+        </td>
                                         
                                     </tr>
                                     @endforeach
