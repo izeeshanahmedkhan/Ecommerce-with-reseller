@@ -193,7 +193,7 @@ $parent2 = App\Models\Category::where('parent_id',$par->id)->get();
 
 
  <li>
-                                    <a href="/">Deals & Discount</a>
+                                    <a href="{{route('deals-discount')}}">Deals & Discount</a>
                                 </li>
 
 

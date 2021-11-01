@@ -866,6 +866,7 @@ Route::get('/single/{colour}/colour/{product}/product',[App\Http\Controllers\Fro
 
 Route::post('/single/{product}/hello',[App\Http\Controllers\CartController::class, 'addcart']);
 
+Route::post('deals/add-cart',[App\Http\Controllers\CartController::class, 'deal_add_cart'])->name('deal_add_cart');
 
 Route::get('clearcart',[App\Http\Controllers\CartController::class, 'clear_cart'])->name('clearcart');
 
@@ -1027,6 +1028,8 @@ Route::post('updateitems/{id}',[App\Http\Controllers\CartController::class, 'upd
 
 
 Route::get('deletecartitem/{id}',[App\Http\Controllers\CartController::class, 'delete_cart_item']);
+
+Route::get('deletecartitem_cart/{id}',[App\Http\Controllers\CartController::class, 'delete_cart_item_cart']);
 // Route::get('single/{product}/deletecartitem/{id}',[App\Http\Controllers\CartController::class, 'delete_cart_item']);
 
 Route::get('cat/{id}',[App\Http\Controllers\CategoryController::class,'category_products_specific1'])->name('cat1');
@@ -1100,3 +1103,13 @@ Route::get('permission',[App\Http\Controllers\OrderController::class, 'permissio
 Route::get('confirm/packing/{id}',[App\Http\Controllers\OrderController::class, 'confirm_packing'])->name('confirmpacking');
 
 Route::get('confirmm/order/{id}/{name}/{name2}',[App\Http\Controllers\OrderController::class, 'courier_rider'])->name('courier_rider');
+
+
+
+
+
+
+Route::get('deal/discount',[App\Http\Controllers\DealController::class, 'deals_discount'])->name('deals-discount');
+
+
+Route::get('deal/discount/details/{id}',[App\Http\Controllers\DealController::class, 'single_product_deals'])->name('single_product_deals');

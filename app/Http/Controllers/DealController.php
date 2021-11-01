@@ -488,4 +488,24 @@ return back();
         }
 
     }
+
+
+
+
+    public function deals_discount()
+    {
+        $categories = Deal::all();
+
+        return view ('frontend.category_deals',['catagories'=>  $categories]);
+    }
+
+
+
+  public function single_product_deals($id)
+    {
+     $categories = Deal::where('id',$id)->first();
+   return view ('frontend.singleproduct_deals',['categories'=>  $categories]);
+    }
+
+
 }

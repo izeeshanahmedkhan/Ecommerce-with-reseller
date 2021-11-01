@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Offer;
+use App\Models\Deal;
+use App\Models\cartt;
 use App\Models\ResellerUser;
 use App\Models\orderdetail;
 use Illuminate\Http\Request;
 use Auth;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Session;
+use DB;
 
 class CartController extends Controller
 {
@@ -25,6 +28,9 @@ class CartController extends Controller
 
   public function cart_view(request $req)
     { 
+
+        cartt::where('created_at', '<=', now()->subMinutes(30)->toDateTimeString())
+        ->delete();
 
       $cartCollection = Cart::getContent();
       $userId = auth()->user()->id; // or any string represents user identifier
@@ -140,12 +146,31 @@ Session::flash('alert-class', 'alert-success');
 
  }
 
+
+  public function delete_cart_item_cart($id)
+    { 
+
+  $cartt = cartt::where('id',$id)->first()->delete();
+
+
+Session::flash('message', 'Delete Successfully!'); 
+Session::flash('alert-class', 'alert-success'); 
+ return back();
+
+ }
+
+
   public function clear_cart()
     { 
 
      $userId = auth()->user()->id;
      Cart::clear();
      Cart::session($userId)->clear();
+
+
+      DB::table('cartts')->delete();
+
+
      Session::flash('message', 'Cart Clear Successfully!'); 
 Session::flash('alert-class', 'alert-success'); 
      return back();
@@ -165,6 +190,41 @@ Session::flash('alert-class', 'alert-success');
  return back();
 
  }
+
+
+
+
+
+
+
+     public function deal_add_cart(request $req)
+    {
+
+         if(!$userId = auth()->user())
+        {
+           return redirect('/login');
+        }
+      
+      $deal=Deal::find($req->dealid);
+
+      $cart = new cartt;
+      $cart->deal_id = $deal->id;
+      $cart->deal_name = $deal->dealname;
+      $cart->user_id = $userId = auth()->user()->id;
+      $cart->totalprice = $deal->totalprice;
+      $cart->save();
+
+
+cartt::where('created_at', '<=', now()->subMinutes(30)->toDateTimeString())
+->delete();
+
+   Session::flash('flash_message', 'Product Add To Cart Successfully !');
+   Session::flash('flash_type', 'alert-success');
+   return redirect('/category');
+
+     
+
+    }
 
 
      public function addcart(request $req)
@@ -214,6 +274,11 @@ Session::flash('alert-class', 'alert-success');
     'size' => $req->size, // new item price, price can also be a string format like so: '98.67'
 ));
     
+
+    cartt::where('created_at', '<=', now()->subMinutes(30)->toDateTimeString())
+->delete();
+
+
     
 
            $userIdi = auth()->user()->id;

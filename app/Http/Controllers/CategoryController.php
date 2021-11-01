@@ -441,7 +441,10 @@ $dd[] = Product::where('id',$i->product_id)->where('price','>=',$start)->where('
   
   public function category_products()
     {
-        $categories = Product::all();
+
+     
+        $categories = Product::paginate(15);
+
         return view ('frontend.category2',['catagories'=>  $categories]);
 
             

@@ -123,11 +123,7 @@
 
  @foreach($catagories  as $cat)
 
-   @php
-                                        
- $productimages = App\Models\ColourImageProductSize::where('product_id',$cat->id)->get();
-                                         
-  @endphp
+  
 
 
                             <div class="col-6 col-sm-4 col-md-3 col-xl-5col">
@@ -142,19 +138,11 @@
 
 
 
-
-@forelse ($productimages as $image)
-       <a href="{{route('single_product',$cat)}}">
-       
-     <img src="{{asset('storage/images/productImages/'.$image->image)}}" style="height:170px; width:auto; max-width:340px;
-">
+       <a href="{{route('single_product_deals',$cat)}}">
+     <img src="{{asset('storage/images/dealimages/'.$cat->image_1)}}" style="height:170px; width:auto; max-width:340px;">
       </a>
 
-    @break
-@empty
-    {{-- If for some reason the business has no images, you can put here some kind of placeholder image, using 3rd party services or maybe your own generic image --}}
-    
-@endforelse
+ 
 
                                     
                                         <div class="label-group">
@@ -172,9 +160,13 @@
                                             </div>
                                         </div>
                                        >
+
+                                        <h2 class="product-title">
+                                            <a href="{{route('single_product',$cat)}}"><b>{{$cat->deal}}</b></a>
+                                        </h2>
                                     
                                         <h2 class="product-title">
-                                            <a href="{{route('single_product',$cat)}}">{{$cat->name}}</a>
+                                            <a href="{{route('single_product',$cat)}}">{{$cat->dealname}}</a>
                                         </h2>
                                    
                                         <div class="ratings-container">
@@ -190,7 +182,7 @@
                                                <span class="old-price">${{$cat->price}}</span>
                                       
                                           
-                                            <span class="product-price">${{$cat->price}}</span>
+                                            <span class="product-price">${{$cat->totalprice}}</span>
                                         </div><!-- End .price-box -->
                                     </div><!-- End .product-details -->
 
@@ -217,7 +209,7 @@
                         </div>
 
                         <nav class="toolbox toolbox-pagination">
-                           <!--  <div class="toolbox-item toolbox-show">
+                            <div class="toolbox-item toolbox-show">
                                 <label>Show:</label>
 
                                 <div class="select-custom">
@@ -226,34 +218,22 @@
                                         <option value="24">24</option>
                                         <option value="36">36</option>
                                     </select>
-                                </div>
-                            </div> -->
+                                </div><!-- End .select-custom -->
+                            </div><!-- End .toolbox-item -->
 
-                        </br>
-
- <ul class="pagination toolbox-item">
-                                <li class="page-item active">
-                                   <span> {{$catagories->links()}}</span>
-                                </li>
-                             
-                            </ul>
-
-
-<style>
-    .w-5
-    {
-        display: none;
-    }
-</style>
-</br> 
-<center>
                             <ul class="pagination toolbox-item">
                                 <li class="page-item active">
-                                 
+                                    <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
                                 </li>
-                             
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                <li class="page-item"><span class="page-link">...</span></li>
+                                <li class="page-item">
+                                    <a class="page-link page-link-btn" href="#"><i class="icon-angle-right"></i></a>
+                                </li>
                             </ul>
-                            </center>
                         </nav>
                     </div><!-- End .main-content -->
 

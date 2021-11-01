@@ -124,6 +124,91 @@ Session::put('oldcart', $subTotal);
 								</tbody>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tbody>
+		
+@php
+$cartt = App\Models\cartt::where('user_id', Auth::user()->id)->get();
+@endphp
+		@foreach($cartt as $cart)
+
+
+
+		<tr class="product-row">
+	<td class="product-col">
+											
+		<figure class="product-image-container">
+
+
+@php
+$deal = App\Models\Deal::where('id',$cart->deal_id)->first();
+echo $deal->image_1;
+@endphp
+
+
+<a href="" class="product-image">
+		<img src="{{asset('storage/images/dealimages/'.$deal->image_1)}}" alt="product">
+   </a>
+
+
+
+
+
+	
+	  </figure>
+	<h2 class="product-title">
+	<a href="product.html">{{$cart->deal_name}}</a>
+	</h2>
+	</td>
+
+					
+	<td>{{$cart->totalprice}}</td>
+
+<td>
+
+	0
+</td>
+										
+	<td>
+	  {{$deal->deal}}
+	</td>
+
+    <td>{{$cart->totalprice}}</td>
+
+	</tr>
+	<tr class="product-action-row">
+	<td colspan="4" class="clearfix">
+    <div class="float-left">
+	<a href="#" class="btn-move">Move to Wishlist</a>
+	</div><!-- End .float-left -->
+											
+	<div class="float-right">
+	
+
+	</form>
+	<a href="deletecartitem_cart/{{$cart->id}}" title="Remove product" class="btn-remove icon-cancel"><span class="sr-only">Remove</span></a>
+   </div><!-- End .float-right -->
+	</td>
+	</tr>
+
+									@endforeach
+								</tbody>
+
+
+
 								<tfoot>
 									<tr>
 		<td colspan="4" class="clearfix">
