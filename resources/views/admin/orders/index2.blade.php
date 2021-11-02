@@ -169,13 +169,16 @@
                                     
                                         <td>{{$order->created_at->diffForHumans()}}</td>
                                         <td>
-                                            <a href="" class="btn btn-raised btn-raised-primary m-1" style="color: white"><i class="nav-icon i-Pen-2 font-weight-bold"></i></a>
-                                            <form method="POST" action="">
+                                            <a href="orderproductdetails_delete/{{$order->id}}" class="btn btn-raised btn-raised-danger m-1" style="color: white"><i class="nav-icon i-Close-Window font-weight-bold"></i></a>
+
+                                            
+
+                                           <!--  <form method="POST" action="">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"  class="btn btn-raised btn-raised-danger m-1" style="color: white"><i
                                                         class="nav-icon i-Close-Window font-weight-bold"></i></button>
-                                            </form>
+                                            </form> -->
                                              <a href="orderproductdetails/{{$order->id}}" class="btn btn-raised btn-raised-success m-1" style="color: white"><i
                                                         class="far fa-eye font-weight-bold"></i></a>
                                         </td>

@@ -347,6 +347,24 @@ elseif($len == 6)
 
     }
 
+    public function orderproduct_details_delete($id)
+    {
+ 
+
+ $orders_products = productorderdetail::where('order_id', $id)->delete();
+
+ $orders = orderdetail::where('id', $id)->delete();
+
+  Session::flash('flash_message', 'Order Deleted Successfully !');
+        Session::flash('flash_type', 'alert-success');
+       return redirect ('/orderdetails');
+
+ 
+
+
+
+    }
+
   
 
    

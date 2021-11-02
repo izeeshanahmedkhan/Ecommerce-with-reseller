@@ -654,6 +654,8 @@ Route::get('orderdetails/pdf6/{pro1}/{pro2}/{pro3}/{pro4}/{pro5}/{pro6}',[App\Ht
 
 Route::get('orderproductdetails/{id}',[App\Http\Controllers\OrderController::class, 'orderproduct_details']);
 
+Route::get('orderproductdetails_delete/{id}',[App\Http\Controllers\OrderController::class, 'orderproduct_details_delete']);
+
 Route::get('assignproduct/{id}/{name}',[App\Http\Controllers\OrderController::class, 'assign_product'])->name('assignproduct');
 
 Route::post('salecenterorder',[App\Http\Controllers\OrderController::class, 'salecenter_order'])->name('salecenterorder');
