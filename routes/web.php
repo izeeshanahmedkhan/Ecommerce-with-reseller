@@ -4,11 +4,64 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\Account\AssetController;
 use App\Http\Controllers\Account\EquityController;
 use App\Http\Controllers\Account\ExpenseController;
 use App\Http\Controllers\Account\IncomeController;
 use App\Http\Controllers\Account\LiabilityController;
+use App\Http\Controllers\Account\VoucherController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AddressPhoneEmailController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BatchController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CatalogueController;
+use App\Http\Controllers\CatalogueProductController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\ColourController;
+use App\Http\Controllers\ColourImageProductSizeController;
+use App\Http\Controllers\ContactusController;
+use App\Http\Controllers\CountryStateCityController;
+use App\Http\Controllers\CourierController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DealController;
+use App\Http\Controllers\DeliveryChargesController;
+use App\Http\Controllers\ForgotpasswordController;
+use App\Http\Controllers\FrontEndController;
+use App\Http\Controllers\GeneralDiscountController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HomeSettingController;
+use App\Http\Controllers\LogoController;
+use App\Http\Controllers\OfferController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PDFController;
+use App\Http\Controllers\OwnerController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductForOwnerController;
+use App\Http\Controllers\ProductForSaleCenterController;
+use App\Http\Controllers\ProductResellerController;
+use App\Http\Controllers\PurchasereturnController;
+use App\Http\Controllers\ResellerCartController;
+use App\Http\Controllers\ResellerController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\ReviewReplyController;
+use App\Http\Controllers\RiderController;
+use App\Http\Controllers\RiderOrderController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SaleCenterController;
+use App\Http\Controllers\SaleCenterOrderController;
+use App\Http\Controllers\SalereturnController;
+use App\Http\Controllers\SizeController;
+use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserCustomerController;
+use App\Http\Controllers\UserResellerController;
+use App\Http\Controllers\UserRiderController;
+use App\Http\Controllers\UserSaleCenterController;
+use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\NotificationController;
 
 /*
@@ -30,7 +83,7 @@ Auth::routes();
 
 
 
-Route::post('/single/{product}/product',[App\Http\Controllers\FrontEndController::class, 'single_product'])->name('single_product');
+// Route::post('/single/{product}/product',[App\Http\Controllers\FrontEndController::class, 'single_product'])->name('single_product');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
