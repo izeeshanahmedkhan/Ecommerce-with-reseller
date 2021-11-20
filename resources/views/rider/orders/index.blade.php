@@ -22,9 +22,10 @@
                                     <th>#</th>
                                     <th>Order Number</th>
                                     <th>Item Name</th>
-                                   
+                                    <th>Quantity</th>
                                     <th>Colour</th>
                                     <th>Size</th>
+                                     <th>Total Cash</th>
                                     <th>Status</th>
                                     <th>Created At</th>
                                     <th>Action</th>
@@ -46,24 +47,26 @@
                                                 {{ $order->product_name }}
                                             </td>
                                            
+
+                                           <td>       {{ $order->quantity }}</td>
                                             <td>
                                                 @php $colour = \App\Models\Colour::where('id',2)->first() @endphp
-
+<!-- 
                                                 <div style="background-color: {{ $colour->colourCode }}; width:25px; height: 25px; font-size: 0;">
 
-                                                </div>
-
+                                                </div> -->
+ {{$order->color}}
 
 
                                             </td>
                                             <td>
                                                 {{--@php $size = \App\Models\Size::where('id',$order->size_id)->first() @endphp--}}
 
-                                               karna he 
+                                             {{$order->size}}
 
 
                                             </td>
-
+<td> {{$order->cash}} </td>
                                             <td>
                                                 @if($order->status == 1)
 

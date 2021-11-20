@@ -7,30 +7,69 @@
                 <h4>View All Sale Returns</h4>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-3" style="padding-left: 40px;">
+                <a href="{{route('lastyearsalereturn')}}" class="btn btn-raised btn-raised-primary m-1" style="color: white;"><i
+                                    class="nav-icon font-weight-bold"></i>Last Year (Sale-Return)</a>
+            </div>
+
+
+             <div class="col-3">
+                <a href="{{route('lastmonthsalereturn')}}" class="btn btn-raised btn-raised-primary m-1" style="color: white;"><i
+                                    class="nav-icon font-weight-bold"></i>Last Month (Sale-Return)</a>
+            </div>
+
+             <div class="col-6">
+ <form class="forms-sample" method="POST" action="{{route('tofrom_salereturn')}}" enctype="multipart/form-data">
+    @csrf
+                 
+             <div class="input-group"> 
+                <label> <b>From Date :</b> </label>
+    <input type="date" name = "from" class="form-control" placeholder="Start"/>
+    <span class="input-group-addon">-</span>
+      <label> <b>To Date : </b></label>
+    <input type="date" name = "to" class="form-control" placeholder="End"/>
+<button type="submit">Search</button>
+
+                                </form>
+</div>
+            </div>
+        </div>
+  
         <!-- end of row-->
         <div class="row mb-4">
             <div class="col-md-12 mb-4">
                 <div class="card text-left">
                     <div class="card-body">
                         <h4 class="card-title mb-3" style="display: inline;">Sale Returns</h4>
-                        <div style="float:right; margin-right: 1%;">
-                            <a href="{{route('salereturn.create')}}" class="btn btn-raised btn-raised-primary m-1" style="color: white;"><i
-                                    class="nav-icon font-weight-bold"></i>Add New Sale Return</a>
-                            <br> <br>
-                        </div>
-
+                        
                         <div class="table-responsive">
                             <table class="display table table-striped table-bordered" id="zero_configuration_table" style="width:100%">
                                 <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>Order_Number</th>
+                                      <th>Order_Date</th>
                                     <th>Product_Id</th>
                                     <th>Reason</th>
                                     <th>Amount</th>
-                                      <th>Quantity</th>
+                                    <th>Quantity</th>
+                                    <th>Sale-Center</th>
+                                    <th>Category Route</th>
+                                    <th>Inventory_type</th>
+                                    <th>Reseller/Customer</th>
+                                    <th>City</th>
+                                    <th>Purchase Price</th>
+                                    <th>Purchase Price After Discount</th>
+                                    <th>Reseller Price</th>
+                                    <th>Retail Price</th>
+                                    <th>Profit/Loss</th>
+                                    <th>Courier/Rider</th>
+                                    <th>Return Date</th>
+
                                     <th>Created At</th>
-                                    <th>Action</th>
+                            
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -39,6 +78,7 @@
                                     <tr>
                                         <td>{{$Sale_return->id}}</td>
                                         <td>{{$Sale_return->order_number}}</td>
+                                          <td>{{$Sale_return->order_date}}</td>
                                         <td>{{$Sale_return->product_id}}</td>
                                         <td>
                                             {{$Sale_return->reason}}
@@ -48,21 +88,37 @@
                                             {{$Sale_return->amount}}
 
                                         </td>
-                                        <td>
-                                            {{$Sale_return->quantity}}
+                                        <td>{{$Sale_return->quantity}}</td>
 
-                                        </td>
+                                          <td>{{$Sale_return->sale_center}}</td>
+
+                            <td>{{$Sale_return->category_route}}</td>
+                              <td>{{$Sale_return->inventory_type}}</td>
+
+                              <td>{{$Sale_return->reseller_or_customer}}</td>
+
+
+                              <td>{{$Sale_return->city}}</td>
+
+
+                              <td>{{$Sale_return->purchase_price}}</td>
+
+                        <td>{{$Sale_return->purchase_price_after_discount}}</td>
+
+                          <td>{{$Sale_return->reseller_price}}</td>
+
+                           <td>{{$Sale_return->retail_price}}</td>
+
+                            <td>{{$Sale_return->profit_or_loss}}</td>
+
+                             <td>{{$Sale_return->courier_or_rider}}</td>
+
+                              <td>{{$Sale_return->return_date}}</td>
+
+
                                     
                                         <td>{{$Sale_return->created_at->diffForHumans()}}</td>
-                                        <td>
-                                            <a href="{{route('salereturn.edit',$Sale_return)}}" class="btn btn-raised btn-raised-primary m-1" style="color: white"><i class="nav-icon i-Pen-2 font-weight-bold"></i></a>
-                                            <form method="POST" action="{{route('salereturn.destroy',$Sale_return)}}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"  class="btn btn-raised btn-raised-danger m-1" style="color: white"><i
-                                                        class="nav-icon i-Close-Window font-weight-bold"></i></button>
-                                            </form>
-                                        </td>
+                                      
                                     </tr>
                                 @endforeach
                                    
@@ -76,7 +132,7 @@
                                     <th>Reason</th>
                                     <th>Amount</th>
                                     <th>Created At</th>
-                                    <th>Action</th>
+                                  
                                 </tr>
                                 </tfoot>
                             </table>

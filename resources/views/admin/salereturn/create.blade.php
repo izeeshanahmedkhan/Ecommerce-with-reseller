@@ -14,13 +14,19 @@
                             @csrf()
                             <div class="row">
                                 <div class="col-md-6 form-group mb-3">
-                                    <label for="salereturnName">Order Name</label>
-                                    <input type="text"  name="ordername" class="form-control form-control @error('ordername') is-invalid @enderror" id="saleName" type="text" placeholder="Enter your order name" value="" autocomplete="ordername" autofocus />
-                                    @error('ordername')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+                                  <label>Order </label>                    
+
+                                  <select class="form-control" name="ordername"required>
+                        <option selected disabled> Select Order </option>
+                  
+@php  $orders = App\Models\orderdetail::all() @endphp
+@foreach($orders as $order)
+
+                 <option value="{{$order->id}}">{{$order->name}}</option>
+        
+@endforeach
+
+                     </select>
                                 </div>
 
                                 <div class="col-md-6 form-group mb-3">
@@ -32,6 +38,16 @@
                                     </span>
                                     @enderror
                                 </div>
+
+
+
+
+
+
+
+
+
+
 
                                 <div class="col-md-6 form-group mb-3">
                                     <label for="salereturnReason">Reason</label>
@@ -57,8 +73,57 @@
                                     @enderror
                                 </div>
 
-                                
+                                <div class="col-md-6 form-group mb-3">
+                                    <label for="salereturnAmount">Quantity</label>
 
+                                    <input type="number"  name="quantity" class="form-control form-control @error('amount') is-invalid @enderror" id="salereturnAmount" placeholder="Enter Sale Return Amount" value="" autocomplete="amount" autofocus/>
+
+                                    @error('amount')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+                                
+<div class="col-md-6 form-group mb-3">
+                                    <label for="salereturnReason">Profit/Loss on return</label>
+
+                                    <input type="text"  name="profitloss" class="form-control form-control @error('reason') is-invalid @enderror" id="salereturnReason" placeholder="Enter Sale Center Adress" value="" autocomplete="reason" autofocus/>
+
+                                    @error('reason')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+
+<div class="col-md-6 form-group mb-3">
+                                    <label for="salereturnReason">Return Date</label>
+
+                                    <input type="date"  name="returndate" class="form-control form-control @error('reason') is-invalid @enderror" id="salereturnReason" placeholder="Enter Sale Center Adress" value="" autocomplete="reason" autofocus/>
+
+                                    @error('reason')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+
+
+<div class="col-md-6 form-group mb-3">
+                                    <label for="salereturnReason">Courier / Rider</label>
+
+                                    <input type="text"  name="courierrider" class="form-control form-control @error('reason') is-invalid @enderror" id="salereturnReason" placeholder="Enter Sale Center Adress" value="" autocomplete="reason" autofocus/>
+
+                                    @error('reason')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                
                                 
 
 

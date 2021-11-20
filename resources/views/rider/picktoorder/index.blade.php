@@ -21,9 +21,10 @@
                                     <th>#</th>
                                     <th>Order Number</th>
                                     <th>Item Name</th>
-                                   
-                                    <th>Colour</th>
-                                    <th>Size</th>
+                                      <th>Quantity</th>
+                                        <th>Color</th>
+                                          <th>Size</th>
+                                  <th>Total Cash</th>
                                     <th>Status</th>
                                     <th>Created At</th>
                                     <th>Action</th>
@@ -44,7 +45,12 @@
 
                                                 {{ $order->product_name }}
                                             </td>
-                                           
+                                           <td>  {{$order->quantity}}</td>
+                                             <td>{{$order->color}}</td>
+                                             <td>{{$order->size}}</td>
+
+                                       <td>{{$order->cash}}</td>
+
                                             <td>
                                                 @php $colour = \App\Models\Colour::where('id',2)->first() @endphp
 

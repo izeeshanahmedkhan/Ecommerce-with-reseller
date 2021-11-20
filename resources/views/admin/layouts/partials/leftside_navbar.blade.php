@@ -304,6 +304,23 @@
 
 
 
+        
+
+
+@if(auth()->user()->hasRole('super-admin'))
+
+            <li class="nav-item {{$activePage == 'Reports' ? 'active' : ''}} 
+            {{$activePage == 'purchasereturnCreate' ? 'active' : ''}}"
+            data-item="reports"><a class="nav-item-hold" href="#">
+                   <i class="nav-icon fa fa-file"></i>
+                    <span class="nav-text">Reports</span></a>
+                <div class="triangle"></div>
+            </li>
+        @endif
+
+
+
+
 
 
 
@@ -578,6 +595,62 @@
                 <li class="nav-item {{$activePage == 'generaldiscountIndex' ? 'active' : ''}}"><a href="{{route('general_discount.index')}}"><i class="nav-icon fas fa-badge-percent"></i><span class="item-name">View General Discounts</span></a></li>
          
         </ul>
+
+
+
+
+
+
+
+
+
+
+  <ul class="childNav" data-parent="reports">
+      
+                <li class="nav-item {{$activePage == 'generaldiscountIndex' ? 'active' : ''}}"><a href="{{route('uploadreport')}}"><i class="nav-icon fas fa-badge-percent"></i><span class="item-name">Upload Report</span></a></li>
+         
+        </ul>
+
+
+<ul class="childNav" data-parent="reports">
+      
+                <li class="nav-item {{$activePage == 'generaldiscountIndex' ? 'active' : ''}}"><a href="{{route('purchaseorder_report')}}"><i class="nav-icon fas fa-badge-percent"></i><span class="item-name">Purchase Report</span></a></li>
+         
+        </ul>
+
+
+
+<ul class="childNav" data-parent="reports">
+      
+                <li class="nav-item {{$activePage == 'generaldiscountIndex' ? 'active' : ''}}"><a href="{{route('inventory_report')}}"><i class="nav-icon fas fa-badge-percent"></i><span class="item-name">Inventory Report</span></a></li>
+         
+        </ul>
+
+
+        <ul class="childNav" data-parent="reports">
+      
+                <li class="nav-item {{$activePage == 'generaldiscountIndex' ? 'active' : ''}}"><a href="{{route('orderreport')}}"><i class="nav-icon fas fa-badge-percent"></i><span class="item-name">Order/Sale Report</span></a></li>
+         
+        </ul>
+
+
+         <ul class="childNav" data-parent="reports">
+      
+                <li class="nav-item {{$activePage == 'generaldiscountIndex' ? 'active' : ''}}"><a href="{{route('purchasereturn_Report')}}"><i class="nav-icon fas fa-badge-percent"></i><span class="item-name">Purchase-Return Report</span></a></li>
+         
+        </ul>
+
+         <ul class="childNav" data-parent="reports">
+      
+                <li class="nav-item {{$activePage == 'generaldiscountIndex' ? 'active' : ''}}"><a href="{{route('salereturnreport')}}"><i class="nav-icon fas fa-badge-percent"></i><span class="item-name">Sales-Return Report</span></a></li>
+         
+        </ul>
+
+
+
+
+
+
 
         <ul class="childNav" data-parent="accounts">
          

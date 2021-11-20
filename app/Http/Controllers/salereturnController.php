@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 use App\Models\salereturn;
+use App\Models\orderdetail;
+use App\Models\CategoryProduct;
+use App\Models\Product;
+use App\Models\GeneralDiscount;
+use App\Models\ProductForSaleCenter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -31,6 +36,31 @@ class salereturnController extends Controller
        //      'amount' => ['required', 'max:255'],
             
        //  ]);
+// quantity
+// profitloss
+// returndate
+// courierrider
+
+      
+
+        $order_date = orderdetail::where('id', $req->ordername)->first()->created_at;
+        $customer_reseller_name = orderdetail::where('id', $req->ordername)->first()->order_number;
+        $city = orderdetail::where('id', $req->ordername)->first()->city;
+
+        $categoryid = CategoryProduct::where('product_id',$req->productid)->first()->category_id;
+
+
+   $productpurchasediscount = Product::where('id',$req->productid)->first()->purchase_discount;
+
+   $productcost = Product::where('id',$req->productid)->first()->purchase_cost;
+
+   $product_reseller_price = Product::where('id',$req->productid)->first()->list_price_for_salesman;
+
+      $product_retail_price = Product::where('id',$req->productid)->first()->price;
+
+// $categoryid2 = Product::where('id',$categoryid)->first()->parent_id;
+// $categoryid3 = Product::where('id',$categoryid)->first()->parent_id;
+ 
 
    
         $salereturn = new salereturn;
@@ -39,7 +69,54 @@ class salereturnController extends Controller
         $salereturn->product_id = $req->productid;
         $salereturn->reason = $req->reason;
         $salereturn->amount = $req->amount;
+        $salereturn->quantity = $req->quantity;
+        $salereturn->profit_or_loss = $req->profitloss;
+        $salereturn->order_date = $order_date;
+         $salereturn->profit_or_loss =  $req->profitloss;
+         $salereturn->return_date =   $req->returndate;
+         $salereturn->courier_or_rider =   $req->courierrider;
+         $salereturn->category_route = $categoryid."/".$req->productid;
+
+         $salecenter_pro = ProductForSaleCenter::where('product_id',$req->productid)->first();
+
+        if($salecenter_pro!=null)
+        {
+
+            $salereturn->inventory_type = "Sale-Center";
+
+            $salereturn->sale_center = $salecenter_pro->salecenter_id;
+
+        }
+
+        else
+        {
+             $salereturn->inventory_type = "Pick-To-Order";
+             $salereturn->sale_center = "none";
+        } 
+
+        $salereturn->reseller_or_customer = $customer_reseller_name; 
+        $salereturn->city = $city;
+
+        $discount = GeneralDiscount::where('product_id',$req->productid)->first();
+        if($discount!=null)
+        {
+          $salereturn->discount = $discount->discount;
+        }
+
+        else 
+        {
+            $salereturn->discount = "none";
+        }
+   
+        $salereturn->purchase_price = $productcost;
+        $salereturn->purchase_price_after_discount = $productpurchasediscount;
+        $salereturn->reseller_price =  $product_reseller_price;
+        $salereturn->reseller_price =  $product_reseller_price;
+        $salereturn->retail_price =  $product_retail_price;
+  
+      
         $salereturn->save();
+
 
         
 

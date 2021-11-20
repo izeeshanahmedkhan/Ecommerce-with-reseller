@@ -20,7 +20,8 @@
                                     <!-- <label for="exampleFormControlSelect1">Select Blood Group</label> -->
                                    
                                    <div class="row">
-                                      
+                                    
+
                                       @foreach($order as $or)
                                    	<div class="col-3">
                                    		
@@ -29,22 +30,69 @@
 
 
 
-                                          <label>Product</label>
-                                         @php $products = \App\Models\Product::where('id',$or->product_id)->first(); @endphp
-                                                  <h4>{{$products->name}} </h4></br>
+                                          <label><b>Product</b></label>
+                                      @php     $products = \App\Models\Product::where('id',$or->product_id)->first(); @endphp
+                                      
+                                                  <h4> {{$or->product_id}} </h4></br>
 
                                                   <div class="form-group">
                                                       <label>Product Quantity </label>
-                                                    <input type="number" name="productquantity" value ="{{$or->quantity}}" min="0" max="{{$or->quantity}}">
+                                                    <input type="number" class="form-control" name="productquantity" value ="{{$or->quantity}}" min="0" max="{{$or->quantity}}">
 
                                                     <input type="hidden" name="salecen_id" value ="{{$or->salecenter_id}}" min="0" max="">
 
-<input type="hidden" name="pro_id" value ="{{$products->id}}" min="0" max="">
+<input type="hidden" name="pro_id" value ="{{$or->product_id}}" min="0" max="">
+<input type="hidden" name="ordernumber" value ="{{$or->order_number}}" min="0" max="">
+<input type="hidden" name="date" value ="{{$or->created_at}}" min="0" max="">
 </br>
+@php $riders=App\Models\Rider::all(); @endphp
+
+            <label>Rider </label>                    
+
+                                  <select class="form-control" name="riderid"required>
+                        <option selected disabled> Select Rider </option>
+                  
+
+@foreach($riders as $rider)
+
+                 <option value="{{$rider->id}}">{{$rider->name}}</option>
+        
+@endforeach
+
+                     </select>
+
+</br>
+
+
 <label>Amount Return </label>
-                                                     <input type="number" name="amount" value ="" min="0" max="" placeholder="Enter Return Amount">
+                                                     <input type="number" class="form-control" name="amount" value ="" min="0" max="" placeholder="Enter Return Amount">
 
                                                  
+
+</br>
+
+ <label>Reason of Return </label>
+                                                     <input type="text" class="form-control" name="reason" value ="" min="0" max="" placeholder="Enter Return Amount">
+                  
+                                                                  
+                                                     </br>     
+
+                                    <label>Payment Adjustment </label>                    
+
+                                  <select class="form-control" name="paymentadjustment"required>
+                        <option selected disabled> Select Payment Adjustment </option>
+                  
+
+
+                 <option value="1"> yes</option>
+                  <option value="0"> nop</option>
+
+                     </select>
+
+
+
+
+
                                                  </div>
 
                                        <button class="btn btn-primary">

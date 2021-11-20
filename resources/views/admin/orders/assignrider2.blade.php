@@ -7,7 +7,7 @@
 
     <div class="main-content">
         <div class="breadcrumb">
-            <h1>Rider</h1> 
+            <h1>Rider </h1> 
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -74,6 +74,9 @@
                                 <input type="hidden" name="productname" value="{{$product->name}}" />
 
                                      <input type="hidden" name="productprice" value="{{$product->price}}" />
+
+
+                                     <input type="hidden" name="productdetailid" value="{{$name2}}" />
 
                             <div class="form-group" style="margin-left:1%;">
                                 <button type="submit" class="btn btn-primary">Submit</button>

@@ -42,7 +42,7 @@
                                                 @php $product = \App\Models\Product::where('id',$order->product_id)->first() @endphp
 
 
-                                                {{ $product->name }}
+                                              {{ $order->quantity }}
                                             </td>
                                             <td>
 

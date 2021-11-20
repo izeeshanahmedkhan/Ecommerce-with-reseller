@@ -75,6 +75,8 @@
 
                                      <input type="hidden" name="productprice" value="{{$product->price}}" />
 
+                                         <input type="hidden" name="productorderdetail" value="{{$name2}}" />
+
                             <div class="form-group" style="margin-left:1%;">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>

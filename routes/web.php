@@ -63,6 +63,7 @@ use App\Http\Controllers\UserRiderController;
 use App\Http\Controllers\UserSaleCenterController;
 use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -737,9 +738,9 @@ Route::get('salecenter/myproducts',[App\Http\Controllers\ProductForSaleCenterCon
 
 // 
 
-Route::get('assignrider2/{id}/{name}',[App\Http\Controllers\OrderController::class, 'assign_rider2'])->name('assignrider2');
+Route::get('assignrider2/{id}/{name}/{name2}',[App\Http\Controllers\OrderController::class, 'assign_rider2'])->name('assignrider2');
 
-Route::get('assignrider3/{id}/{name}',[App\Http\Controllers\OrderController::class, 'assign_rider3'])->name('assignrider3');
+Route::get('assignrider3/{id}/{name}/{name2}',[App\Http\Controllers\OrderController::class, 'assign_rider3'])->name('assignrider3');
 
 Route::get('notavaialble/{pro_id}/{pro_order_id}/{pro_weight},/{pro_totalprice}',[App\Http\Controllers\OrderController::class, 'not_available'])->name('notavailable');
 
@@ -1152,19 +1153,69 @@ Route::post('/all-products-result',[App\Http\Controllers\CategoryController::cla
 
 Route::get('permission',[App\Http\Controllers\OrderController::class, 'permission']);
 
-
-
-
 Route::get('confirm/packing/{id}',[App\Http\Controllers\OrderController::class, 'confirm_packing'])->name('confirmpacking');
 
 Route::get('confirmm/order/{id}/{name}/{name2}',[App\Http\Controllers\OrderController::class, 'courier_rider'])->name('courier_rider');
-
-
-
-
 
 
 Route::get('deal/discount',[App\Http\Controllers\DealController::class, 'deals_discount'])->name('deals-discount');
 
 
 Route::get('deal/discount/details/{id}',[App\Http\Controllers\DealController::class, 'single_product_deals'])->name('single_product_deals');
+
+
+
+//reportsssssssssss
+
+// 1-salereturn 
+Route::get('admin/reports/salereturn',[App\Http\Controllers\ReportController::class, 'salereturn_report'])->name('salereturnreport');
+
+Route::get('admin/reports/salereturn/lastmonth',[App\Http\Controllers\ReportController::class, 'salereturn_Report_lastmoth'])->name('lastmonthsalereturn');
+
+Route::get('admin/reports/salereturn/lastyear',[App\Http\Controllers\ReportController::class, 'salereturn_Report_lastyear'])->name('lastyearsalereturn');
+
+Route::post('admin/reports/salereturn/dates',[App\Http\Controllers\ReportController::class, 'salereturn_Report_twodates'])->name('tofrom_salereturn');
+
+
+// 2-purchase return 
+
+
+Route::get('admin/reports/purchasereturn/all',[App\Http\Controllers\ReportController::class, 'purchasereturn_Report'])->name('purchasereturn_Report');
+
+Route::get('admin/reports/purchasereturn/lastmonth',[App\Http\Controllers\ReportController::class, 'purchasereturn_Report_lastmoth'])->name('lastmonthpurchasereturn');
+
+Route::get('admin/reports/purchasereturn/lastyear',[App\Http\Controllers\ReportController::class, 'purchasereturn_Report_lastyear'])->name('lastyearpurchasereturn');
+
+
+Route::post('admin/reports/purchasereturn/dates',[App\Http\Controllers\ReportController::class, 'purchasereturn_Report_twodates'])->name('tofrom_purchasereturn');
+
+
+
+// 2-Upload report
+Route::get('admin/reports/upload/all',[App\Http\Controllers\ReportController::class, 'upload_report'])->name('uploadreport');
+
+Route::get('admin/reports/uploads/lastmonth',[App\Http\Controllers\ReportController::class, 'upload_Report_lastmoth'])->name('lastmonthupload');
+
+Route::get('admin/reports/uploads/lastyear',[App\Http\Controllers\ReportController::class, 'upload_Report_lastyear'])->name('lastyearupload');
+
+Route::post('admin/reports/upload_reports/dates',[App\Http\Controllers\ReportController::class, 'upload_Report_twodates'])->name('tofrom_uploadreport');
+//3 order report 
+
+Route::get('admin/reports-/all',[App\Http\Controllers\ReportController::class, 'order_report'])->name('orderreport');
+
+
+Route::get('admin/reports/orders/lastmonth',[App\Http\Controllers\ReportController::class, 'order_Report_lastmoth'])->name('lastmonthorder');
+
+Route::get('admin/reports/orders/lastyear',[App\Http\Controllers\ReportController::class, 'order_Report_lastyear'])->name('lastyearorder');
+
+Route::post('admin/reports/order_reports/dates',[App\Http\Controllers\ReportController::class, 'order_Report_twodates'])->name('tofrom_orderreport');
+
+
+//purchase report 
+
+Route::get('admin/purchaseorder_report/all',[App\Http\Controllers\ReportController::class, 'purchaseorder_report'])->name('purchaseorder_report');
+//inventory_report
+
+Route::get('admin/inventory_report/all',[App\Http\Controllers\ReportController::class, 'inventory_report'])->name('inventory_report');
+
+Route::post('admin/reports/inventory_reports/dates',[App\Http\Controllers\ReportController::class, 'inventory_Report_twodates'])->name('tofrom_inventoryreport');

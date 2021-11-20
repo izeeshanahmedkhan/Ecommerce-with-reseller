@@ -18,6 +18,9 @@ class CreateRiderordercustomersTable extends Migration
             $table->integer('rider_id');
             $table->string('product_name');
             $table->string('description');
+            $table->integer('quantity');
+            $table->integer('color');
+            $table->integer('size');
             $table->string('address');
             $table->string('date');
             $table->string('cash');

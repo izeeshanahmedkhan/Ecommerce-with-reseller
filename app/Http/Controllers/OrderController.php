@@ -500,11 +500,11 @@ Session::flash('flash_type', 'alert-success');
  // product details module #02
 
 
- public function assign_rider2($id,$name)
+ public function assign_rider2($id,$name,$name2)
     { 
       if(auth()->user()->hasPermissionTo('confirm pick') && auth()->user()->hasPermissionTo('store'))
     {
-      return view('admin.orders.assignrider2', compact(['id', 'name']));
+      return view('admin.orders.assignrider2', compact(['id', 'name' , 'name2']));
     }
     else
     {
@@ -517,12 +517,12 @@ Session::flash('flash_type', 'alert-success');
     }
 
 
- public function assign_rider3($id,$name)
+ public function assign_rider3($id,$name,$name2)
     { 
         
     if(auth()->user()->hasPermissionTo('labelling & dispatching'))
     {
-        return view('admin.orders.assignrider3', compact(['id', 'name']));
+        return view('admin.orders.assignrider3', compact(['id', 'name' , 'name2']));
     }
     else
     {
@@ -539,16 +539,33 @@ Session::flash('flash_type', 'alert-success');
 public function rider_order2(request $req)
     {
 
+
     if(auth()->user()->hasPermissionTo('confirm pick') && auth()->user()->hasPermissionTo('store'))
 
     {
-         $riderproductorder = new riderproductorder;
+
+      $product_color = productorderdetail::where('id',$req->productdetailid)->first()->color;
+
+
+      $product_size = productorderdetail::where('id',$req->productdetailid)->first()->size;
+
+      $product_quantity = productorderdetail::where('id',$req->productdetailid)->first()->product_quantity;
+
+      $totaldeliverycharges = productorderdetail::where('id',$req->productdetailid)->first()->product_weight;
+
+      $totalproductprice = productorderdetail::where('id',$req->productdetailid)->first()->total_price;
+
+
+       $riderproductorder = new riderproductorder;
        $riderproductorder->rider_id = $req->riderid;
        $riderproductorder->product_name = $req->productname;
+       $riderproductorder->color =  $product_color;
+       $riderproductorder->size =   $product_size;
+       $riderproductorder->quantity = $product_quantity;
        $riderproductorder->description = $req->description;
        $riderproductorder->address = $req->address;
        $riderproductorder->date = $req->date;
-       $riderproductorder->cash = $req->productprice;
+       $riderproductorder->cash =   $totaldeliverycharges+$totalproductprice;
        $riderproductorder->order_id = $req->orderid;
        $riderproductorder->status = "1";
 
@@ -572,13 +589,33 @@ public function rider_order2(request $req)
     {
 if(auth()->user()->hasPermissionTo('labelling & dispatching') ) 
 {
+  
+
+
+      $product_color = productorderdetail::where('id',$req->productorderdetail_id)->first()->color;
+
+
+      $product_size = productorderdetail::where('id',$req->productorderdetail_id)->first()->size;
+
+      $product_quantity = productorderdetail::where('id',$req->productorderdetail_id)->first()->product_quantity;
+
+      $totaldeliverycharges = productorderdetail::where('id',$req->productorderdetail_id)->first()->product_weight;
+
+      $totalproductprice = productorderdetail::where('id',$req->productorderdetail_id)->first()->total_price;
+
+
    $riderproductorder = new riderordercustomer;
        $riderproductorder->rider_id = $req->riderid;
        $riderproductorder->product_name = $req->productname;
+
+       $riderproductorder->color =  $product_color;
+       $riderproductorder->size =   $product_size;
+       $riderproductorder->quantity = $product_quantity;
+
        $riderproductorder->description = $req->description;
        $riderproductorder->address = $req->address;
        $riderproductorder->date = $req->date;
-       $riderproductorder->cash = $req->productprice;
+       $riderproductorder->cash = $totaldeliverycharges+$totalproductprice;
        $riderproductorder->order_id = $req->orderid;
        $riderproductorder->status = "1";
 
